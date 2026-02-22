@@ -21,15 +21,48 @@
         
         body { background-color: var(--bg); color: var(--text-dark); padding-bottom: 80px; -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
 
-        /* Top App Bar */
         .app-bar {
             background-color: var(--surface); padding: 16px 20px;
             display: flex; align-items: center; justify-content: space-between;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100;
         }
         .app-bar h1 { font-size: 1.2rem; color: var(--primary); font-weight: 700; }
-        
-        /* Loading Overlay */
+        /* Container untuk membungkus kapsul agar bisa di-scroll horizontal */
+.sort-wrapper {
+    display: flex;
+    overflow-x: auto;
+    padding: 15px 16px;
+    gap: 10px;
+    background: var(--bg);
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+
+/* Menyembunyikan scrollbar di Chrome, Safari, dan Opera */
+.sort-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Gaya Kapsul */
+.sort-capsule {
+    white-space: nowrap;
+    padding: 8px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Status Kapsul saat aktif/dipilih */
+.sort-capsule.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 4px 8px rgba(0, 143, 57, 0.2);
+}
         #loader {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(255,255,255,0.9); z-index: 999;
@@ -38,7 +71,6 @@
         .spinner { border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* List & Cards */
         .container { padding: 16px; }
         .card {
             background: var(--surface); border-radius: 12px; padding: 16px; margin-bottom: 12px;
@@ -50,12 +82,10 @@
         .card-title { font-weight: 600; font-size: 1.1rem; color: var(--text-dark); }
         .badge { background: var(--primary-light); color: var(--primary); padding: 4px 8px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; }
         .card-body { font-size: 0.9rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
-        .card-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; }
         
         .btn-icon { background: none; border: none; font-size: 1.2rem; color: var(--text-muted); cursor: pointer; padding: 8px; border-radius: 50%; transition: background 0.2s; }
         .btn-icon:hover, .btn-icon:active { background: var(--primary-light); color: var(--primary); }
         
-        /* Floating Action Button (FAB) */
         .fab {
             position: fixed; bottom: 24px; right: 24px; background: var(--primary); color: white;
             width: 56px; height: 56px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
@@ -63,7 +93,6 @@
         }
         .fab:active { transform: scale(0.9); }
 
-        /* Bottom Sheet Modal (Form) */
         .modal {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5);
             display: none; z-index: 200; align-items: flex-end; justify-content: center; opacity: 0; transition: opacity 0.3s;
@@ -88,7 +117,6 @@
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .close-btn { background: none; border: none; font-size: 1.5rem; color: var(--text-dark); cursor: pointer; }
 
-        /* Full Screen Detail View */
         .detail-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg);
             z-index: 300; display: none; flex-direction: column; transform: translateX(100%); transition: transform 0.3s ease;
@@ -106,7 +134,7 @@
         .detail-item:last-child { border-bottom: none; }
         .detail-item-label { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
         .detail-item-value { font-size: 1rem; color: var(--text-dark); font-weight: 500; padding-left: 24px; }
-        .img-preview { width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; margin-top: 8px; background: #eee; }
+        .img-preview { width: 100%; max-height: 240px; object-fit: cover; border-radius: 8px; margin-top: 8px; background: #eee; }
 
         .detail-fab-container {
             position: fixed; bottom: 0; left: 0; width: 100%; background: var(--surface);
@@ -127,7 +155,6 @@
             gap: 5px;
             float: right;
         }
-        .btn-wa:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
@@ -136,14 +163,19 @@
         <h1><i class="fas fa-leaf"></i> Data Mustahiq</h1>
         <button class="btn-icon" onclick="loadData()"><i class="fas fa-sync-alt"></i></button>
     </div>
-
+<div class="sort-wrapper" id="sortWrapper">
+    <div class="sort-capsule active" onclick="setSort(this, 'default')">Tanggal Input</div>
+    <div class="sort-capsule" onclick="setSort(this, 'PENGHASILAN ORANG TUA')">Penghasilan Ortu</div>
+    <div class="sort-capsule" onclick="setSort(this, 'NOMINAL PENDANAAN PERBULAN')">Pemasukan Bulanan</div>
+    <div class="sort-capsule" onclick="setSort(this, 'BIAYA SEWA TEMPAT TINGGAL DI MESIR (EGP)')">Sewa Rumah di Mesir</div>
+    <div class="sort-capsule" onclick="setSort(this, 'NOMINAL HUTANG')">Hutang</div>
+</div>
     <div id="loader">
         <div class="spinner"></div>
         <p style="margin-top: 10px; color: var(--primary); font-weight: 600;">Memproses...</p>
     </div>
 
-    <div class="container" id="dataList">
-        </div>
+    <div class="container" id="dataList"></div>
 
     <button class="fab" onclick="openForm()"><i class="fas fa-plus"></i></button>
 
@@ -153,8 +185,7 @@
             <h2 id="detailTitleName">Detail Profil</h2>
         </div>
         <div class="detail-body">
-            <div class="detail-card" id="detailContent">
-                </div>
+            <div class="detail-card" id="detailContent"></div>
         </div>
         <div class="detail-fab-container">
             <button class="btn-action edit" onclick="editCurrentDetail()"><i class="fas fa-edit"></i> Edit</button>
@@ -170,41 +201,46 @@
             </div>
             <form id="crudForm" onsubmit="submitData(event)">
                 <input type="hidden" name="row" id="editRow">
-                
+
                 <div class="form-group"><label>Nama Lengkap</label><input type="text" name="NAMA LENGKAP" required></div>
                 <div class="form-group"><label>Almamater</label><input type="text" name="ALMAMATER" required></div>
-                <div class="form-group"><label>Angkatan (Tahun Kedatangan)</label><input type="number" name="ANGKATAN (Tahun kedatangan)"></div>
+                <div class="form-group"><label>Angkatan (Tahun Kedatangan)</label><input type="number" name="ANGKATAN (Tahun kedatangan)" required></div>
                 <div class="form-group"><label>Jenjang Pendidikan</label><input type="text" name="JENJANG PENDIDIKAN"></div>
                 <div class="form-group"><label>Fakultas</label><input type="text" name="FAKULTAS"></div>
                 <div class="form-group"><label>Jurusan</label><input type="text" name="JURUSAN"></div>
                 <div class="form-group"><label>Tingkat</label><input type="text" name="TINGKAT"></div>
                 <div class="form-group"><label>Mustawa (Tingkat)</label><input type="text" name="MUSTAWA (TINGKAT)"></div>
-                <div class="form-group"><label>Nomor Telpon (Mesir)</label><input type="tel" name="NOMOR TELPON (MESIR)"></div>
-                <div class="form-group"><label>Nomor Whatsapp</label><input type="tel" name="NOMOR WHATSAPP"></div>
+                <div class="form-group"><label>Nomor Telepon (Mesir)</label><input type="tel" name="NOMOR TELPON (MESIR)"></div>
+                <div class="form-group"><label>Nomor WhatsApp</label><input type="tel" name="NOMOR WHATSAPP"></div>
                 <div class="form-group"><label>Alamat Rumah di Indonesia</label><input type="text" name="ALAMAT RUMAH DI INDONESIA"></div>
                 <div class="form-group"><label>Alamat Rumah di Mesir</label><input type="text" name="ALAMAT RUMAH DI MESIR"></div>
+                <div class="form-group"><label>Status Tempat Tinggal di Mesir</label><input type="text" name="STATUS TEMPAT TINGGAL DI MESIR"></div>
+                <div class="form-group"><label>Biaya Sewa (EGP)</label><input type="text" name="BIAYA SEWA TEMPAT TINGGAL DI MESIR (EGP)"></div>
                 <div class="form-group"><label>Pekerjaan Orang Tua</label><input type="text" name="PEKERJAAN ORANG TUA"></div>
                 <div class="form-group"><label>Penghasilan Orang Tua</label><input type="text" name="PENGHASILAN ORANG TUA"></div>
+                <div class="form-group"><label>Sumber Pendanaan Utama</label><input type="text" name="SUMBER PENDANAAN UTAMA"></div>
+                <div class="form-group"><label>Nominal Pendanaan per Bulan</label><input type="text" name="NOMINAL PENDANAAN PERBULAN"></div>
+                <div class="form-group"><label>Apakah punya hutang?</label><input type="text" name="APAKAH PUNYA HUTANG?"></div>
+                <div class="form-group"><label>Jika ada hutang, kepada siapa & untuk apa</label><input type="text" name="JIKA ADA, PADA SIAPA DAN UNTUK APA?"></div>
+                <div class="form-group"><label>Nominal Hutang</label><input type="text" name="NOMINAL HUTANG"></div>
                 <div class="form-group"><label>Beasiswa</label><input type="text" name="BEASISWA"></div>
                 <div class="form-group"><label>Merokok</label><input type="text" name="MEROKOK"></div>
                 <div class="form-group"><label>Anak Ke-</label><input type="number" name="ANAK KE-"></div>
-                <div class="form-group"><label>Foto Rumah (URL Gambar)</label><input type="url" name="FOTO RUMAH DI INDONESIA"></div>
-                <div class="form-group"><label>Email Address</label><input type="email" name="Email address"></div>
-                
+                <div class="form-group"><label>Foto Rumah di Indonesia (URL)</label><input type="url" name="FOTO RUMAH DI INDONESIA"></div>
+
                 <button type="submit" class="btn-submit">Simpan Data</button>
             </form>
         </div>
     </div>
 
     <script>
-        const API_URL = 'https://script.google.com/macros/s/AKfycbz-iNDtQ3rLlGJ9cLroRAwFCo9b5f1HAuw5Np5DUPEAD9Hcm4IzAfCI-iNzOVsDMxdP/exec'; 
-        let currentItemData = null; // Menyimpan data yang sedang dibuka di Detail
+        const API_URL = 'https://script.google.com/macros/s/AKfycbz4o7dLojHh6kcoldek2HbhW0NFagaaQXgGiAe9tXULu0RhE-3BoVlxmKqsOZG-KxP9/exec'; 
+        let currentItemData = null;
 
         document.addEventListener('DOMContentLoaded', loadData);
 
         function showLoader(show) { document.getElementById('loader').style.display = show ? 'flex' : 'none'; }
 
-        // --- MANAJEMEN FORM (BOTTOM SHEET) ---
         function openForm(item = null) {
             const modal = document.getElementById('formModal');
             const content = document.getElementById('formContent');
@@ -228,7 +264,6 @@
             }
 
             modal.style.display = 'flex';
-            // Trigger reflow untuk animasi
             setTimeout(() => {
                 modal.style.opacity = '1';
                 content.style.transform = 'translateY(0)';
@@ -238,58 +273,61 @@
         function closeForm() { 
             const modal = document.getElementById('formModal');
             const content = document.getElementById('formContent');
-            
             modal.style.opacity = '0';
             content.style.transform = 'translateY(100%)';
             setTimeout(() => { modal.style.display = 'none'; }, 300);
         }
 
-
-        // Fungsi untuk mengubah link Google Drive menjadi link gambar langsung
         function formatDriveUrl(url) {
             if (!url) return '';
             if (url.includes('drive.google.com')) {
                 let fileId = '';
-                if (url.includes('id=')) {
-                    fileId = url.split('id=')[1].split('&')[0];
-                } else {
-                    fileId = url.split('/d/')[1].split('/')[0];
-                }
+                if (url.includes('id=')) fileId = url.split('id=')[1].split('&')[0];
+                else fileId = url.split('/d/')[1]?.split('/')[0] || '';
                 return `https://lh3.googleusercontent.com/u/0/d/${fileId}`;
             }
             return url;
         }
 
-        // --- MANAJEMEN DETAIL SCREEN (REVISI) ---
         function openDetail(encodedItem) {
             const item = JSON.parse(decodeURIComponent(encodedItem));
             currentItemData = item;
             
-            document.getElementById('detailTitleName').innerText = item['NAMA LENGKAP'];
+            document.getElementById('detailTitleName').innerText = item['NAMA LENGKAP'] || 'Profil Mustahiq';
             
-            // Konversi link foto jika ada
-            const rawPhotoUrl = item['FOTO RUMAH DI INDONESIA'] || '';
-            const directPhotoUrl = formatDriveUrl(rawPhotoUrl);
+            const photoUrl = formatDriveUrl(item['FOTO RUMAH DI INDONESIA'] || '');
             
             const content = document.getElementById('detailContent');
             content.innerHTML = `
                 <div class="detail-item"><div class="detail-item-label"><i class="fas fa-university"></i> Almamater</div><div class="detail-item-value">${item['ALMAMATER'] || '-'}</div></div>
                 <div class="detail-item"><div class="detail-item-label"><i class="fas fa-calendar-alt"></i> Angkatan</div><div class="detail-item-value">${item['ANGKATAN (Tahun kedatangan)'] || '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-graduation-cap"></i> Pendidikan</div><div class="detail-item-value">${item['JENJANG PENDIDIKAN'] || '-'} - ${item['FAKULTAS'] || '-'} (${item['JURUSAN'] || '-'})</div></div>
+                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-graduation-cap"></i> Jenjang & Jurusan</div><div class="detail-item-value">${item['JENJANG PENDIDIKAN'] || '-'} • ${item['FAKULTAS'] || '-'} (${item['JURUSAN'] || '-'})</div></div>
                 <div class="detail-item"><div class="detail-item-label"><i class="fas fa-layer-group"></i> Tingkat / Mustawa</div><div class="detail-item-value">${item['TINGKAT'] || '-'} / ${item['MUSTAWA (TINGKAT)'] || '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-phone"></i> Telp (Mesir)</div><div class="detail-item-value">${item['NOMOR TELPON (MESIR)'] || '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fab fa-whatsapp"></i> WhatsApp ${item['NOMOR WHATSAPP'] ? `<a href="https://wa.me/${item['NOMOR WHATSAPP'].replace(/\D/g,'')}?text=${encodeURIComponent(`_Assalamualaikum WR. WB._ *${item['NAMA LENGKAP']}*\n\nKami dari *WAZIQOH KMB Mesir 2025-2026*, ingin memberitahukan bahwa kami akan segera datang ke tempat kamu tinggal untuk menyalurkan Zakat Fitrah Ramadhan 2026, silahkan *kirimkan Gmaps* rumah kamu dan Foto Imarohnya yak.\n\nTerimakasih *${item['NAMA LENGKAP']}* 🙏`)}" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> Kirim Pesan</a>` : ''}</div><div class="detail-item-value">${item['NOMOR WHATSAPP'] || '-'}</div></div>
+                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-phone"></i> Telp Mesir</div><div class="detail-item-value">${item['NOMOR TELPON (MESIR)'] || '-'}</div></div>
+                <div class="detail-item">
+                    <div class="detail-item-label"><i class="fab fa-whatsapp"></i> WhatsApp</div>
+                    <div class="detail-item-value" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <span>${item['NOMOR WHATSAPP'] || '-'}</span>
+                        ${item['NOMOR WHATSAPP'] ? 
+                            `<a href="https://wa.me/${item['NOMOR WHATSAPP'].replace(/\D/g,'')}?text=${encodeURIComponent(`Assalamualaikum WR. WB.\n*${item['NAMA LENGKAP']}*\n\nKami dari WAZIQOH KMB Mesir akan menyalurkan Zakat Fitrah.\nSilakan kirimkan lokasi & foto rumah.`)}" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> Kirim Pesan</a>` 
+                            : ''}
+                    </div>
+                </div>
                 <div class="detail-item"><div class="detail-item-label"><i class="fas fa-home"></i> Alamat Indonesia</div><div class="detail-item-value">${item['ALAMAT RUMAH DI INDONESIA'] || '-'}</div></div>
                 <div class="detail-item"><div class="detail-item-label"><i class="fas fa-map-marker-alt"></i> Alamat Mesir</div><div class="detail-item-value">${item['ALAMAT RUMAH DI MESIR'] || '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-briefcase"></i> Pekerjaan Ortu</div><div class="detail-item-value">${item['PEKERJAAN ORANG TUA'] || '-'}</div></div>
+                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-building"></i> Status Tinggal</div><div class="detail-item-value">${item['STATUS TEMPAT TINGGAL DI MESIR'] || '-'}</div></div>
+                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-money-bill"></i> Biaya Sewa (EGP)</div><div class="detail-item-value">${item['BIAYA SEWA TEMPAT TINGGAL DI MESIR (EGP)'] || '-'}</div></div>
+                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-briefcase"></i> Pekerjaan Orang Tua</div><div class="detail-item-value">${item['PEKERJAAN ORANG TUA'] || '-'}</div></div>
                 <div class="detail-item"><div class="detail-item-label"><i class="fas fa-money-bill-wave"></i> Penghasilan Ortu</div><div class="detail-item-value">${item['PENGHASILAN ORANG TUA'] || '-'}</div></div>
+                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-hand-holding-usd"></i> Sumber Dana</div><div class="detail-item-value">${item['SUMBER PENDANAAN UTAMA'] || '-'} (${item['NOMINAL PENDANAAN PERBULAN'] || '-'})</div></div>
+                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-exclamation-triangle"></i> Hutang</div><div class="detail-item-value">${item['APAKAH PUNYA HUTANG?'] || '-'} ${item['NOMINAL HUTANG'] ? `(${item['NOMINAL HUTANG']})` : ''}</div></div>
+                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-file-invoice-dollar"></i> Untuk Apa</div><div class="detail-item-value">${item['JIKA ADA, PADA SIAPA DAN UNTUK APA?'] || '-'}</div></div>
                 <div class="detail-item"><div class="detail-item-label"><i class="fas fa-award"></i> Beasiswa</div><div class="detail-item-value">${item['BEASISWA'] || '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-smoking"></i> Merokok / Anak Ke-</div><div class="detail-item-value">${item['MEROKOK'] || '-'} / Anak ke-${item['ANAK KE-'] || '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-envelope"></i> Email</div><div class="detail-item-value">${item['Email address'] || '-'}</div></div>
+                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-smoking"></i> Merokok / Anak ke</div><div class="detail-item-value">${item['MEROKOK'] || '-'} • Anak ke-${item['ANAK KE-'] || '-'}</div></div>
                 <div class="detail-item">
-                    <div class="detail-item-label"><i class="fas fa-image"></i> Foto Rumah (IDN)</div>
+                    <div class="detail-item-label"><i class="fas fa-image"></i> Foto Rumah Indonesia</div>
                     <div class="detail-item-value">
-                        ${directPhotoUrl ? `<img src="${directPhotoUrl}" class="img-preview" alt="Foto Rumah" onerror="this.onerror=null; this.src='https://via.placeholder.com/300?text=Gambar+Tidak+Bisa+Dimuat';">` : 'Tidak ada foto'}
+                        ${photoUrl ? `<img src="${photoUrl}" class="img-preview" alt="Foto rumah" onerror="this.src='https://via.placeholder.com/320x180?text=Foto+tidak+tersedia';">` : 'Tidak ada foto'}
                     </div>
                 </div>
             `;
@@ -307,77 +345,139 @@
 
         function editCurrentDetail() {
             closeDetail();
-            setTimeout(() => { openForm(currentItemData); }, 300);
+            setTimeout(() => openForm(currentItemData), 320);
         }
 
         function deleteCurrentDetail() {
-            if(currentItemData && currentItemData.row) {
-                deleteData(currentItemData.row);
-                closeDetail();
-            }
+            if (!currentItemData?.row) return;
+            if (!confirm('Yakin ingin menghapus data ini?')) return;
+            deleteData(currentItemData.row);
+            closeDetail();
         }
 
-        // --- CRUD OPERATIONS ---
-        function loadData() {
-            showLoader(true);
-            fetch(API_URL)
-            .then(res => res.json())
-            .then(data => {
-                const list = document.getElementById('dataList');
-                list.innerHTML = '';
-                data.forEach(item => {
-                    if(!item['NAMA LENGKAP']) return;
-                    // Encode item for safe HTML injection
-                    const encodedItem = encodeURIComponent(JSON.stringify(item));
-                    list.innerHTML += `
-                        <div class="card" onclick="openDetail('${encodedItem}')">
-                            <div class="card-header">
-                                <span class="card-title">${item['NAMA LENGKAP']}</span>
-                                <span class="badge">${item['ANGKATAN (Tahun kedatangan)'] || '-'}</span>
-                            </div>
-                            <div class="card-body">
-                                <div><i class="fas fa-university" style="width: 20px;"></i> ${item['ALMAMATER']}</div>
-                                <div><i class="fas fa-money-bill-wave" style="width: 20px;"></i> Rp ${item['PENGHASILAN ORANG TUA'] || '-'}</div>
-                            </div>
-                        </div>
-                    `;
-                });
-                showLoader(false);
-            })
-            .catch(err => { alert('Gagal memuat data. Pastikan koneksi internet stabil.'); showLoader(false); });
+let allData = []; // Untuk menyimpan data dari API
+let currentSortKey = 'default';
+
+// Fungsi untuk membersihkan teks menjadi angka (misal: "Rp 1.500.000" -> 1500000)
+function parseToNumber(str) {
+    if (!str) return 0;
+    // Mengambil hanya angka saja
+    let num = str.toString().replace(/[^\d]/g, '');
+    return parseInt(num) || 0;
+}
+
+// Fungsi utama mengambil data
+function loadData() {
+    showLoader(true);
+    fetch(API_URL)
+        .then(res => res.json())
+        .then(data => {
+            allData = data; // Simpan data asli
+            renderList();   // Tampilkan ke layar
+            showLoader(false);
+        })
+        .catch(() => {
+            alert('Gagal memuat data');
+            showLoader(false);
+        });
+}
+
+// Fungsi untuk mengganti jenis sortir saat kapsul diklik
+function setSort(el, key) {
+    // Pindahkan class active
+    document.querySelectorAll('.sort-capsule').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    
+    currentSortKey = key;
+    renderList();
+}
+
+// Fungsi untuk menampilkan data ke HTML
+function renderList() {
+    const list = document.getElementById('dataList');
+    list.innerHTML = '';
+    
+    // Copy data agar tidak merusak data asli
+    let filteredData = [...allData];
+
+    // Logika Sort: Terkecil ke Terbesar (Ascending)
+    if (currentSortKey !== 'default') {
+        filteredData.sort((a, b) => {
+            return parseToNumber(a[currentSortKey]) - parseToNumber(b[currentSortKey]);
+        });
+    }
+
+    filteredData.forEach(item => {
+        if (!item['NAMA LENGKAP']) return;
+        const encoded = encodeURIComponent(JSON.stringify(item));
+        
+        const waBtn = item['NOMOR WHATSAPP'] ? 
+            `<a href="https://wa.me/${item['NOMOR WHATSAPP'].replace(/\D/g,'')}?text=${encodeURIComponent(`Assalamualaikum WR. WB.\n*${item['NAMA LENGKAP']}*\n\nKami dari WAZIQOH KMB Mesir akan menyalurkan Zakat Fitrah.\nSilakan kirimkan lokasi & foto rumah.`)}" 
+               target="_blank" class="btn-wa" onclick="event.stopPropagation();">Kirim Pesan</a>` : '';
+
+        // Tampilkan nominal yang sedang di-sort di dalam kartu secara dinamis
+        let infoValue = item['NOMINAL PENDANAAN PERBULAN'] || '-';
+        if(currentSortKey !== 'default') {
+            infoValue = item[currentSortKey] || '-';
         }
+
+        list.innerHTML += `
+            <div class="card" onclick="openDetail('${encoded}')">
+                <div class="card-header">
+                    <span class="card-title">${item['NAMA LENGKAP']}</span>
+                    <span class="badge">${item['ANGKATAN (Tahun kedatangan)'] || '-'}</span>
+                </div>
+                <div class="card-body">
+                    <div><i class="fas fa-university" style="width:20px;"></i> ${item['ALMAMATER'] || '-'}</div>
+                    <div style="margin-bottom: 4px;"><i class="fas fa-money-bill-wave" style="width:20px;"></i> ${infoValue}</div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 5px; border-top: 1px dashed var(--border); padding-top: 8px;">
+                        <span style="font-size: 0.85rem; color: var(--text-dark); font-weight: 500;">${item['NOMOR WHATSAPP'] || '-'}</span>
+                        ${waBtn}
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+}
 
         function submitData(e) {
             e.preventDefault();
             showLoader(true);
             closeForm();
-            
-            let formData = new FormData(document.getElementById('crudForm'));
-            let data = new URLSearchParams();
-            const editRow = document.getElementById('editRow').value;
-            
-            data.append('action', editRow ? 'update' : 'create'); // Pastikan Apps Script Anda mendukung 'update'
-            if (editRow) data.append('row', editRow);
-            for (const pair of formData) { data.append(pair[0], pair[1]); }
 
-            fetch(API_URL, { method: 'POST', body: data })
-            .then(res => res.text())
-            .then(response => { loadData(); })
-            .catch(err => { alert('Gagal menyimpan'); showLoader(false); });
+            const formData = new FormData(document.getElementById('crudForm'));
+            const params = new URLSearchParams();
+            const editRow = document.getElementById('editRow').value;
+
+            params.append('action', editRow ? 'update' : 'create');
+            if (editRow) params.append('row', editRow);
+
+            for (const [k, v] of formData) {
+                params.append(k, v);
+            }
+
+            fetch(API_URL, { method: 'POST', body: params })
+                .then(res => res.text())
+                .then(() => loadData())
+                .catch(() => {
+                    alert('Gagal menyimpan data');
+                    showLoader(false);
+                });
         }
 
         function deleteData(rowId) {
-            if(!confirm('Yakin ingin menghapus data ini?')) return;
             showLoader(true);
-            
-            let data = new URLSearchParams();
-            data.append('action', 'delete');
-            data.append('row', rowId);
+            const params = new URLSearchParams();
+            params.append('action', 'delete');
+            params.append('row', rowId);
 
-            fetch(API_URL, { method: 'POST', body: data })
-            .then(res => res.text())
-            .then(response => { loadData(); })
-            .catch(err => { alert('Gagal menghapus'); showLoader(false); });
+            fetch(API_URL, { method: 'POST', body: params })
+                .then(res => res.text())
+                .then(() => loadData())
+                .catch(() => {
+                    alert('Gagal menghapus');
+                    showLoader(false);
+                });
         }
     </script>
 </body>
