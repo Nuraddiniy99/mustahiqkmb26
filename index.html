@@ -26,43 +26,45 @@
             display: flex; align-items: center; justify-content: space-between;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100;
         }
-        .app-bar h1 { font-size: 1.2rem; color: var(--primary); font-weight: 700; }
-        /* Container untuk membungkus kapsul agar bisa di-scroll horizontal */
-.sort-wrapper {
-    display: flex;
-    overflow-x: auto;
-    padding: 15px 16px;
-    gap: 10px;
-    background: var(--bg);
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
-}
+        .app-bar .logo-container { display: flex; align-items: center; gap: 10px; }
+        .app-bar .logo-container img { height: 55px; width: auto; object-fit: contain; }
+        .app-bar h1 { font-size: 1.2rem; color: var(--primary); font-weight: 700; display: flex; align-items: center; }
+                /* Container untuk membungkus kapsul agar bisa di-scroll horizontal */
+        .sort-wrapper {
+            display: flex;
+            overflow-x: auto;
+            padding: 15px 16px;
+            gap: 10px;
+            background: var(--bg);
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+        }
 
-/* Menyembunyikan scrollbar di Chrome, Safari, dan Opera */
-.sort-wrapper::-webkit-scrollbar {
-    display: none;
-}
+        /* Menyembunyikan scrollbar di Chrome, Safari, dan Opera */
+        .sort-wrapper::-webkit-scrollbar {
+            display: none;
+        }
 
-/* Gaya Kapsul */
-.sort-capsule {
-    white-space: nowrap;
-    padding: 8px 16px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
+        /* Gaya Kapsul */
+        .sort-capsule {
+            white-space: nowrap;
+            padding: 8px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
 
-/* Status Kapsul saat aktif/dipilih */
-.sort-capsule.active {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
-    box-shadow: 0 4px 8px rgba(0, 143, 57, 0.2);
-}
+        /* Status Kapsul saat aktif/dipilih */
+        .sort-capsule.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 8px rgba(0, 143, 57, 0.2);
+        }
         #loader {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(255,255,255,0.9); z-index: 999;
@@ -160,19 +162,22 @@
 <body>
 
     <div class="app-bar">
-        <h1><i class="fas fa-leaf"></i> Data Mustahiq</h1>
+        <div class="logo-container">
+            <img src="https://i.ibb.co/5XnDzfNS/Asset-3.png" alt="Logo">
+            <h1>Data Mustahiq</h1>
+        </div>
         <button class="btn-icon" onclick="loadData()"><i class="fas fa-sync-alt"></i></button>
     </div>
-<div class="sort-wrapper" id="sortWrapper">
-    <div class="sort-capsule active" onclick="setSort(this, 'default')">Tanggal Input</div>
-    <div class="sort-capsule" onclick="setSort(this, 'PENGHASILAN ORANG TUA')">Penghasilan Ortu</div>
-    <div class="sort-capsule" onclick="setSort(this, 'NOMINAL PENDANAAN PERBULAN')">Pemasukan Bulanan</div>
-    <div class="sort-capsule" onclick="setSort(this, 'BIAYA SEWA TEMPAT TINGGAL DI MESIR (EGP)')">Sewa Rumah di Mesir</div>
-    <div class="sort-capsule" onclick="setSort(this, 'NOMINAL HUTANG')">Hutang</div>
-</div>
+    <div class="sort-wrapper" id="sortWrapper">
+        <div class="sort-capsule active" onclick="setSort(this, 'default')">Tanggal Input</div>
+        <div class="sort-capsule" onclick="setSort(this, 'PENGHASILAN ORANG TUA')">Penghasilan Ortu</div>
+        <div class="sort-capsule" onclick="setSort(this, 'NOMINAL PENDANAAN PERBULAN')">Pemasukan Bulanan</div>
+        <div class="sort-capsule" onclick="setSort(this, 'BIAYA SEWA TEMPAT TINGGAL DI MESIR (EGP)')">Sewa Rumah di Mesir</div>
+        <div class="sort-capsule" onclick="setSort(this, 'NOMINAL HUTANG')">Hutang</div>
+    </div>
     <div id="loader">
         <div class="spinner"></div>
-        <p style="margin-top: 10px; color: var(--primary); font-weight: 600;">Tunggu akhi...</p>
+        <p style="margin-top: 10px; color: var(--primary); font-weight: 600;">Memproses...</p>
     </div>
 
     <div class="container" id="dataList"></div>
@@ -355,90 +360,90 @@
             closeDetail();
         }
 
-let allData = []; // Untuk menyimpan data dari API
-let currentSortKey = 'default';
+        let allData = []; // Untuk menyimpan data dari API
+        let currentSortKey = 'default';
 
-// Fungsi untuk membersihkan teks menjadi angka (misal: "Rp 1.500.000" -> 1500000)
-function parseToNumber(str) {
-    if (!str) return 0;
-    // Mengambil hanya angka saja
-    let num = str.toString().replace(/[^\d]/g, '');
-    return parseInt(num) || 0;
-}
-
-// Fungsi utama mengambil data
-function loadData() {
-    showLoader(true);
-    fetch(API_URL)
-        .then(res => res.json())
-        .then(data => {
-            allData = data; // Simpan data asli
-            renderList();   // Tampilkan ke layar
-            showLoader(false);
-        })
-        .catch(() => {
-            alert('Gagal memuat data');
-            showLoader(false);
-        });
-}
-
-// Fungsi untuk mengganti jenis sortir saat kapsul diklik
-function setSort(el, key) {
-    // Pindahkan class active
-    document.querySelectorAll('.sort-capsule').forEach(c => c.classList.remove('active'));
-    el.classList.add('active');
-    
-    currentSortKey = key;
-    renderList();
-}
-
-// Fungsi untuk menampilkan data ke HTML
-function renderList() {
-    const list = document.getElementById('dataList');
-    list.innerHTML = '';
-    
-    // Copy data agar tidak merusak data asli
-    let filteredData = [...allData];
-
-    // Logika Sort: Terkecil ke Terbesar (Ascending)
-    if (currentSortKey !== 'default') {
-        filteredData.sort((a, b) => {
-            return parseToNumber(a[currentSortKey]) - parseToNumber(b[currentSortKey]);
-        });
-    }
-
-    filteredData.forEach(item => {
-        if (!item['NAMA LENGKAP']) return;
-        const encoded = encodeURIComponent(JSON.stringify(item));
-        
-        const waBtn = item['NOMOR WHATSAPP'] ? 
-            `<a href="https://wa.me/${item['NOMOR WHATSAPP'].replace(/\D/g,'')}?text=${encodeURIComponent(`Assalamualaikum WR. WB.\n*${item['NAMA LENGKAP']}*\n\nKami dari WAZIQOH KMB Mesir akan menyalurkan Zakat Fitrah.\nSilakan kirimkan lokasi & foto rumah.`)}" 
-               target="_blank" class="btn-wa" onclick="event.stopPropagation();">Kirim Pesan</a>` : '';
-
-        // Tampilkan nominal yang sedang di-sort di dalam kartu secara dinamis
-        let infoValue = item['NOMINAL PENDANAAN PERBULAN'] || '-';
-        if(currentSortKey !== 'default') {
-            infoValue = item[currentSortKey] || '-';
+        // Fungsi untuk membersihkan teks menjadi angka (misal: "Rp 1.500.000" -> 1500000)
+        function parseToNumber(str) {
+            if (!str) return 0;
+            // Mengambil hanya angka saja
+            let num = str.toString().replace(/[^\d]/g, '');
+            return parseInt(num) || 0;
         }
 
-        list.innerHTML += `
-            <div class="card" onclick="openDetail('${encoded}')">
-                <div class="card-header">
-                    <span class="card-title">${item['NAMA LENGKAP']}</span>
-                    <span class="badge">${item['ANGKATAN (Tahun kedatangan)'] || '-'}</span>
-                </div>
-                <div class="card-body">
-                    <div><i class="fas fa-university" style="width:20px;"></i> ${item['ALMAMATER'] || '-'}</div>
-                    <div style="margin-bottom: 4px;"><i class="fas fa-money-bill-wave" style="width:20px;"></i> ${infoValue}</div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 5px; border-top: 1px dashed var(--border); padding-top: 8px;">
-                        <span style="font-size: 0.85rem; color: var(--text-dark); font-weight: 500;">${item['NOMOR WHATSAPP'] || '-'}</span>
-                        ${waBtn}
+        // Fungsi utama mengambil data
+        function loadData() {
+            showLoader(true);
+            fetch(API_URL)
+                .then(res => res.json())
+                .then(data => {
+                    allData = data; // Simpan data asli
+                    renderList();   // Tampilkan ke layar
+                    showLoader(false);
+                })
+                .catch(() => {
+                    alert('Gagal memuat data');
+                    showLoader(false);
+                });
+        }
+
+        // Fungsi untuk mengganti jenis sortir saat kapsul diklik
+        function setSort(el, key) {
+            // Pindahkan class active
+            document.querySelectorAll('.sort-capsule').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            
+            currentSortKey = key;
+            renderList();
+        }
+
+        // Fungsi untuk menampilkan data ke HTML
+        function renderList() {
+            const list = document.getElementById('dataList');
+            list.innerHTML = '';
+            
+            // Copy data agar tidak merusak data asli
+            let filteredData = [...allData];
+
+            // Logika Sort: Terkecil ke Terbesar (Ascending)
+            if (currentSortKey !== 'default') {
+                filteredData.sort((a, b) => {
+                    return parseToNumber(a[currentSortKey]) - parseToNumber(b[currentSortKey]);
+                });
+            }
+
+            filteredData.forEach(item => {
+                if (!item['NAMA LENGKAP']) return;
+                const encoded = encodeURIComponent(JSON.stringify(item));
+                
+                const waBtn = item['NOMOR WHATSAPP'] ? 
+                    `<a href="https://wa.me/${item['NOMOR WHATSAPP'].replace(/\D/g,'')}?text=${encodeURIComponent(`Assalamualaikum WR. WB.\n*${item['NAMA LENGKAP']}*\n\nKami dari WAZIQOH KMB Mesir akan menyalurkan Zakat Fitrah.\nSilakan kirimkan lokasi & foto rumah.`)}" 
+                    target="_blank" class="btn-wa" onclick="event.stopPropagation();">Kirim Pesan</a>` : '';
+
+                // Tampilkan nominal yang sedang di-sort di dalam kartu secara dinamis
+                let infoValue = item['NOMINAL PENDANAAN PERBULAN'] || '-';
+                if(currentSortKey !== 'default') {
+                    infoValue = item[currentSortKey] || '-';
+                }
+
+                list.innerHTML += `
+                    <div class="card" onclick="openDetail('${encoded}')">
+                        <div class="card-header">
+                            <span class="card-title">${item['NAMA LENGKAP']}</span>
+                            <span class="badge">${item['ANGKATAN (Tahun kedatangan)'] || '-'}</span>
+                        </div>
+                        <div class="card-body">
+                            <div><i class="fas fa-university" style="width:20px;"></i> ${item['ALMAMATER'] || '-'}</div>
+                            <div style="margin-bottom: 4px;"><i class="fas fa-money-bill-wave" style="width:20px;"></i> ${infoValue}</div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 5px; border-top: 1px dashed var(--border); padding-top: 8px;">
+                                <span style="font-size: 0.85rem; color: var(--text-dark); font-weight: 500;">${item['NOMOR WHATSAPP'] || '-'}</span>
+                                ${waBtn}
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        `;
-    });
-}
+                `;
+            });
+        }
 
         function submitData(e) {
             e.preventDefault();
