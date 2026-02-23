@@ -436,7 +436,9 @@
                     <div class="detail-item-value" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                         <span>${item['NOMOR WHATSAPP'] || '-'}</span>
                         ${item['NOMOR WHATSAPP'] ? 
-                            `<a href="https://wa.me/${item['NOMOR WHATSAPP'].replace(/\D/g,'')}?text=${encodeURIComponent(`Assalamualaikum WR. WB.\n*${item['NAMA LENGKAP']}*\n\nKami dari WAZIQOH KMB Mesir akan menyalurkan Zakat Fitrah.\nSilakan kirimkan lokasi & foto rumah.`)}" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> Kirim Pesan</a>` 
+                            `<a href="https://wa.me/${item['NOMOR WHATSAPP'].replace(/\D/g,'')}?text=${encodeURIComponent(
+                                `_Assalamualaikum WR. WB._\n*${item['NAMA LENGKAP']}*\n\nKami dari *WAZIQOH KMB Mesir 2025-2026*, ingin memberitahukan bahwa kami akan segera datang ke tempat kamu tinggal untuk menyalurkan Zakat Fitrah Ramadhan 2026, silahkan *kirimkan Gmaps* rumah kamu dan Foto Imarohnya yak.\nTerimakasih ${item['NAMA LENGKAP']} 🙏`
+                            )}" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> Kirim Pesan</a>` 
                             : ''}
                     </div>
                 </div>
@@ -572,7 +574,9 @@
                 const encoded = encodeURIComponent(JSON.stringify(item));
                 
                 const waBtn = item['NOMOR WHATSAPP'] ? 
-                    `<a href="https://wa.me/${item['NOMOR WHATSAPP'].replace(/\D/g,'')}?text=${encodeURIComponent(`Assalamualaikum WR. WB.\n*${item['NAMA LENGKAP']}*\n\nKami dari WAZIQOH KMB Mesir akan menyalurkan Zakat Fitrah.\nSilakan kirimkan lokasi & foto rumah.`)}" 
+                    `<a href="https://wa.me/${item['NOMOR WHATSAPP'].replace(/\D/g,'')}?text=${encodeURIComponent(
+                        `_Assalamualaikum WR. WB._\n*${item['NAMA LENGKAP']}*\n\nKami dari *WAZIQOH KMB Mesir 2025-2026*, ingin memberitahukan bahwa kami akan segera datang ke tempat kamu tinggal untuk menyalurkan Zakat Fitrah Ramadhan 2026, silahkan *kirimkan Gmaps* rumah kamu dan Foto Imarohnya yak.\nTerimakasih ${item['NAMA LENGKAP']} 🙏`
+                    )}" 
                     target="_blank" class="btn-wa" onclick="event.stopPropagation();">Kirim Pesan</a>` : '';
 
                 // Tampilkan nominal yang sedang di-sort di dalam kartu secara dinamis
