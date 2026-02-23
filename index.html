@@ -234,31 +234,208 @@
             <form id="crudForm" onsubmit="submitData(event)">
                 <input type="hidden" name="row" id="editRow">
 
-                <div class="form-group"><label>Nama Lengkap</label><input type="text" name="NAMA LENGKAP" required></div>
-                <div class="form-group"><label>Almamater</label><input type="text" name="ALMAMATER" required></div>
-                <div class="form-group"><label>Angkatan (Tahun Kedatangan)</label><input type="text" name="ANGKATAN (Tahun kedatangan)" required></div>
-                <div class="form-group"><label>Jenjang Pendidikan</label><input type="text" name="JENJANG PENDIDIKAN"></div>
-                <div class="form-group"><label>Fakultas</label><input type="text" name="FAKULTAS"></div>
-                <div class="form-group"><label>Jurusan</label><input type="text" name="JURUSAN"></div>
-                <div class="form-group"><label>Tingkat</label><input type="text" name="TINGKAT"></div>
-                <div class="form-group"><label>Mustawa (Tingkat)</label><input type="text" name="MUSTAWA (TINGKAT)"></div>
-                <div class="form-group"><label>Nomor Telepon (Mesir)</label><input type="tel" name="NOMOR TELPON (MESIR)"></div>
-                <div class="form-group"><label>Nomor WhatsApp</label><input type="tel" name="NOMOR WHATSAPP"></div>
-                <div class="form-group"><label>Alamat Rumah di Indonesia</label><input type="text" name="ALAMAT RUMAH DI INDONESIA"></div>
-                <div class="form-group"><label>Alamat Rumah di Mesir</label><input type="text" name="ALAMAT RUMAH DI MESIR"></div>
-                <div class="form-group"><label>Status Tempat Tinggal di Mesir</label><input type="text" name="STATUS TEMPAT TINGGAL DI MESIR"></div>
-                <div class="form-group"><label>Biaya Sewa (EGP)</label><input type="text" name="BIAYA SEWA TEMPAT TINGGAL DI MESIR (EGP)"></div>
-                <div class="form-group"><label>Pekerjaan Orang Tua</label><input type="text" name="PEKERJAAN ORANG TUA"></div>
-                <div class="form-group"><label>Penghasilan Orang Tua</label><input type="text" name="PENGHASILAN ORANG TUA"></div>
-                <div class="form-group"><label>Sumber Pendanaan Utama</label><input type="text" name="SUMBER PENDANAAN UTAMA"></div>
-                <div class="form-group"><label>Nominal Pendanaan per Bulan</label><input type="text" name="NOMINAL PENDANAAN PERBULAN"></div>
-                <div class="form-group"><label>Apakah punya hutang?</label><input type="text" name="APAKAH PUNYA HUTANG?"></div>
-                <div class="form-group"><label>Jika ada hutang, kepada siapa & untuk apa</label><input type="text" name="JIKA ADA, PADA SIAPA DAN UNTUK APA?"></div>
-                <div class="form-group"><label>Nominal Hutang</label><input type="text" name="NOMINAL HUTANG"></div>
-                <div class="form-group"><label>Beasiswa</label><input type="text" name="BEASISWA"></div>
-                <div class="form-group"><label>Merokok</label><input type="text" name="MEROKOK"></div>
-                <div class="form-group"><label>Anak Ke-</label><input type="text" name="ANAK KE-"></div>
-                <div class="form-group"><label>Foto Rumah di Indonesia (URL)</label><input type="url" name="FOTO RUMAH DI INDONESIA"></div>
+                <div class="form-group">
+                    <label>Nama Lengkap</label>
+                    <input type="text" name="NAMA LENGKAP" required placeholder="Nama lengkap mahasiswa">
+                </div>
+
+                <div class="form-group">
+                    <label>Almamater</label>
+                    <input type="text" name="ALMAMATER" required placeholder="Contoh: HIKADA Mesir, FSDL Mesir, dll">
+                </div>
+
+                <div class="form-group">
+                    <label>Angkatan (Tahun Kedatangan)</label>
+                    <input type="text" name="ANGKATAN (Tahun kedatangan)" required placeholder="Contoh: 2024 (El Jauhar)">
+                </div>
+
+                <div class="form-group">
+                    <label>Jenjang Pendidikan</label>
+                    <select name="JENJANG PENDIDIKAN" required>
+                        <option value="">Pilih jenjang</option>
+                        <option value="DAUROH LUGOH">DAUROH LUGOH</option>
+                        <option value="MA'HAD">MA'HAD</option>
+                        <option value="KULIAH">KULIAH</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Fakultas</label>
+                    <input type="text" name="FAKULTAS" required placeholder="Nama fakultas lengkap">
+                </div>
+
+                <div class="form-group">
+                    <label>Jurusan</label>
+                    <input type="text" name="JURUSAN" required placeholder="Gunakan 'Umum' jika belum penjurusan">
+                </div>
+
+                <div class="form-group">
+                    <label>Tingkat</label>
+                    <select name="TINGKAT" required>
+                        <option value="">Pilih tingkat</option>
+                        <option value="1.">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Mustawa (Tingkat)</label>
+                    <input type="text" name="MUSTAWA (TINGKAT)" placeholder="Tingkat mustawa / kelas">
+                </div>
+
+                <div class="form-group">
+                    <label>Nomor Telepon (Mesir)</label>
+                    <input type="tel" name="NOMOR TELPON (MESIR)" required placeholder="+201xxxxxxxxx (wajib diawali +20)">
+                    <small style="color: var(--text-muted); display: block; margin-top: 4px;">Harus berawalan +20 untuk nomor Mesir</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Nomor WhatsApp</label>
+                    <input type="tel" name="NOMOR WHATSAPP" placeholder="+201xxxxxxxxx atau +628xxxxxxxxxx (diawali +)">
+                    <small style="color: var(--text-muted); display: block; margin-top: 4px;">Masukkan dengan kode negara + (contoh +20 atau +62), tidak wajib +62</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Alamat Rumah di Indonesia</label>
+                    <input type="text" name="ALAMAT RUMAH DI INDONESIA" required placeholder="Format: RT/RW, DESA, KECAMATAN, KABUPATEN. Contoh: RT09/RW08, CIKANDE PERMAI, CIKANDE, SERANG.">
+                </div>
+
+                <div class="form-group">
+                    <label>Alamat Rumah di Mesir</label>
+                    <input type="text" name="ALAMAT RUMAH DI MESIR" required placeholder="Format: No Imaroh, Jalan, Distrik, Qism, Provinsi. Contoh: 09, Jln, King Al Mansoury, El-gamaleya, El-Gamaleya, Kairo">
+                </div>
+
+                <div class="form-group">
+                    <label>Status Tempat Tinggal di Mesir</label>
+                    <select name="STATUS TEMPAT TINGGAL DI MESIR" required>
+                        <option value="">Pilih status</option>
+                        <option value="Asrama (Gratis)">Asrama (Gratis)</option>
+                        <option value="Sewa (Bayar)">Sewa (Bayar)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Biaya Sewa Tempat Tinggal di Mesir (EGP)</label>
+                    <select name="BIAYA SEWA TEMPAT TINGGAL DI MESIR (EGP)" required>
+                        <option value="">Pilih range biaya per orang/bulan</option>
+                        <option value="Gratis">Gratis</option>
+                        <option value="500 - 750">500 - 750</option>
+                        <option value="750 - 1000">750 - 1000</option>
+                        <option value="1000 - 1250">1000 - 1250</option>
+                        <option value="1250 - 1500">1250 - 1500</option>
+                        <option value="1500 - 1750">1500 - 1750</option>
+                        <option value="1750 - 2000">1750 - 2000</option>
+                        <option value="> 2000">> 2000</option>
+                    </select>
+                    <small style="color: var(--text-muted); display: block; margin-top: 4px;">Biaya sewa per orang/bulan (igar + air + listrik), pilih Gratis jika asrama</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Pekerjaan Orang Tua</label>
+                    <select name="PEKERJAAN ORANG TUA" required>
+                        <option value="">Pilih pekerjaan</option>
+                        <option value="Buruh Harian Lepas">Buruh Harian Lepas</option>
+                        <option value="Petani / Penggarap Sawah">Petani / Penggarap Sawah</option>
+                        <option value="Nelayan Tradisional">Nelayan Tradisional</option>
+                        <option value="Pedagang Kecil / Kaki Lima">Pedagang Kecil / Kaki Lima</option>
+                        <option value="Sopir / Driver Ojek Online">Sopir / Driver Ojek Online</option>
+                        <option value="Pekerja Serabutan">Pekerja Serabutan</option>
+                        <option value="Asisten Rumah Tangga">Asisten Rumah Tangga</option>
+                        <option value="Karyawan Swasta / Buruh Pabrik">Karyawan Swasta / Buruh Pabrik</option>
+                        <option value="Wiraswasta / Pengusaha">Wiraswasta / Pengusaha</option>
+                        <option value="Guru / Dosen Honorer">Guru / Dosen Honorer</option>
+                        <option value="Guru / Dosen PNS">Guru / Dosen PNS</option>
+                        <option value="PNS / ASN (Pegawai Negeri)">PNS / ASN (Pegawai Negeri)</option>
+                        <option value="TNI / POLRI">TNI / POLRI</option>
+                        <option value="Pegawai BUMN / BUMD">Pegawai BUMN / BUMD</option>
+                        <option value="Tenaga Medis (Dokter/Perawat/Bidan)">Tenaga Medis (Dokter/Perawat/Bidan)</option>
+                        <option value="Pensiunan">Pensiunan</option>
+                        <option value="Tidak Bekerja / Pengangguran">Tidak Bekerja / Pengangguran</option>
+                        <option value="Sakit Kronis / Lansia (Tidak Produktif)">Sakit Kronis / Lansia (Tidak Produktif)</option>
+                        <option value="Sudah Meninggal Dunia (Yatim/Piatu)">Sudah Meninggal Dunia (Yatim/Piatu)</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Penghasilan Orang Tua</label>
+                    <select name="PENGHASILAN ORANG TUA" required>
+                        <option value="">Pilih range penghasilan rata-rata/bulan</option>
+                        <option value="< Rp 500.000">< Rp 500.000</option>
+                        <option value="< Rp 1.000.000">< Rp 1.000.000</option>
+                        <option value="< Rp 2.000.000">< Rp 2.000.000</option>
+                        <option value="< Rp 3.000.000">< Rp 3.000.000</option>
+                        <option value="< Rp 4.000.000">< Rp 4.000.000</option>
+                        <option value="> Rp 4.000.000">> Rp 4.000.000</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Sumber Pendanaan Utama</label>
+                    <select name="SUMBER PENDANAAN UTAMA" required>
+                        <option value="">Pilih sumber utama</option>
+                        <option value="Kiriman Orang tua/keluarga">Kiriman Orang tua/keluarga</option>
+                        <option value="Beasiswa Penuh">Beasiswa Penuh</option>
+                        <option value="Beasiswa sebagian">Beasiswa sebagian</option>
+                        <option value="Bekerja">Bekerja</option>
+                        <option value="Tidak ada">Tidak ada</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Nominal Pendanaan per Bulan</label>
+                    <input type="text" name="NOMINAL PENDANAAN PERBULAN" required placeholder="Contoh: Rp 2.000.000/bulan atau - jika tidak ada">
+                </div>
+
+                <div class="form-group">
+                    <label>Apakah punya hutang?</label>
+                    <select name="APAKAH PUNYA HUTANG?" required>
+                        <option value="">Pilih</option>
+                        <option value="Ada">Ada</option>
+                        <option value="Tidak ada">Tidak ada</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Jika ada hutang, kepada siapa & untuk apa</label>
+                    <input type="text" name="JIKA ADA, PADA SIAPA DAN UNTUK APA?" placeholder="Contoh: Bagus, untuk makan sebulan atau - jika tidak ada">
+                </div>
+
+                <div class="form-group">
+                    <label>Nominal Hutang</label>
+                    <input type="text" name="NOMINAL HUTANG" placeholder="Contoh: Rp 2.000.000 atau - jika tidak ada">
+                </div>
+
+                <div class="form-group">
+                    <label>Beasiswa</label>
+                    <select name="BEASISWA" required>
+                        <option value="">Pilih</option>
+                        <option value="Ya">Ya</option>
+                        <option value="Tidak">Tidak</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Merokok</label>
+                    <select name="MEROKOK" required>
+                        <option value="">Pilih</option>
+                        <option value="Ya">Ya</option>
+                        <option value="Tidak">Tidak</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Anak Ke-</label>
+                    <input type="text" name="ANAK KE-" required placeholder="Contoh: 3 dari 5 bersaudara">
+                </div>
+
+                <div class="form-group">
+                    <label>Foto Rumah di Indonesia (URL)</label>
+                    <input type="url" name="FOTO RUMAH DI INDONESIA" required placeholder="Link shareable Google Drive (pastikan public atau anyone with link)">
+                    <small style="color: var(--text-muted); display: block; margin-top: 4px;">Upload foto ke Drive → Share → Anyone with the link → Copy link</small>
+                </div>
 
                 <button type="submit" class="btn-submit">Simpan Data</button>
             </form>
@@ -289,360 +466,387 @@
         </div>
     </div>
 
-    <script>
+<script>
 
-        // ────────────────────────────────────────────────
-        //   SISTEM VERIFIKASI ADMIN YANG LEBIH MUDAH
-        // ────────────────────────────────────────────────
+    // ────────────────────────────────────────────────
+    //   SISTEM VERIFIKASI ADMIN YANG LEBIH MUDAH
+    // ────────────────────────────────────────────────
 
-        const ADMIN_PASSWORD = 'waziqoh2026';
+    const ADMIN_PASSWORD = 'waziqoh2026';
 
-        function showPasswordModal() {
-            return new Promise((resolve) => {
-                const modal = document.getElementById('passwordModal');
-                const input = document.getElementById('adminPassword');
-                const error = document.getElementById('passwordError');
-                const btn = document.getElementById('submitPasswordBtn');
-
-                input.value = '';
-                error.style.display = 'none';
-                btn.disabled = true;
-
-                modal.style.display = 'flex';
-                setTimeout(() => {
-                    modal.style.opacity = '1';
-                    modal.querySelector('.modal-content').style.transform = 'translateY(0)';
-                    input.focus();
-                }, 50);
-
-                function tryVerify() {
-                    const val = input.value.trim();
-                    if (val === ADMIN_PASSWORD) {
-                        closePasswordModal();
-                        resolve(true);
-                    } else {
-                        error.textContent = 'Kata sandi salah, coba lagi';
-                        error.style.display = 'block';
-                        input.focus();
-                        input.select();
-                    }
-                }
-
-                btn.onclick = tryVerify;
-
-                input.oninput = () => {
-                    btn.disabled = input.value.trim() === '';
-                    if (error.style.display === 'block') {
-                        error.style.display = 'none';
-                    }
-                };
-
-                input.onkeydown = (e) => {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        if (!btn.disabled) tryVerify();
-                    }
-                };
-            });
-        }
-
-        function closePasswordModal() {
+    function showPasswordModal() {
+        return new Promise((resolve) => {
             const modal = document.getElementById('passwordModal');
-            if (!modal) return;
+            const input = document.getElementById('adminPassword');
+            const error = document.getElementById('passwordError');
+            const btn = document.getElementById('submitPasswordBtn');
 
-            modal.style.opacity = '0';
-            modal.querySelector('.modal-content').style.transform = 'translateY(100%)';
-
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 320);
-        }
-
-        const API_URL = 'https://script.google.com/macros/s/AKfycbwyoerrOO3CAkizLTnSapQf34rST9nkBun0HRTrYCna2B9UlWHyVUA2_Wmz1uLzOhv3/exec'; 
-        let currentItemData = null;
-
-        document.addEventListener('DOMContentLoaded', loadData);
-
-        function showLoader(show) { document.getElementById('loader').style.display = show ? 'flex' : 'none'; }
-
-        async function openForm(item = null) {
-            const isCorrect = await showPasswordModal();
-            if (!isCorrect) return;
-
-            const modal = document.getElementById('formModal');
-            const content = document.getElementById('formContent');
-            const form = document.getElementById('crudForm');
-            const title = document.getElementById('modalTitle');
-            
-            form.reset();
-            document.getElementById('editRow').value = '';
-
-            if (item) {
-                title.innerText = 'Edit Data';
-                Object.keys(item).forEach(key => {
-                    if (key !== 'row' && key !== 'Timestamp') {
-                        const input = form.querySelector(`input[name="${key}"]`);
-                        if (input) input.value = item[key];
-                    }
-                });
-                document.getElementById('editRow').value = item.row;
-            } else {
-                title.innerText = 'Tambah Data';
-            }
+            input.value = '';
+            error.style.display = 'none';
+            btn.disabled = true;
 
             modal.style.display = 'flex';
             setTimeout(() => {
                 modal.style.opacity = '1';
-                content.style.transform = 'translateY(0)';
-            }, 10);
-        }
+                modal.querySelector('.modal-content').style.transform = 'translateY(0)';
+                input.focus();
+            }, 50);
 
-        function closeForm() { 
-            const modal = document.getElementById('formModal');
-            const content = document.getElementById('formContent');
-            modal.style.opacity = '0';
-            content.style.transform = 'translateY(100%)';
-            setTimeout(() => { modal.style.display = 'none'; }, 300);
-        }
-
-        function formatDriveUrl(url) {
-            if (!url) return '';
-            if (url.includes('drive.google.com')) {
-                let fileId = '';
-                if (url.includes('id=')) fileId = url.split('id=')[1].split('&')[0];
-                else fileId = url.split('/d/')[1]?.split('/')[0] || '';
-                return `https://lh3.googleusercontent.com/u/0/d/${fileId}`;
+            function tryVerify() {
+                const val = input.value.trim();
+                if (val === ADMIN_PASSWORD) {
+                    closePasswordModal();
+                    resolve(true);
+                } else {
+                    error.textContent = 'Kata sandi salah, coba lagi';
+                    error.style.display = 'block';
+                    input.focus();
+                    input.select();
+                }
             }
-            return url;
+
+            btn.onclick = tryVerify;
+
+            input.oninput = () => {
+                btn.disabled = input.value.trim() === '';
+                if (error.style.display === 'block') {
+                    error.style.display = 'none';
+                }
+            };
+
+            input.onkeydown = (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (!btn.disabled) tryVerify();
+                }
+            };
+        });
+    }
+
+    function closePasswordModal() {
+        const modal = document.getElementById('passwordModal');
+        if (!modal) return;
+
+        modal.style.opacity = '0';
+        modal.querySelector('.modal-content').style.transform = 'translateY(100%)';
+
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 320);
+    }
+
+    const API_URL = 'https://script.google.com/macros/s/AKfycbztxx7Gjy9qnOnZxyexX9cUI8QT9-y0vRSTbpO691G6edVhrj716k63rDJpPH5LklGL/exec'; 
+    let currentItemData = null;
+
+    document.addEventListener('DOMContentLoaded', loadData);
+
+    function showLoader(show) { 
+        document.getElementById('loader').style.display = show ? 'flex' : 'none'; 
+    }
+
+    async function openForm(item = null) {
+        const isCorrect = await showPasswordModal();
+        if (!isCorrect) return;
+
+        const modal = document.getElementById('formModal');
+        const content = document.getElementById('formContent');
+        const form = document.getElementById('crudForm');
+        const title = document.getElementById('modalTitle');
+        
+        form.reset();
+        document.getElementById('editRow').value = '';
+
+        if (item) {
+            title.innerText = 'Edit Data';
+
+            Object.keys(item).forEach(key => {
+                if (key !== 'row' && key !== 'Timestamp') {
+                    // Cari baik input text maupun select
+                    const element = form.querySelector(`input[name="${key}"], select[name="${key}"]`);
+                    if (element) {
+                        element.value = item[key];
+
+                        // Khusus select: cek apakah value cocok dengan opsi yang ada
+                        if (element.tagName === 'SELECT' && element.selectedIndex === -1) {
+                            console.warn(`Nilai "${item[key]}" tidak ditemukan di opsi dropdown: ${key}`);
+                            // Opsional: bisa di-reset ke kosong atau opsi pertama
+                            // element.value = "";
+                        }
+                    }
+                }
+            });
+
+            document.getElementById('editRow').value = item.row;
+        } else {
+            title.innerText = 'Tambah Data';
         }
 
-        function openDetail(encodedItem) {
-            const item = JSON.parse(decodeURIComponent(encodedItem));
-            currentItemData = item;
+        modal.style.display = 'flex';
+        setTimeout(() => {
+            modal.style.opacity = '1';
+            content.style.transform = 'translateY(0)';
+        }, 10);
+    }
+
+    function closeForm() { 
+        const modal = document.getElementById('formModal');
+        const content = document.getElementById('formContent');
+        modal.style.opacity = '0';
+        content.style.transform = 'translateY(100%)';
+        setTimeout(() => { modal.style.display = 'none'; }, 300);
+    }
+
+    function formatDriveUrl(url) {
+        if (!url) return '';
+        if (url.includes('drive.google.com')) {
+            let fileId = '';
+            if (url.includes('id=')) fileId = url.split('id=')[1].split('&')[0];
+            else fileId = url.split('/d/')[1]?.split('/')[0] || '';
+            return `https://lh3.googleusercontent.com/u/0/d/${fileId}`;
+        }
+        return url;
+    }
+
+    function openDetail(encodedItem) {
+        const item = JSON.parse(decodeURIComponent(encodedItem));
+        currentItemData = item;
+        
+        document.getElementById('detailTitleName').innerText = item['NAMA LENGKAP'] || 'Profil Mustahiq';
+        
+        const photoUrl = formatDriveUrl(item['FOTO RUMAH DI INDONESIA'] || '');
+        
+        const waNumber = String(item['NOMOR WHATSAPP'] || '').replace(/\D/g, '');
+        
+        const content = document.getElementById('detailContent');
+        content.innerHTML = `
+            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-university"></i> Almamater</div><div class="detail-item-value">${item['ALMAMATER'] || '-'}</div></div>
+            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-calendar-alt"></i> Angkatan</div><div class="detail-item-value">${item['ANGKATAN (Tahun kedatangan)'] || '-'}</div></div>
+            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-graduation-cap"></i> Jenjang & Jurusan</div><div class="detail-item-value">${item['JENJANG PENDIDIKAN'] || '-'} • ${item['FAKULTAS'] || '-'} (${item['JURUSAN'] || '-'})</div></div>
+            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-layer-group"></i> Tingkat / Mustawa</div><div class="detail-item-value">${item['TINGKAT'] || '-'} / ${item['MUSTAWA (TINGKAT)'] || '-'}</div></div>
+            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-phone"></i> Telp Mesir</div><div class="detail-item-value">${item['NOMOR TELPON (MESIR)'] || '-'}</div></div>
+            <div class="detail-item">
+                <div class="detail-item-label"><i class="fab fa-whatsapp"></i> WhatsApp</div>
+                <div class="detail-item-value" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <span>${item['NOMOR WHATSAPP'] || '-'}</span>
+                    ${waNumber ? 
+                        `<a href="https://wa.me/${waNumber}?text=${encodeURIComponent(
+                            `_Assalamualaikum WR. WB._\n*${item['NAMA LENGKAP']}*\n\nKami dari *WAZIQOH KMB Mesir 2025-2026*, ingin memberitahukan bahwa kami akan segera datang ke tempat kamu tinggal untuk menyalurkan Zakat Fitrah Ramadhan 2026, silahkan *kirimkan Gmaps* rumah kamu dan Foto Imarohnya yak.\nTerimakasih ${item['NAMA LENGKAP']} 🙏`
+                        )}" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> Kirim Pesan</a>` 
+                        : ''}
+                </div>
+            </div>
+            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-home"></i> Alamat Indonesia</div><div class="detail-item-value">${item['ALAMAT RUMAH DI INDONESIA'] || '-'}</div></div>
+            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-map-marker-alt"></i> Alamat Mesir</div><div class="detail-item-value">${item['ALAMAT RUMAH DI MESIR'] || '-'}</div></div>
+            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-building"></i> Status Tinggal</div><div class="detail-item-value">${item['STATUS TEMPAT TINGGAL DI MESIR'] || '-'}</div></div>
+            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-money-bill"></i> Biaya Sewa (EGP)</div><div class="detail-item-value">${item['BIAYA SEWA TEMPAT TINGGAL DI MESIR (EGP)'] || '-'}</div></div>
+            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-briefcase"></i> Pekerjaan Orang Tua</div><div class="detail-item-value">${item['PEKERJAAN ORANG TUA'] || '-'}</div></div>
+            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-money-bill-wave"></i> Penghasilan Ortu</div><div class="detail-item-value">${item['PENGHASILAN ORANG TUA'] || '-'}</div></div>
+            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-hand-holding-usd"></i> Sumber Dana</div><div class="detail-item-value">${item['SUMBER PENDANAAN UTAMA'] || '-'} (${item['NOMINAL PENDANAAN PERBULAN'] || '-'})</div></div>
+            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-exclamation-triangle"></i> Hutang</div><div class="detail-item-value">${item['APAKAH PUNYA HUTANG?'] || '-'} ${item['NOMINAL HUTANG'] ? `(${item['NOMINAL HUTANG']})` : ''}</div></div>
+            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-file-invoice-dollar"></i> Untuk Apa</div><div class="detail-item-value">${item['JIKA ADA, PADA SIAPA DAN UNTUK APA?'] || '-'}</div></div>
+            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-award"></i> Beasiswa</div><div class="detail-item-value">${item['BEASISWA'] || '-'}</div></div>
+            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-smoking"></i> Merokok / Posisi Anak</div><div class="detail-item-value">${item['MEROKOK'] || '-'} • ${item['ANAK KE-'] ? `Anak ke-${item['ANAK KE-']}` : '-'}</div></div>
+            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-image"></i> Foto Rumah Indonesia</div><div class="detail-item-value">${photoUrl ? `<img src="${photoUrl}" class="img-preview" alt="Foto rumah" onerror="this.src='https://via.placeholder.com/320x180?text=Foto+tidak+tersedia';">` : 'Tidak ada foto'}</div></div>
+        `;
+
+        const screen = document.getElementById('detailScreen');
+        screen.style.display = 'flex';
+        setTimeout(() => { screen.style.transform = 'translateX(0)'; }, 10);
+    }
+
+    function closeDetail() {
+        const screen = document.getElementById('detailScreen');
+        screen.style.transform = 'translateX(100%)';
+        setTimeout(() => { screen.style.display = 'none'; }, 300);
+    }
+
+    async function editCurrentDetail() {
+        const isCorrect = await showPasswordModal();
+        if (!isCorrect) return;
+
+        const modal = document.getElementById('formModal');
+        const content = document.getElementById('formContent');
+        const form = document.getElementById('crudForm');
+        const title = document.getElementById('modalTitle');
+        
+        form.reset();
+        document.getElementById('editRow').value = '';
+
+        title.innerText = 'Edit Data';
+        
+        Object.keys(currentItemData).forEach(key => {
+            if (key !== 'row' && key !== 'Timestamp') {
+                const element = form.querySelector(`input[name="${key}"], select[name="${key}"]`);
+                if (element) {
+                    element.value = currentItemData[key];
+
+                    if (element.tagName === 'SELECT' && element.selectedIndex === -1) {
+                        console.warn(`Nilai "${currentItemData[key]}" tidak ditemukan di opsi dropdown: ${key}`);
+                    }
+                }
+            }
+        });
+        
+        document.getElementById('editRow').value = currentItemData.row;
+
+        modal.style.display = 'flex';
+        setTimeout(() => {
+            modal.style.opacity = '1';
+            content.style.transform = 'translateY(0)';
+        }, 10);
+    }
+
+    async function deleteCurrentDetail() {
+        if (!currentItemData?.row) return;
+
+        const isCorrect = await showPasswordModal();
+        if (!isCorrect) return;
+
+        if (!confirm('Yakin ingin menghapus data ini?\nTindakan ini tidak dapat dibatalkan.')) return;
+        
+        deleteData(currentItemData.row);
+        closeDetail();
+    }
+
+    let allData = [];
+    let currentSortKey = 'default';
+
+    function parseToNumber(str) {
+        if (!str) return 0;
+        let num = str.toString().replace(/[^\d]/g, '');
+        return parseInt(num) || 0;
+    }
+
+    function loadData() {
+        showLoader(true);
+        fetch(API_URL)
+            .then(res => res.json())
+            .then(data => {
+                console.log("Data dari server:", data);
+                console.log("Jumlah record:", data.length);
+                allData = data;
+                renderList();
+                showLoader(false);
+            })
+            .catch(err => {
+                console.error("Fetch error:", err);
+                alert('Gagal memuat data. Cek koneksi atau URL script.');
+                showLoader(false);
+            });
+    }
+
+    function setSort(el, key) {
+        document.querySelectorAll('.sort-capsule').forEach(c => c.classList.remove('active'));
+        el.classList.add('active');
+        
+        currentSortKey = key;
+        renderList();
+    }
+
+    function renderList() {
+        const list = document.getElementById('dataList');
+        list.innerHTML = '';
+        
+        let filteredData = [...allData];
+
+        if (currentSortKey !== 'default') {
+            filteredData.sort((a, b) => {
+                return parseToNumber(a[currentSortKey]) - parseToNumber(b[currentSortKey]);
+            });
+        }
+
+        filteredData.forEach(item => {
+            const nama = item['NAMA LENGKAP']?.trim();
+            if (!nama || nama === '' || nama === '-') return;
+
+            const encoded = encodeURIComponent(JSON.stringify(item));
             
-            document.getElementById('detailTitleName').innerText = item['NAMA LENGKAP'] || 'Profil Mustahiq';
-            
-            const photoUrl = formatDriveUrl(item['FOTO RUMAH DI INDONESIA'] || '');
-            
-            const content = document.getElementById('detailContent');
-            content.innerHTML = `
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-university"></i> Almamater</div><div class="detail-item-value">${item['ALMAMATER'] || '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-calendar-alt"></i> Angkatan</div><div class="detail-item-value">${item['ANGKATAN (Tahun kedatangan)'] || '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-graduation-cap"></i> Jenjang & Jurusan</div><div class="detail-item-value">${item['JENJANG PENDIDIKAN'] || '-'} • ${item['FAKULTAS'] || '-'} (${item['JURUSAN'] || '-'})</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-layer-group"></i> Tingkat / Mustawa</div><div class="detail-item-value">${item['TINGKAT'] || '-'} / ${item['MUSTAWA (TINGKAT)'] || '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-phone"></i> Telp Mesir</div><div class="detail-item-value">${item['NOMOR TELPON (MESIR)'] || '-'}</div></div>
-                <div class="detail-item">
-                    <div class="detail-item-label"><i class="fab fa-whatsapp"></i> WhatsApp</div>
-                    <div class="detail-item-value" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                        <span>${item['NOMOR WHATSAPP'] || '-'}</span>
-                        ${item['NOMOR WHATSAPP'] ? 
-                            `<a href="https://wa.me/${item['NOMOR WHATSAPP'].replace(/\D/g,'')}?text=${encodeURIComponent(
-                                `_Assalamualaikum WR. WB._\n*${item['NAMA LENGKAP']}*\n\nKami dari *WAZIQOH KMB Mesir 2025-2026*, ingin memberitahukan bahwa kami akan segera datang ke tempat kamu tinggal untuk menyalurkan Zakat Fitrah Ramadhan 2026, silahkan *kirimkan Gmaps* rumah kamu dan Foto Imarohnya yak.\nTerimakasih ${item['NAMA LENGKAP']} 🙏`
-                            )}" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> Kirim Pesan</a>` 
-                            : ''}
+            let rawWa = String(item['NOMOR WHATSAPP'] || '').trim();
+            let cleanWa = rawWa.replace(/\D/g, '');
+            let displayWa = rawWa;
+            let linkWa = cleanWa;
+
+            if (cleanWa.length >= 9 && !cleanWa.startsWith('0')) {
+                if (!rawWa.startsWith('+')) {
+                    displayWa = '+' + rawWa;
+                }
+                linkWa = cleanWa;
+            } else {
+                displayWa = rawWa || '-';
+                linkWa = '';
+            }
+
+            const waBtn = linkWa ? 
+                `<a href="https://wa.me/${linkWa}?text=${encodeURIComponent(
+                    `_Assalamualaikum WR. WB._\n*${item['NAMA LENGKAP']}*\n\nKami dari *WAZIQOH KMB Mesir 2025-2026*, ingin memberitahukan bahwa kami akan segera datang ke tempat kamu tinggal untuk menyalurkan Zakat Fitrah Ramadhan 2026, silahkan *kirimkan Gmaps* rumah kamu dan Foto Imarohnya yak.\nTerimakasih ${item['NAMA LENGKAP']} 🙏`
+                )}" 
+                target="_blank" class="btn-wa" onclick="event.stopPropagation();">Kirim Pesan</a>` 
+                : '';
+
+            let infoValue = item['NOMINAL PENDANAAN PERBULAN'] || '-';
+            if (currentSortKey !== 'default') {
+                infoValue = item[currentSortKey] || '-';
+            }
+
+            list.innerHTML += `
+                <div class="card" onclick="openDetail('${encoded}')">
+                    <div class="card-header">
+                        <span class="card-title">${item['NAMA LENGKAP'] || 'Nama tidak tersedia'}</span>
+                        <span class="badge">${item['ANGKATAN (Tahun kedatangan)'] || '-'}</span>
+                    </div>
+                    <div class="card-body">
+                        <div><i class="fas fa-university" style="width:20px;"></i> ${item['ALMAMATER'] || '-'}</div>
+                        <div style="margin-bottom: 4px;"><i class="fas fa-money-bill-wave" style="width:20px;"></i> ${infoValue}</div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 5px; border-top: 1px dashed var(--border); padding-top: 8px;">
+                            <span style="font-size: 0.85rem; color: var(--text-dark); font-weight: 500;">${displayWa}</span>
+                            ${waBtn}
+                        </div>
                     </div>
                 </div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-home"></i> Alamat Indonesia</div><div class="detail-item-value">${item['ALAMAT RUMAH DI INDONESIA'] || '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-map-marker-alt"></i> Alamat Mesir</div><div class="detail-item-value">${item['ALAMAT RUMAH DI MESIR'] || '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-building"></i> Status Tinggal</div><div class="detail-item-value">${item['STATUS TEMPAT TINGGAL DI MESIR'] || '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-money-bill"></i> Biaya Sewa (EGP)</div><div class="detail-item-value">${item['BIAYA SEWA TEMPAT TINGGAL DI MESIR (EGP)'] || '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-briefcase"></i> Pekerjaan Orang Tua</div><div class="detail-item-value">${item['PEKERJAAN ORANG TUA'] || '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-money-bill-wave"></i> Penghasilan Ortu</div><div class="detail-item-value">${item['PENGHASILAN ORANG TUA'] || '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-hand-holding-usd"></i> Sumber Dana</div><div class="detail-item-value">${item['SUMBER PENDANAAN UTAMA'] || '-'} (${item['NOMINAL PENDANAAN PERBULAN'] || '-'})</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-exclamation-triangle"></i> Hutang</div><div class="detail-item-value">${item['APAKAH PUNYA HUTANG?'] || '-'} ${item['NOMINAL HUTANG'] ? `(${item['NOMINAL HUTANG']})` : ''}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-file-invoice-dollar"></i> Untuk Apa</div><div class="detail-item-value">${item['JIKA ADA, PADA SIAPA DAN UNTUK APA?'] || '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-award"></i> Beasiswa</div><div class="detail-item-value">${item['BEASISWA'] || '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-smoking"></i> Merokok / Posisi Anak</div><div class="detail-item-value">${item['MEROKOK'] || '-'} • ${item['ANAK KE-'] ? `Anak ke-${item['ANAK KE-']}` : '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-image"></i> Foto Rumah Indonesia</div><div class="detail-item-value">${photoUrl ? `<img src="${photoUrl}" class="img-preview" alt="Foto rumah" onerror="this.src='https://via.placeholder.com/320x180?text=Foto+tidak+tersedia';">` : 'Tidak ada foto'}</div></div>
             `;
+        });
+    }
 
-            const screen = document.getElementById('detailScreen');
-            screen.style.display = 'flex';
-            setTimeout(() => { screen.style.transform = 'translateX(0)'; }, 10);
+    function submitData(e) {
+        e.preventDefault();
+        showLoader(true);
+        closeForm();
+
+        const formData = new FormData(document.getElementById('crudForm'));
+        const params = new URLSearchParams();
+        const editRow = document.getElementById('editRow').value;
+
+        params.append('action', editRow ? 'update' : 'create');
+        if (editRow) params.append('row', editRow);
+
+        for (const [k, v] of formData) {
+            params.append(k, v);
         }
 
-        function closeDetail() {
-            const screen = document.getElementById('detailScreen');
-            screen.style.transform = 'translateX(100%)';
-            setTimeout(() => { screen.style.display = 'none'; }, 300);
-        }
-
-        async function editCurrentDetail() {
-            // Munculkan popup password dulu (sudah menimpa detail)
-            const isCorrect = await showPasswordModal();
-            
-            if (!isCorrect) {
-                // Password salah atau dibatalkan → tidak lakukan apa-apa
-                return;
-            }
-
-            // Password benar → langsung buka form edit
-            // TANPA closeDetail() dulu
-            const modal = document.getElementById('formModal');
-            const content = document.getElementById('formContent');
-            const form = document.getElementById('crudForm');
-            const title = document.getElementById('modalTitle');
-            
-            form.reset();
-            document.getElementById('editRow').value = '';
-
-            title.innerText = 'Edit Data';
-            
-            Object.keys(currentItemData).forEach(key => {
-                if (key !== 'row' && key !== 'Timestamp') {
-                    const input = form.querySelector(`input[name="${key}"]`);
-                    if (input) input.value = currentItemData[key];
-                }
+        fetch(API_URL, { method: 'POST', body: params })
+            .then(res => res.text())
+            .then(() => loadData())
+            .catch(() => {
+                alert('Gagal menyimpan data');
+                showLoader(false);
             });
-            
-            document.getElementById('editRow').value = currentItemData.row;
+    }
 
-            // Tampilkan modal form (akan menimpa halaman detail)
-            modal.style.display = 'flex';
-            setTimeout(() => {
-                modal.style.opacity = '1';
-                content.style.transform = 'translateY(0)';
-            }, 10);
-        }
+    function deleteData(rowId) {
+        showLoader(true);
+        const params = new URLSearchParams();
+        params.append('action', 'delete');
+        params.append('row', rowId);
 
-        async function deleteCurrentDetail() {
-            if (!currentItemData?.row) return;
-
-            const isCorrect = await showPasswordModal();
-            if (!isCorrect) return;
-
-            if (!confirm('Yakin ingin menghapus data ini?\nTindakan ini tidak dapat dibatalkan.')) return;
-            
-            deleteData(currentItemData.row);
-            closeDetail();
-        }
-
-        let allData = []; // Untuk menyimpan data dari API
-        let currentSortKey = 'default';
-
-        // Fungsi untuk membersihkan teks menjadi angka (misal: "Rp 1.500.000" -> 1500000)
-        function parseToNumber(str) {
-            if (!str) return 0;
-            // Mengambil hanya angka saja
-            let num = str.toString().replace(/[^\d]/g, '');
-            return parseInt(num) || 0;
-        }
-
-        // Fungsi utama mengambil data
-        function loadData() {
-            showLoader(true);
-            fetch(API_URL)
-                .then(res => res.json())
-                .then(data => {
-                    allData = data; // Simpan data asli
-                    renderList();   // Tampilkan ke layar
-                    showLoader(false);
-                })
-                .catch(() => {
-                    alert('Gagal memuat data');
-                    showLoader(false);
-                });
-        }
-
-        // Fungsi untuk mengganti jenis sortir saat kapsul diklik
-        function setSort(el, key) {
-            // Pindahkan class active
-            document.querySelectorAll('.sort-capsule').forEach(c => c.classList.remove('active'));
-            el.classList.add('active');
-            
-            currentSortKey = key;
-            renderList();
-        }
-
-        // Fungsi untuk menampilkan data ke HTML
-        function renderList() {
-            const list = document.getElementById('dataList');
-            list.innerHTML = '';
-            
-            // Copy data agar tidak merusak data asli
-            let filteredData = [...allData];
-
-            // Logika Sort: Terkecil ke Terbesar (Ascending)
-            if (currentSortKey !== 'default') {
-                filteredData.sort((a, b) => {
-                    return parseToNumber(a[currentSortKey]) - parseToNumber(b[currentSortKey]);
-                });
-            }
-
-            filteredData.forEach(item => {
-                if (!item['NAMA LENGKAP']) return;
-                const encoded = encodeURIComponent(JSON.stringify(item));
-                
-                const waBtn = item['NOMOR WHATSAPP'] ? 
-                    `<a href="https://wa.me/${item['NOMOR WHATSAPP'].replace(/\D/g,'')}?text=${encodeURIComponent(
-                        `_Assalamualaikum WR. WB._\n*${item['NAMA LENGKAP']}*\n\nKami dari *WAZIQOH KMB Mesir 2025-2026*, ingin memberitahukan bahwa kami akan segera datang ke tempat kamu tinggal untuk menyalurkan Zakat Fitrah Ramadhan 2026, silahkan *kirimkan Gmaps* rumah kamu dan Foto Imarohnya yak.\nTerimakasih ${item['NAMA LENGKAP']} 🙏`
-                    )}" 
-                    target="_blank" class="btn-wa" onclick="event.stopPropagation();">Kirim Pesan</a>` : '';
-
-                // Tampilkan nominal yang sedang di-sort di dalam kartu secara dinamis
-                let infoValue = item['NOMINAL PENDANAAN PERBULAN'] || '-';
-                if(currentSortKey !== 'default') {
-                    infoValue = item[currentSortKey] || '-';
-                }
-
-                list.innerHTML += `
-                    <div class="card" onclick="openDetail('${encoded}')">
-                        <div class="card-header">
-                            <span class="card-title">${item['NAMA LENGKAP']}</span>
-                            <span class="badge">${item['ANGKATAN (Tahun kedatangan)'] || '-'}</span>
-                        </div>
-                        <div class="card-body">
-                            <div><i class="fas fa-university" style="width:20px;"></i> ${item['ALMAMATER'] || '-'}</div>
-                            <div style="margin-bottom: 4px;"><i class="fas fa-money-bill-wave" style="width:20px;"></i> ${infoValue}</div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 5px; border-top: 1px dashed var(--border); padding-top: 8px;">
-                                <span style="font-size: 0.85rem; color: var(--text-dark); font-weight: 500;">${item['NOMOR WHATSAPP'] || '-'}</span>
-                                ${waBtn}
-                            </div>
-                        </div>
-                    </div>
-                `;
+        fetch(API_URL, { method: 'POST', body: params })
+            .then(res => res.text())
+            .then(() => loadData())
+            .catch(() => {
+                alert('Gagal menghapus');
+                showLoader(false);
             });
-        }
+    }
 
-        function submitData(e) {
-            e.preventDefault();
-            showLoader(true);
-            closeForm();
-
-            const formData = new FormData(document.getElementById('crudForm'));
-            const params = new URLSearchParams();
-            const editRow = document.getElementById('editRow').value;
-
-            params.append('action', editRow ? 'update' : 'create');
-            if (editRow) params.append('row', editRow);
-
-            for (const [k, v] of formData) {
-                params.append(k, v);
-            }
-
-            fetch(API_URL, { method: 'POST', body: params })
-                .then(res => res.text())
-                .then(() => loadData())
-                .catch(() => {
-                    alert('Gagal menyimpan data');
-                    showLoader(false);
-                });
-        }
-
-        function deleteData(rowId) {
-            showLoader(true);
-            const params = new URLSearchParams();
-            params.append('action', 'delete');
-            params.append('row', rowId);
-
-            fetch(API_URL, { method: 'POST', body: params })
-                .then(res => res.text())
-                .then(() => loadData())
-                .catch(() => {
-                    alert('Gagal menghapus');
-                    showLoader(false);
-                });
-        }
-    </script>
+</script>
 </body>
 </html>
