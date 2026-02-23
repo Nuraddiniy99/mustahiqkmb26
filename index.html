@@ -4,6 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mustahiq App</title>
+
+    <!-- ================== FAVICON ================== -->
+    <link rel="icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" type="image/png">
+    <!-- Ukuran kecil untuk tab browser -->
+    <link rel="icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" sizes="32x32" type="image/png">
+    <!-- Ukuran lebih besar untuk Android home screen / high-dpi -->
+    <link rel="icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" sizes="192x192" type="image/png">
+    <!-- Apple Touch Icon (untuk iPhone/iPad saat ditambahkan ke home screen) -->
+    <link rel="apple-touch-icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" sizes="180x180">
+
+    <!-- ================== OPEN GRAPH / PREVIEW SOSMED (WhatsApp, FB, Telegram, X/Twitter, dll) ================== -->
+    <meta property="og:title" content="Mustahiq App - Data Mustahiq WAZIQOH KMB Mesir">
+    <meta property="og:description" content="Aplikasi pendataan mustahiq warga KMB Mesir by WAZIQOH 2025-2026. Lihat profil lengkap, alamat, foto rumah Indonesia, dan kontak WhatsApp.">
+    <meta property="og:image" content="https://i.ibb.co/271TbktC/banner.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://nuraddiniy99.github.io/mustahiqkmb26/"><!-- Ganti dengan URL asli kalau sudah dihosting -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Mustahiq App">
+
+    <!-- Twitter / X Card (supaya preview bagus di X juga) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mustahiq App - Data Mustahiq WAZIQOH KMB Mesir">
+    <meta name="twitter:description" content="Aplikasi pendataan mustahiq warga KMB Mesir by WAZIQOH 2025-2026">
+    <meta name="twitter:image" content="https://i.ibb.co/271TbktC/banner.png">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -97,7 +123,8 @@
 
         .modal {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5);
-            display: none; z-index: 200; align-items: flex-end; justify-content: center; opacity: 0; transition: opacity 0.3s;
+            display: none; z-index: 400;   /* ← ubah dari 200 menjadi 400 atau lebih */
+            align-items: flex-end; justify-content: center; opacity: 0; transition: opacity 0.3s;
         }
         .modal-content {
             background: var(--surface); width: 100%; max-height: 90vh; overflow-y: auto;
@@ -177,7 +204,7 @@
     </div>
     <div id="loader">
         <div class="spinner"></div>
-        <p style="margin-top: 10px; color: var(--primary); font-weight: 600;">Tunggu akhi...</p>
+        <p style="margin-top: 10px; color: var(--primary); font-weight: 600;">Tunggu sebentar akhi...</p>
     </div>
 
     <div class="container" id="dataList"></div>
@@ -209,7 +236,7 @@
 
                 <div class="form-group"><label>Nama Lengkap</label><input type="text" name="NAMA LENGKAP" required></div>
                 <div class="form-group"><label>Almamater</label><input type="text" name="ALMAMATER" required></div>
-                <div class="form-group"><label>Angkatan (Tahun Kedatangan)</label><input type="number" name="ANGKATAN (Tahun kedatangan)" required></div>
+                <div class="form-group"><label>Angkatan (Tahun Kedatangan)</label><input type="text" name="ANGKATAN (Tahun kedatangan)" required></div>
                 <div class="form-group"><label>Jenjang Pendidikan</label><input type="text" name="JENJANG PENDIDIKAN"></div>
                 <div class="form-group"><label>Fakultas</label><input type="text" name="FAKULTAS"></div>
                 <div class="form-group"><label>Jurusan</label><input type="text" name="JURUSAN"></div>
@@ -230,7 +257,7 @@
                 <div class="form-group"><label>Nominal Hutang</label><input type="text" name="NOMINAL HUTANG"></div>
                 <div class="form-group"><label>Beasiswa</label><input type="text" name="BEASISWA"></div>
                 <div class="form-group"><label>Merokok</label><input type="text" name="MEROKOK"></div>
-                <div class="form-group"><label>Anak Ke-</label><input type="number" name="ANAK KE-"></div>
+                <div class="form-group"><label>Anak Ke-</label><input type="text" name="ANAK KE-"></div>
                 <div class="form-group"><label>Foto Rumah di Indonesia (URL)</label><input type="url" name="FOTO RUMAH DI INDONESIA"></div>
 
                 <button type="submit" class="btn-submit">Simpan Data</button>
@@ -238,7 +265,99 @@
         </div>
     </div>
 
+    <div class="modal" id="passwordModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="font-size: 1.3rem;">Verifikasi Admin</h2>
+                <button class="close-btn" onclick="closePasswordModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div style="padding: 0 0 24px;">
+                <div class="form-group">
+                    <label for="adminPassword">Masukkan password:</label>
+                    <input 
+                        type="password" 
+                        id="adminPassword" 
+                        placeholder="Password admin" 
+                        autocomplete="off"
+                    >
+                </div>
+                <button id="submitPasswordBtn" class="btn-submit">Verifikasi</button>
+                <p id="passwordError" style="color: var(--danger); font-size: 0.9rem; margin-top: 10px; display: none; text-align: center;">
+                    Password salah!
+                </p>
+            </div>
+        </div>
+    </div>
+
     <script>
+
+        // ────────────────────────────────────────────────
+        //   SISTEM VERIFIKASI ADMIN YANG LEBIH MUDAH
+        // ────────────────────────────────────────────────
+
+        const ADMIN_PASSWORD = 'waziqoh2026';
+
+        function showPasswordModal() {
+            return new Promise((resolve) => {
+                const modal = document.getElementById('passwordModal');
+                const input = document.getElementById('adminPassword');
+                const error = document.getElementById('passwordError');
+                const btn = document.getElementById('submitPasswordBtn');
+
+                input.value = '';
+                error.style.display = 'none';
+                btn.disabled = true;
+
+                modal.style.display = 'flex';
+                setTimeout(() => {
+                    modal.style.opacity = '1';
+                    modal.querySelector('.modal-content').style.transform = 'translateY(0)';
+                    input.focus();
+                }, 50);
+
+                function tryVerify() {
+                    const val = input.value.trim();
+                    if (val === ADMIN_PASSWORD) {
+                        closePasswordModal();
+                        resolve(true);
+                    } else {
+                        error.textContent = 'Kata sandi salah, coba lagi';
+                        error.style.display = 'block';
+                        input.focus();
+                        input.select();
+                    }
+                }
+
+                btn.onclick = tryVerify;
+
+                input.oninput = () => {
+                    btn.disabled = input.value.trim() === '';
+                    if (error.style.display === 'block') {
+                        error.style.display = 'none';
+                    }
+                };
+
+                input.onkeydown = (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (!btn.disabled) tryVerify();
+                    }
+                };
+            });
+        }
+
+        function closePasswordModal() {
+            const modal = document.getElementById('passwordModal');
+            if (!modal) return;
+
+            modal.style.opacity = '0';
+            modal.querySelector('.modal-content').style.transform = 'translateY(100%)';
+
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 320);
+        }
+
         const API_URL = 'https://script.google.com/macros/s/AKfycbz4o7dLojHh6kcoldek2HbhW0NFagaaQXgGiAe9tXULu0RhE-3BoVlxmKqsOZG-KxP9/exec'; 
         let currentItemData = null;
 
@@ -246,7 +365,10 @@
 
         function showLoader(show) { document.getElementById('loader').style.display = show ? 'flex' : 'none'; }
 
-        function openForm(item = null) {
+        async function openForm(item = null) {
+            const isCorrect = await showPasswordModal();
+            if (!isCorrect) return;
+
             const modal = document.getElementById('formModal');
             const content = document.getElementById('formContent');
             const form = document.getElementById('crudForm');
@@ -328,13 +450,8 @@
                 <div class="detail-item"><div class="detail-item-label"><i class="fas fa-exclamation-triangle"></i> Hutang</div><div class="detail-item-value">${item['APAKAH PUNYA HUTANG?'] || '-'} ${item['NOMINAL HUTANG'] ? `(${item['NOMINAL HUTANG']})` : ''}</div></div>
                 <div class="detail-item"><div class="detail-item-label"><i class="fas fa-file-invoice-dollar"></i> Untuk Apa</div><div class="detail-item-value">${item['JIKA ADA, PADA SIAPA DAN UNTUK APA?'] || '-'}</div></div>
                 <div class="detail-item"><div class="detail-item-label"><i class="fas fa-award"></i> Beasiswa</div><div class="detail-item-value">${item['BEASISWA'] || '-'}</div></div>
-                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-smoking"></i> Merokok / Anak ke</div><div class="detail-item-value">${item['MEROKOK'] || '-'} • Anak ke-${item['ANAK KE-'] || '-'}</div></div>
-                <div class="detail-item">
-                    <div class="detail-item-label"><i class="fas fa-image"></i> Foto Rumah Indonesia</div>
-                    <div class="detail-item-value">
-                        ${photoUrl ? `<img src="${photoUrl}" class="img-preview" alt="Foto rumah" onerror="this.src='https://via.placeholder.com/320x180?text=Foto+tidak+tersedia';">` : 'Tidak ada foto'}
-                    </div>
-                </div>
+                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-smoking"></i> Merokok / Posisi Anak</div><div class="detail-item-value">${item['MEROKOK'] || '-'} • ${item['ANAK KE-'] ? `Anak ke-${item['ANAK KE-']}` : '-'}</div></div>
+                <div class="detail-item"><div class="detail-item-label"><i class="fas fa-image"></i> Foto Rumah Indonesia</div><div class="detail-item-value">${photoUrl ? `<img src="${photoUrl}" class="img-preview" alt="Foto rumah" onerror="this.src='https://via.placeholder.com/320x180?text=Foto+tidak+tersedia';">` : 'Tidak ada foto'}</div></div>
             `;
 
             const screen = document.getElementById('detailScreen');
@@ -348,14 +465,52 @@
             setTimeout(() => { screen.style.display = 'none'; }, 300);
         }
 
-        function editCurrentDetail() {
-            closeDetail();
-            setTimeout(() => openForm(currentItemData), 320);
+        async function editCurrentDetail() {
+            // Munculkan popup password dulu (sudah menimpa detail)
+            const isCorrect = await showPasswordModal();
+            
+            if (!isCorrect) {
+                // Password salah atau dibatalkan → tidak lakukan apa-apa
+                return;
+            }
+
+            // Password benar → langsung buka form edit
+            // TANPA closeDetail() dulu
+            const modal = document.getElementById('formModal');
+            const content = document.getElementById('formContent');
+            const form = document.getElementById('crudForm');
+            const title = document.getElementById('modalTitle');
+            
+            form.reset();
+            document.getElementById('editRow').value = '';
+
+            title.innerText = 'Edit Data';
+            
+            Object.keys(currentItemData).forEach(key => {
+                if (key !== 'row' && key !== 'Timestamp') {
+                    const input = form.querySelector(`input[name="${key}"]`);
+                    if (input) input.value = currentItemData[key];
+                }
+            });
+            
+            document.getElementById('editRow').value = currentItemData.row;
+
+            // Tampilkan modal form (akan menimpa halaman detail)
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.style.opacity = '1';
+                content.style.transform = 'translateY(0)';
+            }, 10);
         }
 
-        function deleteCurrentDetail() {
+        async function deleteCurrentDetail() {
             if (!currentItemData?.row) return;
-            if (!confirm('Yakin ingin menghapus data ini?')) return;
+
+            const isCorrect = await showPasswordModal();
+            if (!isCorrect) return;
+
+            if (!confirm('Yakin ingin menghapus data ini?\nTindakan ini tidak dapat dibatalkan.')) return;
+            
             deleteData(currentItemData.row);
             closeDetail();
         }
