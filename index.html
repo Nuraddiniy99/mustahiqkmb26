@@ -195,6 +195,14 @@
         </div>
         <button class="btn-icon" onclick="loadData()"><i class="fas fa-sync-alt"></i></button>
     </div>
+    <div style="padding: 10px 16px 0 16px; background: var(--bg);">
+    <div style="position: relative; display: flex; align-items: center;">
+        <i class="fas fa-search" style="position: absolute; left: 15px; color: var(--text-muted);"></i>
+        <input type="text" id="searchInput" onkeyup="searchData()" placeholder="Cari nama mustahiq..." 
+            style="width: 100%; padding: 12px 12px 12px 40px; border-radius: 25px; border: 1px solid var(--border); font-size: 0.95rem; outline: none; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
+    </div>
+</div>
+
     <div class="sort-wrapper" id="sortWrapper">
         <div class="sort-capsule active" onclick="setSort(this, 'default')">Tanggal Input</div>
         <div class="sort-capsule" onclick="setSort(this, 'PENGHASILAN ORANG TUA')">Penghasilan Ortu</div>
@@ -246,7 +254,10 @@
 
                 <div class="form-group">
                     <label>Angkatan (Tahun Kedatangan)</label>
-                    <input type="text" name="ANGKATAN (Tahun kedatangan)" required placeholder="Contoh: 2024 (El Jauhar)">
+                    <input type="text" name="ANGKATAN (Tahun kedatangan)" required 
+                        placeholder="Contoh: 2024 (El Jauhar)"
+                        pattern="^\d{4}\s\(.*\)$"
+                        title="Format: [Tahun] ([Nama Angkatan]). Contoh: 2024 (El Jauhar)">
                 </div>
 
                 <div class="form-group">
@@ -287,24 +298,28 @@
 
                 <div class="form-group">
                     <label>Nomor Telepon (Mesir)</label>
-                    <input type="tel" name="NOMOR TELPON (MESIR)" required placeholder="+201xxxxxxxxx (wajib diawali +20)">
-                    <small style="color: var(--text-muted); display: block; margin-top: 4px;">Harus berawalan +20 untuk nomor Mesir</small>
+                    <input type="tel" name="NOMOR TELPON (MESIR)" required 
+                        placeholder="+201xxxxxxxxx"
+                        pattern="^\+20\d+$"
+                        title="Wajib diawali +20 dan tanpa spasi">
                 </div>
 
                 <div class="form-group">
                     <label>Nomor WhatsApp</label>
-                    <input type="tel" name="NOMOR WHATSAPP" placeholder="+201xxxxxxxxx atau +628xxxxxxxxxx (diawali +)">
-                    <small style="color: var(--text-muted); display: block; margin-top: 4px;">Masukkan dengan kode negara + (contoh +20 atau +62), tidak wajib +62</small>
+                    <input type="tel" name="NOMOR WHATSAPP" required 
+                        placeholder="+628xxxxxxxx atau +201xxxxxxxx"
+                        pattern="^\+\d+$"
+                        title="Wajib diawali + dan kode negara tanpa spasi">
                 </div>
 
                 <div class="form-group">
                     <label>Alamat Rumah di Indonesia</label>
-                    <input type="text" name="ALAMAT RUMAH DI INDONESIA" required placeholder="Format: RT/RW, DESA, KECAMATAN, KABUPATEN. Contoh: RT09/RW08, CIKANDE PERMAI, CIKANDE, SERANG.">
+                    <input type="text" name="ALAMAT RUMAH DI INDONESIA" required placeholder="Format: RT/RW, DESA, KECAMATAN, KABUPATEN">
                 </div>
 
                 <div class="form-group">
                     <label>Alamat Rumah di Mesir</label>
-                    <input type="text" name="ALAMAT RUMAH DI MESIR" required placeholder="Format: No Imaroh, Jalan, Distrik, Qism, Provinsi. Contoh: 09, Jln, King Al Mansoury, El-gamaleya, El-Gamaleya, Kairo">
+                    <input type="text" name="ALAMAT RUMAH DI MESIR" required placeholder="Format: No Imaroh, Jalan, Distrik, Qism, Provinsi">
                 </div>
 
                 <div class="form-group">
@@ -329,7 +344,6 @@
                         <option value="1750 - 2000">1750 - 2000</option>
                         <option value="> 2000">> 2000</option>
                     </select>
-                    <small style="color: var(--text-muted); display: block; margin-top: 4px;">Biaya sewa per orang/bulan (igar + air + listrik), pilih Gratis jika asrama</small>
                 </div>
 
                 <div class="form-group">
@@ -362,7 +376,7 @@
                 <div class="form-group">
                     <label>Penghasilan Orang Tua</label>
                     <select name="PENGHASILAN ORANG TUA" required>
-                        <option value="">Pilih range penghasilan rata-rata/bulan</option>
+                        <option value="">Pilih range penghasilan</option>
                         <option value="< Rp 500.000">< Rp 500.000</option>
                         <option value="< Rp 1.000.000">< Rp 1.000.000</option>
                         <option value="< Rp 2.000.000">< Rp 2.000.000</option>
@@ -386,7 +400,8 @@
 
                 <div class="form-group">
                     <label>Nominal Pendanaan per Bulan</label>
-                    <input type="text" name="NOMINAL PENDANAAN PERBULAN" required placeholder="Contoh: Rp 2.000.000/bulan atau - jika tidak ada">
+                    <input type="text" id="inputPemasukan" name="NOMINAL PENDANAAN PERBULAN" required 
+                        placeholder="Rp 0/bulan">
                 </div>
 
                 <div class="form-group">
@@ -400,12 +415,13 @@
 
                 <div class="form-group">
                     <label>Jika ada hutang, kepada siapa & untuk apa</label>
-                    <input type="text" name="JIKA ADA, PADA SIAPA DAN UNTUK APA?" placeholder="Contoh: Bagus, untuk makan sebulan atau - jika tidak ada">
+                    <input type="text" name="JIKA ADA, PADA SIAPA DAN UNTUK APA?" placeholder="Contoh: Bagus, untuk makan sebulan">
                 </div>
 
                 <div class="form-group">
                     <label>Nominal Hutang</label>
-                    <input type="text" name="NOMINAL HUTANG" placeholder="Contoh: Rp 2.000.000 atau - jika tidak ada">
+                    <input type="text" id="inputHutang" name="NOMINAL HUTANG" required 
+                        placeholder="Rp 0 atau -">
                 </div>
 
                 <div class="form-group">
@@ -428,19 +444,22 @@
 
                 <div class="form-group">
                     <label>Anak Ke-</label>
-                    <input type="text" name="ANAK KE-" required placeholder="Contoh: 3 dari 5 bersaudara">
+                    <input type="text" name="ANAK KE-" required 
+                        placeholder="3 dari 5 bersaudara"
+                        pattern="^\d+\sdari\s\d+\sbersaudara$"
+                        title="Format: [Angka] dari [Angka] bersaudara. Contoh: 1 dari 3 bersaudara">
                 </div>
 
                 <div class="form-group">
                     <label>Foto Rumah di Indonesia (URL)</label>
-                    <input type="url" name="FOTO RUMAH DI INDONESIA" required placeholder="Link shareable Google Drive (pastikan public atau anyone with link)">
-                    <small style="color: var(--text-muted); display: block; margin-top: 4px;">Upload foto ke Drive → Share → Anyone with the link → Copy link</small>
+                    <input type="url" name="FOTO RUMAH DI INDONESIA" required placeholder="Link shareable Google Drive">
                 </div>
 
                 <button type="submit" class="btn-submit">Simpan Data</button>
             </form>
         </div>
     </div>
+
 
     <div class="modal" id="passwordModal">
         <div class="modal-content">
@@ -743,94 +762,117 @@
         renderList();
     }
 
-    function renderList() {
-        const list = document.getElementById('dataList');
-        list.innerHTML = '';
-        
-        let filteredData = [...allData];
+function searchData() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    renderList(query); // Memanggil render ulang dengan filter pencarian
+}
 
-        if (currentSortKey !== 'default') {
-            filteredData.sort((a, b) => {
-                return parseToNumber(a[currentSortKey]) - parseToNumber(b[currentSortKey]);
-            });
-        }
 
-        filteredData.forEach(item => {
-            const nama = item['NAMA LENGKAP']?.trim();
-            if (!nama || nama === '' || nama === '-') return;
+function renderList(searchQuery = '') {
+    const list = document.getElementById('dataList');
+    list.innerHTML = '';
+    
+    let filteredData = [...allData];
 
-            const encoded = encodeURIComponent(JSON.stringify(item));
-            
-            let rawWa = String(item['NOMOR WHATSAPP'] || '').trim();
-            let cleanWa = rawWa.replace(/\D/g, '');
-            let displayWa = rawWa;
-            let linkWa = cleanWa;
-
-            if (cleanWa.length >= 9 && !cleanWa.startsWith('0')) {
-                if (!rawWa.startsWith('+')) {
-                    displayWa = '+' + rawWa;
-                }
-                linkWa = cleanWa;
-            } else {
-                displayWa = rawWa || '-';
-                linkWa = '';
-            }
-
-            const waBtn = linkWa ? 
-                `<a href="https://wa.me/${linkWa}?text=${encodeURIComponent(
-                    `_Assalamualaikum WR. WB._\n*${item['NAMA LENGKAP']}*\n\nKami dari *WAZIQOH KMB Mesir 2025-2026*, ingin memberitahukan bahwa kami akan segera datang ke tempat kamu tinggal untuk menyalurkan Zakat Fitrah Ramadhan 2026, silahkan *kirimkan Gmaps* rumah kamu dan Foto Imarohnya yak.\nTerimakasih ${item['NAMA LENGKAP']} 🙏`
-                )}" 
-                target="_blank" class="btn-wa" onclick="event.stopPropagation();">Kirim Pesan</a>` 
-                : '';
-
-            let infoValue = item['NOMINAL PENDANAAN PERBULAN'] || '-';
-            if (currentSortKey !== 'default') {
-                infoValue = item[currentSortKey] || '-';
-            }
-
-            list.innerHTML += `
-                <div class="card" onclick="openDetail('${encoded}')">
-                    <div class="card-header">
-                        <span class="card-title">${item['NAMA LENGKAP'] || 'Nama tidak tersedia'}</span>
-                        <span class="badge">${item['ANGKATAN (Tahun kedatangan)'] || '-'}</span>
-                    </div>
-                    <div class="card-body">
-                        <div><i class="fas fa-university" style="width:20px;"></i> ${item['ALMAMATER'] || '-'}</div>
-                        <div style="margin-bottom: 4px;"><i class="fas fa-money-bill-wave" style="width:20px;"></i> ${infoValue}</div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 5px; border-top: 1px dashed var(--border); padding-top: 8px;">
-                            <span style="font-size: 0.85rem; color: var(--text-dark); font-weight: 500;">${displayWa}</span>
-                            ${waBtn}
-                        </div>
-                    </div>
-                </div>
-            `;
+    // Filter berdasarkan Pencarian Nama
+    if (searchQuery) {
+        filteredData = filteredData.filter(item => {
+            const nama = (item['NAMA LENGKAP'] || '').toLowerCase();
+            return nama.includes(searchQuery.toLowerCase());
         });
     }
 
-    function submitData(e) {
-        e.preventDefault();
-        showLoader(true);
-        closeForm();
+    // Sortir data
+    if (currentSortKey !== 'default') {
+        filteredData.sort((a, b) => {
+            return parseToNumber(a[currentSortKey]) - parseToNumber(b[currentSortKey]);
+        });
+    }
 
-        const formData = new FormData(document.getElementById('crudForm'));
-        const params = new URLSearchParams();
-        const editRow = document.getElementById('editRow').value;
+    if (filteredData.length === 0) {
+        list.innerHTML = `<div style="text-align:center; padding: 40px; color: var(--text-muted);">Data tidak ditemukan</div>`;
+        return;
+    }
 
-        params.append('action', editRow ? 'update' : 'create');
-        if (editRow) params.append('row', editRow);
+    filteredData.forEach(item => {
+        const nama = item['NAMA LENGKAP']?.trim();
+        if (!nama || nama === '' || nama === '-') return;
 
-        for (const [k, v] of formData) {
-            params.append(k, v);
+        const encoded = encodeURIComponent(JSON.stringify(item));
+        
+        let rawWa = String(item['NOMOR WHATSAPP'] || '').trim();
+        let cleanWa = rawWa.replace(/\D/g, '');
+        let displayWa = rawWa;
+        let linkWa = cleanWa;
+
+        if (cleanWa.length >= 9 && !cleanWa.startsWith('0')) {
+            if (!rawWa.startsWith('+')) displayWa = '+' + rawWa;
+            linkWa = cleanWa;
+        } else {
+            displayWa = rawWa || '-';
+            linkWa = '';
         }
 
-        fetch(API_URL, { method: 'POST', body: params })
-            .then(res => res.text())
-            .then(() => loadData())
-            .catch(() => {
-                alert('Gagal menyimpan data');
-                showLoader(false);
-            });
+        const waBtn = linkWa ? 
+            `<a href="https://wa.me/${linkWa}?text=${encodeURIComponent(`_Assalamualaikum_\n*${item['NAMA LENGKAP']}*...`)}" 
+            target="_blank" class="btn-wa" onclick="event.stopPropagation();">Kirim Pesan</a>` : '';
+
+        let infoValue = item['NOMINAL PENDANAAN PERBULAN'] || '-';
+        if (currentSortKey !== 'default') infoValue = item[currentSortKey] || '-';
+
+        list.innerHTML += `
+            <div class="card" onclick="openDetail('${encoded}')">
+                <div class="card-header">
+                    <span class="card-title">${item['NAMA LENGKAP'] || 'Nama tidak tersedia'}</span>
+                    <span class="badge">${item['ANGKATAN (Tahun kedatangan)'] || '-'}</span>
+                </div>
+                <div class="card-body">
+                    <div><i class="fas fa-university" style="width:20px;"></i> ${item['ALMAMATER'] || '-'}</div>
+                    <div style="margin-bottom: 4px;"><i class="fas fa-money-bill-wave" style="width:20px;"></i> ${infoValue}</div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 5px; border-top: 1px dashed var(--border); padding-top: 8px;">
+                        <span style="font-size: 0.85rem; color: var(--text-dark); font-weight: 500;">${displayWa}</span>
+                        ${waBtn}
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+}
+
+
+function submitData(e) {
+    e.preventDefault();
+    
+    // Cek apakah ada pesan error yang masih muncul di form
+    const errors = document.querySelectorAll('[id$="-error"]');
+    if (errors.length > 0) {
+        alert("Mohon perbaiki data yang salah sebelum mengirim.");
+        return;
     }
+
+    showLoader(true);
+    closeForm();
+
+    const formData = new FormData(document.getElementById('crudForm'));
+    const params = new URLSearchParams();
+    const editRow = document.getElementById('editRow').value;
+
+    params.append('action', editRow ? 'update' : 'create');
+    if (editRow) params.append('row', editRow);
+
+    for (const [k, v] of formData) {
+        params.append(k, v);
+    }
+
+    fetch(API_URL, { method: 'POST', body: params })
+        .then(res => res.text())
+        .then(() => loadData())
+        .catch(() => {
+            alert('Gagal menyimpan data');
+            showLoader(false);
+        });
+}
+
 
     function deleteData(rowId) {
         showLoader(true);
@@ -846,6 +888,99 @@
                 showLoader(false);
             });
     }
+
+// Fungsi untuk menampilkan/menghapus pesan error real-time
+function setRealTimeError(inputElement, isValid, message) {
+    let errorId = inputElement.name + "-error";
+    let errorElement = document.getElementById(errorId);
+
+    if (!isValid) {
+        inputElement.style.borderColor = "var(--danger)";
+        if (!errorElement) {
+            errorElement = document.createElement("small");
+            errorElement.id = errorId;
+            errorElement.style.color = "var(--danger)";
+            errorElement.style.display = "block";
+            errorElement.style.marginTop = "4px";
+            inputElement.parentNode.appendChild(errorElement);
+        }
+        errorElement.textContent = message;
+    } else {
+        inputElement.style.borderColor = "#ddd";
+        if (errorElement) errorElement.remove();
+    }
+}
+
+// 1. Validasi ANGKATAN: 2024 (Nama Angkatan)
+document.querySelector('[name="ANGKATAN (Tahun kedatangan)"]').addEventListener('input', function() {
+    const regex = /^\d{4}\s\(.*\)$/;
+    const isValid = regex.test(this.value);
+    setRealTimeError(this, isValid, "Format salah! Gunakan: Tahun kedatangan (Nama Angkatan)");
+});
+
+// 2. Validasi TELP MESIR: +20xxx tanpa spasi
+document.querySelector('[name="NOMOR TELPON (MESIR)"]').addEventListener('input', function() {
+    const regex = /^\+20\d+$/;
+    const isValid = regex.test(this.value);
+    setRealTimeError(this, isValid, "Wajib diawali +20 dan tanpa spasi!");
+});
+
+// 3. Validasi WHATSAPP: +kode negara tanpa spasi
+document.querySelector('[name="NOMOR WHATSAPP"]').addEventListener('input', function() {
+    const regex = /^\+\d+$/;
+    const isValid = regex.test(this.value);
+    setRealTimeError(this, isValid, "Wajib diawali + (kode negara) dan tanpa spasi!");
+});
+
+// 4. Validasi ANAK KE-: [angka] dari [angka] bersaudara
+document.querySelector('[name="ANAK KE-"]').addEventListener('input', function() {
+    const regex = /^\d+\sdari\s\d+\sbersaudara$/;
+    const isValid = regex.test(this.value);
+    setRealTimeError(this, isValid, "Format: [angka] dari [angka] bersaudara");
+});
+
+// 5. Format & Validasi NOMINAL PENDANAAN (Rp 1.000.000/bulan)
+document.getElementById('inputPemasukan').addEventListener('input', function() {
+    let val = this.value.replace(/[^0-9]/g, '');
+    if (val !== "") {
+        this.value = "Rp " + formatRupiah(val) + "/bulan";
+        setRealTimeError(this, true);
+    } else {
+        setRealTimeError(this, false, "Nominal tidak boleh kosong!");
+    }
+});
+
+// 6. Format & Validasi HUTANG (- atau Rp 1.000.000)
+document.getElementById('inputHutang').addEventListener('input', function() {
+    let val = this.value;
+    if (val === "-") {
+        setRealTimeError(this, true);
+        return;
+    }
+    let cleanVal = val.replace(/[^0-9]/g, '');
+    if (cleanVal !== "") {
+        this.value = "Rp " + formatRupiah(cleanVal);
+        setRealTimeError(this, true);
+    } else {
+        setRealTimeError(this, false, "Isi dengan 'Rp [nominal]' atau '-' jika tidak ada.");
+    }
+});
+
+// Fungsi pemisah ribuan (titik)
+function formatRupiah(angka) {
+    let number_string = angka.replace(/[^,\d]/g, '').toString(),
+        split = number_string.split(','),
+        sisa = split[0].length % 3,
+        rupiah = split[0].substring(0, sisa),
+        ribuan = split[0].substring(sisa).match(/\d{3}/gi);
+
+    if (ribuan) {
+        let separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+    }
+    return rupiah;
+}
+
 
 </script>
 </body>
