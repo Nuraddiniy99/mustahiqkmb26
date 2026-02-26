@@ -806,17 +806,74 @@
         }, 10);
     }
 
-    async function deleteCurrentDetail() {
-        if (!currentItemData?.row) return;
+        async function deleteCurrentDetail() {
+            if (!currentItemData?.row) return;
 
-        const isCorrect = await showPasswordModal();
-        if (!isCorrect) return;
+            const isCorrect = await showPasswordModal();
+            if (!isCorrect) return;
 
-        if (!confirm('Yakin ingin menghapus data ini?\nTindakan ini tidak dapat dibatalkan.')) return;
-        
-        deleteData(currentItemData.row);
-        closeDetail();
-    }
+            let modal = document.getElementById('deleteConfirmModal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'deleteConfirmModal';
+                modal.className = 'modal';
+                modal.style.cssText = 'display:none;align-items:center;justify-content:center;';
+                
+                modal.innerHTML = `
+                    <div style="background:#fff;border-radius:16px;padding:28px 24px;width:90%;max-width:340px;box-shadow:0 12px 50px rgba(0,0,0,0.3);text-align:center;position:relative;">
+                        <button onclick="closeDeleteModal()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.5rem;color:#aaa;cursor:pointer;">×</button>
+                        
+                        <div style="margin-bottom:20px;">
+                            <i class="fas fa-exclamation-circle" style="font-size:3.2rem;color:#e74c3c;"></i>
+                        </div>
+                        
+                        <h3 style="margin:0 0 16px;font-size:1.35rem;color:#2c3e50;">Hapus Data?</h3>
+                        
+                        <p style="margin:0 0 28px;color:#555;line-height:1.5;">
+                            Yakin hapus <strong id="deleteNameDisplay" style="color:#2c3e50;"></strong>?<br>
+                            <span style="color:#e74c3c;font-weight:600;">akhi.. nanti gak bisa dikembalikan lagi.</span>
+                        </p>
+                        
+                        <div style="display:flex;gap:12px;">
+                            <button id="cancelDeleteBtn" style="flex:1;padding:12px;border-radius:10px;background:#f1f1f1;color:#555;border:none;font-weight:600;cursor:pointer;transition:background 0.2s;">Batal</button>
+                            <button id="confirmDeleteBtn" style="flex:1;padding:12px;border-radius:10px;background:#e74c3c;color:white;border:none;font-weight:600;cursor:pointer;transition:background 0.2s;">
+                                <i class="fas fa-trash-alt" style="margin-right:6px;"></i>Hapus
+                            </button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            }
+
+            // Isi data & event
+            document.getElementById('deleteNameDisplay').textContent = 
+                currentItemData['NAMA LENGKAP'] || 'data ini';
+
+            document.getElementById('confirmDeleteBtn').onclick = () => {
+                deleteData(currentItemData.row);
+                closeDetail();
+                closeDeleteModal();
+            };
+
+            document.getElementById('cancelDeleteBtn').onclick = closeDeleteModal;
+
+            // Tampilkan
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.style.opacity = '1';
+                modal.style.transition = 'opacity 0.3s ease';
+            }, 10);
+        }
+
+        function closeDeleteModal() {
+            const modal = document.getElementById('deleteConfirmModal');
+            if (!modal) return;
+
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
 
     let allData = [];
     let currentSortKey = 'default';
