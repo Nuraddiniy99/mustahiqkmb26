@@ -262,38 +262,50 @@
 
                 <div class="form-group">
                     <label>Jenjang Pendidikan</label>
-                    <select name="JENJANG PENDIDIKAN" required>
+                    <select name="JENJANG PENDIDIKAN" id="jenjangSelect" required>
                         <option value="">Pilih jenjang</option>
                         <option value="DAUROH LUGOH">DAUROH LUGOH</option>
                         <option value="MA'HAD">MA'HAD</option>
                         <option value="KULIAH">KULIAH</option>
+                        <option value="LAINNYA">LAINNYA</option>
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label>Fakultas</label>
-                    <input type="text" name="FAKULTAS" required placeholder="Nama fakultas lengkap">
+                <!-- Field tambahan untuk LAINNYA (awalnya disembunyikan) -->
+                <div class="form-group" id="lainnyaGroup" style="display: none;">
+                    <label>Jelaskan Jenjang Lainnya</label>
+                    <input type="text" id="lainnyaInput" name="JENJANG_PENDIDIKAN_LAINNYA" placeholder="Contoh: Pesantren Online, Kursus Intensif, dll">
                 </div>
 
-                <div class="form-group">
-                    <label>Jurusan</label>
-                    <input type="text" name="JURUSAN" required placeholder="Gunakan 'Umum' jika belum penjurusan">
+                <!-- Grup Fakultas, Jurusan, Tingkat (awalnya disembunyikan kalau bukan KULIAH) -->
+                <div id="kuliahGroup" style="display: none;">
+                    <div class="form-group">
+                        <label>Fakultas</label>
+                        <input type="text" name="FAKULTAS" placeholder="Nama fakultas lengkap" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Jurusan</label>
+                        <input type="text" name="JURUSAN" placeholder="Gunakan 'Umum' jika belum penjurusan" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tingkat</label>
+                        <select name="TINGKAT" required>
+                            <option value="">Pilih tingkat</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="-">-</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label>Tingkat</label>
-                    <select name="TINGKAT" required>
-                        <option value="">Pilih tingkat</option>
-                        <option value="1.">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
+                <!-- Mustawa (awalnya disembunyikan kalau bukan MA'HAD/DAUROH) -->
+                <div class="form-group" id="mustawaGroup" style="display: none;">
                     <label>Mustawa (Tingkat)</label>
-                    <input type="text" name="MUSTAWA (TINGKAT)" placeholder="Tingkat mustawa / kelas">
+                    <input type="text" name="MUSTAWA (TINGKAT)" placeholder="Tingkat mustawa / kelas" required>
                 </div>
 
                 <div class="form-group">
@@ -529,7 +541,7 @@
                     closePasswordModal();
                     resolve(true);
                 } else {
-                    error.textContent = 'Kata sandi salah akhi... coba lagi geh';
+                    error.textContent = 'Kata sandi salah, coba lagi';
                     error.style.display = 'block';
                     input.focus();
                     input.select();
@@ -590,24 +602,45 @@
         if (item) {
             title.innerText = 'Edit Data';
 
+            // Isi semua field normal terlebih dahulu
             Object.keys(item).forEach(key => {
                 if (key !== 'row' && key !== 'Timestamp') {
-                    // Cari baik input text maupun select
                     const element = form.querySelector(`input[name="${key}"], select[name="${key}"]`);
                     if (element) {
                         element.value = item[key];
-
-                        // Khusus select: cek apakah value cocok dengan opsi yang ada
-                        if (element.tagName === 'SELECT' && element.selectedIndex === -1) {
-                            console.warn(`Nilai "${item[key]}" tidak ditemukan di opsi dropdown: ${key}`);
-                            // Opsional: bisa di-reset ke kosong atau opsi pertama
-                            // element.value = "";
-                        }
                     }
                 }
             });
 
             document.getElementById('editRow').value = item.row;
+
+            // ────────────────────────────────────────────────
+            //   PENANGANAN KHUSUS JENJANG PENDIDIKAN SAAT EDIT
+            // ────────────────────────────────────────────────
+            const jenjangSelect = document.getElementById('jenjangSelect');
+            const jenjangValue = (item['JENJANG PENDIDIKAN'] || '').trim();
+            const validOptions = ['DAUROH LUGOH', "MA'HAD", 'KULIAH', 'LAINNYA'];
+
+            if (validOptions.includes(jenjangValue)) {
+                // Nilai sudah sesuai dropdown → langsung pakai
+                jenjangSelect.value = jenjangValue;
+            } else if (jenjangValue) {
+                // Nilai tidak dikenal → paksa jadi LAINNYA + isi penjelasan
+                jenjangSelect.value = 'LAINNYA';
+                const lainnyaInput = document.getElementById('lainnyaInput');
+                if (lainnyaInput) {
+                    lainnyaInput.value = jenjangValue;           // isi nilai asli yang aneh
+                }
+            } else {
+                // Kosong → biarkan default kosong
+                jenjangSelect.value = '';
+            }
+
+            // Jika ada field LAINNYA yang diisi → pastikan group-nya kelihatan
+            if (document.getElementById('lainnyaInput')?.value.trim()) {
+                document.getElementById('lainnyaGroup').style.display = 'block';
+            }
+
         } else {
             title.innerText = 'Tambah Data';
         }
@@ -616,6 +649,11 @@
         setTimeout(() => {
             modal.style.opacity = '1';
             content.style.transform = 'translateY(0)';
+            
+            // Penting: update tampilan field kondisional setelah value di-set
+            if (jenjangSelect) {
+                updateJenjangFields();   // ← ini yang paling krusial
+            }
         }, 10);
     }
 
@@ -638,31 +676,41 @@
         return url;
     }
 
-    function openDetail(encodedItem) {
-        const item = JSON.parse(decodeURIComponent(encodedItem));
+    function openDetailFromObject(item) {
         currentItemData = item;
         
         document.getElementById('detailTitleName').innerText = item['NAMA LENGKAP'] || 'Profil Mustahiq';
         
         const photoUrl = formatDriveUrl(item['FOTO RUMAH DI INDONESIA'] || '');
-        
         const waNumber = String(item['NOMOR WHATSAPP'] || '').replace(/\D/g, '');
         
         const content = document.getElementById('detailContent');
         content.innerHTML = `
             <div class="detail-item"><div class="detail-item-label"><i class="fas fa-university"></i> Almamater</div><div class="detail-item-value">${item['ALMAMATER'] || '-'}</div></div>
             <div class="detail-item"><div class="detail-item-label"><i class="fas fa-calendar-alt"></i> Angkatan</div><div class="detail-item-value">${item['ANGKATAN (Tahun kedatangan)'] || '-'}</div></div>
-            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-graduation-cap"></i> Jenjang & Jurusan</div><div class="detail-item-value">${item['JENJANG PENDIDIKAN'] || '-'} • ${item['FAKULTAS'] || '-'} (${item['JURUSAN'] || '-'})</div></div>
-            <div class="detail-item"><div class="detail-item-label"><i class="fas fa-layer-group"></i> Tingkat / Mustawa</div><div class="detail-item-value">${item['TINGKAT'] || '-'} / ${item['MUSTAWA (TINGKAT)'] || '-'}</div></div>
+            <div class="detail-item">
+                <div class="detail-item-label"><i class="fas fa-graduation-cap"></i> Jenjang Pendidikan</div>
+                <div class="detail-item-value">
+                    ${item['JENJANG PENDIDIKAN'] || '-'}
+                    ${item['JENJANG PENDIDIKAN'] === 'KULIAH' ? ` • ${item['FAKULTAS'] || '-'} (${item['JURUSAN'] || '-'})` : ''}
+                </div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-item-label"><i class="fas fa-layer-group"></i> Tingkat / Mustawa</div>
+                <div class="detail-item-value">
+                    ${item['JENJANG PENDIDIKAN'] === 'KULIAH' && item['TINGKAT'] ? item['TINGKAT'] + ' ' : ''}
+                    ${item['MUSTAWA (TINGKAT)'] || (item['JENJANG PENDIDIKAN'] !== 'KULIAH' ? '-' : '')}
+                </div>
+            </div>
             <div class="detail-item"><div class="detail-item-label"><i class="fas fa-phone"></i> Telp Mesir</div><div class="detail-item-value">${item['NOMOR TELPON (MESIR)'] || '-'}</div></div>
             <div class="detail-item">
-                <div class="detail-item-label"><i class="fab fa-whatsapp"></i> WhatsApp</div>
+
                 <div class="detail-item-value" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                     <span>${item['NOMOR WHATSAPP'] || '-'}</span>
                     ${waNumber ? 
                         `<a href="https://wa.me/${waNumber}?text=${encodeURIComponent(
                             `_Assalamualaikum WR. WB._\n*${item['NAMA LENGKAP']}*\n\nKami dari *WAZIQOH KMB Mesir 2025-2026*, ingin memberitahukan bahwa kami akan segera datang ke tempat kamu tinggal untuk menyalurkan Zakat Fitrah Ramadhan 2026, silahkan *kirimkan Gmaps* rumah kamu dan Foto Imarohnya yak.\nTerimakasih ${item['NAMA LENGKAP']} 🙏`
-                        )}" target="_blank" class="btn-wa"><i class="fab fa-whatsapp"></i> Kirim Pesan</a>` 
+                        )}" target="_blank" class="btn-wa"><i></i> Kirim Pesan</a>` 
                         : ''}
                 </div>
             </div>
@@ -685,6 +733,8 @@
         setTimeout(() => { screen.style.transform = 'translateX(0)'; }, 10);
     }
 
+        
+
     function closeDetail() {
         const screen = document.getElementById('detailScreen');
         screen.style.transform = 'translateX(100%)';
@@ -692,6 +742,8 @@
     }
 
     async function editCurrentDetail() {
+        if (!currentItemData) return;
+
         const isCorrect = await showPasswordModal();
         if (!isCorrect) return;
 
@@ -699,31 +751,58 @@
         const content = document.getElementById('formContent');
         const form = document.getElementById('crudForm');
         const title = document.getElementById('modalTitle');
-        
+
         form.reset();
         document.getElementById('editRow').value = '';
 
         title.innerText = 'Edit Data';
-        
+
+        // Isi semua field normal
         Object.keys(currentItemData).forEach(key => {
             if (key !== 'row' && key !== 'Timestamp') {
                 const element = form.querySelector(`input[name="${key}"], select[name="${key}"]`);
                 if (element) {
                     element.value = currentItemData[key];
-
-                    if (element.tagName === 'SELECT' && element.selectedIndex === -1) {
-                        console.warn(`Nilai "${currentItemData[key]}" tidak ditemukan di opsi dropdown: ${key}`);
-                    }
                 }
             }
         });
-        
+
         document.getElementById('editRow').value = currentItemData.row;
 
+        // ────────────────────────────────────────────────
+        //   PENANGANAN KHUSUS JENJANG PENDIDIKAN (sama seperti di openForm)
+        // ────────────────────────────────────────────────
+        const jenjangSelect = document.getElementById('jenjangSelect');
+        const jenjangValue = (currentItemData['JENJANG PENDIDIKAN'] || '').trim();
+        const validOptions = ['DAUROH LUGOH', "MA'HAD", 'KULIAH', 'LAINNYA'];
+
+        if (validOptions.includes(jenjangValue)) {
+            jenjangSelect.value = jenjangValue;
+        } else if (jenjangValue) {
+            jenjangSelect.value = 'LAINNYA';
+            const lainnyaInput = document.getElementById('lainnyaInput');
+            if (lainnyaInput) {
+                lainnyaInput.value = jenjangValue;  // isi nilai asli yang tidak valid
+            }
+        } else {
+            jenjangSelect.value = '';
+        }
+
+        // Pastikan group LAINNYA kelihatan kalau ada isian
+        if (document.getElementById('lainnyaInput')?.value.trim()) {
+            document.getElementById('lainnyaGroup').style.display = 'block';
+        }
+
+        // Tampilkan modal di atas detail screen
         modal.style.display = 'flex';
         setTimeout(() => {
             modal.style.opacity = '1';
             content.style.transform = 'translateY(0)';
+
+            // Update tampilan field kondisional (sangat penting!)
+            if (jenjangSelect) {
+                updateJenjangFields();
+            }
         }, 10);
     }
 
@@ -774,68 +853,58 @@
         renderList();
     }
 
-function searchData() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
-    renderList(query); // Memanggil render ulang dengan filter pencarian
-}
-
-
-function renderList(searchQuery = '') {
-    const list = document.getElementById('dataList');
-    list.innerHTML = '';
-    
-    let filteredData = [...allData];
-
-    // Filter berdasarkan Pencarian Nama
-    if (searchQuery) {
-        filteredData = filteredData.filter(item => {
-            const nama = (item['NAMA LENGKAP'] || '').toLowerCase();
-            return nama.includes(searchQuery.toLowerCase());
-        });
+    function searchData() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        renderList(query); // Memanggil render ulang dengan filter pencarian
     }
 
-    // Sortir data
-    if (currentSortKey !== 'default') {
-        filteredData.sort((a, b) => {
-            return parseToNumber(a[currentSortKey]) - parseToNumber(b[currentSortKey]);
-        });
-    }
 
-    if (filteredData.length === 0) {
-        list.innerHTML = `<div style="text-align:center; padding: 40px; color: var(--text-muted);">Data tidak ditemukan</div>`;
-        return;
-    }
-
-    filteredData.forEach(item => {
-        const nama = item['NAMA LENGKAP']?.trim();
-        if (!nama || nama === '' || nama === '-') return;
-
-        const encoded = encodeURIComponent(JSON.stringify(item));
+    function renderList(searchQuery = '') {
+        const list = document.getElementById('dataList');
+        list.innerHTML = '';
         
-        let rawWa = String(item['NOMOR WHATSAPP'] || '').trim();
-        let cleanWa = rawWa.replace(/\D/g, '');
-        let displayWa = rawWa;
-        let linkWa = cleanWa;
+        let filteredData = [...allData];
 
-        if (cleanWa.length >= 9 && !cleanWa.startsWith('0')) {
-            if (!rawWa.startsWith('+')) displayWa = '+' + rawWa;
-            linkWa = cleanWa;
-        } else {
-            displayWa = rawWa || '-';
-            linkWa = '';
+        // Filter pencarian nama
+        if (searchQuery) {
+            filteredData = filteredData.filter(item => {
+                const nama = (item['NAMA LENGKAP'] || '').toLowerCase().trim();
+                return nama.includes(searchQuery.toLowerCase());
+            });
         }
 
-        const waBtn = linkWa ? 
-            `<a href="https://wa.me/${linkWa}?text=${encodeURIComponent(`_Assalamualaikum_\n*${item['NAMA LENGKAP']}*...`)}" 
-            target="_blank" class="btn-wa" onclick="event.stopPropagation();">Kirim Pesan</a>` : '';
+        // Sortir jika bukan default
+        if (currentSortKey !== 'default') {
+            filteredData.sort((a, b) => {
+                return parseToNumber(a[currentSortKey]) - parseToNumber(b[currentSortKey]);
+            });
+        }
 
-        let infoValue = item['NOMINAL PENDANAAN PERBULAN'] || '-';
-        if (currentSortKey !== 'default') infoValue = item[currentSortKey] || '-';
+        if (filteredData.length === 0) {
+            list.innerHTML = `<div style="text-align:center; padding: 40px; color: var(--text-muted);">Data tidak ditemukan</div>`;
+            return;
+        }
 
-        list.innerHTML += `
-            <div class="card" onclick="openDetail('${encoded}')">
+        filteredData.forEach(item => {
+            const nama = (item['NAMA LENGKAP'] || '').trim();
+            if (!nama) return;  // skip kalau nama kosong atau invalid
+
+            let rawWa = String(item['NOMOR WHATSAPP'] || '').trim();
+            let cleanWa = rawWa.replace(/\D/g, '');
+            let displayWa = rawWa || '-';
+            let linkWa = (cleanWa.length >= 9 && !cleanWa.startsWith('0')) ? cleanWa : '';
+
+            let infoValue = item['NOMINAL PENDANAAN PERBULAN'] || '-';
+            if (currentSortKey !== 'default') infoValue = item[currentSortKey] || '-';
+
+            // Buat elemen card secara programmatic (aman dari syntax error)
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.dataset.item = JSON.stringify(item);  // simpan data JSON di sini
+
+            card.innerHTML = `
                 <div class="card-header">
-                    <span class="card-title">${item['NAMA LENGKAP'] || 'Nama tidak tersedia'}</span>
+                    <span class="card-title">${nama}</span>
                     <span class="badge">${item['ANGKATAN (Tahun kedatangan)'] || '-'}</span>
                 </div>
                 <div class="card-body">
@@ -843,47 +912,78 @@ function renderList(searchQuery = '') {
                     <div style="margin-bottom: 4px;"><i class="fas fa-money-bill-wave" style="width:20px;"></i> ${infoValue}</div>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 5px; border-top: 1px dashed var(--border); padding-top: 8px;">
                         <span style="font-size: 0.85rem; color: var(--text-dark); font-weight: 500;">${displayWa}</span>
-                        ${waBtn}
+                        ${linkWa ? 
+                            `<a href="https://wa.me/${linkWa}" target="_blank" class="btn-wa" onclick="event.stopPropagation();">Kirim Pesan</a>` 
+                            : ''}
                     </div>
                 </div>
-            </div>
-        `;
-    });
-}
+            `;
 
+            // Event listener aman (tidak pakai string onclick panjang)
+            card.addEventListener('click', function() {
+                try {
+                    const parsedItem = JSON.parse(this.dataset.item);
+                    openDetailFromObject(parsedItem);
+                } catch (err) {
+                    console.error("Gagal parse data card:", err);
+                    alert("Data profil ini bermasalah dan tidak bisa dibuka detailnya.");
+                }
+            });
 
-function submitData(e) {
-    e.preventDefault();
-    
-    // Cek apakah ada pesan error yang masih muncul di form
-    const errors = document.querySelectorAll('[id$="-error"]');
-    if (errors.length > 0) {
-        alert("Mohon perbaiki data yang salah sebelum mengirim.");
-        return;
+            list.appendChild(card);
+        });
     }
 
-    showLoader(true);
-    closeForm();
 
-    const formData = new FormData(document.getElementById('crudForm'));
-    const params = new URLSearchParams();
-    const editRow = document.getElementById('editRow').value;
+    function submitData(e) {
+        e.preventDefault();
 
-    params.append('action', editRow ? 'update' : 'create');
-    if (editRow) params.append('row', editRow);
+        const jenjang = document.getElementById('jenjangSelect').value;
+        const lainnya = document.getElementById('lainnyaInput')?.value?.trim();
+
+        if (jenjang === 'LAINNYA' && !lainnya) {
+            alert('Karena memilih LAINNYA, kolom "Jelaskan Jenjang Lainnya" wajib diisi.');
+            document.getElementById('lainnyaInput')?.focus();
+            return;
+        }
+
+        // Cek apakah ada pesan error yang masih muncul di form
+        const errors = document.querySelectorAll('[id$="-error"]');
+        if (errors.length > 0) {
+            alert("Mohon perbaiki data yang salah sebelum mengirim.");
+            return;
+        }
+
+        showLoader(true);
+        closeForm();
+
+        const formData = new FormData(document.getElementById('crudForm'));
+        const params = new URLSearchParams();
+        const editRow = document.getElementById('editRow').value;
+
+        params.append('action', editRow ? 'update' : 'create');
+        if (editRow) params.append('row', editRow);
 
     for (const [k, v] of formData) {
-        params.append(k, v);
+        let finalValue = v;
+
+        // Khusus JENJANG PENDIDIKAN ketika LAINNYA dipilih
+        if (k === 'JENJANG PENDIDIKAN' && v === 'LAINNYA') {
+            const penjelasan = document.getElementById('lainnyaInput')?.value?.trim();
+            finalValue = penjelasan || 'LAINNYA (tidak dijelaskan)'; // fallback kalau kosong
+        }
+
+        params.append(k, finalValue);
     }
 
-    fetch(API_URL, { method: 'POST', body: params })
-        .then(res => res.text())
-        .then(() => loadData())
-        .catch(() => {
-            alert('Gagal menyimpan data');
-            showLoader(false);
-        });
-}
+        fetch(API_URL, { method: 'POST', body: params })
+            .then(res => res.text())
+            .then(() => loadData())
+            .catch(() => {
+                alert('Gagal menyimpan data');
+                showLoader(false);
+            });
+    }
 
 
     function deleteData(rowId) {
@@ -993,7 +1093,75 @@ function formatRupiah(angka) {
     return rupiah;
 }
 
+// ================================================
+// LOGIKA BRANCHING JENJANG PENDIDIKAN (FINAL - sesuai permintaan terbaru)
+// ================================================
 
+const jenjangSelect = document.getElementById('jenjangSelect');
+const kuliahGroup = document.getElementById('kuliahGroup');
+const mustawaGroup = document.getElementById('mustawaGroup');
+const lainnyaGroup = document.getElementById('lainnyaGroup');
+
+if (jenjangSelect) {
+    function updateJenjangFields() {
+        const value = jenjangSelect.value.trim();
+
+        // Reset semua dulu
+        kuliahGroup.style.display = 'none';
+        mustawaGroup.style.display = 'none';
+        lainnyaGroup.style.display = 'none';
+
+        // Matikan required & disabled semua field kondisional
+        document.querySelectorAll('#kuliahGroup input, #kuliahGroup select').forEach(el => {
+            el.removeAttribute('required');
+            el.disabled = true;
+        });
+
+        const mustawaInput = document.querySelector('#mustawaGroup input');
+        if (mustawaInput) {
+            mustawaInput.removeAttribute('required');
+            mustawaInput.disabled = true;
+        }
+
+        const lainnyaInput = document.getElementById('lainnyaInput');
+        if (lainnyaInput) {
+            lainnyaInput.removeAttribute('required');
+            lainnyaInput.disabled = true;
+        }
+
+        // Atur tampilan berdasarkan pilihan
+        if (value === 'KULIAH') {
+            kuliahGroup.style.display = 'block';
+            document.querySelectorAll('#kuliahGroup input, #kuliahGroup select').forEach(el => {
+                el.setAttribute('required', 'required');
+                el.disabled = false;
+            });
+        } 
+        else if (value === "MA'HAD" || value === 'DAUROH LUGOH' || value === 'LAINNYA') {
+            // MA'HAD, DAUROH, dan LAINNYA sama-sama pakai Mustawa
+            mustawaGroup.style.display = 'block';
+            if (mustawaInput) {
+                mustawaInput.setAttribute('required', 'required');
+                mustawaInput.disabled = false;
+            }
+        }
+
+        if (value === 'LAINNYA') {
+            lainnyaGroup.style.display = 'block';
+            if (lainnyaInput) {
+                lainnyaInput.setAttribute('required', 'required');
+                lainnyaInput.disabled = false;
+            }
+        }
+    }
+
+    jenjangSelect.addEventListener('change', updateJenjangFields);
+
+    // Untuk mode edit: panggil setelah set value
+    function triggerJenjangUpdate() {
+        if (jenjangSelect) updateJenjangFields();
+    }
+}
 </script>
 </body>
 </html>
