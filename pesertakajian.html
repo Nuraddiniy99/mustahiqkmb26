@@ -4,32 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WAZIQOH KMB Mesir</title>
-
-      <!-- ================== FAVICON ================== -->
-    <link rel="icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" type="image/png">
-    <!-- Ukuran kecil untuk tab browser -->
-    <link rel="icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" sizes="32x32" type="image/png">
-    <!-- Ukuran lebih besar untuk Android home screen / high-dpi -->
-    <link rel="icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" sizes="192x192" type="image/png">
-    <!-- Apple Touch Icon (untuk iPhone/iPad saat ditambahkan ke home screen) -->
-    <link rel="apple-touch-icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" sizes="180x180">
-
-    <!-- ================== OPEN GRAPH / PREVIEW SOSMED (WhatsApp, FB, Telegram, X/Twitter, dll) ================== -->
-    <meta property="og:title" content="WAZIQOH KMB Mesir">
-    <meta property="og:description" content="Super App © 2025-2026 BO-WAZIQOH KMB Mesir. Semua hak cipta dilindungi.">
-    <meta property="og:image" content="https://i.ibb.co/hFW33J0c/waziqoh.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:url" content="https://nuraddiniy99.github.io/mustahiqkmb26/pesertakajian.html"><!-- Ganti dengan URL asli kalau sudah dihosting -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="WAZIQOH KMB Mesir">
-
-    <!-- Twitter / X Card (supaya preview bagus di X juga) -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="WAZIQOH KMB Mesir">
-    <meta name="twitter:description" content="Super App © 2025-2026 BO-WAZIQOH KMB Mesir. Semua hak cipta dilindungi.">
-    <meta name="twitter:image" content="https://i.ibb.co/hFW33J0c/waziqoh.png">
-  
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
@@ -65,9 +39,69 @@
       outline: none;
       box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.2);
     }
+    /* Loader styles */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+    }
+    #loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .pulse-wave {
+      animation: pulseWave 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulseWave {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.18);
+        opacity: 0.85;
+      }
+    }
+    .pulse-wave::after {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(45, 212, 191, 0.25) 0%, transparent 70%);
+      animation: ripple 3s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes ripple {
+      0% {
+        transform: scale(0.5);
+        opacity: 0.6;
+      }
+      100% {
+        transform: scale(2.5);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body class="antialiased">
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="relative">
+      <img 
+        src="https://i.ibb.co/5XnDzfNS/Asset-3.png" 
+        alt="Loading..." 
+        class="w-36 h-36 pulse-wave object-contain"
+      >
+    </div>
+  </div>
 
   <!-- HEADER - Glassmorphic -->
   <header class="glass sticky top-0 z-50 backdrop-blur-xl shadow-sm">
@@ -275,6 +309,10 @@
     });
 
     async function loadData() {
+      // Tampilkan loader
+      const loader = document.getElementById('loader');
+      loader.classList.remove('hidden');
+
       try {
         const res = await fetch(WEB_APP_URL);
         const json = await res.json();
@@ -287,6 +325,11 @@
       } catch (err) {
         console.error(err);
         alert('Koneksi gagal. Periksa URL Apps Script.');
+      } finally {
+        // Sembunyikan loader setelah selesai
+        setTimeout(() => {
+          loader.classList.add('hidden');
+        }, 500); // delay untuk transisi smooth
       }
     }
 
