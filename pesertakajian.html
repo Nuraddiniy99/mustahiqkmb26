@@ -5,30 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WAZIQOH KMB Mesir</title>
 
-      <!-- ================== FAVICON ================== -->
-    <link rel="icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" type="image/png">
-    <!-- Ukuran kecil untuk tab browser -->
-    <link rel="icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" sizes="32x32" type="image/png">
-    <!-- Ukuran lebih besar untuk Android home screen / high-dpi -->
-    <link rel="icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" sizes="192x192" type="image/png">
-    <!-- Apple Touch Icon (untuk iPhone/iPad saat ditambahkan ke home screen) -->
-    <link rel="apple-touch-icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" sizes="180x180">
+  <!-- ================== FAVICON ================== -->
+  <link rel="icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" type="image/png">
+  <!-- Ukuran kecil untuk tab browser -->
+  <link rel="icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" sizes="32x32" type="image/png">
+  <!-- Ukuran lebih besar untuk Android home screen / high-dpi -->
+  <link rel="icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" sizes="192x192" type="image/png">
+  <!-- Apple Touch Icon (untuk iPhone/iPad saat ditambahkan ke home screen) -->
+  <link rel="apple-touch-icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" sizes="180x180">
 
-    <!-- ================== OPEN GRAPH / PREVIEW SOSMED (WhatsApp, FB, Telegram, X/Twitter, dll) ================== -->
-    <meta property="og:title" content="WAZIQOH KMB Mesir App">
-    <meta property="og:description" content="Super App © 2025-2026 BO-WAZIQOH KMB Mesir. Semua hak cipta dilindungi.">
-    <meta property="og:image" content="https://i.ibb.co/hFW33J0c/waziqoh.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:url" content="https://nuraddiniy99.github.io/mustahiqkmb26/pesertakajian.html"><!-- Ganti dengan URL asli kalau sudah dihosting -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="WAZIQOH KMB Mesir App">
+  <!-- ================== OPEN GRAPH / PREVIEW SOSMED ================== -->
+  <meta property="og:title" content="WAZIQOH KMB Mesir App">
+  <meta property="og:description" content="Super App © 2025-2026 BO-WAZIQOH KMB Mesir. Semua hak cipta dilindungi.">
+  <meta property="og:image" content="https://i.ibb.co/hFW33J0c/waziqoh.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://nuraddiniy99.github.io/mustahiqkmb26/pesertakajian.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="WAZIQOH KMB Mesir App">
 
-    <!-- Twitter / X Card (supaya preview bagus di X juga) -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="WAZIQOH KMB Mesir App">
-    <meta name="twitter:description" content="Super App © 2025-2026 BO-WAZIQOH KMB Mesir. Semua hak cipta dilindungi.">
-    <meta name="twitter:image" content="https://i.ibb.co/hFW33J0c/waziqoh.png">
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WAZIQOH KMB Mesir App">
+  <meta name="twitter:description" content="Super App © 2025-2026 BO-WAZIQOH KMB Mesir. Semua hak cipta dilindungi.">
+  <meta name="twitter:image" content="https://i.ibb.co/hFW33J0c/waziqoh.png">
   
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -218,6 +218,14 @@
 
     let allData = [];
 
+    // Tanggal switch pesan: 2 Maret 2026 00:00 EET (Mesir, UTC+2)
+    const SWITCH_DATE = new Date('2026-03-02T00:00:00+02:00');
+
+    function isAfterSwitchDate() {
+      const now = new Date();
+      return now >= SWITCH_DATE;
+    }
+
     function getDriveImageUrl(link) {
       if (!link || typeof link !== 'string' || link.trim() === '') return '';
       let fileId = '';
@@ -242,7 +250,16 @@
 
     function sendWA(nama, wa) {
       const phone = normalizePhone(wa);
-      const msg = `Assalamualaikum ${nama}. Kami dari WAZIQOH KMB Mesir, kami tunggu yah di tempat kajian segera, terima kasih🙏😁`;
+      let msg = '';
+
+      if (isAfterSwitchDate()) {
+        // Pesan pengingat setelah 2 Maret 2026
+        msg = `Assalamualaikum WR. WB. ${nama}\nKajian WAZIQOH KMB Mesir sudah dimulai, ditunggu segera di tempat yah:\nSahat Qozzaz\nhttps://maps.app.goo.gl/wzt88bj2q3eogmD67\nTerima kasih🙏😁`;
+      } else {
+        // Pesan undang grup sebelum 2 Maret 2026
+        msg = `Assalamualaikum WR. WB. ${nama}\nKami dari WAZIQOH KMB Mesir silahkan gabung ke grup kami berikut ini yah :\n_https://chat.whatsapp.com/F6IECpwn79OImVHXoBiaIX_\nTerima kasih🙏😁`;
+      }
+
       const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
       window.open(url, '_blank');
     }
@@ -335,7 +352,6 @@
     });
 
     async function loadData() {
-      // Tampilkan loader
       const loader = document.getElementById('loader');
       loader.classList.remove('hidden');
 
@@ -352,10 +368,9 @@
         console.error(err);
         alert('Koneksi gagal. Periksa URL Apps Script.');
       } finally {
-        // Sembunyikan loader setelah selesai
         setTimeout(() => {
           loader.classList.add('hidden');
-        }, 500); // delay untuk transisi smooth
+        }, 500);
       }
     }
 
