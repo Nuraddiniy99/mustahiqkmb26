@@ -7,11 +7,8 @@
 
   <!-- ================== FAVICON ================== -->
   <link rel="icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" type="image/png">
-  <!-- Ukuran kecil untuk tab browser -->
   <link rel="icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" sizes="32x32" type="image/png">
-  <!-- Ukuran lebih besar untuk Android home screen / high-dpi -->
   <link rel="icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" sizes="192x192" type="image/png">
-  <!-- Apple Touch Icon (untuk iPhone/iPad saat ditambahkan ke home screen) -->
   <link rel="apple-touch-icon" href="https://i.ibb.co/q37GwCZ7/favicon.png" sizes="180x180">
 
   <!-- ================== OPEN GRAPH / PREVIEW SOSMED ================== -->
@@ -24,7 +21,6 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="WAZIQOH KMB Mesir App">
 
-  <!-- Twitter / X Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="WAZIQOH KMB Mesir App">
   <meta name="twitter:description" content="Super App © 2025-2026 BO-WAZIQOH KMB Mesir. Semua hak cipta dilindungi.">
@@ -48,6 +44,8 @@
     }
     .card {
       transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: visible; /* biar nomor bisa keluar sedikit */
     }
     .card:hover {
       transform: translateY(-4px);
@@ -114,6 +112,25 @@
         opacity: 0;
       }
     }
+    /* Nomor urut baru: pojok kiri atas, unik & rapi */
+    .card-number {
+      position: absolute;
+      top: -12px;
+      left: 12px;
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(to bottom right, #2dd4bf, #14b8a6);
+      color: white;
+      font-weight: bold;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(45, 212, 191, 0.5);
+      border: 2px solid white;
+      z-index: 10;
+    }
   </style>
 </head>
 <body class="antialiased">
@@ -157,8 +174,15 @@
       <i class="fa-solid fa-magnifying-glass absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none"></i>
     </div>
 
+    <!-- TOTAL PENDAFTAR -->
+    <div id="totalPendaftar" class="mb-6 text-center">
+      <div class="inline-block glass px-6 py-3 rounded-full text-slate-700 font-medium shadow-md">
+        Total Pendaftar: <span id="count" class="font-bold text-teal-600">0</span> orang
+      </div>
+    </div>
+
     <!-- LIST CARDS -->
-    <div id="listContainer" class="space-y-4"></div>
+    <div id="listContainer" class="space-y-5"></div>
 
   </main>
 
@@ -253,10 +277,8 @@
       let msg = '';
 
       if (isAfterSwitchDate()) {
-        // Pesan pengingat setelah 2 Maret 2026
         msg = `Assalamualaikum WR. WB. ${nama}\nKajian WAZIQOH KMB Mesir sudah dimulai, ditunggu segera di tempat yah:\nSahat Qozzaz\nhttps://maps.app.goo.gl/wzt88bj2q3eogmD67\nTerima kasih🙏😁`;
       } else {
-        // Pesan undang grup sebelum 2 Maret 2026
         msg = `Assalamualaikum WR. WB. ${nama}\nKami dari WAZIQOH KMB Mesir silahkan gabung ke grup kami berikut ini yah :\n_https://chat.whatsapp.com/F6IECpwn79OImVHXoBiaIX_\nTerima kasih🙏😁`;
       }
 
@@ -309,18 +331,22 @@
       const container = document.getElementById('listContainer');
       container.innerHTML = '';
 
+      // Update total pendaftar
+      document.getElementById('count').textContent = data.length;
+
       if (data.length === 0) {
         container.innerHTML = `<p class="text-center text-slate-500 py-16 text-base">Tidak ada data ditemukan</p>`;
         return;
       }
 
-      data.forEach(item => {
+      data.forEach((item, index) => {
         const div = document.createElement('div');
         div.className = `card glass rounded-3xl p-5 cursor-pointer`;
         
         div.innerHTML = `
+          <div class="card-number">${index + 1}</div>
           <div class="flex justify-between items-start gap-4">
-            <div class="flex-1 min-w-0">
+            <div class="flex-1 min-w-0 pl-10">
               <h3 class="text-base font-semibold text-slate-800 truncate">${item.nama}</h3>
               <span class="inline-block mt-1.5 px-3 py-1 bg-teal-50 text-teal-700 font-medium text-xs rounded-full border border-teal-200/70">
                 ${item.kekeluargaan}
