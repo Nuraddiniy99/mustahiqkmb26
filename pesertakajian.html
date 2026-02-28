@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WAZIQOH KMB Mesir</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(to bottom, #ffffff, #f8fafc);
+      min-height: 100vh;
+      color: #0f172a;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+    .card {
+      transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+      border-color: rgba(45, 212, 191, 0.4);
+    }
+    .modal-enter {
+      animation: modalPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    @keyframes modalPop {
+      from { opacity: 0; transform: scale(0.96) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    input:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.2);
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- HEADER - Glassmorphic -->
+  <header class="glass sticky top-0 z-50 backdrop-blur-xl shadow-sm">
+    <div class="max-w-3xl mx-auto px-5 py-4 flex items-center gap-3">
+      <img 
+        src="https://i.ibb.co/5XnDzfNS/Asset-3.png" 
+        alt="Logo WAZIQOH KMB" 
+        class="h-10 w-auto object-contain brightness-105"
+      >
+      <div>
+        <h1 class="text-xl font-bold tracking-tight text-slate-800">WAZIQOH KMB</h1>
+        <p class="text-slate-500 text-sm font-medium">Daftar Peserta Kajian</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-5 pt-7 pb-24">
+
+    <!-- SEARCH -->
+    <div class="glass relative mb-7 rounded-full overflow-hidden shadow-md">
+      <input 
+        id="searchInput" 
+        type="text" 
+        class="w-full bg-transparent text-slate-800 placeholder-slate-400 px-6 py-4 text-base focus:bg-white/40 transition-all duration-300"
+        placeholder="Cari nama atau kekeluargaan..."
+      >
+      <i class="fa-solid fa-magnifying-glass absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none"></i>
+    </div>
+
+    <!-- LIST CARDS -->
+    <div id="listContainer" class="space-y-4"></div>
+
+  </main>
+
+  <!-- MODAL - Glassmorphic -->
+  <div id="modal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[999] p-4">
+    <div class="glass w-full max-w-md rounded-3xl overflow-hidden shadow-2xl modal-enter transform transition-all duration-400 scale-95 opacity-0">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-white/40">
+        <h2 id="modalNama" class="text-xl font-bold text-slate-800 tracking-tight"></h2>
+        <button onclick="closeModal()" class="text-3xl text-slate-400 hover:text-slate-600 transition-colors">×</button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 space-y-7 overflow-y-auto max-h-[65vh]">
+        <!-- Foto -->
+        <div id="photoContainer" class="hidden">
+          <p class="text-xs text-slate-500 uppercase tracking-wider mb-3 font-semibold">Bukti Follow Instagram</p>
+          <img id="modalPhoto" class="w-full rounded-2xl shadow-md object-cover border border-slate-200" alt="Bukti" loading="lazy" referrerpolicy="no-referrer">
+        </div>
+
+        <!-- Details -->
+        <div class="space-y-5 text-sm">
+          <div class="grid grid-cols-[auto,1fr] gap-x-5 gap-y-4 text-slate-700">
+            <div class="text-slate-500 font-medium">Waktu Daftar</div>
+            <div id="modalTimestamp" class="font-medium"></div>
+
+            <div class="text-slate-500 font-medium">Kekeluargaan</div>
+            <div id="modalKeluarga" class="inline-block px-3 py-1 bg-teal-100 text-teal-800 font-medium rounded-full text-sm"></div>
+
+            <div class="text-slate-500 font-medium">WhatsApp</div>
+            <div id="modalWA" class="font-mono text-slate-800"></div>
+
+            <div class="text-slate-500 font-medium">Siap Buka Bersama</div>
+            <div id="modalBuka" class="font-medium"></div>
+
+            <div class="text-slate-500 font-medium">Siap Tepat Waktu</div>
+            <div id="modalDatang" class="font-medium"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Button -->
+      <div class="p-5 border-t border-slate-200 bg-white/30">
+        <button onclick="kirimDariModal()" 
+                class="w-full bg-gradient-to-r from-teal-600 to-teal-500 hover:from-teal-500 hover:to-teal-400 text-white font-medium py-3 px-5 rounded-2xl flex items-center justify-center gap-2 text-base shadow-md hover:shadow-lg transition-all duration-300 active:scale-95">
+          <i class="fa-brands fa-whatsapp text-lg"></i>
+          Kirim Pengingat
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Ganti dengan URL Apps Script kamu (sudah diisi)
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyHJAfpuDyMFrcrPBPZVun0cxtEZ2s8RW_eP0saMI1OaxNVznT5CMZshiL0myW02g1Gtg/exec';
+
+    let allData = [];
+
+    function getDriveImageUrl(link) {
+      if (!link || typeof link !== 'string' || link.trim() === '') return '';
+      let fileId = '';
+      const matchOpen = link.match(/[?&]id=([^&]+)/i);
+      if (matchOpen) fileId = matchOpen[1];
+      const matchD = link.match(/\/d\/([^\/&?]+)/i);
+      if (matchD) fileId = matchD[1];
+      const matchUc = link.match(/uc\?id=([^&]+)/i);
+      if (matchUc) fileId = matchUc[1];
+      if (fileId) {
+        return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+      }
+      return link.trim();
+    }
+
+    function normalizePhone(wa) {
+      let digits = wa.replace(/\D/g, '');
+      if (digits.startsWith('0')) digits = '62' + digits.slice(1);
+      if (!digits.startsWith('62')) digits = '62' + digits;
+      return digits;
+    }
+
+    function sendWA(nama, wa) {
+      const phone = normalizePhone(wa);
+      const msg = `Assalamualaikum ${nama}. Kami dari WAZIQOH KMB Mesir, kami tunggu yah di tempat kajian segera, terima kasih🙏😁`;
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    }
+
+    function showModal(item) {
+      const modal = document.getElementById('modal');
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.querySelector('.modal-enter')?.classList.remove('scale-95', 'opacity-0');
+      }, 10);
+
+      document.getElementById('modalNama').textContent = item.nama;
+      document.getElementById('modalTimestamp').textContent = item.timestamp;
+      document.getElementById('modalKeluarga').textContent = item.kekeluargaan;
+      document.getElementById('modalWA').textContent = item.wa;
+      document.getElementById('modalBuka').textContent = item.siapBuka;
+      document.getElementById('modalDatang').textContent = item.siapDatang;
+
+      const photoContainer = document.getElementById('photoContainer');
+      const photoImg = document.getElementById('modalPhoto');
+      
+      if (item.bukti) {
+        const photoUrl = getDriveImageUrl(item.bukti);
+        photoImg.src = photoUrl;
+        photoImg.onerror = () => {
+          photoImg.src = 'https://placehold.co/400x300/e2e8f0/64748b?text=Foto+tidak+muncul';
+          console.error('Gagal load foto:', photoUrl);
+        };
+        photoImg.onload = () => console.log('Foto OK:', photoUrl);
+        photoContainer.classList.remove('hidden');
+      } else {
+        photoContainer.classList.add('hidden');
+      }
+
+      window.currentItem = item;
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.add('hidden');
+    }
+
+    function kirimDariModal() {
+      if (window.currentItem) sendWA(window.currentItem.nama, window.currentItem.wa);
+    }
+
+    function renderList(data) {
+      const container = document.getElementById('listContainer');
+      container.innerHTML = '';
+
+      if (data.length === 0) {
+        container.innerHTML = `<p class="text-center text-slate-500 py-16 text-base">Tidak ada data ditemukan</p>`;
+        return;
+      }
+
+      data.forEach(item => {
+        const div = document.createElement('div');
+        div.className = `card glass rounded-3xl p-5 cursor-pointer`;
+        
+        div.innerHTML = `
+          <div class="flex justify-between items-start gap-4">
+            <div class="flex-1 min-w-0">
+              <h3 class="text-base font-semibold text-slate-800 truncate">${item.nama}</h3>
+              <span class="inline-block mt-1.5 px-3 py-1 bg-teal-50 text-teal-700 font-medium text-xs rounded-full border border-teal-200/70">
+                ${item.kekeluargaan}
+              </span>
+            </div>
+            <button onclick="event.stopPropagation(); sendWA('${item.nama.replace(/'/g, "\\'")}', '${item.wa}');" 
+                    class="bg-teal-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium flex items-center gap-2 hover:bg-teal-500 transition-all shadow-sm hover:shadow active:scale-95 flex-shrink-0">
+              <i class="fa-brands fa-whatsapp text-base"></i>
+              Kirim
+            </button>
+          </div>
+        `;
+
+        div.addEventListener('click', (e) => {
+          if (!e.target.closest('button')) showModal(item);
+        });
+
+        container.appendChild(div);
+      });
+    }
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase().trim();
+      const filtered = allData.filter(item => 
+        item.nama.toLowerCase().includes(term) || 
+        item.kekeluargaan.toLowerCase().includes(term)
+      );
+      renderList(filtered);
+    });
+
+    async function loadData() {
+      try {
+        const res = await fetch(WEB_APP_URL);
+        const json = await res.json();
+        if (json.success) {
+          allData = json.data;
+          renderList(allData);
+        } else {
+          alert('Gagal memuat data.');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Koneksi gagal. Periksa URL Apps Script.');
+      }
+    }
+
+    document.getElementById('modal').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) closeModal();
+    });
+
+    window.onload = loadData;
+  </script>
+</body>
+</html>
