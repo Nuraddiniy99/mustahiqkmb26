@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>WAZIQOH · KMB Mesir</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            padding: 20px 16px 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #1e293b;
+        }
+
+        .app-container {
+            max-width: 480px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Modern Card Style */
+        .card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 24px 20px;
+            box-shadow: 0 10px 30px -5px rgba(0, 80, 50, 0.08);
+            margin-bottom: 24px;
+            border: 1px solid #e9edf0;
+            transition: all 0.2s ease;
+        }
+
+        /* Header with Logo */
+        .app-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            background: #ffffff;
+            border-radius: 32px;
+            padding: 16px 20px;
+            box-shadow: 0 6px 16px rgba(0, 70, 40, 0.04);
+            border: 1px solid #e2e8f0;
+        }
+
+        .logo-kiri {
+            width: 60px;
+            height: 60px;
+            background: url('https://i.ibb.co/5XnDzfNS/Asset-3.png.png') center/contain no-repeat;
+            background-size: contain;
+            flex-shrink: 0;
+        }
+
+        .header-titles {
+            flex: 1;
+        }
+
+        .header-titles h1 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #0f3b2c;
+            line-height: 1.2;
+        }
+
+        .header-titles .sub {
+            color: #547a66;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .badge {
+            background: #e2f0e9;
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.7rem;
+            color: #0f5e3f;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Form Elements */
+        .form-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1e3a2f;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-title i {
+            color: #0f7b54;
+            font-size: 1.2rem;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #2b4f3d;
+            letter-spacing: 0.3px;
+            margin-left: 8px;
+            margin-bottom: 6px;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .input-field {
+            background: #f9fcfa;
+            border: 1.5px solid #dde9e2;
+            border-radius: 20px;
+            padding: 14px 18px;
+            font-size: 1rem;
+            width: 100%;
+            outline: none;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .input-field:focus {
+            border-color: #0f7b54;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(15, 123, 84, 0.1);
+        }
+
+        /* Payment Types Chip */
+        .payment-types {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 16px 0 20px;
+        }
+
+        .type-chip {
+            background: #f1f7f4;
+            border-radius: 40px;
+            padding: 12px 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1e4d37;
+            border: 1.5px solid transparent;
+            transition: all 0.15s;
+            cursor: pointer;
+            user-select: none;
+            flex: 1 0 auto;
+            justify-content: center;
+        }
+
+        .type-chip i {
+            color: #0f7b54;
+            font-size: 1rem;
+        }
+
+        .type-chip.selected {
+            background: #daf1e6;
+            border-color: #0f7b54;
+            color: #0a452f;
+            box-shadow: 0 2px 8px rgba(10, 100, 60, 0.1);
+        }
+
+        /* Nominal Input per Jenis */
+/* Nominal Input per Jenis - Versi Mobile Efisien */
+.nominal-group {
+    margin-bottom: 16px;
+    padding: 12px;                /* dikurangi dari 16px */
+    background: #f8fbf9;
+    border-radius: 20px;
+    border: 1px solid #d0e2d9;
+}
+
+.nominal-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;                     /* gap lebih kecil dari 12px */
+    margin-bottom: 10px;          /* jarak antar baris lebih rapat */
+}
+
+.nominal-row:last-child {
+    margin-bottom: 0;
+}
+
+.nominal-label {
+    width: 80px;                  /* dikurangi dari 100px agar lebih compact */
+    min-width: 80px;
+    font-weight: 600;
+    font-size: 0.85rem;           /* sedikit lebih kecil */
+    color: #1e4d37;
+    white-space: nowrap;          /* cegah label patah ke baris baru */
+}
+
+.nominal-input {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;                     /* gap lebih kecil */
+    min-width: 0;                 /* penting agar bisa mengecil */
+}
+
+.nominal-input input {
+    flex: 1 1 auto;               /* grow + shrink + basis auto */
+    min-width: 80px;              /* minimal lebar agar tidak terlalu kecil */
+    background: white;
+    border: 1.5px solid #dde9e2;
+    border-radius: 14px;          /* sedikit lebih kecil dari 16px */
+    padding: 10px 12px;           /* padding lebih kecil dari 12px 16px */
+    font-size: 0.95rem;           /* font sedikit lebih kecil */
+    outline: none;
+    font-family: 'Inter', sans-serif;
+}
+
+.nominal-input input:focus {
+    border-color: #0f7b54;
+    box-shadow: 0 0 0 3px rgba(15, 123, 84, 0.12);
+}
+
+.nominal-input input:disabled {
+    background: #f0f5f2;
+    opacity: 0.6;
+}
+
+.currency-select {
+    width: 70px;                  /* lebih kecil dari 80px */
+    min-width: 70px;
+    background: #f9fcfa;
+    border: 1.5px solid #dde9e2;
+    border-radius: 14px;
+    padding: 10px 8px;            /* padding lebih kecil */
+    font-size: 0.9rem;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+
+.currency-select:focus {
+    border-color: #0f7b54;
+    box-shadow: 0 0 0 3px rgba(15, 123, 84, 0.12);
+}
+
+/* Khusus untuk Lainnya (custom label + input + currency) */
+.nominal-row[data-type="Lainnya"] {
+    flex-wrap: wrap;              /* agar custom label bisa turun jika terlalu panjang */
+    align-items: flex-start;
+}
+
+.custom-label-input {
+    flex: 1 1 100%;               /* ambil full width di baris sendiri */
+    min-width: 100%;
+    margin-bottom: 8px;
+    background: white;
+    border: 1.5px solid #dde9e2;
+    border-radius: 14px;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+        .custom-label-input:focus {
+            border-color: #0f7b54;
+            box-shadow: 0 0 0 3px rgba(15, 123, 84, 0.1);
+        }
+
+        /* Total Card */
+        .total-card {
+            background: linear-gradient(135deg, #f1f9f5 0%, #e3f0ea 100%);
+            border-radius: 24px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #0f7b54;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .total-label {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #0a452f;
+        }
+
+        .total-amount {
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: #0f7b54;
+            letter-spacing: -0.5px;
+        }
+
+        .total-currency {
+            font-size: 1rem;
+            color: #2e5e45;
+            margin-left: 4px;
+        }
+
+        /* Radio Method */
+        .radio-group {
+            display: flex;
+            gap: 24px;
+            margin: 16px 0 8px;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            color: #2b4f3d;
+            cursor: pointer;
+        }
+
+        .radio-group input[type="radio"] {
+            accent-color: #0f7b54;
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Buttons */
+        .btn {
+            border: none;
+            border-radius: 30px;
+            padding: 16px 20px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: #0f7b54;
+            color: white;
+            box-shadow: 0 6px 14px rgba(15, 123, 84, 0.25);
+            border: 1px solid #0b6845;
+        }
+
+        .btn-primary:hover {
+            background: #0b6845;
+            transform: scale(1.01);
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #1e4d37;
+            border: 1.5px solid #c6dbd2;
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f9f4;
+        }
+
+        .btn-small {
+            padding: 12px 16px;
+            font-size: 0.85rem;
+            width: auto;
+        }
+
+        /* Current Number Card */
+        .current-number-card {
+            background: linear-gradient(135deg, #0f5e44 0%, #1a7a5c 100%);
+            color: white;
+            border-radius: 28px;
+            padding: 20px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 12px 24px -8px rgba(10, 80, 50, 0.3);
+        }
+
+        .current-number-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .current-number-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+
+        .current-number-unit {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-left: 4px;
+        }
+
+        .current-number-action {
+            background: rgba(255,255,255,0.2);
+            border-radius: 40px;
+            padding: 10px 16px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.3);
+            cursor: pointer;
+        }
+
+        /* Data List */
+        .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 16px 4px 12px;
+        }
+
+        .list-header h3 {
+            font-weight: 600;
+            color: #1e3a2f;
+            font-size: 1.1rem;
+        }
+
+        .data-item {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 18px 16px;
+            margin-bottom: 12px;
+            border: 1px solid #e2ebe6;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: all 0.15s;
+        }
+
+        .data-item:hover {
+            border-color: #b8d5c8;
+            box-shadow: 0 4px 12px rgba(0,70,40,0.03);
+        }
+
+        .item-row1 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .invoice-badge {
+            background: #e3f1eb;
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #0b543b;
+            letter-spacing: 0.3px;
+        }
+
+        .item-amount {
+            font-weight: 700;
+            color: #0a452f;
+            font-size: 1.1rem;
+        }
+
+        .item-details {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: #3b5f4d;
+            align-items: center;
+        }
+
+        .item-details i {
+            color: #0f7b54;
+            width: 16px;
+        }
+
+        .item-jenis-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .item-jenis-badge {
+            background: #e3f1eb;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #0b543b;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+            margin-top: 6px;
+        }
+
+        .item-actions button {
+            background: #f0f7f3;
+            border: none;
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e5c41;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.1s;
+            border: 1px solid #d0e2d9;
+        }
+
+        .item-actions button:hover {
+            background: #dff0e8;
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 36px 20px;
+            background: #f1f9f5;
+            border-radius: 32px;
+            color: #547a66;
+            font-size: 0.95rem;
+        }
+
+        /* Hidden Receipt Template */
+        .receipt-template {
+            display: none;
+        }
+
+        .receipt-a6 {
+            width: 105mm;
+            min-height: 148mm;
+            background: white;
+            padding: 12mm 8mm;
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            color: #1e293b;
+        }
+
+        .receipt-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .receipt-logo {
+            width: 48px;
+            height: 48px;
+            background: url('https://i.ibb.co/QFHWNM98/Asseheadert-2.png') center/contain no-repeat;
+        }
+
+        .receipt-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #022c1b;
+            line-height: 1.3;
+        }
+
+        .receipt-title small {
+            font-weight: 400;
+            font-size: 9px;
+            color: #4f675b;
+        }
+
+        .receipt-nomor {
+            text-align: right;
+            font-size: 11px;
+            margin: 5px 0 15px;
+            border-bottom: 1px dashed #aaa;
+            padding-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .receipt-field {
+            display: flex;
+            margin: 12px 0;
+            align-items: baseline;
+        }
+
+        .receipt-field .label {
+            width: 110px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #1b3528;
+            text-transform: uppercase;
+        }
+
+        .receipt-field .value {
+            flex: 1;
+            font-size: 11px;
+            border-bottom: 1px solid #aaa;
+            padding: 2px 4px;
+            min-height: 18px;
+        }
+
+        .payment-check-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 16px;
+            margin: 16px 0 10px;
+            font-size: 10px;
+        }
+
+        .payment-check-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .check-symbol {
+            font-size: 14px;
+            color: #0f7b54;
+        }
+
+        .check-symbol.unchecked {
+            opacity: 0.3;
+        }
+
+        .payment-detail-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            margin: 4px 0;
+            padding: 4px 0;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        .jumlah-uang-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 16px 0 12px;
+        }
+
+        .jumlah-label {
+            font-weight: 700;
+            font-size: 10px;
+            width: 100px;
+        }
+
+        .jumlah-value {
+            font-size: 13px;
+            font-weight: 700;
+            border-bottom: 2px solid #111;
+            padding: 4px 8px;
+            min-width: 140px;
+        }
+
+        .terbilang {
+            font-size: 10px;
+            margin: 16px 0;
+            border-bottom: 1px solid #333;
+            padding: 6px 2px;
+        }
+
+        .method-ttd {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 28px;
+        }
+
+        .ttd-img {
+            width: 70px;
+            height: 30px;
+            background: url('https://i.ibb.co/TBQS77gW/ttd-akfa.png') center/contain no-repeat;
+            margin-left: auto;
+        }
+
+        .petugas {
+            font-size: 9px;
+            margin-top: 4px;
+            color: #2d4f3a;
+            text-align: right;
+        }
+
+        .scan-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+            font-size: 8px;
+            color: #6f8b7c;
+            border-top: 1px dotted #aaa;
+            padding-top: 8px;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 40px 20px;
+            color: #547a66;
+        }
+
+        .loading i {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            color: #0f7b54;
+        }
+
+        /* Search Input */
+        #searchInput {
+            padding: 14px 18px;
+            font-size: 1rem;
+        }
+
+        /* Modal Preview */
+        #previewModal {
+            display: none;
+        }
+        #previewContainer .receipt-a6 {
+            width: 148mm !important;
+            height: 105mm !important;
+            transform: scale(0.8);  /* agar muat di modal */
+            transform-origin: top left;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="app-header">
+            <div class="logo-kiri"></div>
+            <div class="header-titles">
+                <h1>Data Muzakki 2026</h1>
+                <div class="sub">
+                    <span class="badge"><i class="fas fa-leaf"></i> WAZIQOH KMB Mesir</span>
+                    <span><i class="far fa-clock"></i> <span id="liveTime"></span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Number Card -->
+        <div class="current-number-card" id="currentNumberCard">
+            <div>
+                <div class="current-number-label">Nomor Invoice Terakhir</div>
+                <div style="display: flex; align-items: baseline;">
+                    <span class="current-number-value" id="lastInvoiceNumber">0000</span>
+                    <span class="current-number-unit">/2026</span>
+                </div>
+            </div>
+            <div class="current-number-action" id="refreshNumberBtn">
+                <i class="fas fa-sync-alt"></i> <span>Refresh</span>
+            </div>
+        </div>
+
+        <!-- Form Input Card -->
+        <div class="card">
+            <div class="form-title">
+                <i class="fas fa-pen-alt"></i> Form Transaksi Baru
+            </div>
+            
+            <div class="input-group">
+                <label><i class="fas fa-user"></i> NAMA LENGKAP</label>
+                <input type="text" class="input-field" id="namaInput" placeholder="Contoh: Ahmad Fauzi" value="">
+            </div>
+
+            <div>
+                <label style="margin-left: 8px; font-size: 0.8rem; font-weight: 600; color: #2b4f3d;">JENIS PEMBAYARAN</label>
+                <div class="payment-types" id="jenisGroup">
+                    <span class="type-chip" data-type="Zakat Fitrah"><i class="fas fa-hand-holding-heart"></i> Zakat Fitrah</span>
+                    <span class="type-chip" data-type="Shodaqoh"><i class="fas fa-gift"></i> Shodaqoh</span>
+                    <span class="type-chip" data-type="Infaq"><i class="fas fa-coins"></i> Infaq</span>
+                    <span class="type-chip" data-type="Wakaf"><i class="fas fa-mosque"></i> Wakaf</span>
+                    <span class="type-chip" data-type="Lainnya"><i class="fas fa-ellipsis-h"></i> Lainnya</span>
+                </div>
+            </div>
+
+            <!-- Nominal per Jenis -->
+            <div class="nominal-group" id="nominalGroup">
+                <div class="nominal-group" id="nominalGroup">
+                    <div class="nominal-row" data-type="Zakat Fitrah" style="display: none;">
+                        <span class="nominal-label">Zakat Fitrah</span>
+                        <div class="nominal-input">
+                            <input type="text" id="nominalZakat" class="nominal-field" placeholder="0.00" value="">  <!-- type="text" & value="" -->
+                            <select id="currencyZakat" class="currency-select">
+                                <option value="EGP" selected>EGP</option>
+                                <option value="IDR">IDR</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="nominal-row" data-type="Shodaqoh" style="display: none;">
+                        <span class="nominal-label">Shodaqoh</span>
+                        <div class="nominal-input">
+                            <input type="text" id="nominalShodaqoh" class="nominal-field" placeholder="0.00" value="">  <!-- type="text" & value="" -->
+                            <select id="currencyShodaqoh" class="currency-select">
+                                <option value="EGP" selected>EGP</option>
+                                <option value="IDR">IDR</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="nominal-row" data-type="Infaq" style="display: none;">
+                        <span class="nominal-label">Infaq</span>
+                        <div class="nominal-input">
+                            <input type="text" id="nominalInfaq" class="nominal-field" placeholder="0.00" value="">  <!-- type="text" & value="" -->
+                            <select id="currencyInfaq" class="currency-select">
+                                <option value="EGP" selected>EGP</option>
+                                <option value="IDR">IDR</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="nominal-row" data-type="Wakaf" style="display: none;">
+                        <span class="nominal-label">Wakaf</span>
+                        <div class="nominal-input">
+                            <input type="text" id="nominalWakaf" class="nominal-field" placeholder="0.00" value="">  <!-- type="text" & value="" -->
+                            <select id="currencyWakaf" class="currency-select">
+                                <option value="EGP" selected>EGP</option>
+                                <option value="IDR">IDR</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="nominal-row" data-type="Lainnya" style="display: none;">
+                        <input type="text" id="customLabelLainnya" class="custom-label-input" placeholder="Jenis Lainnya" disabled>
+                        <div class="nominal-input">
+                            <input type="text" id="nominalLainnya" class="nominal-field" placeholder="0.00" value="">  <!-- type="text" & value="" -->
+                            <select id="currencyLainnya" class="currency-select">
+                                <option value="EGP" selected>EGP</option>
+                                <option value="IDR">IDR</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Card -->
+            <div class="total-card" id="totalCard">
+                <span class="total-label">TOTAL PEMBAYARAN</span>
+                <div id="totalAmounts"></div>
+            </div>
+
+            <div class="radio-group">
+                <label><input type="radio" name="metode" value="Tunai" checked> <i class="fas fa-money-bill-wave"></i> Tunai</label>
+                <label><input type="radio" name="metode" value="Transfer"> <i class="fas fa-exchange-alt"></i> Transfer</label>
+            </div>
+
+            <input type="hidden" id="editIndex" value="-1">
+            <input type="hidden" id="editInvoice" value="">
+
+            <button class="btn btn-primary" id="simpanBtn" style="margin-top: 16px;">
+                <i class="fas fa-save"></i> Simpan Transaksi
+            </button>
+            <button class="btn btn-secondary btn-small" id="resetFormBtn" style="margin-top: 12px;">
+                <i class="fas fa-undo-alt"></i> Reset Form
+            </button>
+        </div>
+
+        <!-- Search Bar untuk Riwayat -->
+        <div class="input-group" style="margin-bottom: 16px; max-width: 100%;">
+            <label><i class="fas fa-search"></i> Cari  Nomor Invoice atau Nama</label>
+            <input type="text" id="searchInput" class="input-field" placeholder="Masukkan nomor invoice atau nama...">
+        </div>
+
+        <!-- Data List -->
+        <div class="list-header">
+            <h3><i class="fas fa-database" style="margin-right: 6px;"></i>Riwayat Pembayaran</h3>
+            <span class="badge" id="totalCount">0 data</span>
+        </div>
+        <div id="dataListContainer">
+            <div class="loading">
+                <i class="fas fa-spinner fa-pulse"></i>
+                <div>Memuat data...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Receipt Template - Desain Landscape A6 Profesional -->
+    <div class="receipt-template" id="receiptTemplateContainer" style="display: none;">
+        <div class="receipt-a6" id="receiptContent" style="
+            width: 148mm;
+            height: 105mm;
+            background: white;
+            padding: 8mm 10mm;
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+            color: #1e293b;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        ">
+            <!-- Header Hijau Kiri -->
+            <div style="
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 45mm;
+                height: 105mm;
+                background: #e2f0e9;
+                padding: 10mm 5mm;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            ">
+                <div>
+                    <img src="https://i.ibb.co/QFHWNM98/Asseheadert-2.png" alt="Logo WAZIQOH" style="width: 80%; margin-bottom: 5mm;">
+                    <div style="font-weight: bold; font-size: 10px; color: #0f7b54; line-height: 1.2;">
+                        BADAN OTORITAS KELUARGA MAHASISWA BATEN MESIR<br>
+                        WAZIQOH KMB Mesir
+                    </div>
+                </div>
+                <div style="font-size: 8px; color: #547a66; margin-top: auto;">
+                    Jl. Anwar Syams, Gedung ITB Lt. 3 No.5<br>
+                    Zohro, Cairo, Mesir<br>
+                    Telp: (+20) 1507817887<br>
+                    Email: waziqohkmbmesir@gmail.com
+                </div>
+            </div>
+
+            <!-- Konten Utama (Kanan) -->
+            <div style="margin-left: 50mm; padding-left: 5mm;">
+                <!-- Judul & Nomor -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8mm;">
+                    <div style="font-size: 12px; font-weight: bold; color: #0f7b54;">
+                        KWITANSI BUKTI PEMBAYARAN<br>WAKAF, ZAKAT, INFAQ & SHODAQQOH
+                    </div>
+                    <div style="text-align: right; font-size: 10px;">
+                        Nomor : <span id="receiptNomor">INV/2026/_____</span><br>
+                        Tanggal : <span id="receiptTanggal">________, __/__/20__</span>
+                    </div>
+                </div>
+
+                <!-- Telah Terima Dari -->
+                <div style="margin-bottom: 6mm; font-size: 10px;">
+                    Telah terima dari : <span id="receiptNama" style="border-bottom: 1px solid #aaa; padding: 0 4px; min-width: 200px; display: inline-block;">_________________________</span>
+                    <span style="margin-left: 10px;">(___________________)</span>
+                </div>
+
+                <!-- Jenis Pembayaran -->
+                <div style="font-size: 10px; font-weight: 600; margin-bottom: 4mm;">Jenis Pembayaran :</div>
+                <div id="receiptJenisCheck" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 4mm; font-size: 9px;"></div>
+
+                <!-- Jumlah Uang -->
+                <div style="margin: 8mm 0; font-size: 10px;">
+                    Jumlah Uang : <span id="receiptJumlah" style="font-weight: bold; border-bottom: 2px solid #111; padding: 2px 8px; min-width: 140px; display: inline-block;">EGP ______________ / Rp ______________</span>
+                </div>
+
+                <!-- Terbilang -->
+                <div style="margin-bottom: 8mm; font-size: 10px;">
+                    Terbilang : <span id="receiptTerbilang" style="border-bottom: 1px solid #333; padding: 2px 4px; min-width: 300px; display: inline-block;">(_________________________)</span>
+                </div>
+
+                <!-- Metode -->
+                <div style="font-size: 10px; margin-bottom: 12mm;">
+                    Metode : <span id="receiptMetode">☐ Tunai  ☐ Transfer</span>
+                </div>
+
+                <!-- TTD + Stempel + Petugas -->
+                <div style="display: flex; justify-content: flex-end; align-items: flex-end; position: relative; margin-top: 10mm;">
+                    <div style="text-align: center; position: relative;">
+                        <img src="https://i.ibb.co/TBQS77gW/ttd-akfa.png" alt="TTD" style="width: 80px; height: 35px; display: block; margin: 0 auto 4px;">
+                        <img src="https://i.ibb.co/DPNFgX0x/Asset-1.png" alt="Stempel" style="position: absolute; left: -40px; top: -20px; width: 100px; height: 100px; opacity: 0.7; transform: rotate(-10deg);">
+                        <div style="font-size: 9px; color: #2d4f3a;">Petugas WAZIQOH KMB Mesir</div>
+                        <div style="font-size: 9px; font-weight: bold;">Akfa Ma'rufa MS Hubbalkhair</div>
+                    </div>
+                </div>
+
+                <!-- Footer Scan + QR -->
+                <div style="position: absolute; bottom: 8mm; right: 10mm; text-align: right; font-size: 8px; color: #6f8b7c;">
+                    <div>Scan here!</div>
+                    <div>"Membersihkan harta Mengetuk pintu langit"</div>
+                    <!-- QR Code placeholder (ganti src dengan QR asli jika ada) -->
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=https://waziqoh.kmbmesir.com" alt="QR Code" style="width: 60px; height: 60px; margin-top: 4px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Preview Kwitansi -->
+    <div id="previewModal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6);">
+        <div style="background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888; width: 90%; max-width: 500px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0; color: #0f7b54;">Preview Kwitansi</h3>
+                <span id="closePreviewModal" style="color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+            </div>
+            <div id="previewContainer" style="border: 1px solid #ddd; background: white; padding: 10px; overflow: auto; max-height: 60vh; margin-bottom: 16px;">
+                <!-- Preview akan diisi di sini -->
+            </div>
+            <div style="text-align: right;">
+                <button id="cancelPreviewBtn" class="btn btn-secondary" style="margin-right: 8px;">Tutup</button>
+                <button id="downloadFromPreviewBtn" class="btn btn-primary">Download PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // KONFIGURASI APPS SCRIPT ENDPOINT
+        // ============================================
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxI4TepH4GG4YqKELEkNIiR9ITFiT27kKZkfsynS2sTQ8bzK0igfvOxHifo6RdiU3Fi/exec';
+
+        let payments = [];
+        let selectedJenis = [];
+        let nominalValues = {
+            'Zakat Fitrah': {nominal: 0, currency: 'EGP'},
+            'Shodaqoh': {nominal: 0, currency: 'EGP'},
+            'Infaq': {nominal: 0, currency: 'EGP'},
+            'Wakaf': {nominal: 0, currency: 'EGP'},
+            'Lainnya': {nominal: 0, currency: 'EGP', customLabel: ''}
+        };
+
+        // Load data on start
+        window.onload = function() {
+            loadAllData();
+            updateLiveTime();
+            setInterval(updateLiveTime, 1000);
+            
+            document.getElementById('refreshNumberBtn').addEventListener('click', function() {
+                loadAllData();
+            });
+
+            // Setup listeners untuk nominal inputs dan currency selects
+            setupNominalListeners();
+
+            // Fitur Search Riwayat
+            document.getElementById('searchInput').addEventListener('input', function() {
+                const searchTerm = this.value.trim().toLowerCase();
+                renderFilteredList(searchTerm);
+            });
+        };
+
+        // Fitur Search Riwayat
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.trim().toLowerCase();
+            renderFilteredList(searchTerm);
+        });
+
+function setupNominalListeners() {
+    const nominalFields = document.querySelectorAll('.nominal-field');
+    nominalFields.forEach(field => {
+        // Saat fokus: tampilkan raw
+        field.addEventListener('focus', function() {
+            this.value = unformatNumber(this.value).toString().replace('.', ',');
+        });
+
+        // Saat ketik: format real-time
+        field.addEventListener('input', function() {
+            let value = this.value.replace(/[^0-9,]/g, '');
+            if ((value.match(/,/g) || []).length > 1) {
+                value = value.slice(0, value.lastIndexOf(',')) + value.slice(value.lastIndexOf(',') + 1);
+            }
+
+            const raw = unformatNumber(value);
+            const hasDecimal = value.includes(',');
+            this.value = formatNumber(raw, hasDecimal);
+
+            // Mapping type yang benar
+            let type = this.id.replace('nominal', '');
+            if (type === 'Zakat') type = 'Zakat Fitrah';
+            if (type === 'Shodaqoh') type = 'Shodaqoh';  // sudah benar
+            if (type === 'Infaq') type = 'Infaq';
+            if (type === 'Wakaf') type = 'Wakaf';
+            if (type === 'Lainnya') type = 'Lainnya';
+
+            if (nominalValues[type]) {
+                nominalValues[type].nominal = raw;
+                updateTotal();
+            } else {
+                console.warn('Type tidak ditemukan:', type);
+            }
+        });
+
+        // Saat blur: format final
+        field.addEventListener('blur', function() {
+            const raw = unformatNumber(this.value);
+            this.value = formatNumber(raw);
+
+            let type = this.id.replace('nominal', '');
+            if (type === 'Zakat') type = 'Zakat Fitrah';
+
+            if (nominalValues[type]) {
+                nominalValues[type].nominal = raw;
+                updateTotal();
+            }
+        });
+    });
+
+    // Listener currency (fix assignment error + mapping)
+    const currencySelects = document.querySelectorAll('.currency-select');
+    currencySelects.forEach(select => {
+        select.addEventListener('change', function() {
+            let type = this.id.replace('currency', '');
+            if (type === 'Zakat') type = 'Zakat Fitrah';
+
+            if (nominalValues[type]) {
+                nominalValues[type].currency = this.value;  // ← sekarang aman
+                updateTotal();
+            } else {
+                console.warn('Currency type tidak ditemukan:', type);
+            }
+        });
+    });
+
+    // Custom label
+    const customLabel = document.getElementById('customLabelLainnya');
+    if (customLabel) {
+        customLabel.addEventListener('input', function() {
+            nominalValues['Lainnya'].customLabel = this.value.trim() || 'Lainnya';
+        });
+    }
+}
+
+        function updateTotal() {
+            const totals = {};
+            for (let type in nominalValues) {
+                if (selectedJenis.includes(type) && nominalValues[type].nominal > 0) {
+                    const curr = nominalValues[type].currency;
+                    if (!totals[curr]) totals[curr] = 0;
+                    totals[curr] += nominalValues[type].nominal;
+                }
+            }
+
+            const totalAmountsDiv = document.getElementById('totalAmounts');
+            totalAmountsDiv.innerHTML = '';
+            
+            if (Object.keys(totals).length === 0) {
+                totalAmountsDiv.innerHTML = '<div class="total-row"><span class="total-amount">0</span><span class="total-currency">EGP</span></div>';
+                return;
+            }
+
+            for (let curr in totals) {
+                const amount = totals[curr];
+                const formatted = formatNumber(amount); // otomatis hilang .00 jika bulat
+                
+                const row = document.createElement('div');
+                row.className = 'total-row';
+                row.innerHTML = `
+                    <span class="total-amount">${formatted}</span>
+                    <span class="total-currency">${curr}</span>
+                `;
+                totalAmountsDiv.appendChild(row);
+            }
+        }
+
+        function updateLiveTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('liveTime').innerText = timeStr;
+        }
+
+        // ============================================
+        // FUNGSI MEMBACA DATA DARI APPS SCRIPT
+        // ============================================
+        async function loadAllData() {
+            showLoading(true);
+            
+            try {
+                const response = await fetch(APPS_SCRIPT_URL + '?action=getAll');
+                const result = await response.json();
+                
+                if (result.success && result.data) {
+                    payments = result.data;
+                    
+                    // Urutkan berdasarkan timestamp
+                    payments.sort((a, b) => {
+                        if (!a.timestamp) return 1;
+                        if (!b.timestamp) return -1;
+                        return new Date(a.timestamp) - new Date(b.timestamp);
+                    });
+                } else {
+                    payments = [];
+                }
+                
+                renderFilteredList('');  // tampilkan semua saat pertama load
+                updateLastInvoiceNumber();
+                showLoading(false);
+                
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('dataListContainer').innerHTML = '<div class="empty-message"><i class="fas fa-exclamation-triangle"></i><br>Gagal memuat data. Periksa koneksi ke server.</div>';
+                showLoading(false);
+            }
+        }
+
+        function showLoading(show) {
+            if (show) {
+                document.getElementById('dataListContainer').innerHTML = '<div class="loading"><i class="fas fa-spinner fa-pulse"></i><div>Memuat data...</div></div>';
+            }
+        }
+
+        function updateLastInvoiceNumber() {
+            if (payments.length === 0) {
+                document.getElementById('lastInvoiceNumber').innerText = '000';
+                return;
+            }
+            
+            let maxNum = 0;
+            payments.forEach(p => {
+                if (p.invoiceNumber) {
+                    const match = p.invoiceNumber.match(/INV\/2026\/(\d+)/);
+                    if (match) {
+                        const num = parseInt(match[1], 10);
+                        if (num > maxNum) maxNum = num;
+                    }
+                }
+            });
+            document.getElementById('lastInvoiceNumber').innerText = maxNum.toString().padStart(3, '0');  // ← ubah jadi 3
+        }
+
+        function formatNumber(num, forceDecimal = false) {
+            if (num === '' || num === null || isNaN(num)) return '';
+            const n = parseFloat(num);
+            if (isNaN(n)) return '';
+            
+            let [integer, decimal = ''] = n.toString().split('.');
+            integer = integer.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            
+            if (decimal || forceDecimal) {
+                decimal = decimal.padEnd(2, '0').slice(0, 2);
+                return `${integer},${decimal}`;
+            }
+            return integer;
+        }
+
+        function unformatNumber(str) {
+            if (!str) return 0;
+            const cleaned = str.replace(/\./g, '').replace(/,/g, '.');
+            return parseFloat(cleaned) || 0;
+        }
+
+        // Render list
+        function renderList() {
+            const container = document.getElementById('dataListContainer');
+            if (!payments.length) {
+                container.innerHTML = '<div class="empty-message"><i class="fas fa-inbox fa-3x" style="opacity:0.5; margin-bottom:12px;"></i><br>Belum ada data transaksi.<br>Tambahkan transaksi baru.</div>';
+                document.getElementById('totalCount').innerText = '0 data';
+                return;
+            }
+
+            let html = '';
+            payments.forEach((p, idx) => {
+                let jenisBadges = '';
+                let totalStr = '';
+                const totals = {};
+                if (Array.isArray(p.jenis)) {
+                    p.jenis.forEach(j => {
+                        const type = j.type || j.customLabel || 'Unknown';
+                        const nominal = j.nominal || 0;
+                        const curr = j.currency || 'EGP';
+                        if (!totals[curr]) totals[curr] = 0;
+                        totals[curr] += nominal;
+                        jenisBadges += `<span class="item-jenis-badge">${type}: ${formatNumber(nominal)} ${curr}</span>`;
+                    });
+                }
+                for (let curr in totals) {
+                    totalStr += `${formatNumber(totals[curr])} ${curr} `;
+                }
+
+                html += `<div class="data-item" data-index="${idx}">
+                    <div class="item-row1">
+                        <span class="invoice-badge">${p.invoiceNumber || 'INV/....'}</span>
+                        <span class="item-amount">${totalStr}</span>
+                    </div>
+                    <div class="item-details">
+                        <span><i class="fas fa-user"></i> ${p.nama || '-'}</span>
+                        <span><i class="fas fa-wallet"></i> ${p.metode || 'Tunai'}</span>
+                    </div>
+                    <div class="item-jenis-list">
+                        ${jenisBadges}
+                    </div>
+                    <div class="item-actions">
+                        <button onclick="editEntry('${p.invoiceNumber}')" title="Edit"><i class="fas fa-edit"></i></button>
+                        <button onclick="deleteEntry('${p.invoiceNumber}')" title="Hapus"><i class="fas fa-trash-alt"></i></button>
+                        <button onclick="downloadKwitansi('${p.invoiceNumber}')" title="Unduh PDF"><i class="fas fa-file-pdf"></i></button>
+                    </div>
+                </div>`;
+            });
+            container.innerHTML = html;
+            document.getElementById('totalCount').innerText = payments.length + ' data';
+        }
+
+        // Fungsi render list dengan filter search
+function renderFilteredList(searchTerm = '') {
+    const container = document.getElementById('dataListContainer');
+    
+    if (!payments.length) {
+        container.innerHTML = '<div class="empty-message"><i class="fas fa-inbox fa-3x" style="opacity:0.5; margin-bottom:12px;"></i><br>Belum ada data transaksi.</div>';
+        document.getElementById('totalCount').innerText = '0 data';
+        return;
+    }
+
+    // Filter data
+    const filteredPayments = payments.filter(p => {
+        const invoiceLower = (p.invoiceNumber || '').toLowerCase();
+        const namaLower = (p.nama || '').toLowerCase();
+        return invoiceLower.includes(searchTerm) || namaLower.includes(searchTerm);
+    });
+
+    if (!filteredPayments.length) {
+        container.innerHTML = '<div class="empty-message"><i class="fas fa-search fa-3x" style="opacity:0.5; margin-bottom:12px;"></i><br>Tidak ditemukan data yang cocok.</div>';
+        document.getElementById('totalCount').innerText = '0 hasil';
+        return;
+    }
+
+    let html = '';
+    filteredPayments.forEach((p, idx) => {
+        let jenisBadges = '';
+        let totalStr = '';
+        const totals = {};
+        if (Array.isArray(p.jenis)) {
+            p.jenis.forEach(j => {
+                const type = j.type || j.customLabel || 'Unknown';
+                const nominal = j.nominal || 0;
+                const curr = j.currency || 'EGP';
+                if (!totals[curr]) totals[curr] = 0;
+                totals[curr] += nominal;
+                jenisBadges += `<span class="item-jenis-badge">${type}: ${formatNumber(nominal)} ${curr}</span>`;
+            });
+        }
+        for (let curr in totals) {
+            totalStr += `${formatNumber(totals[curr])} ${curr} `;
+        }
+
+        html += `<div class="data-item" data-index="${idx}">
+            <div class="item-row1">
+                <span class="invoice-badge">${p.invoiceNumber || 'INV/....'}</span>
+                <span class="item-amount">${totalStr}</span>
+            </div>
+            <div class="item-details">
+                <span><i class="fas fa-user"></i> ${p.nama || '-'}</span>
+                <span><i class="fas fa-wallet"></i> ${p.metode || 'Tunai'}</span>
+            </div>
+            <div class="item-jenis-list">
+                ${jenisBadges}
+            </div>
+            <div class="item-actions">
+                <button onclick="editEntry('${p.invoiceNumber}')" title="Edit"><i class="fas fa-edit"></i></button>
+                <button onclick="deleteEntry('${p.invoiceNumber}')" title="Hapus"><i class="fas fa-trash-alt"></i></button>
+                <button onclick="downloadKwitansi('${p.invoiceNumber}')" title="Unduh PDF"><i class="fas fa-file-pdf"></i></button>
+            </div>
+        </div>`;
+    });
+
+    container.innerHTML = html;
+    document.getElementById('totalCount').innerText = `${filteredPayments.length} hasil`;
+}
+
+        // Payment type chip selector
+        document.querySelectorAll('.type-chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                const type = this.dataset.type;
+                
+                if (this.classList.contains('selected')) {
+                    this.classList.remove('selected');
+                    selectedJenis = selectedJenis.filter(t => t !== type);
+                    
+                    // Sembunyikan input nominal
+                    const row = document.querySelector(`.nominal-row[data-type="${type}"]`);
+                    if (row) {
+                        row.style.display = 'none';
+                        const input = row.querySelector('.nominal-field');
+                        if (input) {
+                            input.disabled = true;
+                            input.value = '0';
+                            nominalValues[type].nominal = 0;
+                        }
+                        if (type === 'Lainnya') {
+                            const custom = document.getElementById('customLabelLainnya');
+                            custom.disabled = true;
+                            custom.value = '';
+                            nominalValues[type].customLabel = '';
+                        }
+                    }
+                } else {
+                    this.classList.add('selected');
+                    selectedJenis.push(type);
+                    
+                    // Tampilkan input nominal
+                    const row = document.querySelector(`.nominal-row[data-type="${type}"]`);
+                    if (row) {
+                        row.style.display = 'flex';
+                        const input = row.querySelector('.nominal-field');
+                        if (input) {
+                            input.disabled = false;
+                            input.value = '0';
+                        }
+                        if (type === 'Lainnya') {
+                            const custom = document.getElementById('customLabelLainnya');
+                            custom.disabled = false;
+                        }
+                    }
+                }
+                
+                updateTotal();
+            });
+        });
+
+        // Save data
+        document.getElementById('simpanBtn').addEventListener('click', async function() {
+            const nama = document.getElementById('namaInput').value.trim();
+            if (!nama) { alert('Nama wajib diisi'); return; }
+            
+            const metode = document.querySelector('input[name="metode"]:checked').value;
+            const editInvoice = document.getElementById('editInvoice').value;
+
+            // Filter jenis yang aktif dan memiliki nominal > 0
+            const activeJenis = selectedJenis.filter(type => nominalValues[type].nominal > 0);
+            
+            if (activeJenis.length === 0) { 
+                alert('Pilih minimal satu jenis pembayaran dengan nominal > 0'); 
+                return; 
+            }
+
+            const now = new Date();
+            const timestamp = now.toISOString();
+            
+            // Generate invoice number untuk data baru
+            let invoiceNumber = editInvoice;
+            if (!invoiceNumber) {
+                let maxNum = 0;
+                payments.forEach(p => {
+                    if (p.invoiceNumber) {
+                        const match = p.invoiceNumber.match(/INV\/2026\/(\d+)/);
+                        if (match) {
+                            const num = parseInt(match[1], 10);
+                            if (num > maxNum) maxNum = num;
+                        }
+                    }
+                });
+                const nextNumber = (maxNum + 1).toString().padStart(3, '0');  // ← ubah dari 4 jadi 3
+                invoiceNumber = `INV/2026/${nextNumber}`;
+            }
+
+            // Buat array jenis dengan nominal dan currency
+            const jenisWithDetails = activeJenis.map(type => ({
+                type: type === 'Lainnya' ? (nominalValues[type].customLabel || 'Lainnya') : type,
+                nominal: nominalValues[type].nominal,
+                currency: nominalValues[type].currency
+            }));
+
+            try {
+                const formData = new URLSearchParams();
+                formData.append('action', 'save');
+                formData.append('editMode', editInvoice ? '1' : '-1');
+                formData.append('invoiceNumber', invoiceNumber);
+                formData.append('nama', nama);
+                formData.append('jenis', JSON.stringify(jenisWithDetails));
+                formData.append('metode', metode);
+                formData.append('timestamp', editInvoice ? payments.find(p => p.invoiceNumber === editInvoice)?.timestamp || timestamp : timestamp);
+
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: formData
+                });
+
+                const result = await response.json();
+                console.log('Hasil simpan:', result);
+
+                if (result.success) {
+                    alert('✅ Data berhasil disimpan!');
+                    resetForm();
+                    setTimeout(() => loadAllData(), 800);
+                } else {
+                    alert('Gagal menyimpan: ' + (result.message || result.error));
+                }
+                
+            } catch (error) {
+                console.error('Error simpan:', error);
+                alert('❌ Gagal menyimpan: ' + error.message);
+            }
+        });
+
+        // Edit entry
+        window.editEntry = function(invoiceNumber) {
+            const payment = payments.find(p => p.invoiceNumber === invoiceNumber);
+            if (!payment) return;
+
+            document.getElementById('namaInput').value = payment.nama || '';
+            
+            document.querySelector(`input[name="metode"][value="${payment.metode}"]`).checked = true;
+            
+            // Reset semua chip dan nominal
+            document.querySelectorAll('.type-chip').forEach(c => c.classList.remove('selected'));
+            document.querySelectorAll('.nominal-row').forEach(row => {
+                row.style.display = 'none';
+                const input = row.querySelector('.nominal-field');
+                if (input) {
+                    input.disabled = true;
+                    input.value = '0';
+                }
+                const custom = row.querySelector('.custom-label-input');
+                if (custom) {
+                    custom.disabled = true;
+                    custom.value = '';
+                }
+            });
+            
+            selectedJenis = [];
+            nominalValues = {
+                'Zakat Fitrah': {nominal: 0, currency: 'EGP'},
+                'Shodaqoh': {nominal: 0, currency: 'EGP'},
+                'Infaq': {nominal: 0, currency: 'EGP'},
+                'Wakaf': {nominal: 0, currency: 'EGP'},
+                'Lainnya': {nominal: 0, currency: 'EGP', customLabel: ''}
+            };
+            
+            // Set nilai dari payment
+            if (Array.isArray(payment.jenis)) {
+                payment.jenis.forEach(item => {
+                    let type = item.type;
+                    let isLainnya = false;
+                    if (!['Zakat Fitrah', 'Shodaqoh', 'Infaq', 'Wakaf'].includes(type)) {
+                        type = 'Lainnya';
+                        isLainnya = true;
+                    }
+                    
+                    // Aktifkan chip
+                    const chip = document.querySelector(`.type-chip[data-type="${type}"]`);
+                    if (chip && !selectedJenis.includes(type)) {
+                        chip.classList.add('selected');
+                        selectedJenis.push(type);
+                        
+                        // Tampilkan dan set nominal
+                        const row = document.querySelector(`.nominal-row[data-type="${type}"]`);
+                        if (row) {
+                            row.style.display = 'flex';
+                            const input = row.querySelector('.nominal-field');
+                            if (input) {
+                                input.disabled = false;
+                                input.value = item.nominal;
+                                nominalValues[type].nominal = item.nominal;
+                            }
+                            const select = row.querySelector('.currency-select');
+                            if (select) {
+                                select.value = item.currency;
+                                nominalValues[type].currency = item.currency;
+                            }
+                            if (isLainnya) {
+                                const custom = document.getElementById('customLabelLainnya');
+                                custom.value = item.type;
+                                custom.disabled = false;
+                                nominalValues[type].customLabel = item.type;
+                            }
+                        }
+                    }
+                });
+            }
+
+            document.getElementById('editIndex').value = 1;
+            document.getElementById('editInvoice').value = invoiceNumber;
+            
+            updateTotal();
+        };
+
+        // Delete entry
+        window.deleteEntry = async function(invoiceNumber) {
+            if (!confirm('Hapus data ini? Nomor invoice akan diurut ulang otomatis.')) return;
+            
+            try {
+                const formData = new URLSearchParams();
+                formData.append('action', 'delete');
+                formData.append('invoiceNumber', invoiceNumber);
+
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: formData
+                });
+
+                const result = await response.json();
+                console.log('Hasil hapus:', result);
+
+                if (result.success) {
+                    alert('✅ Data berhasil dihapus!');
+                    await renumberInvoices();  // ← panggil renumber otomatis
+                    resetForm();
+                } else {
+                    alert('Gagal menghapus: ' + (result.message || result.error));
+                }
+                
+            } catch (error) {
+                console.error('Error hapus:', error);
+                alert('❌ Gagal menghapus: ' + error.message);
+            }
+        };
+
+        // Fungsi renumber invoice setelah hapus (agar nomor bergeser otomatis)
+        async function renumberInvoices() {
+            try {
+                // Ambil semua data terbaru dulu
+                await loadAllData();  // pastikan payments sudah update
+
+                // Urutkan payments berdasarkan timestamp (agar urutan logis)
+                payments.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+                // Siapkan batch update ke Apps Script (POST multiple)
+                const updates = payments.map((p, index) => {
+                    const newNumber = (index + 1).toString().padStart(3, '0');
+                    const newInvoice = `INV/2026/${newNumber}`;
+                    return { invoiceNumber: p.invoiceNumber, newInvoiceNumber: newInvoice };
+                });
+
+                // Kirim ke Apps Script untuk batch update
+                const formData = new URLSearchParams();
+                formData.append('action', 'renumber');
+                formData.append('updates', JSON.stringify(updates));
+
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: formData
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    console.log('Renumber berhasil:', result.message);
+                    await loadAllData();  // refresh data setelah renumber
+                } else {
+                    console.error('Renumber gagal:', result.message);
+                }
+            } catch (error) {
+                console.error('Error renumber:', error);
+            }
+        }
+
+        // Download PDF Kwitansi
+        window.downloadKwitansi = function(invoiceNumber) {
+        const payment = payments.find(p => p.invoiceNumber === invoiceNumber);
+        if (!payment) {
+            alert('Data tidak ditemukan');
+            return;
+        }
+
+        // Clone template untuk preview
+        const container = document.getElementById('receiptTemplateContainer');
+        const receiptDiv = container.querySelector('.receipt-a6').cloneNode(true);
+        
+        // Fill data (sama seperti sebelumnya)
+        receiptDiv.querySelector('#receiptNomor').innerText = payment.invoiceNumber || 'INV/2026/_____';
+
+        const date = new Date(payment.timestamp || new Date());
+        const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        const dayName = days[date.getDay()];
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear().toString().slice(2);
+        receiptDiv.querySelector('#receiptTanggal').innerText = `${dayName}, ${day}/${month}/20${year}`;
+
+        receiptDiv.querySelector('#receiptNama').innerText = payment.nama || '_________________________';
+
+        const checkDiv = receiptDiv.querySelector('#receiptJenisCheck');
+        checkDiv.innerHTML = '';
+        const jenisList = ['Zakat Fitrah', 'Shodaqoh', 'Infaq', 'Wakaf'];
+        jenisList.forEach(type => {
+            const item = payment.jenis.find(j => j.type === type);
+            const checked = item ? '☑' : '☐';
+            const nominal = item ? formatNumber(item.nominal) : '______';
+            const currency = item ? item.currency : 'EGP';
+            checkDiv.innerHTML += `
+                <div style="margin-bottom: 4px; font-size: 9px;">
+                    ${checked} ${type} : ${currency} ${nominal}
+                </div>
+            `;
+        });
+
+        const lainnya = payment.jenis.find(j => !jenisList.includes(j.type));
+        if (lainnya) {
+            checkDiv.innerHTML += `
+                <div style="margin-bottom: 4px; font-size: 9px;">
+                    ☑ ${lainnya.type} : ${lainnya.currency} ${formatNumber(lainnya.nominal)}
+                </div>
+            `;
+        }
+
+        let egpSum = 0, idrSum = 0;
+        payment.jenis.forEach(j => {
+            if (j.currency === 'EGP') egpSum += j.nominal || 0;
+            if (j.currency === 'IDR') idrSum += j.nominal || 0;
+        });
+        receiptDiv.querySelector('#receiptJumlah').innerText = `EGP ${formatNumber(egpSum)} / Rp ${formatNumber(idrSum)}`;
+
+        let terbilangText = '';
+        if (egpSum > 0) terbilangText += numberToWords(egpSum) + ' EGP';
+        if (egpSum > 0 && idrSum > 0) terbilangText += ' dan ';
+        if (idrSum > 0) terbilangText += numberToWords(idrSum) + ' Rupiah';
+        receiptDiv.querySelector('#receiptTerbilang').innerText = terbilangText || '(nol)';
+
+        const metode = payment.metode || 'Tunai';
+        receiptDiv.querySelector('#receiptMetode').innerText = metode === 'Tunai' ? '☑ Tunai  ☐ Transfer' : '☐ Tunai  ☑ Transfer';
+
+        // Tampilkan di modal preview
+        const previewContainer = document.getElementById('previewContainer');
+        previewContainer.innerHTML = '';
+        previewContainer.appendChild(receiptDiv);
+
+        // Tampilkan modal
+        document.getElementById('previewModal').style.display = 'block';
+
+        // Event tutup modal
+        const closeModal = () => {
+            document.getElementById('previewModal').style.display = 'none';
+            previewContainer.innerHTML = '';  // bersihkan
+        };
+
+        document.getElementById('closePreviewModal').onclick = closeModal;
+        document.getElementById('cancelPreviewBtn').onclick = closeModal;
+
+        // Download dari preview
+        document.getElementById('downloadFromPreviewBtn').onclick = function() {
+            const opt = {
+                margin: [0, 0, 0, 0],
+                filename: `kwitansi_${payment.invoiceNumber.replace(/\//g, '-')}.pdf`,
+                image: { type: 'jpeg', quality: 0.95 },
+                html2canvas: {
+                    scale: 2,
+                    letterRendering: true,
+                    useCORS: true,
+                    allowTaint: true,
+                    logging: false,
+                    windowWidth: 148 * 3.78,
+                    windowHeight: 105 * 3.78
+                },
+                jsPDF: {
+                    unit: 'mm',
+                    format: [148, 105],
+                    orientation: 'landscape'
+                },
+                pagebreak: { mode: ['avoid-all'] }
+            };
+
+            html2pdf().set(opt).from(receiptDiv).save();
+            closeModal();  // tutup modal setelah download
+        };
+    };
+
+        function numberToWords(num) {
+            if (!num) return 'nol';
+            const angka = Math.round(Math.abs(num));
+            if (angka === 0) return 'nol';
+            if (angka < 12) {
+                const satuan = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan', 'sepuluh', 'sebelas'];
+                return satuan[angka];
+            }
+            if (angka < 20) return numberToWords(angka-10) + ' belas';
+            if (angka < 100) return numberToWords(Math.floor(angka/10)) + ' puluh ' + numberToWords(angka%10);
+            if (angka < 1000) return numberToWords(Math.floor(angka/100)) + ' ratus ' + numberToWords(angka%100);
+            return angka.toString();
+        }
+
+        function resetForm() {
+            document.getElementById('namaInput').value = '';
+            document.querySelector('input[name="metode"][value="Tunai"]').checked = true;
+            
+            // Reset chips
+            document.querySelectorAll('.type-chip').forEach(c => c.classList.remove('selected'));
+            
+            // Reset nominal rows
+            document.querySelectorAll('.nominal-row').forEach(row => {
+                row.style.display = 'none';
+                const input = row.querySelector('.nominal-field');
+                if (input) {
+                    input.disabled = true;
+                    input.value = '0';
+                }
+                const select = row.querySelector('.currency-select');
+                if (select) {
+                    select.value = 'EGP';
+                }
+                const custom = row.querySelector('.custom-label-input');
+                if (custom) {
+                    custom.disabled = true;
+                    custom.value = '';
+                }
+            });
+            
+            selectedJenis = [];
+            nominalValues = {
+                'Zakat Fitrah': {nominal: 0, currency: 'EGP'},
+                'Shodaqoh': {nominal: 0, currency: 'EGP'},
+                'Infaq': {nominal: 0, currency: 'EGP'},
+                'Wakaf': {nominal: 0, currency: 'EGP'},
+                'Lainnya': {nominal: 0, currency: 'EGP', customLabel: ''}
+            };
+            
+            document.getElementById('editIndex').value = '-1';
+            document.getElementById('editInvoice').value = '';
+            
+            updateTotal();
+        }
+        
+        document.getElementById('resetFormBtn').addEventListener('click', resetForm);
+
+        window.editEntry = editEntry;
+        window.deleteEntry = deleteEntry;
+        window.downloadKwitansi = downloadKwitansi;
+    </script>
+</body>
+</html>
