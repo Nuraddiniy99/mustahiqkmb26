@@ -1146,6 +1146,7 @@
                         <button onclick="editEntry('${p.invoiceNumber}')" title="Edit"><i class="fas fa-edit"></i></button>
                         <button onclick="deleteEntry('${p.invoiceNumber}')" title="Hapus"><i class="fas fa-trash-alt"></i></button>
                         <button onclick="downloadKwitansi('${p.invoiceNumber}')" title="Unduh PDF"><i class="fas fa-file-pdf"></i></button>
+                        <button onclick="shareLink('${p.invoiceNumber}')" title="Bagikan Link"><i class="fas fa-share-alt"></i></button>
                     </div>
                 </div>`;
             });
@@ -1154,71 +1155,72 @@
         }
 
         // Fungsi render list dengan filter search
-function renderFilteredList(searchTerm = '') {
-    const container = document.getElementById('dataListContainer');
-    
-    if (!payments.length) {
-        container.innerHTML = '<div class="empty-message"><i class="fas fa-inbox fa-3x" style="opacity:0.5; margin-bottom:12px;"></i><br>Belum ada data transaksi.</div>';
-        document.getElementById('totalCount').innerText = '0 data';
-        return;
-    }
+        function renderFilteredList(searchTerm = '') {
+            const container = document.getElementById('dataListContainer');
+            
+            if (!payments.length) {
+                container.innerHTML = '<div class="empty-message"><i class="fas fa-inbox fa-3x" style="opacity:0.5; margin-bottom:12px;"></i><br>Belum ada data transaksi.</div>';
+                document.getElementById('totalCount').innerText = '0 data';
+                return;
+            }
 
-    // Filter data
-    const filteredPayments = payments.filter(p => {
-        const invoiceLower = (p.invoiceNumber || '').toLowerCase();
-        const namaLower = (p.nama || '').toLowerCase();
-        return invoiceLower.includes(searchTerm) || namaLower.includes(searchTerm);
-    });
-
-    if (!filteredPayments.length) {
-        container.innerHTML = '<div class="empty-message"><i class="fas fa-search fa-3x" style="opacity:0.5; margin-bottom:12px;"></i><br>Tidak ditemukan data yang cocok.</div>';
-        document.getElementById('totalCount').innerText = '0 hasil';
-        return;
-    }
-
-    let html = '';
-    filteredPayments.forEach((p, idx) => {
-        let jenisBadges = '';
-        let totalStr = '';
-        const totals = {};
-        if (Array.isArray(p.jenis)) {
-            p.jenis.forEach(j => {
-                const type = j.type || j.customLabel || 'Unknown';
-                const nominal = j.nominal || 0;
-                const curr = j.currency || 'EGP';
-                if (!totals[curr]) totals[curr] = 0;
-                totals[curr] += nominal;
-                jenisBadges += `<span class="item-jenis-badge">${type}: ${formatNumber(nominal)} ${curr}</span>`;
+            // Filter data
+            const filteredPayments = payments.filter(p => {
+                const invoiceLower = (p.invoiceNumber || '').toLowerCase();
+                const namaLower = (p.nama || '').toLowerCase();
+                return invoiceLower.includes(searchTerm) || namaLower.includes(searchTerm);
             });
-        }
-        for (let curr in totals) {
-            totalStr += `${formatNumber(totals[curr])} ${curr} `;
-        }
 
-        html += `<div class="data-item" data-index="${idx}">
-            <div class="item-row1">
-                <span class="invoice-badge">${p.invoiceNumber || 'INV/....'}</span>
-                <span class="item-amount">${totalStr}</span>
-            </div>
-            <div class="item-details">
-                <span><i class="fas fa-user"></i> ${p.nama || '-'}</span>
-                <span><i class="fas fa-users"></i> ${p.kekeluargaan || 'KMB'}</span>
-                <span><i class="fas fa-wallet"></i> ${p.metode || 'Tunai'}</span>
-            </div>
-            <div class="item-jenis-list">
-                ${jenisBadges}
-            </div>
-            <div class="item-actions">
-                <button onclick="editEntry('${p.invoiceNumber}')" title="Edit"><i class="fas fa-edit"></i></button>
-                <button onclick="deleteEntry('${p.invoiceNumber}')" title="Hapus"><i class="fas fa-trash-alt"></i></button>
-                <button onclick="downloadKwitansi('${p.invoiceNumber}')" title="Unduh PDF"><i class="fas fa-file-pdf"></i></button>
-            </div>
-        </div>`;
-    });
+            if (!filteredPayments.length) {
+                container.innerHTML = '<div class="empty-message"><i class="fas fa-search fa-3x" style="opacity:0.5; margin-bottom:12px;"></i><br>Tidak ditemukan data yang cocok.</div>';
+                document.getElementById('totalCount').innerText = '0 hasil';
+                return;
+            }
 
-    container.innerHTML = html;
-    document.getElementById('totalCount').innerText = `${filteredPayments.length} hasil`;
-}
+            let html = '';
+            filteredPayments.forEach((p, idx) => {
+                let jenisBadges = '';
+                let totalStr = '';
+                const totals = {};
+                if (Array.isArray(p.jenis)) {
+                    p.jenis.forEach(j => {
+                        const type = j.type || j.customLabel || 'Unknown';
+                        const nominal = j.nominal || 0;
+                        const curr = j.currency || 'EGP';
+                        if (!totals[curr]) totals[curr] = 0;
+                        totals[curr] += nominal;
+                        jenisBadges += `<span class="item-jenis-badge">${type}: ${formatNumber(nominal)} ${curr}</span>`;
+                    });
+                }
+                for (let curr in totals) {
+                    totalStr += `${formatNumber(totals[curr])} ${curr} `;
+                }
+
+                html += `<div class="data-item" data-index="${idx}">
+                    <div class="item-row1">
+                        <span class="invoice-badge">${p.invoiceNumber || 'INV/....'}</span>
+                        <span class="item-amount">${totalStr}</span>
+                    </div>
+                    <div class="item-details">
+                        <span><i class="fas fa-user"></i> ${p.nama || '-'}</span>
+                        <span><i class="fas fa-users"></i> ${p.kekeluargaan || 'KMB'}</span>
+                        <span><i class="fas fa-wallet"></i> ${p.metode || 'Tunai'}</span>
+                    </div>
+                    <div class="item-jenis-list">
+                        ${jenisBadges}
+                    </div>
+                        <div class="item-actions">
+                            <button onclick="editEntry('${p.invoiceNumber}')" title="Edit"><i class="fas fa-edit"></i></button>
+                            <button onclick="deleteEntry('${p.invoiceNumber}')" title="Hapus"><i class="fas fa-trash-alt"></i></button>
+                            <button onclick="downloadKwitansi('${p.invoiceNumber}')" title="Unduh PDF"><i class="fas fa-file-pdf"></i></button>
+                            <button onclick="shareLink('${p.invoiceNumber}')" title="Bagikan Link"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                </div>`;
+            });
+
+            container.innerHTML = html;
+            document.getElementById('totalCount').innerText = `${filteredPayments.length} hasil`;
+        }
 
         // Payment type chip selector
         document.querySelectorAll('.type-chip').forEach(chip => {
@@ -1834,6 +1836,136 @@ function renderFilteredList(searchTerm = '') {
             if (angka < 1000) return numberToWords(Math.floor(angka/100)) + ' ratus ' + numberToWords(angka%100);
             return angka.toString();
         }
+
+        // Fungsi untuk share link invoice
+        window.shareLink = function(invoiceNumber) {
+            // Buat URL lengkap
+            const baseUrl = 'https://nuraddiniy99.github.io/mustahiqkmb26/view.html';
+            const fullUrl = `${baseUrl}?invoice=${invoiceNumber}`;
+            
+            // Cek apakah browser mendukung Web Share API (terutama di mobile)
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Invoice Pembayaran',
+                    text: `Link invoice: ${invoiceNumber}`,
+                    url: fullUrl,
+                })
+                .then(() => console.log('Berhasil dibagikan'))
+                .catch((error) => {
+                    console.log('Gagal share:', error);
+                    // Fallback: copy ke clipboard
+                    copyToClipboard(fullUrl);
+                });
+            } else {
+                // Fallback untuk desktop: copy ke clipboard
+                copyToClipboard(fullUrl);
+            }
+        };
+
+        // Fungsi copy ke clipboard
+        function copyToClipboard(text) {
+            // Buat element textarea temporary
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            textarea.setSelectionRange(0, 99999);
+            
+            try {
+                // Copy ke clipboard
+                document.execCommand('copy');
+                
+                // Tampilkan notifikasi
+                showNotification('✅ Link berhasil disalin ke clipboard!');
+            } catch (err) {
+                console.error('Gagal copy:', err);
+                showNotification('❌ Gagal menyalin link', 'error');
+            } finally {
+                // Hapus element temporary
+                document.body.removeChild(textarea);
+                
+                // Buka link di tab baru sebagai opsi kedua
+                setTimeout(() => {
+                    if (confirm('Buka link invoice di tab baru?')) {
+                        window.open(text, '_blank');
+                    }
+                }, 100);
+            }
+        }
+
+        // Fungsi notifikasi sederhana
+        function showNotification(message, type = 'success') {
+            // Cek apakah sudah ada notifikasi, hapus jika ada
+            const existingNotif = document.querySelector('.share-notification');
+            if (existingNotif) existingNotif.remove();
+            
+            // Buat elemen notifikasi
+            const notif = document.createElement('div');
+            notif.className = 'share-notification';
+            notif.innerHTML = `
+                <div style="
+                    position: fixed;
+                    bottom: 24px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: ${type === 'success' ? '#0f7b54' : '#dc2626'};
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 50px;
+                    font-weight: 500;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    z-index: 10000;
+                    animation: slideUp 0.3s ease;
+                    max-width: 90%;
+                    text-align: center;
+                ">
+                    ${message}
+                </div>
+            `;
+            
+            document.body.appendChild(notif);
+            
+            // Hapus notifikasi setelah 3 detik
+            setTimeout(() => {
+                notif.style.animation = 'fadeOut 0.3s ease';
+                setTimeout(() => notif.remove(), 300);
+            }, 3000);
+        }
+
+        // Tambahkan CSS untuk animasi notifikasi (di dalam tag <style>)
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideUp {
+                from {
+                    opacity: 0;
+                    transform: translate(-50%, 20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translate(-50%, 0);
+                }
+            }
+            
+            @keyframes fadeOut {
+                to {
+                    opacity: 0;
+                    transform: translate(-50%, 20px);
+                }
+            }
+            
+            /* Optional: styling untuk tombol share */
+            .item-actions button[onclick*="shareLink"] {
+                background: #e8f0fe;
+                color: #1a5a9c;
+            }
+            
+            .item-actions button[onclick*="shareLink"]:hover {
+                background: #d4e3ff;
+            }
+        `;
+        document.head.appendChild(style);
 
         function resetForm() {
             document.getElementById('namaInput').value = '';
