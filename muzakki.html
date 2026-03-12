@@ -1564,18 +1564,74 @@ function renderFilteredList(searchTerm = '') {
         }
 
         // FUNGSI TERBILANG (Mendukung Multi-Mata Uang)
+        
         function numberToWordsIndonesia(num) {
-            if (num === 0) return 'nol';
-            const angka = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan', 'sepuluh', 'sebelas'];
-            if (num < 12) return angka[num];
-            if (num < 20) return angka[num - 10] + ' belas';
-            if (num < 100) return angka[Math.floor(num / 10)] + ' puluh' + (num % 10 > 0 ? ' ' + angka[num % 10] : '');
-            if (num < 200) return 'seratus' + (num > 100 ? ' ' + numberToWordsIndonesia(num - 100) : '');
-            if (num < 1000) return angka[Math.floor(num / 100)] + ' ratus' + (num % 100 > 0 ? ' ' + numberToWordsIndonesia(num % 100) : '');
-            if (num < 2000) return 'seribu' + (num > 1000 ? ' ' + numberToWordsIndonesia(num - 1000) : '');
-            if (num < 1000000) return numberToWordsIndonesia(Math.floor(num / 1000)) + ' ribu' + (num % 1000 > 0 ? ' ' + numberToWordsIndonesia(num % 1000) : '');
-            if (num < 1000000000) return numberToWordsIndonesia(Math.floor(num / 1000000)) + ' juta' + (num % 1000000 > 0 ? ' ' + numberToWordsIndonesia(num % 1000000) : '');
-            return num.toString();
+            console.log('[TERBILANG VERSION] Fungsi terbilang versi CLEAN dipanggil untuk num:', num);
+            if (num == 0 || num == null || isNaN(num)) return 'nol';
+
+            num = Math.round(Math.abs(num));
+
+            const satuan  = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan'];
+            const belasan = ['sepuluh', 'sebelas', 'dua belas', 'tiga belas', 'empat belas', 'lima belas', 
+                            'enam belas', 'tujuh belas', 'delapan belas', 'sembilan belas'];
+            const puluhan = ['', '', 'dua puluh', 'tiga puluh', 'empat puluh', 'lima puluh', 
+                            'enam puluh', 'tujuh puluh', 'delapan puluh', 'sembilan puluh'];
+
+            function convert(n) {
+                if (n === 0) return '';
+
+                if (n < 10) return satuan[n];
+
+                if (n < 20) return belasan[n - 10];
+
+                if (n < 100) {
+                    const p = Math.floor(n / 10);
+                    const s = n % 10;
+                    let result = puluhan[p];
+                    if (s > 0) result += (result ? ' ' : '') + satuan[s];
+                    return result;
+                }
+
+                if (n < 200) {
+                    let result = 'seratus';
+                    const sisa = n - 100;
+                    if (sisa > 0) result += ' ' + convert(sisa);
+                    return result;
+                }
+
+                if (n < 1000) {
+                    const r = Math.floor(n / 100);
+                    let result = satuan[r] + ' ratus';
+                    const sisa = n % 100;
+                    if (sisa > 0) result += ' ' + convert(sisa);
+                    return result;
+                }
+
+                if (n < 2000) {
+                    let result = 'seribu';
+                    const sisa = n - 1000;
+                    if (sisa > 0) result += ' ' + convert(sisa);
+                    return result;
+                }
+
+                if (n < 1000000) {
+                    let result = convert(Math.floor(n / 1000)) + ' ribu';
+                    const sisa = n % 1000;
+                    if (sisa > 0) result += ' ' + convert(sisa);
+                    return result;
+                }
+
+                if (n < 1000000000) {
+                    let result = convert(Math.floor(n / 1000000)) + ' juta';
+                    const sisa = n % 1000000;
+                    if (sisa > 0) result += ' ' + convert(sisa);
+                    return result;
+                }
+
+                return n.toString();
+            }
+
+            return convert(num);
         }
 
         window.downloadKwitansi = function(invoiceNumber) {
@@ -1684,7 +1740,7 @@ function renderFilteredList(searchTerm = '') {
 
             let currentY = doc.lastAutoTable.finalY + 12;
 
-            // TOTAL & TERBILANG (sisa kode tetap sama, tidak perlu diubah)
+            // TOTAL & TERBILANG
             const totals = {};
             payment.jenis.forEach(item => {
                 const curr = item.currency || 'EGP';
@@ -1695,6 +1751,7 @@ function renderFilteredList(searchTerm = '') {
             doc.setFont('helvetica', 'bold');
             doc.setTextColor(textDark[0], textDark[1], textDark[2]);
             doc.text('TOTAL PEMBAYARAN', 20, currentY);
+
             let totalRowY = currentY;
             for (let curr in totals) {
                 doc.setFontSize(14);
@@ -1706,12 +1763,19 @@ function renderFilteredList(searchTerm = '') {
             doc.setFillColor(softGreen[0], softGreen[1], softGreen[2]);
             const terbilangH = (Object.keys(totals).length * 6) + 6;
             doc.roundedRect(20, totalRowY, 170, terbilangH, 2, 2, 'F');
+
             doc.setFontSize(9);
             doc.setFont('helvetica', 'italic');
             doc.setTextColor(textDark[0], textDark[1], textDark[2]);
+
             let tY = totalRowY + 6;
             for (let curr in totals) {
-                const kata = numberToWordsIndonesia(Math.round(totals[curr])).toUpperCase();
+
+                const amount = Math.round(totals[curr]);
+                const kata = numberToWordsIndonesia(amount).toUpperCase();
+                
+                console.log(`[TERBILANG DEBUG] Hasil terbilang: ${kata} ${curr}`);
+
                 doc.text(`Terbilang: # ${kata} ${curr} #`, 25, tY);
                 tY += 6;
             }
@@ -1756,34 +1820,6 @@ function renderFilteredList(searchTerm = '') {
 
             doc.save(`Kwitansi_${payment.invoiceNumber.replace(/\//g, '-')}.pdf`);
         };
-
-        // Fungsi terbilang untuk Bahasa Indonesia
-        function numberToWordsIndonesia(num) {
-            if (num === 0) return 'nol';
-            
-            const angka = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan', 'sepuluh', 'sebelas'];
-            
-            if (num < 12) {
-                return angka[num];
-            } else if (num < 20) {
-                return angka[num - 10] + ' belas';
-            } else if (num < 100) {
-                return angka[Math.floor(num / 10)] + ' puluh ' + angka[num % 10];
-            } else if (num < 200) {
-                return 'seratus ' + numberToWordsIndonesia(num - 100);
-            } else if (num < 1000) {
-                return angka[Math.floor(num / 100)] + ' ratus ' + numberToWordsIndonesia(num % 100);
-            } else if (num < 2000) {
-                return 'seribu ' + numberToWordsIndonesia(num - 1000);
-            } else if (num < 1000000) {
-                return numberToWordsIndonesia(Math.floor(num / 1000)) + ' ribu ' + numberToWordsIndonesia(num % 1000);
-            } else if (num < 1000000000) {
-                return numberToWordsIndonesia(Math.floor(num / 1000000)) + ' juta ' + numberToWordsIndonesia(num % 1000000);
-            } else {
-                return num.toString();
-            }
-        }
-
 
         function numberToWords(num) {
             if (!num) return 'nol';
