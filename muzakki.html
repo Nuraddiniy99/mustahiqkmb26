@@ -668,6 +668,233 @@
             margin-top: 4px;
             display: block;
         }
+
+        /* Revenue Card - Warna Sesuai Tema Aplikasi */
+        .revenue-card {
+            background: linear-gradient(135deg, #0f5e44 0%, #1a7a5c 100%);
+            border-radius: 32px;
+            padding: 24px 20px;
+            margin-bottom: 24px;
+            color: white;
+            box-shadow: 0 12px 24px -8px rgba(10, 80, 50, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .revenue-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .revenue-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b, #fbbf24);
+            opacity: 0.6;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .revenue-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .revenue-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 6px 14px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .revenue-title i {
+            font-size: 1rem;
+            color: #fbbf24;
+        }
+
+        .revenue-badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .revenue-badge i {
+            color: #fbbf24;
+            font-size: 0.6rem;
+        }
+
+        .revenue-content {
+            display: flex;
+            align-items: stretch;
+            gap: 20px;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .revenue-item {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 18px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .revenue-item:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .revenue-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .revenue-label i {
+            font-size: 0.9rem;
+        }
+
+        .revenue-amount {
+            font-size: 1.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 6px;
+            font-family: 'Inter', monospace;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .revenue-trend {
+            font-size: 0.7rem;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 4px 8px;
+            border-radius: 20px;
+            width: fit-content;
+        }
+
+        .revenue-trend i {
+            font-size: 0.6rem;
+        }
+
+        .revenue-trend.positive {
+            color: #a3ffb0;
+            background: rgba(0, 128, 0, 0.2);
+        }
+
+        .revenue-trend.negative {
+            color: #ffa3a3;
+            background: rgba(255, 0, 0, 0.2);
+        }
+
+        .revenue-divider {
+            width: 2px;
+            background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            border-radius: 2px;
+            margin: 0 10px;
+        }
+
+        .revenue-footer {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 2px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+            z-index: 1;
+        }
+
+        .revenue-stats {
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 6px 14px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .revenue-stats i {
+            font-size: 0.8rem;
+            color: #fbbf24;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .revenue-content {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .revenue-divider {
+                display: none;
+            }
+            
+            .revenue-item {
+                width: 100%;
+            }
+            
+            .revenue-footer {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .revenue-stats {
+                width: calc(50% - 5px);
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -703,6 +930,43 @@
             </div>
             <div class="current-number-action" id="refreshNumberBtn">
                 <i class="fas fa-sync-alt"></i> <span>Refresh</span>
+            </div>
+        </div>
+
+        <!-- Total Revenue Card - Multi Currency -->
+        <div class="revenue-card">
+            <div class="revenue-header">
+                <span class="revenue-title"><i class="fas fa-chart-pie"></i> TOTAL PENDAPATAN</span>
+                <span class="revenue-badge"><i class="fas fa-sync-alt"></i> <span id="lastUpdatedRevenue"></span></span>
+            </div>
+            <div class="revenue-content">
+                <div class="revenue-item">
+                    <div class="revenue-label">
+                        <i class="fas fa-coins" style="color: #fbbf24;"></i> Rupiah (IDR)
+                    </div>
+                    <div class="revenue-amount" id="totalIDR">Rp 0</div>
+                    <div class="revenue-trend" id="trendIDR">
+                        <i class="fas fa-minus"></i> dari kemarin
+                    </div>
+                </div>
+                <div class="revenue-divider"></div>
+                <div class="revenue-item">
+                    <div class="revenue-label">
+                        <i class="fas fa-money-bill-wave" style="color: #fbbf24;"></i> Pound Mesir (EGP)
+                    </div>
+                    <div class="revenue-amount" id="totalEGP">EGP 0</div>
+                    <div class="revenue-trend" id="trendEGP">
+                        <i class="fas fa-minus"></i> dari kemarin
+                    </div>
+                </div>
+            </div>
+            <div class="revenue-footer">
+                <span class="revenue-stats" id="totalTransactions">
+                    <i class="fas fa-exchange-alt"></i> 0 transaksi
+                </span>
+                <span class="revenue-stats" id="totalMuzakki">
+                    <i class="fas fa-users"></i> 0 muzakki
+                </span>
             </div>
         </div>
 
@@ -816,8 +1080,18 @@
 
         <!-- Search Bar untuk Riwayat -->
         <div class="input-group" style="margin-bottom: 16px; max-width: 100%;">
-            <label><i class="fas fa-search"></i> Cari  Nomor Invoice atau Nama</label>
+            <label><i class="fas fa-search"></i> Cari Nomor Invoice atau Nama</label>
             <input type="text" id="searchInput" class="input-field" placeholder="Masukkan nomor invoice atau nama...">
+        </div>
+
+        <!-- TOMBOL OTOMATIS (SATU UNTUK SEMUA) -->
+        <div style="margin-bottom: 16px;">
+            <button id="autoFixBtn" class="btn btn-primary" style="width: 100%; padding: 16px; background-color: #fbbf24;">
+                <i class="fas fa-magic"></i> Tekan Setelah Hapus/Edit Data!
+            </button>
+            <small style="display: block; text-align: center; margin-top: 8px; color: #64748b; font-size: 0.8rem;">
+                <i class="fas fa-info-circle"></i> Jika setelah menghapus atau edit data, tekan tombol di atas langsung!
+            </small>
         </div>
 
         <!-- Data List -->
@@ -855,7 +1129,7 @@
         // ============================================
         // KONFIGURASI APPS SCRIPT ENDPOINT
         // ============================================
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwTh0vJfVQSFCqWZjn6fPc4vjBTlJCDqqV_KELPteH07ptRmqfqewEOgXE1gQrws-aP/exec';
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyOZEnkUsVevvGJsBjXkcoX1JzhHOfGl5-i54pkYLp1otb7yRBb6Vx6CYMpUJ9-r813/exec';
 
         let payments = [];
         let selectedJenis = [];
@@ -865,13 +1139,181 @@
             'Infaq': {nominal: 0, currency: 'EGP'},
             'Wakaf': {nominal: 0, currency: 'EGP'},
             'Lainnya': {nominal: 0, currency: 'EGP', customLabel: ''}
-            
         };
-        let kekeluargaan = 'KMB'; // default value
 
-        // Load data on start
+// ============================================
+// FUNGSI MENGHITUNG TOTAL PENDAPATAN (IDR & EGP)
+// ============================================
+function calculateTotalRevenue() {
+    let totalIDR = 0;
+    let totalEGP = 0;
+    let uniqueMuzakki = new Set();
+    
+    payments.forEach(payment => {
+        // Hitung muzakki unik berdasarkan nama
+        if (payment.nama) {
+            uniqueMuzakki.add(payment.nama.toLowerCase().trim());
+        }
+        
+        // Hitung total per currency
+        if (Array.isArray(payment.jenis)) {
+            payment.jenis.forEach(item => {
+                const nominal = item.nominal || 0;
+                const currency = item.currency || 'EGP';
+                
+                if (currency === 'IDR') {
+                    totalIDR += nominal;
+                } else if (currency === 'EGP') {
+                    totalEGP += nominal;
+                }
+            });
+        }
+    });
+    
+    return {
+        totalIDR: totalIDR,
+        totalEGP: totalEGP,
+        uniqueMuzakkiCount: uniqueMuzakki.size,
+        totalTransactions: payments.length
+    };
+}
+
+function calculateYesterdayRevenue() {
+    let yesterdayIDR = 0;
+    let yesterdayEGP = 0;
+    
+    const oneDayAgo = new Date();
+    oneDayAgo.setDate(oneDayAgo.getDate() - 1);
+    oneDayAgo.setHours(0, 0, 0, 0); // Set ke awal hari kemarin
+    
+    const endOfYesterday = new Date(oneDayAgo);
+    endOfYesterday.setHours(23, 59, 59, 999); // Set ke akhir hari kemarin
+    
+    payments.forEach(payment => {
+        const paymentDate = new Date(payment.timestamp);
+        
+        // Hitung transaksi yang terjadi KEMARIN (antara awal kemarin sampai akhir kemarin)
+        if (paymentDate >= oneDayAgo && paymentDate <= endOfYesterday) {
+            if (Array.isArray(payment.jenis)) {
+                payment.jenis.forEach(item => {
+                    const nominal = item.nominal || 0;
+                    const currency = item.currency || 'EGP';
+                    
+                    if (currency === 'IDR') {
+                        yesterdayIDR += nominal;
+                    } else if (currency === 'EGP') {
+                        yesterdayEGP += nominal;
+                    }
+                });
+            }
+        }
+    });
+    
+    return {
+        yesterdayIDR: yesterdayIDR,
+        yesterdayEGP: yesterdayEGP
+    };
+}
+
+function updateRevenueCard() {
+    const revenue = calculateTotalRevenue(); // TOTAL semua waktu
+    const yesterday = calculateYesterdayRevenue(); // TOTAL kemarin
+    
+    // Format angka IDR
+    const formattedIDR = new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    }).format(revenue.totalIDR);
+    
+    // Format angka EGP
+    const formattedEGP = new Intl.NumberFormat('id-ID', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(revenue.totalEGP);
+    
+    // Update elemen HTML
+    document.getElementById('totalIDR').innerHTML = formattedIDR;
+    document.getElementById('totalEGP').innerHTML = `EGP ${formattedEGP}`;
+    document.getElementById('totalTransactions').innerHTML = 
+        `<i class="fas fa-exchange-alt"></i> ${revenue.totalTransactions} transaksi`;
+    document.getElementById('totalMuzakki').innerHTML = 
+        `<i class="fas fa-users"></i> ${revenue.uniqueMuzakkiCount} donatur`;
+    
+    // Hapus rata-rata dari HTML jika masih ada
+    const avgElement = document.getElementById('avgTransaction');
+    if (avgElement) {
+        avgElement.style.display = 'none';
+    }
+    
+    // Update waktu terakhir
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('id-ID', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+    });
+    document.getElementById('lastUpdatedRevenue').innerHTML = timeStr;
+    
+    // Hitung persentase perubahan dari KEMARIN ke HARI INI (TOTAL)
+    // Rumus: ((hari ini - kemarin) / kemarin) * 100
+    
+    // Persentase IDR
+    if (yesterday.yesterdayIDR > 0) {
+        const percentageChangeIDR = ((revenue.totalIDR - yesterday.yesterdayIDR) / yesterday.yesterdayIDR * 100).toFixed(1);
+        const absPercentageIDR = Math.abs(percentageChangeIDR);
+        
+        const trendIDRElem = document.getElementById('trendIDR');
+        if (percentageChangeIDR > 0) {
+            trendIDRElem.innerHTML = `<i class="fas fa-arrow-up"></i> +${absPercentageIDR}% dari kemarin`;
+            trendIDRElem.className = 'revenue-trend positive';
+        } else if (percentageChangeIDR < 0) {
+            trendIDRElem.innerHTML = `<i class="fas fa-arrow-down"></i> -${absPercentageIDR}% dari kemarin`;
+            trendIDRElem.className = 'revenue-trend negative';
+        } else {
+            trendIDRElem.innerHTML = `<i class="fas fa-minus"></i> 0% dari kemarin`;
+            trendIDRElem.className = 'revenue-trend';
+        }
+    } else {
+        // Jika tidak ada data kemarin, tampilkan 0%
+        document.getElementById('trendIDR').innerHTML = `<i class="fas fa-minus"></i> 0% dari kemarin`;
+        document.getElementById('trendIDR').className = 'revenue-trend';
+    }
+    
+    // Persentase EGP
+    if (yesterday.yesterdayEGP > 0) {
+        const percentageChangeEGP = ((revenue.totalEGP - yesterday.yesterdayEGP) / yesterday.yesterdayEGP * 100).toFixed(1);
+        const absPercentageEGP = Math.abs(percentageChangeEGP);
+        
+        const trendEGPElem = document.getElementById('trendEGP');
+        if (percentageChangeEGP > 0) {
+            trendEGPElem.innerHTML = `<i class="fas fa-arrow-up"></i> +${absPercentageEGP}% dari kemarin`;
+            trendEGPElem.className = 'revenue-trend positive';
+        } else if (percentageChangeEGP < 0) {
+            trendEGPElem.innerHTML = `<i class="fas fa-arrow-down"></i> -${absPercentageEGP}% dari kemarin`;
+            trendEGPElem.className = 'revenue-trend negative';
+        } else {
+            trendEGPElem.innerHTML = `<i class="fas fa-minus"></i> 0% dari kemarin`;
+            trendEGPElem.className = 'revenue-trend';
+        }
+    } else {
+        // Jika tidak ada data kemarin, tampilkan 0%
+        document.getElementById('trendEGP').innerHTML = `<i class="fas fa-minus"></i> 0% dari kemarin`;
+        document.getElementById('trendEGP').className = 'revenue-trend';
+    }
+    
+    // Debug (opsional, hapus jika tidak perlu)
+    console.log('Total IDR:', revenue.totalIDR, 'Kemarin IDR:', yesterday.yesterdayIDR);
+    console.log('Total EGP:', revenue.totalEGP, 'Kemarin EGP:', yesterday.yesterdayEGP);
+}
+
+        // ============================================
+        // LOAD DATA DENGAN URUTAN YANG BENAR
+        // ============================================
         window.onload = function() {
-            loadAllData();
+            loadAllData().then(() => {
+                updateRevenueCard(); // Tambahkan ini
+            });
             updateLiveTime();
             setInterval(updateLiveTime, 1000);
             
@@ -879,23 +1321,14 @@
                 loadAllData();
             });
 
-            // Setup listeners untuk nominal inputs dan currency selects
             setupNominalListeners();
-
-            // Fitur Search Riwayat
+            
             document.getElementById('searchInput').addEventListener('input', function() {
                 const searchTerm = this.value.trim().toLowerCase();
                 renderFilteredList(searchTerm);
             });
         };
 
-        // Fitur Search Riwayat
-        document.getElementById('searchInput').addEventListener('input', function() {
-            const searchTerm = this.value.trim().toLowerCase();
-            renderFilteredList(searchTerm);
-        });
-
-        // Fungsi global untuk menampilkan/sembunyikan loading
         function showGlobalLoading(show = true) {
             const loader = document.getElementById('globalLoading');
             if (!loader) return;
@@ -910,12 +1343,10 @@
         function setupNominalListeners() {
             const nominalFields = document.querySelectorAll('.nominal-field');
             nominalFields.forEach(field => {
-                // Saat fokus: tampilkan raw
                 field.addEventListener('focus', function() {
                     this.value = unformatNumber(this.value).toString().replace('.', ',');
                 });
 
-                // Saat ketik: format real-time
                 field.addEventListener('input', function() {
                     let value = this.value.replace(/[^0-9,]/g, '');
                     if ((value.match(/,/g) || []).length > 1) {
@@ -926,10 +1357,9 @@
                     const hasDecimal = value.includes(',');
                     this.value = formatNumber(raw, hasDecimal);
 
-                    // Mapping type yang benar
                     let type = this.id.replace('nominal', '');
                     if (type === 'Zakat') type = 'Zakat Fitrah';
-                    if (type === 'Shodaqoh') type = 'Shodaqoh';  // sudah benar
+                    if (type === 'Shodaqoh') type = 'Shodaqoh';
                     if (type === 'Infaq') type = 'Infaq';
                     if (type === 'Wakaf') type = 'Wakaf';
                     if (type === 'Lainnya') type = 'Lainnya';
@@ -937,12 +1367,9 @@
                     if (nominalValues[type]) {
                         nominalValues[type].nominal = raw;
                         updateTotal();
-                    } else {
-                        console.warn('Type tidak ditemukan:', type);
                     }
                 });
 
-                // Saat blur: format final
                 field.addEventListener('blur', function() {
                     const raw = unformatNumber(this.value);
                     this.value = formatNumber(raw);
@@ -957,7 +1384,6 @@
                 });
             });
 
-            // Listener currency (fix assignment error + mapping)
             const currencySelects = document.querySelectorAll('.currency-select');
             currencySelects.forEach(select => {
                 select.addEventListener('change', function() {
@@ -965,15 +1391,12 @@
                     if (type === 'Zakat') type = 'Zakat Fitrah';
 
                     if (nominalValues[type]) {
-                        nominalValues[type].currency = this.value;  // ← sekarang aman
+                        nominalValues[type].currency = this.value;
                         updateTotal();
-                    } else {
-                        console.warn('Currency type tidak ditemukan:', type);
                     }
                 });
             });
 
-            // Custom label
             const customLabel = document.getElementById('customLabelLainnya');
             if (customLabel) {
                 customLabel.addEventListener('input', function() {
@@ -1002,7 +1425,7 @@
 
             for (let curr in totals) {
                 const amount = totals[curr];
-                const formatted = formatNumber(amount); // otomatis hilang .00 jika bulat
+                const formatted = formatNumber(amount);
                 
                 const row = document.createElement('div');
                 row.className = 'total-row';
@@ -1020,11 +1443,8 @@
             document.getElementById('liveTime').innerText = timeStr;
         }
 
-        // ============================================
-        // FUNGSI MEMBACA DATA DARI APPS SCRIPT
-        // ============================================
         async function loadAllData() {
-            showGlobalLoading(true);  // gunakan global loading biar konsisten
+            showGlobalLoading(true);
 
             try {
                 const response = await fetch(APPS_SCRIPT_URL + '?action=getAll');
@@ -1033,18 +1453,22 @@
                 if (result.success && result.data) {
                     payments = result.data;
                     
-                    // SORTING DIBALIK: terbaru di atas (descending timestamp)
+                    // Tampilan: urutkan baru → lama
                     payments.sort((a, b) => {
-                        const timeA = a.timestamp ? new Date(a.timestamp) : new Date(0);
-                        const timeB = b.timestamp ? new Date(b.timestamp) : new Date(0);
-                        return timeB - timeA;  // ← ini yang diubah: timeB - timeA (baru → lama)
+                        return new Date(b.timestamp) - new Date(a.timestamp);
                     });
+                    
+                    console.log('✅ Data dimuat:', payments.length, 'item');
+                    console.log('Paling atas:', payments[0]?.invoiceNumber, new Date(payments[0]?.timestamp).toLocaleString());
+                    console.log('Paling bawah:', payments[payments.length-1]?.invoiceNumber, new Date(payments[payments.length-1]?.timestamp).toLocaleString());
+                    
                 } else {
                     payments = [];
                 }
                 
                 renderFilteredList(''); 
                 updateLastInvoiceNumber();
+                updateRevenueCard();
                 
             } catch (error) {
                 console.error('Error loading data:', error);
@@ -1052,12 +1476,6 @@
                     '<div class="empty-message"><i class="fas fa-exclamation-triangle"></i><br>Gagal memuat data. Periksa koneksi ke server.</div>';
             } finally {
                 showGlobalLoading(false);
-            }
-        }
-
-        function showLoading(show) {
-            if (show) {
-                document.getElementById('dataListContainer').innerHTML = '<div class="loading"><i class="fas fa-spinner fa-pulse"></i><div>Memuat data...</div></div>';
             }
         }
 
@@ -1077,7 +1495,7 @@
                     }
                 }
             });
-            document.getElementById('lastInvoiceNumber').innerText = maxNum.toString().padStart(3, '0');  // ← ubah jadi 3
+            document.getElementById('lastInvoiceNumber').innerText = maxNum.toString().padStart(3, '0');
         }
 
         function formatNumber(num, forceDecimal = false) {
@@ -1101,60 +1519,6 @@
             return parseFloat(cleaned) || 0;
         }
 
-        // Render list
-        function renderList() {
-            const container = document.getElementById('dataListContainer');
-            if (!payments.length) {
-                container.innerHTML = '<div class="empty-message"><i class="fas fa-inbox fa-3x" style="opacity:0.5; margin-bottom:12px;"></i><br>Belum ada data transaksi.<br>Tambahkan transaksi baru.</div>';
-                document.getElementById('totalCount').innerText = '0 data';
-                return;
-            }
-
-            let html = '';
-            payments.forEach((p, idx) => {
-                let jenisBadges = '';
-                let totalStr = '';
-                const totals = {};
-                if (Array.isArray(p.jenis)) {
-                    p.jenis.forEach(j => {
-                        const type = j.type || j.customLabel || 'Unknown';
-                        const nominal = j.nominal || 0;
-                        const curr = j.currency || 'EGP';
-                        if (!totals[curr]) totals[curr] = 0;
-                        totals[curr] += nominal;
-                        jenisBadges += `<span class="item-jenis-badge">${type}: ${formatNumber(nominal)} ${curr}</span>`;
-                    });
-                }
-                for (let curr in totals) {
-                    totalStr += `${formatNumber(totals[curr])} ${curr} `;
-                }
-
-                html += `<div class="data-item" data-index="${idx}">
-                    <div class="item-row1">
-                        <span class="invoice-badge">${p.invoiceNumber || 'INV/....'}</span>
-                        <span class="item-amount">${totalStr}</span>
-                    </div>
-                    <div class="item-details">
-                        <span><i class="fas fa-user"></i> ${p.nama || '-'}</span>
-                        <span><i class="fas fa-users"></i> ${p.kekeluargaan || 'KMB'}</span>
-                        <span><i class="fas fa-wallet"></i> ${p.metode || 'Tunai'}</span>
-                    </div>
-                    <div class="item-jenis-list">
-                        ${jenisBadges}
-                    </div>
-                    <div class="item-actions">
-                        <button onclick="editEntry('${p.invoiceNumber}')" title="Edit"><i class="fas fa-edit"></i></button>
-                        <button onclick="deleteEntry('${p.invoiceNumber}')" title="Hapus"><i class="fas fa-trash-alt"></i></button>
-                        <button onclick="downloadKwitansi('${p.invoiceNumber}')" title="Unduh PDF"><i class="fas fa-file-pdf"></i></button>
-                        <button onclick="shareLink('${p.invoiceNumber}')" title="Bagikan Link"><i class="fas fa-share-alt"></i></button>
-                    </div>
-                </div>`;
-            });
-            container.innerHTML = html;
-            document.getElementById('totalCount').innerText = payments.length + ' data';
-        }
-
-        // Fungsi render list dengan filter search
         function renderFilteredList(searchTerm = '') {
             const container = document.getElementById('dataListContainer');
             
@@ -1164,7 +1528,6 @@
                 return;
             }
 
-            // Filter data
             const filteredPayments = payments.filter(p => {
                 const invoiceLower = (p.invoiceNumber || '').toLowerCase();
                 const namaLower = (p.nama || '').toLowerCase();
@@ -1209,12 +1572,12 @@
                     <div class="item-jenis-list">
                         ${jenisBadges}
                     </div>
-                        <div class="item-actions">
-                            <button onclick="editEntry('${p.invoiceNumber}')" title="Edit"><i class="fas fa-edit"></i></button>
-                            <button onclick="deleteEntry('${p.invoiceNumber}')" title="Hapus"><i class="fas fa-trash-alt"></i></button>
-                            <button onclick="downloadKwitansi('${p.invoiceNumber}')" title="Unduh PDF"><i class="fas fa-file-pdf"></i></button>
-                            <button onclick="shareLink('${p.invoiceNumber}')" title="Bagikan Link"><i class="fas fa-share-alt"></i></button>
-                        </div>
+                    <div class="item-actions">
+                        <button onclick="editEntry('${p.invoiceNumber}')" title="Edit"><i class="fas fa-edit"></i></button>
+                        <button onclick="deleteEntry('${p.invoiceNumber}')" title="Hapus"><i class="fas fa-trash-alt"></i></button>
+                        <button onclick="downloadKwitansi('${p.invoiceNumber}')" title="Unduh PDF"><i class="fas fa-file-pdf"></i></button>
+                        <button onclick="shareLink('${p.invoiceNumber}')" title="Bagikan Link"><i class="fas fa-share-alt"></i></button>
+                    </div>
                 </div>`;
             });
 
@@ -1231,7 +1594,6 @@
                     this.classList.remove('selected');
                     selectedJenis = selectedJenis.filter(t => t !== type);
                     
-                    // Sembunyikan input nominal
                     const row = document.querySelector(`.nominal-row[data-type="${type}"]`);
                     if (row) {
                         row.style.display = 'none';
@@ -1252,7 +1614,6 @@
                     this.classList.add('selected');
                     selectedJenis.push(type);
                     
-                    // Tampilkan input nominal
                     const row = document.querySelector(`.nominal-row[data-type="${type}"]`);
                     if (row) {
                         row.style.display = 'flex';
@@ -1272,7 +1633,9 @@
             });
         });
 
-        // Save data
+        // ============================================
+        // PERBAIKAN: SAVE DATA DENGAN RENUMBER OTOMATIS
+        // ============================================
         document.getElementById('simpanBtn').addEventListener('click', async function() {
             const nama = document.getElementById('namaInput').value.trim();
             if (!nama) { alert('Nama wajib diisi'); return; }
@@ -1297,18 +1660,37 @@
 
             let invoiceNumber = editInvoice;
             if (!invoiceNumber) {
-                let maxNum = 0;
-                payments.forEach(p => {
-                    if (p.invoiceNumber) {
-                        const match = p.invoiceNumber.match(/INV\/2026\/(\d+)/);
-                        if (match) {
-                            const num = parseInt(match[1], 10);
-                            if (num > maxNum) maxNum = num;
+                // Ambil data terbaru dari server untuk menghitung nomor
+                try {
+                    const response = await fetch(APPS_SCRIPT_URL + '?action=getAll');
+                    const result = await response.json();
+                    let allData = result.data || [];
+                    
+                    // Urutkan ascending untuk penomoran
+                    allData.sort((a, b) => {
+                        const timeA = a.timestamp ? new Date(a.timestamp) : new Date(0);
+                        const timeB = b.timestamp ? new Date(b.timestamp) : new Date(0);
+                        return timeA - timeB;
+                    });
+                    
+                    const nextNumber = (allData.length + 1).toString().padStart(3, '0');
+                    invoiceNumber = `INV/2026/${nextNumber}`;
+                } catch (error) {
+                    console.error('Error getting next number:', error);
+                    // Fallback ke cara lama
+                    let maxNum = 0;
+                    payments.forEach(p => {
+                        if (p.invoiceNumber) {
+                            const match = p.invoiceNumber.match(/INV\/2026\/(\d+)/);
+                            if (match) {
+                                const num = parseInt(match[1], 10);
+                                if (num > maxNum) maxNum = num;
+                            }
                         }
-                    }
-                });
-                const nextNumber = (maxNum + 1).toString().padStart(3, '0');
-                invoiceNumber = `INV/2026/${nextNumber}`;
+                    });
+                    const nextNumber = (maxNum + 1).toString().padStart(3, '0');
+                    invoiceNumber = `INV/2026/${nextNumber}`;
+                }
             }
 
             const jenisWithDetails = activeJenis.map(type => ({
@@ -1327,7 +1709,7 @@
                 formData.append('nama', nama);
                 formData.append('jenis', JSON.stringify(jenisWithDetails));
                 formData.append('metode', metode);
-                formData.append('timestamp', editInvoice ? payments.find(p => p.invoiceNumber === editInvoice)?.timestamp || timestamp : timestamp);
+                formData.append('timestamp', timestamp);
                 formData.append('kekeluargaan', kekeluargaan);
 
                 const response = await fetch(APPS_SCRIPT_URL, {
@@ -1337,12 +1719,11 @@
                 });
 
                 const result = await response.json();
-                console.log('Hasil simpan:', result);
 
                 if (result.success) {
                     alert('✅ Data berhasil disimpan!');
                     resetForm();
-                    setTimeout(() => loadAllData(), 800);
+                    await loadAllData(); // Langsung refresh
                 } else {
                     alert('Gagal menyimpan: ' + (result.message || result.error || 'Unknown error'));
                 }
@@ -1355,18 +1736,135 @@
             }
         });
 
-        // Edit entry
+        // ============================================
+        // PERBAIKAN: DELETE DENGAN RENUMBER OTOMATIS
+        // ============================================
+        window.deleteEntry = async function(invoiceNumber) {
+            if (!confirm('Hapus data ini? Nomor invoice akan diurutkan ulang otomatis.')) return;
+
+            showGlobalLoading(true);
+
+            try {
+                const formData = new URLSearchParams();
+                formData.append('action', 'delete');
+                formData.append('invoiceNumber', invoiceNumber);
+
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('✅ Data berhasil dihapus! Sedang mengurutkan ulang nomor invoice...');
+                    
+                    // Tunggu sebentar lalu renumber
+                    setTimeout(async () => {
+                        await renumberInvoices();
+                    }, 1000);
+                    
+                    resetForm();
+                } else {
+                    alert('Gagal menghapus: ' + (result.message || result.error || 'Unknown error'));
+                    showGlobalLoading(false);
+                }
+                
+            } catch (error) {
+                console.error('Error hapus:', error);
+                alert('❌ Gagal menghapus: ' + error.message);
+                showGlobalLoading(false);
+            }
+        };
+
+        // ============================================
+        // FUNGSI RENUMBER YANG DIPERBAIKI (FRONTEND)
+        // ============================================
+        async function renumberInvoices() {
+            try {
+                console.log('Memulai proses renumber...');
+                
+                // Ambil data terbaru dari server
+                const response = await fetch(APPS_SCRIPT_URL + '?action=getAll');
+                const result = await response.json();
+                
+                if (!result.success || !result.data) {
+                    console.log('Tidak ada data untuk direnumber');
+                    showGlobalLoading(false);
+                    return;
+                }
+
+                let allData = result.data;
+                console.log('Data sebelum renumber:', allData.map(d => d.invoiceNumber));
+                
+                // Urutkan dari yang PALING LAMA ke PALING BARU (ascending)
+                allData.sort((a, b) => {
+                    const timeA = a.timestamp ? new Date(a.timestamp) : new Date(0);
+                    const timeB = b.timestamp ? new Date(b.timestamp) : new Date(0);
+                    return timeA - timeB; // ASCENDING: lama → baru
+                });
+
+                // Buat array updates untuk semua data
+                const updates = allData.map((p, index) => {
+                    const newNumber = (index + 1).toString().padStart(3, '0');
+                    const newInvoice = `INV/2026/${newNumber}`;
+                    return { 
+                        oldInvoice: p.invoiceNumber,  // ← PENTING: pakai oldInvoice
+                        newInvoice: newInvoice        // ← PENTING: pakai newInvoice
+                    };
+                });
+
+                console.log('Renumber updates:', updates);
+
+                // Kirim batch update ke server
+                const formData = new URLSearchParams();
+                formData.append('action', 'renumber');
+                formData.append('updates', JSON.stringify(updates));
+
+                const renumberResponse = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: formData
+                });
+
+                const renumberResult = await renumberResponse.json();
+                
+                if (renumberResult.success) {
+                    console.log('✅ Renumber berhasil');
+                    
+                    // Tunggu sebentar agar server selesai memproses
+                    setTimeout(async () => {
+                        await loadAllData(); // Refresh data dengan urutan baru
+                        updateRevenueCard();
+                    }, 1500);
+                } else {
+                    console.error('❌ Renumber gagal:', renumberResult);
+                    alert('Renumber gagal: ' + (renumberResult.message || 'Unknown error'));
+                    await loadAllData(); // Tetap refresh
+                }
+                
+            } catch (error) {
+                console.error('Error saat renumber:', error);
+                alert('Error saat renumber: ' + error.message);
+                await loadAllData();
+            } finally {
+                showGlobalLoading(false);
+            }
+        }
+
+        // ============================================
+        // EDIT ENTRY
+        // ============================================
         window.editEntry = function(invoiceNumber) {
             const payment = payments.find(p => p.invoiceNumber === invoiceNumber);
             if (!payment) return;
 
             document.getElementById('namaInput').value = payment.nama || '';
             document.getElementById('kekeluargaanInput').value = payment.kekeluargaan || 'KMB';
-                kekeluargaan = payment.kekeluargaan || 'KMB';
             
             document.querySelector(`input[name="metode"][value="${payment.metode}"]`).checked = true;
             
-            // Reset semua chip dan nominal
             document.querySelectorAll('.type-chip').forEach(c => c.classList.remove('selected'));
             document.querySelectorAll('.nominal-row').forEach(row => {
                 row.style.display = 'none';
@@ -1391,7 +1889,6 @@
                 'Lainnya': {nominal: 0, currency: 'EGP', customLabel: ''}
             };
             
-            // Set nilai dari payment
             if (Array.isArray(payment.jenis)) {
                 payment.jenis.forEach(item => {
                     let type = item.type;
@@ -1401,13 +1898,11 @@
                         isLainnya = true;
                     }
                     
-                    // Aktifkan chip
                     const chip = document.querySelector(`.type-chip[data-type="${type}"]`);
                     if (chip && !selectedJenis.includes(type)) {
                         chip.classList.add('selected');
                         selectedJenis.push(type);
                         
-                        // Tampilkan dan set nominal
                         const row = document.querySelector(`.nominal-row[data-type="${type}"]`);
                         if (row) {
                             row.style.display = 'flex';
@@ -1439,136 +1934,10 @@
             updateTotal();
         };
 
-        // Delete entry
-        window.deleteEntry = async function(invoiceNumber) {
-            if (!confirm('Hapus data ini? Nomor invoice akan diurut ulang otomatis (proses latar).')) return;
-
-            showGlobalLoading(true);
-
-            try {
-                const formData = new URLSearchParams();
-                formData.append('action', 'delete');
-                formData.append('invoiceNumber', invoiceNumber);
-
-                const response = await fetch(APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: formData
-                });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    // Langsung beri feedback sukses & hilangkan loading
-                    alert('✅ Data berhasil dihapus! Nomor invoice sedang diurut ulang di latar belakang.');
-                    
-                    // Refresh list dulu (biar user lihat data sudah berkurang)
-                    await loadAllData();   // ini cepat karena cache lokal masih ada
-
-                    // Renumber di background → tidak tunggu
-                    renumberInvoicesInBackground();  
-
-                    resetForm();
-                } else {
-                    alert('Gagal menghapus: ' + (result.message || result.error || 'Unknown error'));
-                }
-                
-            } catch (error) {
-                console.error('Error hapus:', error);
-                alert('❌ Gagal menghapus: ' + error.message);
-            } finally {
-                showGlobalLoading(false);   // loading hilang secepat mungkin setelah hapus sukses/gagal
-            }
-        };
-
-        async function renumberInvoicesInBackground() {
-            try {
-                const response = await fetch(APPS_SCRIPT_URL + '?action=getAll');
-                const result = await response.json();
-                if (!result.success || !result.data) return;
-
-                let paymentsLocal = result.data;
-                
-                // SORTING DIBALIK: terbaru di atas
-                paymentsLocal.sort((a, b) => {
-                    const timeA = a.timestamp ? new Date(a.timestamp) : new Date(0);
-                    const timeB = b.timestamp ? new Date(b.timestamp) : new Date(0);
-                    return timeB - timeA;  // ← terbaru dulu
-                });
-
-                const updates = paymentsLocal.map((p, index) => {
-                    const newNumber = (index + 1).toString().padStart(3, '0');
-                    const newInvoice = `INV/2026/${newNumber}`;
-                    return { invoiceNumber: p.invoiceNumber, newInvoiceNumber: newInvoice };
-                });
-
-                const formData = new URLSearchParams();
-                formData.append('action', 'renumber');
-                formData.append('updates', JSON.stringify(updates));
-
-                fetch(APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: formData
-                }).then(res => res.json())
-                .then(r => {
-                    if (r.success) {
-                        console.log('Renumber background selesai');
-                        setTimeout(loadAllData, 1500);
-                    } else {
-                        console.warn('Renumber background gagal:', r);
-                    }
-                })
-                .catch(err => console.error('Renumber background error:', err));
-
-            } catch (err) {
-                console.error('Background renumber gagal fetch:', err);
-            }
-        }
-
-        // Fungsi renumber invoice setelah hapus (agar nomor bergeser otomatis)
-        async function renumberInvoices() {
-            try {
-                // Ambil semua data terbaru dulu
-                await loadAllData();  // pastikan payments sudah update
-
-                // Urutkan payments berdasarkan timestamp (agar urutan logis)
-                payments.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
-
-                // Siapkan batch update ke Apps Script (POST multiple)
-                const updates = payments.map((p, index) => {
-                    const newNumber = (index + 1).toString().padStart(3, '0');
-                    const newInvoice = `INV/2026/${newNumber}`;
-                    return { invoiceNumber: p.invoiceNumber, newInvoiceNumber: newInvoice };
-                });
-
-                // Kirim ke Apps Script untuk batch update
-                const formData = new URLSearchParams();
-                formData.append('action', 'renumber');
-                formData.append('updates', JSON.stringify(updates));
-
-                const response = await fetch(APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: formData
-                });
-
-                const result = await response.json();
-                if (result.success) {
-                    console.log('Renumber berhasil:', result.message);
-                    await loadAllData();  // refresh data setelah renumber
-                } else {
-                    console.error('Renumber gagal:', result.message);
-                }
-            } catch (error) {
-                console.error('Error renumber:', error);
-            }
-        }
-
-        // FUNGSI TERBILANG (Mendukung Multi-Mata Uang)
-        
+        // ============================================
+        // FUNGSI TERBILANG UNTUK KWITANSI
+        // ============================================
         function numberToWordsIndonesia(num) {
-            console.log('[TERBILANG VERSION] Fungsi terbilang versi CLEAN dipanggil untuk num:', num);
             if (num == 0 || num == null || isNaN(num)) return 'nol';
 
             num = Math.round(Math.abs(num));
@@ -1583,9 +1952,7 @@
                 if (n === 0) return '';
 
                 if (n < 10) return satuan[n];
-
                 if (n < 20) return belasan[n - 10];
-
                 if (n < 100) {
                     const p = Math.floor(n / 10);
                     const s = n % 10;
@@ -1593,14 +1960,12 @@
                     if (s > 0) result += (result ? ' ' : '') + satuan[s];
                     return result;
                 }
-
                 if (n < 200) {
                     let result = 'seratus';
                     const sisa = n - 100;
                     if (sisa > 0) result += ' ' + convert(sisa);
                     return result;
                 }
-
                 if (n < 1000) {
                     const r = Math.floor(n / 100);
                     let result = satuan[r] + ' ratus';
@@ -1608,47 +1973,45 @@
                     if (sisa > 0) result += ' ' + convert(sisa);
                     return result;
                 }
-
                 if (n < 2000) {
                     let result = 'seribu';
                     const sisa = n - 1000;
                     if (sisa > 0) result += ' ' + convert(sisa);
                     return result;
                 }
-
                 if (n < 1000000) {
                     let result = convert(Math.floor(n / 1000)) + ' ribu';
                     const sisa = n % 1000;
                     if (sisa > 0) result += ' ' + convert(sisa);
                     return result;
                 }
-
                 if (n < 1000000000) {
                     let result = convert(Math.floor(n / 1000000)) + ' juta';
                     const sisa = n % 1000000;
                     if (sisa > 0) result += ' ' + convert(sisa);
                     return result;
                 }
-
                 return n.toString();
             }
 
             return convert(num);
         }
 
+        // ============================================
+        // DOWNLOAD KWITANSI
+        // ============================================
         window.downloadKwitansi = function(invoiceNumber) {
             const payment = payments.find(p => p.invoiceNumber === invoiceNumber);
             if (!payment) { alert('Data tidak ditemukan'); return; }
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4', compress: true });
 
-            // Definisi Warna
             const softGreen = [236, 249, 231];
             const textDark = [30, 41, 59];
             const primaryGreen = [15, 123, 84];
             const accentLine = [203, 213, 225];
 
-            // ===== HEADER UTAMA =====
+            // HEADER
             doc.setFillColor(softGreen[0], softGreen[1], softGreen[2]);
             doc.roundedRect(15, 15, 180, 40, 4, 4, 'F');
 
@@ -1663,19 +2026,16 @@
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(15);
             doc.text('BADAN OTONOM (BO) - WAZIQOH', 78, 30);
-
             doc.setFontSize(12);
             doc.setFont('helvetica', 'normal');
             doc.text('KELUARGA MAHASISWA BANTEN MESIR', 78, 36);
-
             doc.setFontSize(8);
             doc.setTextColor(100, 116, 139);
             doc.text('Jl.‘Ainu Syams College, Gedung II, Lt. 3, No.5 Zahro, Nasr City, Kairo, Mesir', 78, 41);
-
             doc.setFillColor(primaryGreen[0], primaryGreen[1], primaryGreen[2]);
             doc.rect(15, 15, 2, 40, 'F');
 
-            // ===== JUDUL KWITANSI =====
+            // JUDUL
             doc.setTextColor(textDark[0], textDark[1], textDark[2]);
             doc.setFontSize(22);
             doc.setFont('helvetica', 'bold');
@@ -1695,29 +2055,25 @@
             const tgl = new Date(payment.timestamp || Date.now());
             doc.text(tgl.toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' }), 150, 78);
 
-            // Penerima - REVISI: nama + (kekeluargaan) di samping kanan
+            // PENERIMA
             doc.setDrawColor(accentLine[0], accentLine[1], accentLine[2]);
             doc.line(20, 85, 190, 85);
-
             doc.setFontSize(10);
             doc.text('Diterima dari:', 20, 93);
-
             doc.setFontSize(16);
             doc.setFont('helvetica', 'bold');
             doc.setTextColor(primaryGreen[0], primaryGreen[1], primaryGreen[2]);
 
             const namaText = payment.nama.toUpperCase() || 'NAMA TIDAK TERISI';
             const namaWidth = doc.getTextWidth(namaText);
-
             doc.text(namaText, 20, 101);
-
             doc.setFontSize(16);
             doc.setFont('helvetica', 'normal');
             doc.setTextColor(textDark[0], textDark[1], textDark[2]);
             const kekText = `  (${payment.kekeluargaan || 'KMB'})`;
             doc.text(kekText, 20 + namaWidth, 101);
 
-            // ===== TABEL DETAIL =====
+            // TABEL
             const tableBody = payment.jenis.map(item => [
                 item.type || item.customLabel || 'Lainnya',
                 (item.nominal || 0).toLocaleString('id-ID'),
@@ -1742,7 +2098,7 @@
 
             let currentY = doc.lastAutoTable.finalY + 12;
 
-            // TOTAL & TERBILANG
+            // TOTAL
             const totals = {};
             payment.jenis.forEach(item => {
                 const curr = item.currency || 'EGP';
@@ -1762,6 +2118,7 @@
                 totalRowY += 8;
             }
 
+            // TERBILANG
             doc.setFillColor(softGreen[0], softGreen[1], softGreen[2]);
             const terbilangH = (Object.keys(totals).length * 6) + 6;
             doc.roundedRect(20, totalRowY, 170, terbilangH, 2, 2, 'F');
@@ -1772,16 +2129,13 @@
 
             let tY = totalRowY + 6;
             for (let curr in totals) {
-
                 const amount = Math.round(totals[curr]);
                 const kata = numberToWordsIndonesia(amount).toUpperCase();
-                
-                console.log(`[TERBILANG DEBUG] Hasil terbilang: ${kata} ${curr}`);
-
                 doc.text(`Terbilang: # ${kata} ${curr} #`, 25, tY);
                 tY += 6;
             }
 
+            // METODE
             const metodeText = `METODE: ${payment.metode || 'TUNAI'}`;
             const metodeWidth = doc.getTextWidth(metodeText) + 12;
             doc.setFillColor(textDark[0], textDark[1], textDark[2]);
@@ -1791,6 +2145,7 @@
             doc.setFontSize(9);
             doc.text(metodeText, 26, tY + 11.2);
 
+            // TANDA TANGAN
             const signX = 158;
             const signY = tY + 28;
             doc.setTextColor(textDark[0], textDark[1], textDark[2]);
@@ -1813,6 +2168,7 @@
             doc.setTextColor(textDark[0], textDark[1], textDark[2]);
             doc.text('Direktur WAZIQOH KMB Mesir', signX, signY + 36, { align: 'center' });
 
+            // FOOTER
             doc.setDrawColor(accentLine[0], accentLine[1], accentLine[2]);
             doc.line(20, 280, 190, 280);
             doc.setFontSize(7);
@@ -1823,27 +2179,13 @@
             doc.save(`Kwitansi_${payment.invoiceNumber.replace(/\//g, '-')}.pdf`);
         };
 
-        function numberToWords(num) {
-            if (!num) return 'nol';
-            const angka = Math.round(Math.abs(num));
-            if (angka === 0) return 'nol';
-            if (angka < 12) {
-                const satuan = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan', 'sepuluh', 'sebelas'];
-                return satuan[angka];
-            }
-            if (angka < 20) return numberToWords(angka-10) + ' belas';
-            if (angka < 100) return numberToWords(Math.floor(angka/10)) + ' puluh ' + numberToWords(angka%10);
-            if (angka < 1000) return numberToWords(Math.floor(angka/100)) + ' ratus ' + numberToWords(angka%100);
-            return angka.toString();
-        }
-
-        // Fungsi untuk share link invoice
+        // ============================================
+        // SHARE LINK
+        // ============================================
         window.shareLink = function(invoiceNumber) {
-            // Buat URL lengkap
             const baseUrl = 'https://nuraddiniy99.github.io/mustahiqkmb26/view.html';
             const fullUrl = `${baseUrl}?invoice=${invoiceNumber}`;
             
-            // Cek apakah browser mendukung Web Share API (terutama di mobile)
             if (navigator.share) {
                 navigator.share({
                     title: 'Invoice Pembayaran',
@@ -1853,18 +2195,14 @@
                 .then(() => console.log('Berhasil dibagikan'))
                 .catch((error) => {
                     console.log('Gagal share:', error);
-                    // Fallback: copy ke clipboard
                     copyToClipboard(fullUrl);
                 });
             } else {
-                // Fallback untuk desktop: copy ke clipboard
                 copyToClipboard(fullUrl);
             }
         };
 
-        // Fungsi copy ke clipboard
         function copyToClipboard(text) {
-            // Buat element textarea temporary
             const textarea = document.createElement('textarea');
             textarea.value = text;
             textarea.style.position = 'fixed';
@@ -1874,19 +2212,13 @@
             textarea.setSelectionRange(0, 99999);
             
             try {
-                // Copy ke clipboard
                 document.execCommand('copy');
-                
-                // Tampilkan notifikasi
                 showNotification('✅ Link berhasil disalin ke clipboard!');
             } catch (err) {
                 console.error('Gagal copy:', err);
                 showNotification('❌ Gagal menyalin link', 'error');
             } finally {
-                // Hapus element temporary
                 document.body.removeChild(textarea);
-                
-                // Buka link di tab baru sebagai opsi kedua
                 setTimeout(() => {
                     if (confirm('Buka link invoice di tab baru?')) {
                         window.open(text, '_blank');
@@ -1895,13 +2227,10 @@
             }
         }
 
-        // Fungsi notifikasi sederhana
         function showNotification(message, type = 'success') {
-            // Cek apakah sudah ada notifikasi, hapus jika ada
             const existingNotif = document.querySelector('.share-notification');
             if (existingNotif) existingNotif.remove();
             
-            // Buat elemen notifikasi
             const notif = document.createElement('div');
             notif.className = 'share-notification';
             notif.innerHTML = `
@@ -1927,54 +2256,84 @@
             
             document.body.appendChild(notif);
             
-            // Hapus notifikasi setelah 3 detik
             setTimeout(() => {
                 notif.style.animation = 'fadeOut 0.3s ease';
                 setTimeout(() => notif.remove(), 300);
             }, 3000);
         }
 
-        // Tambahkan CSS untuk animasi notifikasi (di dalam tag <style>)
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideUp {
-                from {
-                    opacity: 0;
-                    transform: translate(-50%, 20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translate(-50%, 0);
-                }
-            }
-            
-            @keyframes fadeOut {
-                to {
-                    opacity: 0;
-                    transform: translate(-50%, 20px);
-                }
-            }
-            
-            /* Optional: styling untuk tombol share */
-            .item-actions button[onclick*="shareLink"] {
-                background: #e8f0fe;
-                color: #1a5a9c;
-            }
-            
-            .item-actions button[onclick*="shareLink"]:hover {
-                background: #d4e3ff;
-            }
-        `;
-        document.head.appendChild(style);
 
+        // ============================================
+        // TOMBOL OTOMATIS: RENUMBER + PERBAIKI TAMPILAN SEKALIGUS
+        // ============================================
+        document.getElementById('autoFixBtn').addEventListener('click', async function() {
+            if (!confirm('⚠️ PERBAIKI OTOMATIS:\n\n1. Mengurutkan ulang NOMOR INVOICE di DATABASE berdasarkan waktu\n2. Mengatur TAMPILAN card (terbaru di atas)\n\nLanjutkan?')) {
+                return;
+            }
+            
+            showGlobalLoading(true);
+            
+            try {
+                // STEP 1: Jalankan superRenumber di database
+                console.log('🔄 STEP 1: Menjalankan superRenumber...');
+                const formData = new URLSearchParams();
+                formData.append('action', 'superRenumber');
+                
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (!result.success) {
+                    throw new Error(result.message || 'Gagal renumber database');
+                }
+                
+                console.log('✅ STEP 1 selesai:', result.message);
+                
+                // STEP 2: Load ulang data dari database yang sudah diperbaiki
+                console.log('🔄 STEP 2: Memuat data terbaru...');
+                await loadAllData();
+                
+                // STEP 3: Urutkan tampilan (sebenarnya sudah otomatis di loadAllData, tapi kita pastikan)
+                console.log('🔄 STEP 3: Memastikan urutan tampilan...');
+                payments.sort((a, b) => {
+                    return new Date(b.timestamp) - new Date(a.timestamp);
+                });
+                
+                // Render ulang dengan urutan yang benar
+                renderFilteredList(document.getElementById('searchInput').value.trim().toLowerCase());
+                
+                // STEP 4: Tampilkan pesan sukses dengan detail
+                const firstItem = payments[0];
+                const lastItem = payments[payments.length-1];
+                
+                alert(`✅ PERBAIKAN SELESAI!\n\n` +
+                    `📊 Total data: ${payments.length}\n` +
+                    `⬆️ Paling atas: ${firstItem?.invoiceNumber} (TERBARU)\n` +
+                    `⬇️ Paling bawah: ${lastItem?.invoiceNumber} (TERLAMA)\n\n` +
+                    `Nomor invoice sekarang berurutan berdasarkan waktu.`);
+                
+            } catch (error) {
+                console.error('❌ Error:', error);
+                alert('❌ Gagal: ' + error.message);
+            } finally {
+                showGlobalLoading(false);
+            }
+        });
+
+        // ============================================
+        // RESET FORM
+        // ============================================
         function resetForm() {
             document.getElementById('namaInput').value = '';
+            document.getElementById('kekeluargaanInput').value = 'KMB';
             document.querySelector('input[name="metode"][value="Tunai"]').checked = true;
             
-            // Reset chips
             document.querySelectorAll('.type-chip').forEach(c => c.classList.remove('selected'));
             
-            // Reset nominal rows
             document.querySelectorAll('.nominal-row').forEach(row => {
                 row.style.display = 'none';
                 const input = row.querySelector('.nominal-field');
@@ -2010,20 +2369,37 @@
         
         document.getElementById('resetFormBtn').addEventListener('click', resetForm);
 
-        function showGlobalLoading(show = true) {
-            const loader = document.getElementById('globalLoading');
-            if (!loader) return;
-            
-            if (show) {
-                loader.classList.add('active');
-            } else {
-                loader.classList.remove('active');
+        // Tambahkan CSS untuk animasi
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideUp {
+                from {
+                    opacity: 0;
+                    transform: translate(-50%, 20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translate(-50%, 0);
+                }
             }
-        }
-
-        window.editEntry = editEntry;
-        window.deleteEntry = deleteEntry;
-        window.downloadKwitansi = downloadKwitansi;
+            
+            @keyframes fadeOut {
+                to {
+                    opacity: 0;
+                    transform: translate(-50%, 20px);
+                }
+            }
+            
+            .item-actions button[onclick*="shareLink"] {
+                background: #e8f0fe;
+                color: #1a5a9c;
+            }
+            
+            .item-actions button[onclick*="shareLink"]:hover {
+                background: #d4e3ff;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
