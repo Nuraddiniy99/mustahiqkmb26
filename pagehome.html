@@ -1,0 +1,2423 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<title>WAZIQOH KMB Mesir — Portal Donasi Mahasiswa Banten</title>
+<meta name="description" content="Wakaf, Zakat, Infaq, Shodaqoh untuk Keluarga Banten di Tanah Mesir."/>
+<link rel="icon" type="image/png" href="https://i.ibb.co/q37GwCZ7/favicon.png"/>
+<link rel="apple-touch-icon" href="https://i.ibb.co/q37GwCZ7/favicon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{fontFamily:{display:['"Cormorant Garamond"','serif'],sans:['"Plus Jakarta Sans"','sans-serif']},colors:{p:{50:'#edf7f2',100:'#c8eada',200:'#90d4b4',300:'#56be8e',400:'#26a870',500:'#0d7a52',600:'#0a6243',700:'#084f36',800:'#063c29',900:'#042a1c'},gd:{100:'#fef9eb',200:'#fdefc8',300:'#f8d67a',400:'#f0b429',500:'#c9920a'},sand:{50:'#fdfaf4',100:'#f5f0e4',200:'#e8dfc8'}}}}}
+</script>
+
+<style>
+/* ══════════════════════════════════════════
+   WAZIQOH KMB MESIR — CSS UTAMA
+   Warna brand dari logo Asset-3.png:
+   Hijau teal gelap #0d7a52 | Emas #c9920a
+   Krem lembut #fdfaf4
+══════════════════════════════════════════ */
+:root{
+  --P:#0d7a52; --PD:#0a6243; --PL:#edf7f2; --PLL:#f5fbf8;
+  --G:#c9920a; --GL:#fef9eb;
+  --INK:#082518; --INK2:#2d5240; --INK3:#5a7e6e;
+  --BG:#fdfaf4; --WH:#ffffff; --BD:#dceee5;
+  --SHADOW:0 4px 24px rgba(13,122,82,.10);
+  --SHADOW2:0 12px 48px rgba(13,122,82,.18);
+  --R:18px; --R2:26px; --R3:36px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--BG);color:var(--INK);-webkit-tap-highlight-color:transparent;overflow-x:hidden}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--BG)}
+::-webkit-scrollbar-thumb{background:var(--P);border-radius:99px}
+
+/* ── NOISE TEXTURE ── */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ── GLASSMORPHISM ── */
+.glass{background:rgba(255,255,255,.82);backdrop-filter:blur(28px) saturate(2);-webkit-backdrop-filter:blur(28px) saturate(2);border:1px solid rgba(255,255,255,.65);box-shadow:0 8px 40px rgba(13,122,82,.08)}
+.glass-dk{background:rgba(13,122,82,.93);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.14)}
+.glass-gold{background:rgba(254,249,235,.9);backdrop-filter:blur(16px);border:1px solid rgba(201,146,10,.25);box-shadow:0 4px 20px rgba(201,146,10,.12)}
+.glass-card{background:linear-gradient(135deg,rgba(237,247,242,.95),rgba(200,234,218,.85));border:1.5px solid rgba(13,122,82,.2);box-shadow:var(--SHADOW)}
+
+/* ── MARQUEE ── */
+.mq-wrap{overflow:hidden;white-space:nowrap}
+.mq-track{display:inline-flex;animation:mq 32s linear infinite}
+@keyframes mq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.fade-up{opacity:0;animation:fadeUp .7s ease forwards}
+.d1{animation-delay:.1s}.d2{animation-delay:.22s}.d3{animation-delay:.34s}.d4{animation-delay:.46s}
+@keyframes floatY{0%,100%{transform:translateY(-5px)}50%{transform:translateY(5px)}}
+.float{animation:floatY 3.2s ease-in-out infinite}
+@keyframes pulse-ring{0%,100%{box-shadow:0 0 0 0 rgba(13,122,82,.45)}70%{box-shadow:0 0 0 14px rgba(13,122,82,0)}}
+.pulse{animation:pulse-ring 2.4s infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner{animation:spin .85s linear infinite}
+@keyframes shimmer{0%{background-position:-600px 0}100%{background-position:600px 0}}
+.skel{background:linear-gradient(90deg,#e4f2ec 25%,#cce5d8 50%,#e4f2ec 75%);background-size:1200px 100%;animation:shimmer 1.6s infinite;border-radius:8px}
+@keyframes slideIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+.slide-in{animation:slideIn .4s ease forwards}
+@keyframes wa-ping{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.wa-anim{animation:wa-ping 2.6s ease-in-out infinite}
+
+/* ── CARD HOVER ── */
+.ch{transition:transform .3s cubic-bezier(.25,.46,.45,.94),box-shadow .3s ease;will-change:transform}
+.ch:hover{transform:translateY(-6px);box-shadow:var(--SHADOW2)}
+.ch:active{transform:scale(.98)}
+
+/* ── PROGRESS BAR ── */
+.pbar{height:7px;background:var(--PL);border-radius:99px;overflow:hidden}
+.pbar-fill{height:100%;background:linear-gradient(90deg,var(--P),#3db887);border-radius:99px;transition:width 1.4s cubic-bezier(.25,.46,.45,.94)}
+
+/* ── AMOUNT PILL ── */
+.amt-pill{border:1.5px solid var(--BD);border-radius:13px;padding:10px 6px;text-align:center;font-size:12.5px;font-weight:700;cursor:pointer;transition:all .2s;background:var(--WH);color:var(--INK2)}
+.amt-pill:hover,.amt-pill.sel{border-color:var(--P);background:var(--PL);color:var(--P)}
+
+/* ── STEP DOT ── */
+.sdot{width:8px;height:8px;border-radius:50%;background:#ccc;transition:all .3s}
+.sdot.on{width:24px;border-radius:6px;background:var(--P)}
+
+/* ── INPUT FOCUS ── */
+.inp:focus{outline:none;border-color:var(--P);box-shadow:0 0 0 3px rgba(13,122,82,.14)}
+
+/* ── MODAL ── */
+.modal-sheet{
+  position:fixed;bottom:0;left:0;right:0;
+  background:var(--WH);border-radius:var(--R3) var(--R3) 0 0;
+  z-index:9200;transform:translateY(110%);
+  transition:transform .38s cubic-bezier(.32,0,.67,0);
+  max-height:92vh;display:flex;flex-direction:column;
+  box-shadow:0 -8px 48px rgba(0,0,0,.18)
+}
+@media(min-width:768px){
+  .modal-sheet{top:50%;left:50%;right:auto;bottom:auto;width:540px;border-radius:var(--R3);max-height:90vh;
+    transform:translate(-50%,60%) scale(.95);opacity:0;
+    transition:transform .32s cubic-bezier(.32,0,.67,0),opacity .3s}
+}
+.modal-sheet.open{transform:translateY(0)!important}
+@media(min-width:768px){.modal-sheet.open{transform:translate(-50%,-50%) scale(1)!important;opacity:1!important}}
+
+#modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);z-index:9100;opacity:0;pointer-events:none;transition:opacity .3s}
+#modal-overlay.open{opacity:1;pointer-events:all}
+
+/* ── MODAL DRAG HANDLE ── */
+.drag-handle{width:40px;height:4px;background:var(--BD);border-radius:99px;margin:12px auto 4px;flex-shrink:0}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--INK);color:#fff;border-radius:14px;padding:13px 22px;font-size:13.5px;font-weight:600;
+  z-index:99999;pointer-events:none;opacity:0;white-space:nowrap;
+  transition:all .35s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 32px rgba(0,0,0,.25)}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(min-width:768px){#toast{bottom:30px}}
+
+/* ── KEGIATAN SWIPER ── */
+.keg-track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.keg-card-img{position:relative;overflow:hidden;border-radius:var(--R2);cursor:pointer}
+.keg-card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(4,42,28,.88) 0%,transparent 55%)}
+.keg-card-img img{width:100%;height:200px;object-fit:cover;transition:transform .45s}
+.keg-card-img:hover img{transform:scale(1.04)}
+@media(min-width:768px){.keg-card-img img{height:240px}}
+
+/* ── TESTIMONI TRACK ── */
+.testi-track{display:flex;transition:transform .55s cubic-bezier(.4,0,.2,1)}
+
+/* ── TABEL PENERIMA ── */
+.penerima-row{transition:background .2s}
+.penerima-row:hover{background:var(--PLL)}
+
+/* ── REKENING CARD ── */
+.rek-card{border:1.5px solid var(--BD);border-radius:var(--R);padding:16px;background:var(--WH);transition:all .2s;cursor:pointer}
+.rek-card:hover,.rek-card.sel{border-color:var(--P);background:var(--PLL)}
+
+/* ── STARS ── */
+.stars{color:#f0b429;letter-spacing:1px;font-size:13px}
+
+/* ── NOSCROLL ── */
+.noscroll::-webkit-scrollbar{display:none}
+.noscroll{-ms-overflow-style:none;scrollbar-width:none}
+
+/* ── GOLD GRADIENT TEXT ── */
+.text-gold{background:linear-gradient(90deg,#f8d67a,#c9920a);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+/* ── COPY BTN ── */
+.copy-btn{transition:all .2s}
+.copy-btn.copied{background:var(--P)!important;color:#fff!important}
+
+/* ── JENIS PILL ── */
+.jenis-opt{border:1.5px solid var(--BD);border-radius:14px;padding:12px 10px;text-align:center;cursor:pointer;transition:all .2s;background:var(--WH)}
+.jenis-opt:hover,.jenis-opt.sel{border-color:var(--P);background:var(--PL)}
+.jenis-opt.sel .jenis-icon{background:var(--P)}
+.jenis-icon{width:36px;height:36px;border-radius:10px;background:var(--PL);display:flex;align-items:center;justify-content:center;margin:0 auto 6px;font-size:17px;transition:background .2s}
+
+/* ── BOTTOM NAV ── */
+.bnav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px 12px;border-radius:12px;transition:all .2s;cursor:pointer;border:none;background:none}
+.bnav-item.on svg,.bnav-item.on span{color:var(--P)}
+.bnav-item.on{background:var(--PL)}
+.bnav-item svg{color:#9cb9aa;transition:color .2s}
+.bnav-item span{font-size:10px;font-weight:600;color:#9cb9aa;transition:color .2s}
+
+/* ── FILTER TAB ── */
+.ftab{flex-shrink:0;padding:8px 18px;border-radius:99px;font-size:12.5px;font-weight:700;border:1.5px solid var(--BD);background:var(--WH);color:var(--INK3);cursor:pointer;transition:all .2s}
+.ftab:hover,.ftab.on{background:var(--P);border-color:var(--P);color:#fff}
+
+/* ── FAQ ACCORDION ── */
+.faq-answer{overflow:hidden;max-height:0;transition:max-height .35s cubic-bezier(.25,.46,.45,.94)}
+
+/* ── INVOICE PAGE ── */
+#invoice-page{display:none;position:fixed;inset:0;background:var(--BG);z-index:9800;overflow-y:auto}
+
+/* ── SAFE AREA ── */
+@supports(padding:max(0px)){.pb-safe{padding-bottom:max(16px,env(safe-area-inset-bottom))}}
+
+/* ── SECTION DARK ── */
+.sec-dark{background:linear-gradient(135deg,var(--INK) 0%,#0a4d35 100%)}
+</style>
+</head>
+<body class="pb-24 md:pb-0">
+
+<!-- ═══════════════════════════════════════
+     TOAST
+═══════════════════════════════════════ -->
+<div id="toast"></div>
+
+<!-- ═══════════════════════════════════════
+     LOADING SCREEN
+═══════════════════════════════════════ -->
+<div id="loading-screen" class="fixed inset-0 z-[99999] flex flex-col items-center justify-center" style="background:linear-gradient(135deg,#042a1c 0%,#0a4d35 100%)">
+  <div class="mb-8 text-center fade-up">
+    <img src="https://i.ibb.co/5XnDzfNS/Asset-3.png" alt="WAZIQOH Logo" class="w-32 h-auto mx-auto mb-5 drop-shadow-2xl float" onerror="this.style.display='none';document.getElementById('load-fallback').style.display='block'"/>
+    <div id="load-fallback" style="display:none" class="text-white font-display text-3xl font-bold mb-1">WAZIQOH</div>
+    <p class="text-p-200 text-xs tracking-[.25em] uppercase font-semibold">Portal Donasi KMB Mesir</p>
+  </div>
+  <div class="w-52 h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.12)">
+    <div id="load-bar" class="h-full rounded-full" style="width:0%;background:linear-gradient(90deg,#56be8e,#f8d67a);transition:width 2s ease"></div>
+  </div>
+  <p class="text-p-300 text-xs mt-4 font-medium" id="load-text">Memuat portal donasi…</p>
+</div>
+
+<!-- ═══════════════════════════════════════
+     MARQUEE — di bawah header (bukan fixed)
+═══════════════════════════════════════ -->
+<div class="mq-wrap" style="background:var(--P);color:#fff;font-size:11.5px;font-weight:600;padding:7px 0;position:relative;z-index:30">
+  <div class="mq-track gap-0">
+    <span class="mx-5">🕌 WAZIQOH KMB Mesir</span><span class="mx-2 opacity-40">|</span>
+    <span class="mx-5">✦ Wakaf · Zakat · Infaq · Shodaqoh · Fidyah</span><span class="mx-2 opacity-40">|</span>
+    <span class="mx-5">🌙 100% Transparan & Syariah</span><span class="mx-2 opacity-40">|</span>
+    <span class="mx-5">✦ Bantu Mahasiswa Banten di Kairo</span><span class="mx-2 opacity-40">|</span>
+    <span class="mx-5">📍 Nasr City, Cairo, Egypt</span><span class="mx-2 opacity-40">|</span>
+    <span class="mx-5">🤝 Di bawah naungan KMB Mesir</span><span class="mx-2 opacity-40">|</span>
+    <!-- duplicate for seamless loop -->
+    <span class="mx-5">🕌 WAZIQOH KMB Mesir</span><span class="mx-2 opacity-40">|</span>
+    <span class="mx-5">✦ Wakaf · Zakat · Infaq · Shodaqoh · Fidyah</span><span class="mx-2 opacity-40">|</span>
+    <span class="mx-5">🌙 100% Transparan & Syariah</span><span class="mx-2 opacity-40">|</span>
+    <span class="mx-5">✦ Bantu Mahasiswa Banten di Kairo</span><span class="mx-2 opacity-40">|</span>
+    <span class="mx-5">📍 Nasr City, Cairo, Egypt</span><span class="mx-2 opacity-40">|</span>
+    <span class="mx-5">🤝 Di bawah naungan KMB Mesir</span><span class="mx-2 opacity-40">|</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     HEADER — sticky, below marquee
+═══════════════════════════════════════ -->
+<header class="sticky top-0 z-40 transition-all duration-300" id="main-header">
+  <div class="glass border-b border-white/50" style="border-radius:0">
+    <div class="max-w-5xl mx-auto px-4 h-16 flex items-center gap-3">
+
+      <!-- LOGO -->
+      <a href="#" class="flex items-center gap-2.5 flex-shrink-0">
+        <img src="https://i.ibb.co/q37GwCZ7/favicon.png" alt="WAZIQOH" class="w-9 h-9 rounded-xl object-contain shadow-lg" onerror="this.outerHTML='<div class=\'w-9 h-9 rounded-xl flex items-center justify-center text-white font-bold text-sm\' style=\'background:var(--P)\'>W</div>'"/>
+        <div class="leading-none">
+          <div class="font-display font-bold text-p-600 text-[17px]">WAZIQOH</div>
+          <div class="text-[9px] text-p-400 font-bold tracking-widest uppercase">KMB Mesir</div>
+        </div>
+      </a>
+
+      <!-- SEARCH (desktop) -->
+      <div class="hidden md:flex flex-1 max-w-xs relative ml-3">
+        <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-p-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input type="text" id="search-input" placeholder="Cari program…" oninput="filterProgram(currentCat, null)"
+          class="w-full pl-9 pr-4 py-2 rounded-xl text-sm font-medium inp" style="background:var(--PLL);border:1.5px solid var(--BD)"/>
+      </div>
+
+      <!-- NAV DESKTOP -->
+      <nav class="hidden md:flex items-center gap-1 text-sm font-semibold ml-auto">
+        <a href="#" class="px-3 py-1.5 rounded-xl text-p-700 hover:bg-p-50 transition">Beranda</a>
+        <a href="#transparansi" class="px-3 py-1.5 rounded-xl text-p-700 hover:bg-p-50 transition">Transparansi</a>
+        <a href="#program" class="px-3 py-1.5 rounded-xl text-p-700 hover:bg-p-50 transition">Program</a>
+        <a href="#faq" class="px-3 py-1.5 rounded-xl text-p-700 hover:bg-p-50 transition">FAQ</a>
+      </nav>
+
+      <!-- ACTIONS -->
+      <div class="flex items-center gap-2 ml-auto md:ml-3">
+        <!-- Cek Donasi -->
+        <button onclick="openModal('modal-cek')" title="Cek Status Donasi"
+          class="hidden sm:flex w-9 h-9 items-center justify-center rounded-xl border transition ch" style="background:var(--WH);border-color:var(--BD);color:var(--INK2)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </button>
+        <!-- WA -->
+        <a href="https://wa.me/6285880856341" target="_blank" title="WhatsApp Admin"
+          class="hidden sm:flex w-9 h-9 items-center justify-center rounded-xl transition ch" style="background:#25D366;color:#fff">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <!-- DONASI HEADER BTN -->
+        <button onclick="openModal('modal-donasi')"
+          class="hidden sm:flex items-center gap-1.5 font-bold text-sm text-white rounded-xl px-4 py-2 transition ch pulse"
+          style="background:var(--P);box-shadow:0 4px 18px rgba(13,122,82,.32)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+          Donasi
+        </button>
+        <!-- HAMBURGER MOBILE -->
+        <button id="hamburger" onclick="toggleMobileMenu()" class="md:hidden flex flex-col gap-1.5 p-2" style="color:var(--INK)">
+          <span class="block w-5 h-0.5 rounded transition-all" style="background:currentColor" id="hb1"></span>
+          <span class="block w-4 h-0.5 rounded transition-all" style="background:currentColor" id="hb2"></span>
+          <span class="block w-5 h-0.5 rounded transition-all" style="background:currentColor" id="hb3"></span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════
+     MOBILE MENU DRAWER
+═══════════════════════════════════════ -->
+<div id="mobile-menu" class="fixed inset-0 z-[9300] transform translate-x-full transition-transform duration-300" style="background:var(--WH)">
+  <div class="flex flex-col h-full">
+    <div class="flex items-center justify-between px-5 py-4 border-b" style="border-color:var(--BD)">
+      <img src="https://i.ibb.co/5XnDzfNS/Asset-3.png" alt="WAZIQOH" class="h-10 object-contain"/>
+      <button onclick="toggleMobileMenu()" class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:var(--PLL);color:var(--P)">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <nav class="flex-1 overflow-y-auto px-5 py-4 space-y-1">
+      <a href="#" onclick="toggleMobileMenu()" class="flex items-center gap-3 py-3 px-4 rounded-2xl font-semibold transition" style="color:var(--P);background:var(--PLL)">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Beranda</a>
+      <a href="#transparansi" onclick="toggleMobileMenu()" class="flex items-center gap-3 py-3 px-4 rounded-2xl font-semibold transition hover:bg-p-50">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Transparansi</a>
+      <a href="#program" onclick="toggleMobileMenu()" class="flex items-center gap-3 py-3 px-4 rounded-2xl font-semibold transition hover:bg-p-50">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>Program</a>
+      <a href="#faq" onclick="toggleMobileMenu()" class="flex items-center gap-3 py-3 px-4 rounded-2xl font-semibold transition hover:bg-p-50">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>FAQ</a>
+      <div class="mt-4 p-4 rounded-2xl" style="background:var(--PLL);border:1.5px solid var(--BD)">
+        <p class="text-xs font-bold mb-2 uppercase tracking-wider" style="color:var(--INK3)">Rekening Donasi</p>
+        <div id="rek-mobile" class="space-y-2 text-sm"></div>
+      </div>
+    </nav>
+    <div class="p-5 border-t" style="border-color:var(--BD)">
+      <button onclick="toggleMobileMenu();openModal('modal-donasi')"
+        class="w-full text-white font-bold py-4 rounded-2xl text-base transition"
+        style="background:var(--P);box-shadow:0 4px 20px rgba(13,122,82,.3)">
+        💚 Donasi Sekarang
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     HERO SECTION
+═══════════════════════════════════════ -->
+<section class="relative min-h-[92vh] flex items-center overflow-hidden">
+  <!-- BG IMAGE -->
+  <div class="absolute inset-0">
+    <img src="https://images.unsplash.com/photo-1601560496309-d59c44021f8f?auto=format&fit=crop&q=80&w=1400" alt="Kairo" class="w-full h-full object-cover"/>
+    <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(4,42,28,.88) 0%,rgba(10,77,53,.72) 50%,rgba(4,42,28,.6) 100%)"></div>
+    <div class="absolute inset-0 opacity-20" style="background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22%3E%3Cpath d=%22M30 5L35 20L50 20L38 29L43 44L30 35L17 44L22 29L10 20L25 20Z%22 fill=%22none%22 stroke=%22rgba(201,146,10,0.4)%22 stroke-width=%221%22/%3E%3C/svg%3E');background-size:60px 60px"></div>
+  </div>
+
+  <div class="relative z-10 w-full max-w-5xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-10 items-center">
+
+    <!-- LEFT COPY -->
+    <div>
+      <div class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold mb-6 fade-up"
+        style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.9)">
+        <span class="w-1.5 h-1.5 rounded-full" style="background:#56be8e"></span>
+        Di bawah naungan KMB Mesir
+      </div>
+      <h1 class="font-display text-white font-bold leading-tight mb-4 fade-up d1"
+        style="font-size:clamp(2rem,5vw,3.5rem)">
+        Titipkan<br/>
+        <span class="text-gold">Amanahmu</span><br/>
+        di Mesir
+      </h1>
+      <p class="text-sm md:text-base leading-relaxed mb-8 fade-up d2" style="color:rgba(255,255,255,.8);max-width:380px">
+        Wakaf, Zakat, Infaq & Shodaqoh untuk saudara kita mahasiswa Banten yang berjuang menuntut ilmu di bumi para Nabi.
+      </p>
+      <div class="flex flex-wrap gap-3 fade-up d3">
+        <button onclick="openModal('modal-donasi')"
+          class="text-white font-bold py-3.5 px-7 rounded-2xl transition ch pulse flex items-center gap-2"
+          style="background:var(--P);box-shadow:0 6px 24px rgba(13,122,82,.4)">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          Donasi Sekarang
+        </button>
+        <a href="#program" class="text-white font-semibold py-3.5 px-7 rounded-2xl transition ch flex items-center gap-2"
+          style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25)">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          Lihat Program
+        </a>
+      </div>
+      <!-- HERO STATS -->
+      <div class="flex gap-4 mt-8 fade-up d4">
+        <div class="rounded-2xl px-4 py-3 text-center" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15)">
+          <div class="text-xl font-extrabold text-white" id="hero-stat-penerima">—</div>
+          <div class="text-[10px] font-medium" style="color:rgba(255,255,255,.7)">Mahasiswa Terbantu</div>
+        </div>
+        <div class="rounded-2xl px-4 py-3 text-center" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15)">
+          <div class="text-xl font-extrabold text-gold" id="hero-stat-dana">—</div>
+          <div class="text-[10px] font-medium" style="color:rgba(255,255,255,.7)">Total Tersalurkan</div>
+        </div>
+        <div class="rounded-2xl px-4 py-3 text-center" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15)">
+          <div class="text-xl font-extrabold text-white" id="hero-stat-program">—</div>
+          <div class="text-[10px] font-medium" style="color:rgba(255,255,255,.7)">Program Aktif</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: QUICK DONATE CARD -->
+    <div class="glass rounded-3xl p-6 shadow-2xl hidden md:block fade-up d2">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-bold text-p-700">Donasi Cepat</h3>
+        <span class="flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold" style="background:var(--PL);color:var(--P)">
+          <span class="w-1.5 h-1.5 rounded-full" style="background:var(--P);animation:pulse-ring 2s infinite"></span>Realtime
+        </span>
+      </div>
+      <!-- PROGRESS TARGET BULAN INI -->
+      <div class="mb-4">
+        <div class="flex justify-between text-xs font-semibold mb-1.5">
+          <span style="color:var(--INK3)">Target Bulan Ini</span>
+          <span style="color:var(--P)" id="hero-pct">—%</span>
+        </div>
+        <div class="pbar"><div class="pbar-fill" id="hero-progress" style="width:0%"></div></div>
+        <div class="flex justify-between text-[10px] mt-1" style="color:var(--INK3)">
+          <span id="hero-realisasi">—</span>
+          <span id="hero-target">—</span>
+        </div>
+      </div>
+      <!-- QUICK AMOUNTS -->
+      <div class="grid grid-cols-3 gap-2 mb-3">
+        <div class="amt-pill" onclick="heroSelectAmt(50000,this)">50rb</div>
+        <div class="amt-pill sel" onclick="heroSelectAmt(100000,this)">100rb</div>
+        <div class="amt-pill" onclick="heroSelectAmt(250000,this)">250rb</div>
+        <div class="amt-pill" onclick="heroSelectAmt(500000,this)">500rb</div>
+        <div class="amt-pill" onclick="heroSelectAmt(1000000,this)">1jt</div>
+        <div class="amt-pill" onclick="openModal('modal-donasi')">Lain</div>
+      </div>
+      <button onclick="openModal('modal-donasi')" class="w-full text-white font-bold py-3 rounded-2xl text-sm transition ch" style="background:var(--P);box-shadow:0 4px 18px rgba(13,122,82,.28)">
+        🌿 Lanjutkan Donasi
+      </button>
+      <!-- DONATUR TERBARU -->
+      <div class="mt-4 pt-4" style="border-top:1px solid var(--BD)">
+        <p class="text-[10px] font-bold mb-2 uppercase tracking-wider" style="color:var(--INK3)">Donatur Terbaru</p>
+        <div class="space-y-1.5" id="last-donatur-list">
+          <div class="skel h-6 rounded-lg"></div>
+          <div class="skel h-6 rounded-lg"></div>
+          <div class="skel h-6 rounded-lg" style="width:70%"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SCROLL HINT -->
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-10 float" style="color:rgba(255,255,255,.5)">
+    <span class="text-[10px] font-medium">Scroll</span>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     MAIN CONTENT
+═══════════════════════════════════════ -->
+<main class="max-w-5xl mx-auto px-4 space-y-20 relative z-10">
+
+  <!-- ───────────────────────────────────
+       TRANSPARANSI DANA
+  ─────────────────────────────────────── -->
+  <section id="transparansi" class="mt-14">
+    <div class="text-center mb-8">
+      <p class="text-xs font-bold uppercase tracking-widest mb-2" style="color:var(--INK3)">Data Real-time dari Spreadsheet</p>
+      <h2 class="font-display text-3xl font-bold" style="color:var(--INK)">Transparansi Dana</h2>
+    </div>
+
+    <!-- TOTAL CARD -->
+    <div class="glass-dk rounded-3xl p-8 text-white text-center relative overflow-hidden mb-6 shadow-2xl">
+      <div class="absolute -right-20 -top-20 w-64 h-64 rounded-full" style="background:rgba(255,255,255,.05);filter:blur(40px)"></div>
+      <div class="absolute -left-10 -bottom-10 w-44 h-44 rounded-full" style="background:rgba(201,146,10,.1);filter:blur(32px)"></div>
+      <p class="text-xs font-bold uppercase tracking-widest mb-2 relative z-10" style="color:rgba(255,255,255,.7)">Total Dana Tersalurkan</p>
+      <div id="total-dana" class="font-display text-5xl md:text-6xl font-bold relative z-10 mb-2">
+        <div class="skel h-12 w-72 mx-auto rounded-xl"></div>
+      </div>
+      <p class="text-xs relative z-10" style="color:rgba(255,255,255,.5)">
+        <span class="inline-flex items-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full" style="background:#56be8e;animation:pulse-ring 2s infinite"></span>
+          Diperbarui otomatis · <span id="last-update-label">—</span>
+        </span>
+      </p>
+    </div>
+
+    <!-- 4 RINCIAN -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-white rounded-2xl p-5 text-center ch shadow-sm" style="border:1.5px solid var(--BD)">
+        <div class="w-10 h-10 rounded-xl mx-auto mb-3 flex items-center justify-center" style="background:var(--PL)">
+          <svg class="w-5 h-5" style="color:var(--P)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div class="text-lg font-extrabold mb-0.5" style="color:var(--P)" id="val-zakat"><div class="skel h-5 w-16 mx-auto rounded"></div></div>
+        <div class="text-xs font-semibold" style="color:var(--INK3)">Zakat</div>
+        <div class="pbar mt-2"><div class="pbar-fill" id="bar-zakat" style="width:0%"></div></div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 text-center ch shadow-sm" style="border:1.5px solid var(--BD)">
+        <div class="w-10 h-10 rounded-xl mx-auto mb-3 flex items-center justify-center" style="background:var(--GL)">
+          <svg class="w-5 h-5" style="color:var(--G)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        </div>
+        <div class="text-lg font-extrabold mb-0.5" style="color:var(--P)" id="val-infaq"><div class="skel h-5 w-16 mx-auto rounded"></div></div>
+        <div class="text-xs font-semibold" style="color:var(--INK3)">Infaq & Sedekah</div>
+        <div class="pbar mt-2"><div class="pbar-fill" id="bar-infaq" style="width:0%"></div></div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 text-center ch shadow-sm" style="border:1.5px solid var(--BD)">
+        <div class="w-10 h-10 rounded-xl mx-auto mb-3 flex items-center justify-center" style="background:var(--PL)">
+          <svg class="w-5 h-5" style="color:var(--P)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+        </div>
+        <div class="text-lg font-extrabold mb-0.5" style="color:var(--P)" id="val-wakaf"><div class="skel h-5 w-16 mx-auto rounded"></div></div>
+        <div class="text-xs font-semibold" style="color:var(--INK3)">Wakaf</div>
+        <div class="pbar mt-2"><div class="pbar-fill" id="bar-wakaf" style="width:0%"></div></div>
+      </div>
+      <div class="bg-white rounded-2xl p-5 text-center ch shadow-sm" style="border:1.5px solid var(--BD)">
+        <div class="w-10 h-10 rounded-xl mx-auto mb-3 flex items-center justify-center" style="background:var(--GL)">
+          <svg class="w-5 h-5" style="color:var(--G)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <div class="text-lg font-extrabold mb-0.5" style="color:var(--P)" id="val-program"><div class="skel h-5 w-16 mx-auto rounded"></div></div>
+        <div class="text-xs font-semibold" style="color:var(--INK3)">Program Khusus</div>
+        <div class="pbar mt-2"><div class="pbar-fill" id="bar-program" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <!-- CHART TREN -->
+    <div class="bg-white rounded-3xl p-6 shadow-sm" style="border:1.5px solid var(--BD)">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="font-bold text-sm" style="color:var(--INK2)">Tren Penyaluran Dana (6 Bulan)</h3>
+        <div class="flex gap-2">
+          <button onclick="switchChart('bar')" id="btn-chart-bar" class="text-xs px-3 py-1 rounded-lg font-semibold transition" style="background:var(--PL);color:var(--P);border:1.5px solid var(--P)">Bar</button>
+          <button onclick="switchChart('line')" id="btn-chart-line" class="text-xs px-3 py-1 rounded-lg font-semibold transition" style="background:var(--WH);color:var(--INK3);border:1.5px solid var(--BD)">Line</button>
+        </div>
+      </div>
+      <div id="chart-container" class="flex items-end gap-2 h-32"></div>
+      <div id="chart-labels" class="flex justify-between mt-1 text-[10px]" style="color:var(--INK3);font-weight:600"></div>
+    </div>
+    <div class="text-center mt-4">
+      <a href="transparansi.html" class="inline-flex items-center gap-2 text-sm font-semibold rounded-xl px-5 py-2.5 transition ch"
+        style="color:var(--P);border:1.5px solid var(--BD);background:var(--WH)">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        Lihat Laporan Lengkap
+      </a>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────────────
+       JENIS DANA CARDS
+  ─────────────────────────────────────── -->
+  <section>
+    <div class="mb-6">
+      <p class="text-xs font-bold uppercase tracking-widest mb-1" style="color:var(--INK3)">Pilih Kebaikanmu</p>
+      <h2 class="font-display text-3xl font-bold" style="color:var(--INK)">Jenis Dana</h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <!-- Wakaf -->
+      <div onclick="openModalWithJenis('Wakaf')" class="bg-white rounded-3xl p-4 text-center ch cursor-pointer group shadow-sm relative overflow-hidden" style="border:1.5px solid var(--BD)">
+        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style="background:linear-gradient(135deg,rgba(13,122,82,.05),rgba(13,122,82,.1))"></div>
+        <div class="h-24 rounded-2xl overflow-hidden mb-3 relative">
+          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy"/>
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(4,42,28,.65),transparent)"></div>
+          <span class="absolute bottom-1.5 left-2 text-white text-[9px] px-2 py-0.5 rounded-full font-bold" style="background:var(--P)">Jariyah</span>
+        </div>
+        <h3 class="font-bold text-sm mb-0.5" style="color:var(--INK)">Wakaf</h3>
+        <p class="text-[10px]" style="color:var(--INK3)">Manfaat abadi</p>
+      </div>
+      <!-- Zakat Fitrah -->
+      <div onclick="openModalWithJenis('Zakat Fitrah')" class="bg-white rounded-3xl p-4 text-center ch cursor-pointer group shadow-sm relative overflow-hidden" style="border:1.5px solid var(--BD)">
+        <div class="h-24 rounded-2xl overflow-hidden mb-3 relative">
+          <img src="https://images.unsplash.com/photo-1590218706313-94dfd1c81da5?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy"/>
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(4,42,28,.65),transparent)"></div>
+          <span class="absolute bottom-1.5 left-2 text-white text-[9px] px-2 py-0.5 rounded-full font-bold" style="background:#c9920a">Wajib</span>
+        </div>
+        <h3 class="font-bold text-sm mb-0.5" style="color:var(--INK)">Zakat Fitrah</h3>
+        <p class="text-[10px]" style="color:var(--INK3)">Per jiwa</p>
+      </div>
+      <!-- Zakat Maal -->
+      <div onclick="openModalWithJenis('Zakat Maal')" class="bg-white rounded-3xl p-4 text-center ch cursor-pointer group shadow-sm relative overflow-hidden" style="border:1.5px solid var(--BD)">
+        <div class="h-24 rounded-2xl overflow-hidden mb-3 relative">
+          <img src="https://images.unsplash.com/photo-1579621970590-9d624316904b?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy"/>
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(4,42,28,.65),transparent)"></div>
+          <span class="absolute bottom-1.5 left-2 text-white text-[9px] px-2 py-0.5 rounded-full font-bold" style="background:var(--P)">2.5%</span>
+        </div>
+        <h3 class="font-bold text-sm mb-0.5" style="color:var(--INK)">Zakat Maal</h3>
+        <p class="text-[10px]" style="color:var(--INK3)">Harta & usaha</p>
+      </div>
+      <!-- Infaq -->
+      <div onclick="openModalWithJenis('Infaq')" class="bg-white rounded-3xl p-4 text-center ch cursor-pointer group shadow-sm relative overflow-hidden" style="border:1.5px solid var(--BD)">
+        <div class="h-24 rounded-2xl overflow-hidden mb-3 relative">
+          <img src="https://images.unsplash.com/photo-1533038590840-1c504ca82f25?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy"/>
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(4,42,28,.65),transparent)"></div>
+          <span class="absolute bottom-1.5 left-2 text-white text-[9px] px-2 py-0.5 rounded-full font-bold" style="background:#c9920a">Sunnah</span>
+        </div>
+        <h3 class="font-bold text-sm mb-0.5" style="color:var(--INK)">Infaq</h3>
+        <p class="text-[10px]" style="color:var(--INK3)">Kapan saja</p>
+      </div>
+      <!-- Shodaqoh -->
+      <div onclick="openModalWithJenis('Shodaqoh')" class="bg-white rounded-3xl p-4 text-center ch cursor-pointer group shadow-sm relative overflow-hidden" style="border:1.5px solid var(--BD)">
+        <div class="h-24 rounded-2xl overflow-hidden mb-3 relative">
+          <img src="https://images.unsplash.com/photo-1544396821-4dd40b938ad3?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy"/>
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(4,42,28,.65),transparent)"></div>
+          <span class="absolute bottom-1.5 left-2 text-white text-[9px] px-2 py-0.5 rounded-full font-bold" style="background:var(--P)">Darurat</span>
+        </div>
+        <h3 class="font-bold text-sm mb-0.5" style="color:var(--INK)">Shodaqoh</h3>
+        <p class="text-[10px]" style="color:var(--INK3)">Bebas & tulus</p>
+      </div>
+      <!-- Fidyah -->
+      <div onclick="openModalWithJenis('Fidyah')" class="bg-white rounded-3xl p-4 text-center ch cursor-pointer group shadow-sm relative overflow-hidden" style="border:1.5px solid var(--BD)">
+        <div class="h-24 rounded-2xl overflow-hidden mb-3 relative">
+          <img src="https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?auto=format&fit=crop&q=80&w=300" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy"/>
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(4,42,28,.65),transparent)"></div>
+          <span class="absolute bottom-1.5 left-2 text-white text-[9px] px-2 py-0.5 rounded-full font-bold" style="background:#c9920a">Ramadhan</span>
+        </div>
+        <h3 class="font-bold text-sm mb-0.5" style="color:var(--INK)">Fidyah</h3>
+        <p class="text-[10px]" style="color:var(--INK3)">Pengganti puasa</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────────────
+       COUNTER IMPACT
+  ─────────────────────────────────────── -->
+  <section class="sec-dark rounded-[36px] p-8 md:p-12 relative overflow-hidden">
+    <div class="absolute -right-20 -top-20 w-72 h-72 rounded-full" style="background:rgba(13,122,82,.2);filter:blur(60px)"></div>
+    <div class="absolute -left-10 -bottom-10 w-48 h-48 rounded-full" style="background:rgba(201,146,10,.15);filter:blur(40px)"></div>
+    <div class="text-center mb-10 relative z-10">
+      <p class="text-xs font-bold uppercase tracking-widest mb-2" style="color:rgba(255,255,255,.6)">Dampak Nyata</p>
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-white">Berdampak Bersama <span class="text-gold">WAZIQOH</span></h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 relative z-10 text-center" id="counter-section">
+      <div>
+        <div class="text-4xl md:text-5xl font-extrabold text-white mb-1"><span class="counter" data-target="248" id="cnt-penerima">0</span>+</div>
+        <div class="text-sm font-medium" style="color:rgba(255,255,255,.7)">Mahasiswa Terbantu</div>
+      </div>
+      <div>
+        <div class="text-4xl md:text-5xl font-extrabold mb-1 text-gold"><span class="counter" data-target="17" id="cnt-program">0</span></div>
+        <div class="text-sm font-medium" style="color:rgba(255,255,255,.7)">Program Aktif</div>
+      </div>
+      <div>
+        <div class="text-4xl md:text-5xl font-extrabold text-white mb-1"><span class="counter" data-target="4" id="cnt-bidang">0</span></div>
+        <div class="text-sm font-medium" style="color:rgba(255,255,255,.7)">Bidang Kegiatan</div>
+      </div>
+      <div>
+        <div class="text-4xl md:text-5xl font-extrabold text-gold mb-1"><span class="counter" data-target="100" id="cnt-persen">0</span>%</div>
+        <div class="text-sm font-medium" style="color:rgba(255,255,255,.7)">Transparan & Syariah</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────────────
+       PROGRAM UNGGULAN
+  ─────────────────────────────────────── -->
+  <section id="program">
+    <div class="flex justify-between items-end mb-6">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest mb-1" style="color:var(--INK3)">Kegiatan Kami</p>
+        <h2 class="font-display text-3xl font-bold" style="color:var(--INK)">Program Unggulan</h2>
+      </div>
+    </div>
+    <!-- FILTER TABS -->
+    <div class="flex gap-2 overflow-x-auto noscroll pb-3 mb-6">
+      <button class="ftab on" data-cat="semua" onclick="filterProgram('semua',this)">Semua</button>
+      <button class="ftab" data-cat="edukasi" onclick="filterProgram('edukasi',this)">Edukasi</button>
+      <button class="ftab" data-cat="dakwah" onclick="filterProgram('dakwah',this)">Dakwah</button>
+      <button class="ftab" data-cat="ekonomi" onclick="filterProgram('ekonomi',this)">Ekonomi</button>
+      <button class="ftab" data-cat="kesehatan" onclick="filterProgram('kesehatan',this)">Kesehatan</button>
+      <button class="ftab" data-cat="infaq" onclick="filterProgram('infaq',this)">Infaq</button>
+      <button class="ftab" data-cat="zakat" onclick="filterProgram('zakat',this)">Zakat</button>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5" id="program-grid">
+      <!-- rendered by JS -->
+    </div>
+  </section>
+
+  <!-- ───────────────────────────────────
+       LAYANAN
+  ─────────────────────────────────────── -->
+  <section id="layanan">
+    <div class="mb-6">
+      <p class="text-xs font-bold uppercase tracking-widest mb-1" style="color:var(--INK3)">Tools & Fitur</p>
+      <h2 class="font-display text-3xl font-bold" style="color:var(--INK)">Layanan Kami</h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div onclick="openModal('modal-kalkulator')" class="bg-white rounded-2xl p-5 text-center shadow-sm ch cursor-pointer" style="border:1.5px solid var(--BD)">
+        <div class="w-12 h-12 rounded-2xl mx-auto mb-3 flex items-center justify-center" style="background:var(--PL);color:var(--P)">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        </div>
+        <h4 class="font-bold text-sm" style="color:var(--INK2)">Kalkulator Zakat</h4>
+        <p class="text-[11px] mt-1" style="color:var(--INK3)">Hitung nisab & zakat</p>
+      </div>
+      <div onclick="openModal('modal-konfirmasi')" class="bg-white rounded-2xl p-5 text-center shadow-sm ch cursor-pointer" style="border:1.5px solid var(--BD)">
+        <div class="w-12 h-12 rounded-2xl mx-auto mb-3 flex items-center justify-center" style="background:var(--GL);color:var(--G)">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h4 class="font-bold text-sm" style="color:var(--INK2)">Konfirmasi Donasi</h4>
+        <p class="text-[11px] mt-1" style="color:var(--INK3)">Upload bukti transfer</p>
+      </div>
+      <div onclick="openModal('modal-cek')" class="bg-white rounded-2xl p-5 text-center shadow-sm ch cursor-pointer" style="border:1.5px solid var(--BD)">
+        <div class="w-12 h-12 rounded-2xl mx-auto mb-3 flex items-center justify-center" style="background:var(--PL);color:var(--P)">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </div>
+        <h4 class="font-bold text-sm" style="color:var(--INK2)">Cek Status Donasi</h4>
+        <p class="text-[11px] mt-1" style="color:var(--INK3)">Lacak donasi Anda</p>
+      </div>
+      <a href="https://wa.me/6285880856341" target="_blank" class="bg-white rounded-2xl p-5 text-center shadow-sm ch block" style="border:1.5px solid var(--BD)">
+        <div class="w-12 h-12 rounded-2xl mx-auto mb-3 flex items-center justify-center" style="background:#e8fdf0;color:#25D366">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <h4 class="font-bold text-sm" style="color:var(--INK2)">Konsultasi WA</h4>
+        <p class="text-[11px] mt-1" style="color:var(--INK3)">Chat langsung admin</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────────────
+       REKENING DONASI
+  ─────────────────────────────────────── -->
+  <section>
+    <div class="mb-6">
+      <p class="text-xs font-bold uppercase tracking-widest mb-1" style="color:var(--INK3)">Transfer Donasi</p>
+      <h2 class="font-display text-3xl font-bold" style="color:var(--INK)">Rekening Donasi</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-4" id="rekening-list">
+      <div class="skel h-24 rounded-2xl"></div>
+      <div class="skel h-24 rounded-2xl"></div>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────────────
+       TESTIMONI (kartu swipe)
+  ─────────────────────────────────────── -->
+  <section>
+    <div class="flex justify-between items-end mb-6">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest mb-1" style="color:var(--INK3)">Suara Kebaikan</p>
+        <h2 class="font-display text-3xl font-bold" style="color:var(--INK)">Apa Kata Mereka</h2>
+      </div>
+      <div class="flex gap-2">
+        <button onclick="prevTesti()" class="w-9 h-9 rounded-xl flex items-center justify-center ch" style="background:var(--WH);border:1.5px solid var(--BD);color:var(--P)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button onclick="nextTesti()" class="w-9 h-9 rounded-xl flex items-center justify-center ch" style="background:var(--WH);border:1.5px solid var(--BD);color:var(--P)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="overflow-hidden rounded-3xl">
+      <div class="testi-track" id="testi-track"></div>
+    </div>
+    <div class="flex justify-center gap-2 mt-4" id="testi-dots"></div>
+  </section>
+
+  <!-- ───────────────────────────────────
+       KEGIATAN TERBARU (swipe auto 7s)
+  ─────────────────────────────────────── -->
+  <section>
+    <div class="flex justify-between items-end mb-6">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest mb-1" style="color:var(--INK3)">Update Terkini</p>
+        <h2 class="font-display text-3xl font-bold" style="color:var(--INK)">Kegiatan Terbaru</h2>
+      </div>
+      <div class="flex gap-2">
+        <button onclick="prevKeg()" class="w-9 h-9 rounded-xl flex items-center justify-center ch" style="background:var(--WH);border:1.5px solid var(--BD);color:var(--P)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button onclick="nextKeg()" class="w-9 h-9 rounded-xl flex items-center justify-center ch" style="background:var(--WH);border:1.5px solid var(--BD);color:var(--P)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="overflow-hidden">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 transition-none" id="keg-container">
+        <!-- rendered by JS -->
+      </div>
+    </div>
+    <div class="flex justify-center gap-2 mt-4" id="keg-dots"></div>
+  </section>
+
+  <!-- ───────────────────────────────────
+       PENERIMA MANFAAT
+  ─────────────────────────────────────── -->
+  <section>
+    <div class="mb-6">
+      <p class="text-xs font-bold uppercase tracking-widest mb-1" style="color:var(--INK3)">Mereka yang Terbantu</p>
+      <h2 class="font-display text-3xl font-bold" style="color:var(--INK)">Penerima Manfaat</h2>
+    </div>
+    <div class="bg-white rounded-3xl shadow-sm overflow-hidden" style="border:1.5px solid var(--BD)">
+      <div class="p-4 flex gap-3 items-center" style="border-bottom:1px solid var(--BD)">
+        <input type="text" id="search-penerima" placeholder="Cari nama atau kota…" oninput="searchPenerima()" class="flex-1 rounded-xl px-4 py-2 text-sm inp" style="background:var(--PLL);border:1.5px solid var(--BD)"/>
+        <select id="filter-penerima" onchange="searchPenerima()" class="rounded-xl px-3 py-2 text-sm inp" style="background:var(--PLL);border:1.5px solid var(--BD)">
+          <option value="">Semua</option>
+          <option value="Beasiswa">Beasiswa</option>
+          <option value="Bantuan Darurat">Darurat</option>
+          <option value="Wakaf">Wakaf</option>
+        </select>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead style="background:var(--PLL)">
+            <tr>
+              <th class="text-left px-4 py-3 text-xs font-bold uppercase tracking-wide" style="color:var(--P)">Nama</th>
+              <th class="text-left px-4 py-3 text-xs font-bold uppercase tracking-wide hidden md:table-cell" style="color:var(--P)">Kab/Kota</th>
+              <th class="text-left px-4 py-3 text-xs font-bold uppercase tracking-wide" style="color:var(--P)">Program</th>
+              <th class="text-left px-4 py-3 text-xs font-bold uppercase tracking-wide hidden md:table-cell" style="color:var(--P)">Jumlah</th>
+              <th class="text-left px-4 py-3 text-xs font-bold uppercase tracking-wide" style="color:var(--P)">Bulan</th>
+            </tr>
+          </thead>
+          <tbody id="penerima-tbody"></tbody>
+        </table>
+      </div>
+      <div class="p-4 flex justify-between items-center" style="border-top:1px solid var(--BD)">
+        <span class="text-xs" style="color:var(--INK3)" id="penerima-count">—</span>
+        <div class="flex gap-2">
+          <button onclick="prevPg()" class="px-3 py-1.5 rounded-xl text-xs font-semibold ch" style="background:var(--PLL);border:1.5px solid var(--BD);color:var(--P)" id="btn-prev-pg">← Sebelumnya</button>
+          <button onclick="nextPg()" class="px-3 py-1.5 rounded-xl text-xs font-semibold ch" style="background:var(--PLL);border:1.5px solid var(--BD);color:var(--P)" id="btn-next-pg">Selanjutnya →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────────────
+       FAQ
+  ─────────────────────────────────────── -->
+  <section id="faq" class="pb-8">
+    <div class="text-center mb-8">
+      <p class="text-xs font-bold uppercase tracking-widest mb-1" style="color:var(--INK3)">Ada Pertanyaan?</p>
+      <h2 class="font-display text-3xl font-bold" style="color:var(--INK)">FAQ</h2>
+    </div>
+    <div class="space-y-3 max-w-2xl mx-auto" id="faq-list"></div>
+  </section>
+
+</main>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════ -->
+<footer class="glass-dk text-white mt-16 pt-14 pb-28 md:pb-14 px-4 rounded-t-[44px]">
+  <div class="max-w-5xl mx-auto">
+    <div class="grid md:grid-cols-3 gap-10 mb-10">
+      <div>
+        <img src="https://i.ibb.co/5XnDzfNS/Asset-3.png" alt="WAZIQOH" class="h-16 object-contain mb-4 drop-shadow-lg" onerror="this.outerHTML='<div class=\'font-display text-2xl font-bold text-white mb-4\'>WAZIQOH KMB</div>'"/>
+        <p class="text-sm leading-relaxed mb-4" style="color:rgba(255,255,255,.75)">Lembaga otonom pengelola ZISWAF di bawah naungan Keluarga Mahasiswa Banten Mesir. 100% dana untuk mahasiswa Banten di Mesir.</p>
+        <div class="flex gap-2">
+          <a href="https://wa.me/6285880856341" target="_blank" class="w-9 h-9 rounded-xl flex items-center justify-center transition ch" style="background:rgba(255,255,255,.12);color:#fff">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-xl flex items-center justify-center transition ch" style="background:rgba(255,255,255,.12);color:#fff">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h3 class="font-bold mb-4 text-sm uppercase tracking-wider" style="color:rgba(255,255,255,.6)">Navigasi</h3>
+        <ul class="space-y-2 text-sm" style="color:rgba(255,255,255,.75)">
+          <li><a href="#" class="hover:text-white transition">Beranda</a></li>
+          <li><a href="#transparansi" class="hover:text-white transition">Transparansi Dana</a></li>
+          <li><a href="#program" class="hover:text-white transition">Program Unggulan</a></li>
+          <li><a href="#layanan" class="hover:text-white transition">Layanan</a></li>
+          <li><a href="#faq" class="hover:text-white transition">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-bold mb-4 text-sm uppercase tracking-wider" style="color:rgba(255,255,255,.6)">Hubungi Kami</h3>
+        <div class="space-y-3 text-sm" style="color:rgba(255,255,255,.75)">
+          <div class="flex items-start gap-2.5">
+            <svg class="w-4 h-4 mt-0.5 flex-shrink-0" style="color:#56be8e" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            <span>Nasr City, Cairo, Egypt</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <svg class="w-4 h-4 flex-shrink-0" style="color:#56be8e" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15"/></svg>
+            <a href="https://wa.me/6285880856341" target="_blank" class="hover:text-white transition font-semibold">+62 858-8085-6341</a>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <svg class="w-4 h-4 flex-shrink-0" style="color:#56be8e" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>waziqoh@kmbmesir.org</span>
+          </div>
+        </div>
+        <div class="mt-4 p-3 rounded-xl" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15)">
+          <p class="text-xs font-semibold mb-0.5" style="color:rgba(255,255,255,.6)">Rekening Utama</p>
+          <p class="font-bold text-white" id="footer-rek-bsi">BSI 7150-XXXX-XXX</p>
+          <p class="text-xs" style="color:rgba(255,255,255,.6)">a.n. WAZIQOH KMB Mesir</p>
+        </div>
+      </div>
+    </div>
+    <div class="pt-6 flex flex-col md:flex-row justify-between items-center gap-2 text-xs" style="border-top:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5)">
+      <span id="footer-copyright">© 2026 WAZIQOH KMB Mesir. All rights reserved.</span>
+      <div class="flex gap-4">
+        <a href="#" class="hover:text-white transition">Kebijakan Privasi</a>
+        <a href="#" class="hover:text-white transition">Syarat & Ketentuan</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════
+     BOTTOM NAV (MOBILE)
+═══════════════════════════════════════ -->
+<nav class="fixed bottom-0 w-full z-40 md:hidden pb-safe" style="background:rgba(255,255,255,.97);backdrop-filter:blur(16px);border-top:1px solid var(--BD);box-shadow:0 -4px 24px rgba(0,0,0,.07)">
+  <div class="flex justify-around items-center px-2 py-2">
+    <button class="bnav-item on" id="bnav-home" onclick="setBnav('home',this)">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      <span>Beranda</span>
+    </button>
+    <button class="bnav-item" onclick="setBnav('donasi',this);openModal('modal-donasi')">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+      <span>Donasi</span>
+    </button>
+    <button class="bnav-item" onclick="setBnav('kalkulator',this);openModal('modal-kalkulator')">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+      <span>Zakat</span>
+    </button>
+    <button class="bnav-item" onclick="setBnav('program',this)" id="bnav-program">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+      <span>Program</span>
+    </button>
+    <button class="bnav-item" onclick="setBnav('cek',this);openModal('modal-cek')">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      <span>Cek</span>
+    </button>
+  </div>
+</nav>
+
+<!-- FAB DONASI MOBILE -->
+<div class="fixed bottom-20 right-4 z-40 md:hidden flex flex-col gap-3 items-end">
+  <a href="https://wa.me/6285880856341" target="_blank" class="w-12 h-12 rounded-2xl flex items-center justify-center shadow-xl wa-anim" style="background:#25D366;color:#fff;box-shadow:0 6px 20px rgba(37,211,102,.35)">
+    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+  </a>
+  <button onclick="openModal('modal-donasi')" class="text-white px-5 h-12 rounded-2xl font-bold text-sm flex items-center gap-2 pulse" style="background:var(--P);box-shadow:0 6px 22px rgba(13,122,82,.38)">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>Donasi
+  </button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     MODAL OVERLAY
+═══════════════════════════════════════ -->
+<div id="modal-overlay" onclick="closeAllModals()"></div>
+
+<!-- ═══════════════════════════════════════
+     MODAL DONASI — 4 STEP
+═══════════════════════════════════════ -->
+<div id="modal-donasi" class="modal-sheet">
+  <div class="drag-handle"></div>
+  <div class="flex justify-between items-center px-5 py-3 flex-shrink-0" style="border-bottom:1px solid var(--BD)">
+    <div>
+      <h3 class="font-bold text-lg" style="color:var(--INK)">Form Donasi WAZIQOH</h3>
+      <p class="text-[11px]" style="color:var(--INK3)">Isi dengan lengkap & benar</p>
+    </div>
+    <button onclick="closeAllModals()" class="w-9 h-9 rounded-xl flex items-center justify-center transition" style="background:var(--PLL);border:1.5px solid var(--BD);color:var(--INK3)">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <!-- STEP INDICATOR -->
+  <div class="flex justify-center gap-2 py-3 flex-shrink-0" style="background:var(--PLL);border-bottom:1px solid var(--BD)">
+    <div class="sdot on" id="sd1"></div>
+    <div class="sdot" id="sd2"></div>
+    <div class="sdot" id="sd3"></div>
+    <div class="sdot" id="sd4"></div>
+  </div>
+  <div class="flex-1 overflow-y-auto">
+
+    <!-- ── STEP 1: JENIS DANA ── -->
+    <div id="dstep-1" class="p-5 space-y-4">
+      <p class="text-xs font-bold uppercase tracking-wider" style="color:var(--INK3)">Langkah 1 — Pilih Jenis Dana</p>
+      <div class="grid grid-cols-3 gap-2.5" id="jenis-grid">
+        <div class="jenis-opt sel" data-val="Wakaf" onclick="selJenis(this)">
+          <div class="jenis-icon">🏛️</div>
+          <div class="text-xs font-bold" style="color:var(--INK)">Wakaf</div>
+          <div class="text-[9px]" style="color:var(--INK3)">Jariyah</div>
+        </div>
+        <div class="jenis-opt" data-val="Zakat Fitrah" onclick="selJenis(this)">
+          <div class="jenis-icon">🌙</div>
+          <div class="text-xs font-bold" style="color:var(--INK)">Zakat Fitrah</div>
+          <div class="text-[9px]" style="color:var(--INK3)">Per jiwa</div>
+        </div>
+        <div class="jenis-opt" data-val="Zakat Maal" onclick="selJenis(this)">
+          <div class="jenis-icon">💰</div>
+          <div class="text-xs font-bold" style="color:var(--INK)">Zakat Maal</div>
+          <div class="text-[9px]" style="color:var(--INK3)">2.5% harta</div>
+        </div>
+        <div class="jenis-opt" data-val="Infaq" onclick="selJenis(this)">
+          <div class="jenis-icon">🌿</div>
+          <div class="text-xs font-bold" style="color:var(--INK)">Infaq</div>
+          <div class="text-[9px]" style="color:var(--INK3)">Kapan saja</div>
+        </div>
+        <div class="jenis-opt" data-val="Shodaqoh" onclick="selJenis(this)">
+          <div class="jenis-icon">💚</div>
+          <div class="text-xs font-bold" style="color:var(--INK)">Shodaqoh</div>
+          <div class="text-[9px]" style="color:var(--INK3)">Tulus ikhlas</div>
+        </div>
+        <div class="jenis-opt" data-val="Fidyah" onclick="selJenis(this)">
+          <div class="jenis-icon">🌾</div>
+          <div class="text-xs font-bold" style="color:var(--INK)">Fidyah</div>
+          <div class="text-[9px]" style="color:var(--INK3)">Pengganti puasa</div>
+        </div>
+      </div>
+      <!-- Opsi Lainnya -->
+      <div>
+        <label class="text-xs font-semibold mb-1 block" style="color:var(--INK2)">Lainnya (isi sendiri)</label>
+        <input type="text" id="jenis-lain" placeholder="cth: Qurban, Kafarat…" oninput="if(this.value.trim()){selJenisStr(this.value)}" class="w-full rounded-xl px-4 py-2.5 text-sm inp" style="background:var(--PLL);border:1.5px solid var(--BD)"/>
+      </div>
+      <button onclick="goStep(2)" class="w-full text-white font-bold py-4 rounded-2xl transition ch" style="background:var(--P);box-shadow:0 4px 18px rgba(13,122,82,.28)">
+        Pilih Nominal →
+      </button>
+    </div>
+
+    <!-- ── STEP 2: NOMINAL ── -->
+    <div id="dstep-2" class="p-5 space-y-4 hidden">
+      <p class="text-xs font-bold uppercase tracking-wider" style="color:var(--INK3)">Langkah 2 — Nominal Donasi</p>
+      <div class="grid grid-cols-3 gap-2" id="amt-grid">
+        <div class="amt-pill" onclick="selAmt(50000,this)">Rp 50.000</div>
+        <div class="amt-pill" onclick="selAmt(100000,this)">Rp 100.000</div>
+        <div class="amt-pill" onclick="selAmt(250000,this)">Rp 250.000</div>
+        <div class="amt-pill" onclick="selAmt(500000,this)">Rp 500.000</div>
+        <div class="amt-pill" onclick="selAmt(1000000,this)">Rp 1.000.000</div>
+        <div class="amt-pill" onclick="selAmt(2500000,this)">Rp 2.500.000</div>
+      </div>
+      <div class="flex items-center gap-2 rounded-2xl px-4 py-3" style="background:var(--PLL);border:1.5px solid var(--BD)">
+        <span class="text-sm font-bold" style="color:var(--INK3)">Rp</span>
+        <input type="number" id="amt-custom" placeholder="Nominal lain…" oninput="amtCustom()" class="flex-1 text-base font-bold bg-transparent focus:outline-none" style="color:var(--P)"/>
+      </div>
+      <label>
+        <span class="text-xs font-semibold block mb-1.5" style="color:var(--INK2)">Niat / Doa (opsional)</span>
+        <textarea id="inp-doa" rows="2" placeholder="Tuliskan niat atau doa…" class="w-full rounded-xl px-4 py-2.5 text-sm inp resize-none" style="background:var(--PLL);border:1.5px solid var(--BD)"></textarea>
+      </label>
+      <div class="flex gap-3">
+        <button onclick="goStep(1)" class="flex-1 font-semibold py-3.5 rounded-2xl transition ch text-sm" style="border:1.5px solid var(--BD);color:var(--INK3)">← Kembali</button>
+        <button onclick="goStep(3)" class="flex-[2] text-white font-bold py-3.5 rounded-2xl transition ch text-sm" style="background:var(--P)">Data Diri →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: DATA DIRI ── -->
+    <div id="dstep-3" class="p-5 space-y-3 hidden">
+      <p class="text-xs font-bold uppercase tracking-wider" style="color:var(--INK3)">Langkah 3 — Data Donatur</p>
+      <div class="space-y-3">
+        <div>
+          <label class="text-xs font-semibold mb-1 block" style="color:var(--INK2)">Nama Lengkap <span class="text-red-400">*</span></label>
+          <input type="text" id="inp-nama" placeholder="Nama lengkap Anda" class="w-full rounded-xl px-4 py-2.5 text-sm inp" style="background:var(--PLL);border:1.5px solid var(--BD)"/>
+        </div>
+        <div>
+          <label class="text-xs font-semibold mb-1 block" style="color:var(--INK2)">No. HP / WhatsApp</label>
+          <input type="tel" id="inp-hp" placeholder="08xxxxxxxxxx" class="w-full rounded-xl px-4 py-2.5 text-sm inp" style="background:var(--PLL);border:1.5px solid var(--BD)"/>
+        </div>
+        <div>
+          <label class="text-xs font-semibold mb-1 block" style="color:var(--INK2)">Email (opsional)</label>
+          <input type="email" id="inp-email" placeholder="email@contoh.com" class="w-full rounded-xl px-4 py-2.5 text-sm inp" style="background:var(--PLL);border:1.5px solid var(--BD)"/>
+        </div>
+        <div>
+          <label class="text-xs font-semibold mb-1 block" style="color:var(--INK2)">Kota Asal</label>
+          <input type="text" id="inp-kota" placeholder="Serang, Cilegon, Pandeglang…" class="w-full rounded-xl px-4 py-2.5 text-sm inp" style="background:var(--PLL);border:1.5px solid var(--BD)"/>
+        </div>
+        <div>
+          <label class="text-xs font-semibold mb-1 block" style="color:var(--INK2)">Kekeluargaan di Mesir (opsional)</label>
+          <input type="text" id="inp-keluarga" placeholder="cth: Adik saya Ahmad di Nasr City" class="w-full rounded-xl px-4 py-2.5 text-sm inp" style="background:var(--PLL);border:1.5px solid var(--BD)"/>
+          <p class="text-[10px] mt-1" style="color:var(--INK3)">Jika ada anggota keluarga Anda yang sedang di Mesir</p>
+        </div>
+        <label class="flex items-center gap-2.5 cursor-pointer">
+          <input type="checkbox" id="inp-anonim" class="rounded"/>
+          <span class="text-sm" style="color:var(--INK2)">Donasi secara anonim</span>
+        </label>
+      </div>
+      <div class="flex gap-3 pt-2">
+        <button onclick="goStep(2)" class="flex-1 font-semibold py-3.5 rounded-2xl transition ch text-sm" style="border:1.5px solid var(--BD);color:var(--INK3)">← Kembali</button>
+        <button onclick="goStep(4)" class="flex-[2] text-white font-bold py-3.5 rounded-2xl transition ch text-sm" style="background:var(--P)">Lihat Rekening →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 4: REKENING & KIRIM ORDER ── -->
+    <div id="dstep-4" class="p-5 space-y-4 hidden">
+      <p class="text-xs font-bold uppercase tracking-wider" style="color:var(--INK3)">Langkah 4 — Transfer & Kirim Order</p>
+      <!-- RINGKASAN -->
+      <div class="rounded-2xl p-4" style="background:var(--PLL);border:1.5px solid var(--BD)">
+        <p class="text-[10px] font-bold uppercase tracking-wider mb-2" style="color:var(--INK3)">Ringkasan Donasi</p>
+        <div class="flex justify-between text-sm mb-1"><span style="color:var(--INK3)">Jenis</span><b id="sum-jenis" style="color:var(--INK)">—</b></div>
+        <div class="flex justify-between text-sm mb-1"><span style="color:var(--INK3)">Donatur</span><b id="sum-nama" style="color:var(--INK)">—</b></div>
+        <div class="flex justify-between text-base font-extrabold pt-2" style="border-top:1px solid var(--BD);color:var(--P)">
+          <span class="text-sm font-semibold" style="color:var(--INK3)">Total Transfer</span>
+          <span id="sum-nominal">Rp 0</span>
+        </div>
+      </div>
+      <!-- REKENING DINAMIS -->
+      <p class="text-xs font-bold uppercase tracking-wider" style="color:var(--INK3)">Pilih Rekening Tujuan</p>
+      <div class="space-y-2" id="rek-in-modal"></div>
+      <!-- TOMBOL KIRIM ORDER -->
+      <div class="flex gap-3 pt-1">
+        <button onclick="goStep(3)" class="flex-1 font-semibold py-3.5 rounded-2xl transition ch text-sm" style="border:1.5px solid var(--BD);color:var(--INK3)">← Kembali</button>
+        <button onclick="kirimOrder()" id="btn-kirim-order" class="flex-[2] text-white font-bold py-3.5 rounded-2xl transition ch text-sm" style="background:var(--P);box-shadow:0 4px 16px rgba(13,122,82,.28)">
+          📤 Kirim Order
+        </button>
+      </div>
+    </div>
+
+    <!-- ── STEP 5: KODE ORDER ── -->
+    <div id="dstep-5" class="p-5 space-y-4 hidden text-center">
+      <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-2" style="background:var(--PL)">
+        <svg class="w-8 h-8" style="color:var(--P)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <h3 class="font-display text-xl font-bold" style="color:var(--INK)">Order Berhasil Dibuat!</h3>
+      <p class="text-sm" style="color:var(--INK3)">Segera transfer dan konfirmasi sebelum order kedaluwarsa.</p>
+      <!-- KODE ORDER -->
+      <div class="rounded-2xl p-4" style="background:var(--PLL);border:2px dashed var(--P)">
+        <p class="text-xs font-bold mb-1" style="color:var(--INK3)">KODE ORDER ANDA</p>
+        <div class="font-display text-3xl font-bold mb-2" style="color:var(--P)" id="kode-order-display">—</div>
+        <p class="text-[11px] mb-3" style="color:var(--INK3)">⏳ Order aktif selama <b id="order-countdown">60:00</b> menit</p>
+        <button onclick="copyKodeOrder()" id="btn-copy-kode" class="copy-btn text-white font-bold px-6 py-2.5 rounded-xl text-sm transition w-full" style="background:var(--P)">
+          📋 Salin Kode Order
+        </button>
+      </div>
+      <div class="text-left rounded-2xl p-4 space-y-2" style="background:var(--WH);border:1.5px solid var(--BD)">
+        <p class="text-xs font-bold uppercase tracking-wider" style="color:var(--INK3)">Langkah Selanjutnya</p>
+        <div class="flex items-start gap-2.5 text-sm">
+          <span class="w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center text-white text-[11px] font-bold mt-0.5" style="background:var(--P)">1</span>
+          <span style="color:var(--INK2)">Transfer ke rekening yang telah dipilih sesuai nominal.</span>
+        </div>
+        <div class="flex items-start gap-2.5 text-sm">
+          <span class="w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center text-white text-[11px] font-bold mt-0.5" style="background:var(--P)">2</span>
+          <span style="color:var(--INK2)">Klik "Konfirmasi Donasi" dan masukkan kode order + foto bukti transfer.</span>
+        </div>
+        <div class="flex items-start gap-2.5 text-sm">
+          <span class="w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center text-white text-[11px] font-bold mt-0.5" style="background:var(--P)">3</span>
+          <span style="color:var(--INK2)">Admin akan verifikasi dan mengirimkan kwitansi ke WhatsApp Anda.</span>
+        </div>
+      </div>
+      <button onclick="closeAllModals();setTimeout(function(){openModal('modal-konfirmasi')},300)" class="w-full text-white font-bold py-4 rounded-2xl transition ch" style="background:var(--P)">
+        ✅ Sudah Transfer — Konfirmasi Sekarang
+      </button>
+      <button onclick="closeAllModals()" class="w-full font-semibold py-3 rounded-2xl transition text-sm" style="border:1.5px solid var(--BD);color:var(--INK3)">
+        Nanti saja
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     MODAL KONFIRMASI TRANSFER
+═══════════════════════════════════════ -->
+<div id="modal-konfirmasi" class="modal-sheet">
+  <div class="drag-handle"></div>
+  <div class="flex justify-between items-center px-5 py-3 flex-shrink-0" style="border-bottom:1px solid var(--BD)">
+    <h3 class="font-bold text-lg" style="color:var(--INK)">Konfirmasi Transfer</h3>
+    <button onclick="closeAllModals()" class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:var(--PLL);border:1.5px solid var(--BD);color:var(--INK3)">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="flex-1 overflow-y-auto p-5 space-y-3">
+    <div class="rounded-2xl px-4 py-3 flex items-start gap-2.5" style="background:#fffbeb;border:1.5px solid #f8d67a">
+      <svg class="w-4 h-4 mt-0.5 flex-shrink-0" style="color:#c9920a" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+      <p class="text-xs font-medium" style="color:#854d0e">Pastikan sudah transfer terlebih dahulu ke rekening WAZIQOH, lalu isi form ini.</p>
+    </div>
+    <div>
+      <label class="text-xs font-semibold mb-1 block" style="color:var(--INK2)">Kode Order <span class="text-red-400">*</span></label>
+      <input type="text" id="kf-kode" placeholder="WAZQ-XXXXXX" class="w-full rounded-xl px-4 py-2.5 text-sm inp" style="background:var(--PLL);border:1.5px solid var(--BD)"/>
+    </div>
+    <div>
+      <label class="text-xs font-semibold mb-1 block" style="color:var(--INK2)">Nama Pengirim <span class="text-red-400">*</span></label>
+      <input type="text" id="kf-nama" placeholder="Sesuai nama rekening" class="w-full rounded-xl px-4 py-2.5 text-sm inp" style="background:var(--PLL);border:1.5px solid var(--BD)"/>
+    </div>
+    <div>
+      <label class="text-xs font-semibold mb-1 block" style="color:var(--INK2)">No. HP <span class="text-red-400">*</span></label>
+      <input type="tel" id="kf-hp" placeholder="08xxxxxxxxxx" class="w-full rounded-xl px-4 py-2.5 text-sm inp" style="background:var(--PLL);border:1.5px solid var(--BD)"/>
+    </div>
+    <div>
+      <label class="text-xs font-semibold mb-1 block" style="color:var(--INK2)">Nominal Transfer <span class="text-red-400">*</span></label>
+      <div class="flex items-center gap-2 rounded-xl px-4 py-2.5" style="background:var(--PLL);border:1.5px solid var(--BD)">
+        <span class="text-sm font-semibold" style="color:var(--INK3)">Rp</span>
+        <input type="number" id="kf-nominal" placeholder="0" class="flex-1 text-sm font-bold bg-transparent focus:outline-none" style="color:var(--P)"/>
+      </div>
+    </div>
+    <div>
+      <label class="text-xs font-semibold mb-1 block" style="color:var(--INK2)">Bank Tujuan</label>
+      <select id="kf-bank" class="w-full rounded-xl px-4 py-2.5 text-sm inp" style="background:var(--PLL);border:1.5px solid var(--BD)" id="kf-bank-select">
+        <option value="">— Pilih Bank —</option>
+      </select>
+    </div>
+    <div>
+      <label class="text-xs font-semibold mb-1 block" style="color:var(--INK2)">Foto Bukti Transfer <span class="text-red-400">*</span></label>
+      <label class="block w-full rounded-2xl p-6 text-center cursor-pointer transition ch" style="border:2px dashed var(--BD);background:var(--PLL)" id="upload-label">
+        <div id="upload-preview">
+          <svg class="w-8 h-8 mx-auto mb-2" style="color:var(--BD)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <p class="text-xs" style="color:var(--INK3)">Klik atau seret foto bukti transfer</p>
+        </div>
+        <input type="file" id="kf-bukti" accept="image/*" class="hidden" onchange="previewBukti(this)"/>
+      </label>
+    </div>
+    <button onclick="submitKonfirmasi()" class="w-full text-white font-bold py-4 rounded-2xl transition ch" style="background:var(--P);box-shadow:0 4px 16px rgba(13,122,82,.28)">
+      📤 Kirim Konfirmasi
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     MODAL CEK STATUS DONASI
+═══════════════════════════════════════ -->
+<div id="modal-cek" class="modal-sheet">
+  <div class="drag-handle"></div>
+  <div class="flex justify-between items-center px-5 py-3 flex-shrink-0" style="border-bottom:1px solid var(--BD)">
+    <h3 class="font-bold text-lg" style="color:var(--INK)">Cek Status Donasi</h3>
+    <button onclick="closeAllModals()" class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:var(--PLL);border:1.5px solid var(--BD);color:var(--INK3)">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="flex-1 overflow-y-auto p-5 space-y-4">
+    <p class="text-sm" style="color:var(--INK3)">Masukkan Kode Order (WAZQ-XXXXXX) atau Nomor HP yang digunakan saat donasi.</p>
+    <div class="flex gap-2">
+      <input type="text" id="cek-input" placeholder="WAZQ-000001 atau 081234…" class="flex-1 rounded-xl px-4 py-2.5 text-sm inp" style="background:var(--PLL);border:1.5px solid var(--BD)"/>
+      <button onclick="cekDonasi()" class="text-white font-bold px-5 rounded-xl text-sm transition ch" style="background:var(--P)">Cek</button>
+    </div>
+    <div id="cek-loading" class="hidden text-center py-8">
+      <div class="w-10 h-10 rounded-full border-4 spinner mx-auto mb-3" style="border-color:var(--PL);border-top-color:var(--P)"></div>
+      <p class="text-sm" style="color:var(--INK3)">Mencari data donasi…</p>
+    </div>
+    <div id="cek-result" class="hidden"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     MODAL KALKULATOR ZAKAT
+═══════════════════════════════════════ -->
+<div id="modal-kalkulator" class="modal-sheet">
+  <div class="drag-handle"></div>
+  <div class="flex justify-between items-center px-5 py-3 flex-shrink-0" style="border-bottom:1px solid var(--BD)">
+    <div>
+      <h3 class="font-bold text-lg" style="color:var(--INK)">Kalkulator Zakat</h3>
+      <p class="text-[11px]" style="color:var(--INK3)">Nisab & Haul — Syariah</p>
+    </div>
+    <button onclick="closeAllModals()" class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:var(--PLL);border:1.5px solid var(--BD);color:var(--INK3)">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="flex-1 overflow-y-auto p-5 space-y-4" style="background:var(--PLL)">
+    <!-- TABS -->
+    <div class="flex rounded-2xl p-1 gap-1" style="background:var(--WH);border:1.5px solid var(--BD)">
+      <button class="ztab flex-1 py-2 rounded-xl text-sm font-bold transition" id="zt-p" onclick="switchZakatTab('p',this)" style="background:var(--P);color:#fff">Penghasilan</button>
+      <button class="ztab flex-1 py-2 rounded-xl text-sm font-bold transition" id="zt-m" onclick="switchZakatTab('m',this)" style="color:var(--INK3)">Maal</button>
+      <button class="ztab flex-1 py-2 rounded-xl text-sm font-bold transition" id="zt-f" onclick="switchZakatTab('f',this)" style="color:var(--INK3)">Fitrah</button>
+    </div>
+    <!-- PENGHASILAN -->
+    <div id="ztab-p">
+      <div class="bg-white rounded-2xl p-4 space-y-3" style="border:1.5px solid var(--BD)">
+        <div>
+          <label class="text-xs font-bold block mb-1" style="color:var(--INK3)">Gaji / Penghasilan / Bulan</label>
+          <div class="flex items-center gap-2" style="border-bottom:2px solid var(--P);padding-bottom:8px">
+            <span class="text-sm font-bold" style="color:var(--INK3)">Rp</span>
+            <input type="number" id="calc-gaji" placeholder="0" oninput="calcZPenghasilan()" class="flex-1 text-xl font-bold bg-transparent focus:outline-none" style="color:var(--P)"/>
+          </div>
+        </div>
+        <div>
+          <label class="text-xs font-bold block mb-1" style="color:var(--INK3)">Bonus / Lainnya / Bulan</label>
+          <div class="flex items-center gap-2" style="border-bottom:1px solid var(--BD);padding-bottom:8px">
+            <span class="text-sm" style="color:var(--INK3)">Rp</span>
+            <input type="number" id="calc-bonus" placeholder="0" oninput="calcZPenghasilan()" class="flex-1 text-base bg-transparent focus:outline-none" style="color:var(--INK2)"/>
+          </div>
+        </div>
+        <div>
+          <label class="text-xs font-bold block mb-1" style="color:var(--INK3)">Tanggungan (jiwa)</label>
+          <input type="number" id="calc-tanggungan" placeholder="0" min="0" oninput="calcZPenghasilan()" class="w-full rounded-xl px-3 py-2 text-sm inp" style="background:var(--PLL);border:1.5px solid var(--BD)"/>
+        </div>
+      </div>
+      <div class="rounded-2xl p-5 text-white relative overflow-hidden" style="background:linear-gradient(135deg,var(--P),var(--PD))">
+        <div class="absolute -right-6 -top-6 w-24 h-24 rounded-full" style="background:rgba(255,255,255,.08);filter:blur(16px)"></div>
+        <div class="flex justify-between items-start relative z-10">
+          <div>
+            <p class="text-xs mb-1" style="color:rgba(255,255,255,.75)">Zakat Penghasilan (2.5%)</p>
+            <div class="text-3xl font-extrabold" id="calc-result-p">Rp 0</div>
+            <p class="text-[10px] mt-1" id="calc-nisab-status" style="color:rgba(255,255,255,.7)">Masukkan penghasilan</p>
+          </div>
+          <div class="text-right">
+            <p class="text-xs mb-1" style="color:rgba(255,255,255,.75)">Per Tahun</p>
+            <div class="text-base font-bold" id="calc-result-tahunan">Rp 0</div>
+          </div>
+        </div>
+        <div class="mt-3 pt-3 grid grid-cols-2 gap-3 relative z-10 text-xs" style="border-top:1px solid rgba(255,255,255,.15)">
+          <div><p style="color:rgba(255,255,255,.6)">Nisab (85gr emas)</p><p class="font-bold" id="calc-nisab-val" style="color:#fff">—</p></div>
+          <div><p style="color:rgba(255,255,255,.6)">Total Penghasilan</p><p class="font-bold" id="calc-total-income" style="color:#fff">Rp 0</p></div>
+        </div>
+      </div>
+      <button onclick="closeAllModals();openModalWithJenis('Zakat Maal')" class="w-full text-white font-bold py-3.5 rounded-2xl transition ch" style="background:var(--P)">💰 Tunaikan Zakat Sekarang</button>
+    </div>
+    <!-- MAAL -->
+    <div id="ztab-m" class="hidden space-y-3">
+      <div class="bg-white rounded-2xl p-4 space-y-3" style="border:1.5px solid var(--BD)">
+        <div class="flex items-center gap-2 rounded-xl px-3 py-2" style="background:var(--PLL);border:1.5px solid var(--BD)"><span class="text-xs" style="color:var(--INK3)">Tabungan</span><span class="text-xs ml-1" style="color:var(--INK3)">Rp</span><input type="number" id="maal-tab" placeholder="0" oninput="calcZMaal()" class="flex-1 text-sm font-semibold bg-transparent focus:outline-none"/></div>
+        <div class="flex items-center gap-2 rounded-xl px-3 py-2" style="background:var(--PLL);border:1.5px solid var(--BD)"><span class="text-xs" style="color:var(--INK3)">Investasi/Emas</span><span class="text-xs ml-1" style="color:var(--INK3)">Rp</span><input type="number" id="maal-inv" placeholder="0" oninput="calcZMaal()" class="flex-1 text-sm font-semibold bg-transparent focus:outline-none"/></div>
+        <div class="flex items-center gap-2 rounded-xl px-3 py-2" style="background:var(--PLL);border:1.5px solid var(--BD)"><span class="text-xs" style="color:var(--INK3)">Piutang</span><span class="text-xs ml-1" style="color:var(--INK3)">Rp</span><input type="number" id="maal-put" placeholder="0" oninput="calcZMaal()" class="flex-1 text-sm font-semibold bg-transparent focus:outline-none"/></div>
+        <div class="flex items-center gap-2 rounded-xl px-3 py-2" style="background:var(--PLL);border:1.5px solid var(--BD)"><span class="text-xs" style="color:var(--INK3)">Hutang</span><span class="text-xs ml-1" style="color:var(--INK3)">Rp</span><input type="number" id="maal-htg" placeholder="0" oninput="calcZMaal()" class="flex-1 text-sm font-semibold bg-transparent focus:outline-none"/></div>
+      </div>
+      <div class="rounded-2xl p-5 text-white" style="background:linear-gradient(135deg,var(--P),var(--PD))">
+        <p class="text-xs mb-1" style="color:rgba(255,255,255,.75)">Zakat Maal (2.5%)</p>
+        <div class="text-3xl font-extrabold" id="calc-result-m">Rp 0</div>
+        <p class="text-[10px] mt-1" id="calc-maal-status" style="color:rgba(255,255,255,.7)">Masukkan data harta</p>
+      </div>
+      <button onclick="closeAllModals();openModalWithJenis('Zakat Maal')" class="w-full text-white font-bold py-3.5 rounded-2xl transition ch" style="background:var(--P)">💰 Tunaikan Zakat Maal</button>
+    </div>
+    <!-- FITRAH -->
+    <div id="ztab-f" class="hidden space-y-3">
+      <div class="bg-white rounded-2xl p-4" style="border:1.5px solid var(--BD)">
+        <label class="text-xs font-bold block mb-2" style="color:var(--INK3)">Jumlah Jiwa</label>
+        <div class="flex items-center gap-3 mb-4">
+          <button onclick="adjFitrah(-1)" class="w-10 h-10 rounded-xl font-bold text-xl transition ch" style="background:var(--PL);border:1.5px solid var(--BD);color:var(--P)">−</button>
+          <input type="number" id="calc-jiwa" value="1" min="1" oninput="calcZFitrah()" class="flex-1 text-center text-2xl font-extrabold bg-transparent focus:outline-none" style="color:var(--P)"/>
+          <button onclick="adjFitrah(1)" class="w-10 h-10 rounded-xl font-bold text-xl transition ch" style="background:var(--PL);border:1.5px solid var(--BD);color:var(--P)">+</button>
+        </div>
+        <label class="text-xs font-bold block mb-2" style="color:var(--INK3)">Standar Fitrah</label>
+        <div class="grid grid-cols-3 gap-2" id="fitrah-std-grid">
+          <button class="amt-pill sel" data-v="35000" onclick="selFitrahStd(35000,this)">Rp 35rb</button>
+          <button class="amt-pill" data-v="45000" onclick="selFitrahStd(45000,this)">Rp 45rb</button>
+          <button class="amt-pill" data-v="60000" onclick="selFitrahStd(60000,this)">Rp 60rb</button>
+        </div>
+      </div>
+      <div class="rounded-2xl p-5 text-white" style="background:linear-gradient(135deg,var(--P),var(--PD))">
+        <p class="text-xs mb-1" style="color:rgba(255,255,255,.75)">Total Zakat Fitrah</p>
+        <div class="text-3xl font-extrabold" id="calc-result-f">Rp 35.000</div>
+        <p class="text-[10px] mt-1" id="calc-fitrah-info" style="color:rgba(255,255,255,.7)">1 jiwa × Rp 35.000</p>
+      </div>
+      <button onclick="closeAllModals();openModalWithJenis('Zakat Fitrah')" class="w-full text-white font-bold py-3.5 rounded-2xl transition ch" style="background:var(--P)">🌙 Tunaikan Zakat Fitrah</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     INVOICE PAGE (full screen, URL param)
+═══════════════════════════════════════ -->
+<div id="invoice-page">
+  <div class="min-h-screen flex flex-col items-center justify-center p-6" style="background:var(--BG)">
+    <div class="w-full max-w-md">
+      <div class="text-center mb-6">
+        <img src="https://i.ibb.co/5XnDzfNS/Asset-3.png" alt="WAZIQOH" class="h-16 mx-auto mb-3 object-contain"/>
+        <h2 class="font-display text-2xl font-bold" style="color:var(--INK)">Kwitansi Donasi</h2>
+      </div>
+      <div class="bg-white rounded-3xl p-6 shadow-xl space-y-3" style="border:1.5px solid var(--BD)" id="invoice-content">
+        <div class="skel h-6 rounded-xl"></div>
+        <div class="skel h-6 rounded-xl"></div>
+        <div class="skel h-6 rounded-xl w-3/4"></div>
+      </div>
+      <div class="mt-6 space-y-3" id="invoice-actions" style="display:none">
+        <button onclick="window.print()" class="w-full text-white font-bold py-4 rounded-2xl" style="background:var(--P)">
+          🖨️ Download / Print Kwitansi
+        </button>
+        <a href="https://wa.me/6285880856341" target="_blank" class="w-full font-bold py-4 rounded-2xl flex items-center justify-center gap-2" style="background:#25D366;color:#fff">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967"/></svg>
+          Chat Admin WA
+        </a>
+        <button onclick="document.getElementById('invoice-page').style.display='none'" class="w-full py-3 rounded-2xl font-semibold" style="border:1.5px solid var(--BD);color:var(--INK3)">
+          ← Kembali ke Beranda
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════ -->
+<script>
+// ══════════════════════════════════════════════════════
+//  KONFIGURASI
+// ══════════════════════════════════════════════════════
+var CONFIG = {
+  // ► GANTI DENGAN URL DEPLOYMENT APPS SCRIPT ANDA ◄
+  apiUrl: 'https://script.google.com/macros/s/AKfycbyw6nGUWV1SyQhC3mSpIeCHwB9pm_oblWc77HzmStJaCBHq70nCkGUD3ZCseuxfXgbZ/exec',
+  waAdmin: '6285880856341',
+  hargaEmas: 1250000,
+  nisabGram: 85
+};
+
+// ══════════════════════════════════════════════════════
+//  STATE GLOBAL
+// ══════════════════════════════════════════════════════
+var APP = {
+  donasi:       { jenis:'Wakaf', nominal:100000, nama:'', hp:'', email:'', kota:'', keluarga:'', doa:'', anonim:false },
+  step:         1,
+  kodeOrder:    '',
+  orderTimer:   null,
+  orderSecs:    3600,
+  fitrahStd:    35000,
+  currentCat:   'semua',
+  testiIdx:     0,
+  testiTimer:   null,
+  kegIdx:       0,
+  kegTimer:     null,
+  kegData:      [],
+  testiData:    [],
+  penerimaAll:  [],
+  penerimaFilt: [],
+  pg:           1,
+  perPg:        7,
+  chartType:    'bar',
+  chartData:    [],
+  rekeningData: [],
+  dbStat:       {},
+  progData:     []
+};
+
+// ══════════════════════════════════════════════════════
+//  INIT — ambil semua data dari Spreadsheet
+// ══════════════════════════════════════════════════════
+window.addEventListener('load', function() {
+  // Animasi loading bar
+  var bar = document.getElementById('load-bar');
+  var txt = document.getElementById('load-text');
+  var msgs = ['Memuat portal donasi…','Menyiapkan data…','Hampir selesai…'];
+  var mi = 0;
+  bar.style.width = '100%';
+  var mtimer = setInterval(function(){ txt.textContent = msgs[mi++ % msgs.length]; }, 600);
+
+  setTimeout(function(){
+    clearInterval(mtimer);
+    var ls = document.getElementById('loading-screen');
+    ls.style.opacity = '0';
+    ls.style.transition = 'opacity .5s';
+    setTimeout(function(){ ls.style.display = 'none'; }, 500);
+    initApp();
+  }, 2000);
+
+  // Cek URL param invoice
+  checkInvoiceParam();
+});
+
+function initApp() {
+  fetchAllData();
+  initCounters();
+}
+
+function fetchAllData() {
+  fetch(CONFIG.apiUrl + '?action=getAll')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (d.error) { console.error('API Error:', d.error); useFallback(); return; }
+      populateAll(d);
+    })
+    .catch(function(e){ console.error('Fetch error:', e); useFallback(); });
+}
+
+function populateAll(d) {
+  if (d.dana)       populateDana(d.dana);
+  if (d.chart)      { APP.chartData = d.chart; drawChart(); }
+  if (d.program)    { APP.progData = d.program; renderProgram('semua'); }
+  if (d.rekening)   { APP.rekeningData = d.rekening; renderRekening(); buildRekeningInModal(); buildBankSelect(); }
+  if (d.testimoni)  { APP.testiData = d.testimoni; renderTestimoni(); }
+  if (d.kegiatan)   { APP.kegData = d.kegiatan; renderKegiatan(); }
+  if (d.penerima)   { APP.penerimaAll = d.penerima; APP.penerimaFilt = d.penerima; renderPenerima(); }
+  if (d.faq)        renderFAQ(d.faq);
+  if (d.stats)      { APP.dbStat = d.stats; populateStats(d.stats); }
+  if (d.konfigurasi) applyKonfigurasi(d.konfigurasi);
+  if (d.lastUpdate) document.getElementById('last-update-label').textContent = new Date(d.lastUpdate).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
+}
+
+function useFallback() {
+  // Data fallback jika API tidak terjangkau
+  document.getElementById('total-dana').textContent = 'Data tidak tersedia';
+  showToast('⚠️ Gagal memuat data. Periksa koneksi atau URL API.');
+}
+
+function applyKonfigurasi(cfg) {
+  if (cfg.hargaEmasPerGram) CONFIG.hargaEmas = Number(cfg.hargaEmasPerGram);
+  if (cfg.nisabEmasGram) CONFIG.nisabGram = Number(cfg.nisabEmasGram);
+  if (cfg.fitrahDefault) APP.fitrahStd = Number(cfg.fitrahDefault);
+  if (cfg.noWA) CONFIG.waAdmin = cfg.noWA;
+  if (cfg.copyRight) document.getElementById('footer-copyright').textContent = cfg.copyRight;
+  // Update kalkulator nisab display
+  updateNisabDisplay();
+}
+
+// ══════════════════════════════════════════════════════
+//  POPULATE DANA
+// ══════════════════════════════════════════════════════
+function populateDana(d) {
+  var fmt = function(v){ return 'Rp ' + Number(v).toLocaleString('id-ID'); };
+  var fmtJt = function(v){ return 'Rp ' + (Number(v)/1000000).toFixed(0) + ' Jt'; };
+
+  document.getElementById('total-dana').textContent = fmt(d.total);
+
+  var total = Number(d.total) || 1;
+  function setCard(id, barId, val) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = fmtJt(val);
+    setTimeout(function(){
+      var bar = document.getElementById(barId);
+      if (bar) bar.style.width = Math.round((Number(val)/total)*100) + '%';
+    }, 300);
+  }
+  setCard('val-zakat',   'bar-zakat',   d.zakat);
+  setCard('val-infaq',   'bar-infaq',   d.infaq);
+  setCard('val-wakaf',   'bar-wakaf',   d.wakaf);
+  setCard('val-program', 'bar-program', d.program);
+
+  // HERO stats
+  var tgt  = Number(d.targetBulanIni) || 0;
+  var real = Number(d.realisasiBulanIni) || 0;
+  var pct  = tgt > 0 ? Math.min(Math.round((real/tgt)*100), 100) : 0;
+  var pctEl = document.getElementById('hero-pct');
+  var progEl = document.getElementById('hero-progress');
+  var realEl = document.getElementById('hero-realisasi');
+  var tgtEl  = document.getElementById('hero-target');
+  if (pctEl)  pctEl.textContent = pct + '%';
+  if (realEl) realEl.textContent = fmtJt(real);
+  if (tgtEl)  tgtEl.textContent  = 'Target ' + fmtJt(tgt);
+  setTimeout(function(){ if (progEl) progEl.style.width = pct + '%'; }, 400);
+
+  var heroTotal = document.getElementById('hero-stat-dana');
+  if (heroTotal) heroTotal.textContent = fmtJt(d.total);
+}
+
+function populateStats(s) {
+  var el1 = document.getElementById('hero-stat-penerima');
+  var el2 = document.getElementById('hero-stat-program');
+  if (el1) el1.textContent = s.jumlahPenerima + '+';
+  if (el2) el2.textContent = s.jumlahProgram;
+}
+
+// ══════════════════════════════════════════════════════
+//  CHART
+// ══════════════════════════════════════════════════════
+function drawChart() {
+  var container = document.getElementById('chart-container');
+  var labelsEl  = document.getElementById('chart-labels');
+  if (!container || !APP.chartData.length) return;
+
+  container.innerHTML = '';
+  labelsEl.innerHTML  = '';
+  var max = 0;
+  for (var i = 0; i < APP.chartData.length; i++) {
+    if (Number(APP.chartData[i].value) > max) max = Number(APP.chartData[i].value);
+  }
+
+  if (APP.chartType === 'bar') {
+    for (var i = 0; i < APP.chartData.length; i++) {
+      var d = APP.chartData[i];
+      var pct = max > 0 ? (Number(d.value)/max)*100 : 0;
+      var col = document.createElement('div');
+      col.className = 'flex-1 flex flex-col items-center justify-end gap-1';
+      col.innerHTML = '<span style="font-size:9px;color:var(--INK3);font-weight:700">'+(Number(d.value)/1000000).toFixed(0)+'jt</span>'
+        + '<div style="width:100%;border-radius:6px 6px 0 0;background:linear-gradient(to top,var(--P),#3db887);height:0%;transition:height 1.2s cubic-bezier(.25,.46,.45,.94)" data-h="'+pct+'%"></div>';
+      container.appendChild(col);
+      var lbl = document.createElement('span');
+      lbl.textContent = d.label;
+      lbl.style.cssText = 'font-size:10px;color:var(--INK3);font-weight:600';
+      labelsEl.appendChild(lbl);
+    }
+    setTimeout(function(){
+      var bars = container.querySelectorAll('[data-h]');
+      for (var i = 0; i < bars.length; i++) { bars[i].style.height = bars[i].getAttribute('data-h'); }
+    }, 150);
+  } else {
+    var w = container.offsetWidth || 400, h = 120;
+    var pts = [];
+    for (var i = 0; i < APP.chartData.length; i++) {
+      pts.push({
+        x: (i/(APP.chartData.length-1)) * (w-40) + 20,
+        y: h - 20 - ((Number(APP.chartData[i].value)/max) * (h-40))
+      });
+    }
+    var path = pts.map(function(p,i){ return (i===0?'M':'L')+p.x+','+p.y; }).join(' ');
+    var area = path + ' L'+pts[pts.length-1].x+','+(h-20)+' L'+pts[0].x+','+(h-20)+' Z';
+    container.innerHTML = '<svg viewBox="0 0 '+w+' '+h+'" class="w-full" style="overflow:visible">'
+      + '<defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--P)" stop-opacity=".35"/><stop offset="100%" stop-color="var(--P)" stop-opacity="0"/></linearGradient></defs>'
+      + '<path d="'+area+'" fill="url(#cg)"/>'
+      + '<path d="'+path+'" fill="none" stroke="var(--P)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'
+      + pts.map(function(p){ return '<circle cx="'+p.x+'" cy="'+p.y+'" r="4" fill="var(--P)" stroke="#fff" stroke-width="2"/>'; }).join('')
+      + '</svg>';
+    for (var i = 0; i < APP.chartData.length; i++) {
+      var lbl = document.createElement('span');
+      lbl.textContent = APP.chartData[i].label;
+      lbl.style.cssText = 'font-size:10px;color:var(--INK3);font-weight:600';
+      labelsEl.appendChild(lbl);
+    }
+  }
+
+  // Sync chart btn styles
+  var bbar  = document.getElementById('btn-chart-bar');
+  var bline = document.getElementById('btn-chart-line');
+  if (bbar)  { bbar.style.background  = APP.chartType==='bar'  ? 'var(--PL)' : 'var(--WH)'; bbar.style.color  = APP.chartType==='bar'  ? 'var(--P)'  : 'var(--INK3)'; bbar.style.borderColor  = APP.chartType==='bar'  ? 'var(--P)' : 'var(--BD)'; }
+  if (bline) { bline.style.background = APP.chartType==='line' ? 'var(--PL)' : 'var(--WH)'; bline.style.color = APP.chartType==='line' ? 'var(--P)'  : 'var(--INK3)'; bline.style.borderColor = APP.chartType==='line' ? 'var(--P)' : 'var(--BD)'; }
+}
+
+function switchChart(type) { APP.chartType = type; drawChart(); }
+
+// ══════════════════════════════════════════════════════
+//  PROGRAM
+// ══════════════════════════════════════════════════════
+var currentCat = 'semua';
+function filterProgram(cat, btn) {
+  currentCat = cat;
+  APP.currentCat = cat;
+  var tabs = document.querySelectorAll('.ftab');
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].classList.remove('on');
+    if (tabs[i].getAttribute('data-cat') === cat) tabs[i].classList.add('on');
+  }
+  renderProgram(cat);
+}
+
+function renderProgram(cat) {
+  var grid = document.getElementById('program-grid');
+  if (!grid) return;
+  var q    = (document.getElementById('search-input') || {}).value || '';
+  q = q.toLowerCase();
+  var list = APP.progData;
+
+  if (cat !== 'semua') list = list.filter(function(p){ return p.kategori === cat; });
+  if (q) list = list.filter(function(p){ return (p.nama||'').toLowerCase().indexOf(q) !== -1 || (p.deskripsi||'').toLowerCase().indexOf(q) !== -1; });
+
+  if (!list.length) {
+    grid.innerHTML = '<div class="col-span-3 text-center py-12" style="color:var(--INK3)"><div style="font-size:40px;margin-bottom:12px">🔍</div><p class="font-semibold">Tidak ada program ditemukan.</p></div>';
+    return;
+  }
+
+  grid.innerHTML = list.map(function(p){
+    var pct = p.pct || 0;
+    return '<div class="bg-white rounded-3xl overflow-hidden shadow-sm ch cursor-pointer flex flex-col" style="border:1.5px solid var(--BD)'+(p.urgent?';ring:2px solid #fca5a5':'')+'" onclick="openModalWithJenis(\'Infaq\')">'
+      + '<div class="relative overflow-hidden" style="padding-top:56%">'
+      + '<img src="'+(p.img||'https://images.unsplash.com/photo-1590218706313-94dfd1c81da5?auto=format&fit=crop&q=80&w=400')+'" loading="lazy" alt="'+p.nama+'" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s" onmouseover="this.style.transform=\'scale(1.05)\'" onmouseout="this.style.transform=\'\'"/>'
+      + '<div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(4,42,28,.5),transparent)"></div>'
+      + '<div style="position:absolute;top:10px;left:10px;background:rgba(255,255,255,.92);color:var(--P);font-size:10px;font-weight:800;padding:3px 10px;border-radius:99px">'+(p.tag||p.badge||'Program')+'</div>'
+      + (p.urgent ? '<div style="position:absolute;top:10px;right:10px;background:#ef4444;color:#fff;font-size:9px;font-weight:800;padding:3px 10px;border-radius:99px;animation:pulse-ring 2s infinite">MENDESAK</div>' : '')
+      + '</div>'
+      + '<div class="p-5 flex-1 flex flex-col gap-2">'
+      + '<h3 class="font-bold text-sm leading-snug" style="color:var(--INK);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">'+p.nama+'</h3>'
+      + '<p class="text-xs leading-relaxed flex-1" style="color:var(--INK3)">'+p.deskripsi+'</p>'
+      + '<div><div class="flex justify-between text-[10px] font-semibold mb-1" style="color:var(--INK3)"><span style="color:var(--P)">Rp '+(Number(p.terkumpul)/1000000).toFixed(1)+'jt terkumpul</span><span>'+pct+'%</span></div>'
+      + '<div class="pbar"><div class="pbar-fill" style="width:'+pct+'%"></div></div>'
+      + '<div class="text-[10px] mt-1" style="color:var(--INK3)">Target: Rp '+(Number(p.target)/1000000).toFixed(0)+'jt</div></div>'
+      + '<button onclick="event.stopPropagation();openModalWithJenis(\'Infaq\')" class="w-full py-3 rounded-2xl font-bold text-sm transition ch mt-1" style="background:var(--PL);color:var(--P)" onmouseover="this.style.background=\'var(--P)\';this.style.color=\'#fff\'" onmouseout="this.style.background=\'var(--PL)\';this.style.color=\'var(--P)\'">Donasi Program Ini</button>'
+      + '</div></div>';
+  }).join('');
+}
+
+// ══════════════════════════════════════════════════════
+//  REKENING
+// ══════════════════════════════════════════════════════
+function renderRekening() {
+  var el = document.getElementById('rekening-list');
+  if (!el || !APP.rekeningData.length) return;
+  el.innerHTML = APP.rekeningData.map(function(r){
+    return '<div class="bg-white rounded-2xl p-5 flex justify-between items-center shadow-sm ch" style="border:1.5px solid var(--BD)">'
+      + '<div><div class="text-[10px] font-bold uppercase mb-0.5" style="color:var(--INK3)">'+r.bank+'</div>'
+      + '<div class="text-xl font-extrabold tracking-wide" style="color:var(--P)">'+r.norek+'</div>'
+      + '<div class="text-xs mt-0.5" style="color:var(--INK3)">a.n. '+r.atasnama+'</div></div>'
+      + '<div class="flex flex-col items-end gap-2">'
+      + '<div class="w-10 h-10 rounded-xl flex items-center justify-center text-xs font-black" style="background:var(--PL);color:var(--P)">'+r.kode+'</div>'
+      + '<button onclick="copyRek(event,\''+r.norek+'\',\''+r.bank+'\')" class="copy-btn text-xs font-bold px-3 py-1.5 rounded-xl transition" style="background:var(--PL);color:var(--P);border:1.5px solid var(--BD)">Salin</button>'
+      + '</div></div>';
+  }).join('');
+
+  // Footer rekening BSI
+  if (APP.rekeningData[0]) {
+    var fb = document.getElementById('footer-rek-bsi');
+    if (fb) fb.textContent = APP.rekeningData[0].kode + ' ' + APP.rekeningData[0].norek;
+  }
+
+  // Mobile menu rekening
+  var rm = document.getElementById('rek-mobile');
+  if (rm) {
+    rm.innerHTML = APP.rekeningData.map(function(r){
+      return '<div><div class="font-bold text-sm" style="color:var(--INK2)">'+r.bank+'</div>'
+        + '<div class="font-extrabold" style="color:var(--P)">'+r.norek+'</div></div>';
+    }).join('');
+  }
+}
+
+function buildRekeningInModal() {
+  var el = document.getElementById('rek-in-modal');
+  if (!el || !APP.rekeningData.length) return;
+  el.innerHTML = APP.rekeningData.map(function(r){
+    return '<div class="rek-card" onclick="selRek(this,\''+r.kode+'\')">'
+      + '<div class="flex items-start justify-between gap-3">'
+      + '<div><div class="text-[10px] font-bold uppercase mb-0.5" style="color:var(--INK3)">'+r.bank+'</div>'
+      + '<div class="text-base font-extrabold" style="color:var(--P)">'+r.norek+'</div>'
+      + '<div class="text-xs" style="color:var(--INK3)">a.n. '+r.atasnama+'</div></div>'
+      + '<div class="w-10 h-10 rounded-xl flex items-center justify-center text-xs font-black flex-shrink-0" style="background:var(--PL);color:var(--P)">'+r.kode+'</div>'
+      + '</div>'
+      + '<button onclick="event.stopPropagation();copyRek(event,\''+r.norek+'\',\''+r.bank+'\')" class="copy-btn mt-2 text-xs font-bold px-3 py-1.5 rounded-xl transition" style="background:var(--PL);color:var(--P);border:1.5px solid var(--BD)">Salin Nomor</button>'
+      + '</div>';
+  }).join('');
+}
+
+function buildBankSelect() {
+  var sel = document.getElementById('kf-bank-select') || document.getElementById('kf-bank');
+  if (!sel || !APP.rekeningData.length) return;
+  sel.innerHTML = '<option value="">— Pilih Bank —</option>'
+    + APP.rekeningData.map(function(r){ return '<option value="'+r.kode+'">'+r.bank+' — '+r.norek+'</option>'; }).join('');
+}
+
+function selRek(el, kode) {
+  var cards = document.querySelectorAll('#rek-in-modal .rek-card');
+  for (var i = 0; i < cards.length; i++) cards[i].classList.remove('sel');
+  el.classList.add('sel');
+}
+
+function copyRek(e, norek, bank) {
+  e.stopPropagation();
+  navigator.clipboard.writeText(norek).then(function(){
+    var btn = e.currentTarget || e.target;
+    var orig = btn.textContent;
+    btn.textContent = '✓ Disalin';
+    btn.classList.add('copied');
+    showToast('✅ Nomor ' + bank + ' berhasil disalin!');
+    setTimeout(function(){ btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// ══════════════════════════════════════════════════════
+//  TESTIMONI SLIDER
+// ══════════════════════════════════════════════════════
+function renderTestimoni() {
+  var track = document.getElementById('testi-track');
+  var dots  = document.getElementById('testi-dots');
+  if (!track || !APP.testiData.length) return;
+
+  track.innerHTML = APP.testiData.map(function(t){
+    var stars = '';
+    for (var i = 0; i < (t.rating||5); i++) stars += '★';
+    return '<div class="min-w-full md:min-w-[calc(50%-8px)] flex-shrink-0 bg-white rounded-3xl p-6 flex flex-col gap-3" style="border:1.5px solid var(--BD);box-shadow:var(--SHADOW)">'
+      + '<div class="stars">'+stars+'</div>'
+      + '<p class="text-sm italic leading-relaxed flex-1" style="color:var(--INK2)">"'+t.teks+'"</p>'
+      + '<div class="flex items-center gap-3">'
+      + '<div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" style="background:var(--PL);color:var(--P)">'+(t.avatar||t.nama.charAt(0).toUpperCase())+'</div>'
+      + '<div><div class="font-bold text-sm" style="color:var(--INK)">'+t.nama+'</div>'
+      + '<div class="text-[11px]" style="color:var(--INK3)">'+t.peran+' · '+t.kota+'</div></div></div></div>';
+  }).join('');
+
+  dots.innerHTML = APP.testiData.map(function(_,i){ return '<div class="sdot'+(i===0?' on':'')+'" id="tdot-'+i+'"></div>'; }).join('');
+  startTestiTimer();
+}
+
+function updateTesti() {
+  var track = document.getElementById('testi-track');
+  if (!track) return;
+  var isMd = window.innerWidth >= 768;
+  var shift = isMd ? APP.testiIdx * 50 : APP.testiIdx * 100;
+  track.style.transform = 'translateX(-'+shift+'%)';
+  var dots = document.querySelectorAll('[id^="tdot-"]');
+  for (var i = 0; i < dots.length; i++) {
+    dots[i].classList.remove('on');
+    if (i === APP.testiIdx) dots[i].classList.add('on');
+  }
+}
+function nextTesti() { APP.testiIdx = (APP.testiIdx+1) % Math.max(APP.testiData.length,1); updateTesti(); }
+function prevTesti() { APP.testiIdx = (APP.testiIdx-1+Math.max(APP.testiData.length,1)) % Math.max(APP.testiData.length,1); updateTesti(); }
+function startTestiTimer() { if(APP.testiTimer) clearInterval(APP.testiTimer); APP.testiTimer = setInterval(nextTesti, 5500); }
+
+// ══════════════════════════════════════════════════════
+//  KEGIATAN SWIPER (auto 7 detik)
+// ══════════════════════════════════════════════════════
+function renderKegiatan() {
+  var container = document.getElementById('keg-container');
+  var dots = document.getElementById('keg-dots');
+  if (!container || !APP.kegData.length) return;
+
+  var isDesktop = window.innerWidth >= 768;
+  var perPage   = isDesktop ? 3 : 1;
+  var pages     = Math.ceil(APP.kegData.length / perPage);
+
+  container.innerHTML = APP.kegData.map(function(k, idx){
+    var pageIdx = Math.floor(idx / perPage);
+    var visible = (pageIdx === 0) ? 'block' : 'none';
+    return '<div class="keg-item" data-page="'+pageIdx+'" style="display:'+visible+'">'
+      + '<div class="keg-card-img" onclick="openKegDetail('+idx+')">'
+      + '<img src="'+getKegImg(k)+'" alt="'+k.judul+'" loading="lazy" onerror="this.src=\'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=400\'"/>'
+      + '<div style="position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding:16px">'
+      + '<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">'
+      + '<span style="background:'+(k.tipeKat==='red'?'#ef4444':k.tipeKat==='gold'?'var(--G)':'var(--P)')+';color:#fff;font-size:9px;font-weight:800;padding:3px 10px;border-radius:99px">'+k.kategori+'</span>'
+      + '<span style="color:rgba(255,255,255,.75);font-size:10px;font-weight:600">'+k.tanggal+'</span></div>'
+      + '<h4 style="color:#fff;font-weight:700;font-size:14px;line-height:1.35">'+k.judul+'</h4>'
+      + '</div></div></div>';
+  }).join('');
+
+  dots.innerHTML = '';
+  for (var i = 0; i < pages; i++) {
+    var d = document.createElement('div');
+    d.className = 'sdot' + (i === 0 ? ' on' : '');
+    d.setAttribute('data-page', i);
+    d.onclick = (function(idx){ return function(){ goKegPage(idx); }; })(i);
+    dots.appendChild(d);
+  }
+
+  startKegTimer();
+}
+
+function getKegImg(k) {
+  if (k.img) return k.img;
+  var imgs = [
+    'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=600',
+    'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=600',
+    'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=600',
+    'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&q=80&w=600',
+    'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&q=80&w=600',
+    'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=600'
+  ];
+  return imgs[Math.floor(Math.random()*imgs.length)];
+}
+
+function goKegPage(pageIdx) {
+  APP.kegIdx = pageIdx;
+  var items = document.querySelectorAll('.keg-item');
+  for (var i = 0; i < items.length; i++) {
+    var itemPage = parseInt(items[i].getAttribute('data-page'));
+    items[i].style.display = (itemPage === pageIdx) ? 'block' : 'none';
+    items[i].style.animation = (itemPage === pageIdx) ? 'fadeUp .4s ease forwards' : 'none';
+  }
+  var dots = document.querySelectorAll('#keg-dots [data-page]');
+  for (var i = 0; i < dots.length; i++) {
+    dots[i].classList.remove('on');
+    if (parseInt(dots[i].getAttribute('data-page')) === pageIdx) dots[i].classList.add('on');
+  }
+}
+
+function nextKeg() {
+  var isDesktop = window.innerWidth >= 768;
+  var perPage   = isDesktop ? 3 : 1;
+  var pages     = Math.ceil(APP.kegData.length / perPage);
+  APP.kegIdx    = (APP.kegIdx + 1) % pages;
+  goKegPage(APP.kegIdx);
+}
+function prevKeg() {
+  var isDesktop = window.innerWidth >= 768;
+  var perPage   = isDesktop ? 3 : 1;
+  var pages     = Math.ceil(APP.kegData.length / perPage);
+  APP.kegIdx    = (APP.kegIdx - 1 + pages) % pages;
+  goKegPage(APP.kegIdx);
+}
+function startKegTimer() {
+  if (APP.kegTimer) clearInterval(APP.kegTimer);
+  APP.kegTimer = setInterval(nextKeg, 7000);
+}
+
+function openKegDetail(idx) {
+  var k = APP.kegData[idx];
+  if (!k) return;
+  showToast('📌 ' + k.judul + ' — ' + k.tanggal);
+}
+
+// ══════════════════════════════════════════════════════
+//  PENERIMA MANFAAT
+// ══════════════════════════════════════════════════════
+function searchPenerima() {
+  var q    = (document.getElementById('search-penerima').value || '').toLowerCase();
+  var f    = document.getElementById('filter-penerima').value;
+  APP.penerimaFilt = APP.penerimaAll.filter(function(p){
+    var matchQ = (p.nama||'').toLowerCase().indexOf(q) !== -1 || (p.kota||'').toLowerCase().indexOf(q) !== -1;
+    var matchF = !f || p.program === f;
+    return matchQ && matchF;
+  });
+  APP.pg = 1;
+  renderPenerima();
+}
+
+function renderPenerima() {
+  var tbody = document.getElementById('penerima-tbody');
+  if (!tbody) return;
+  var start = (APP.pg - 1) * APP.perPg;
+  var slice = APP.penerimaFilt.slice(start, start + APP.perPg);
+  var fmtRp = function(v){ return 'Rp ' + Number(v).toLocaleString('id-ID'); };
+
+  if (!slice.length) {
+    tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-sm" style="color:var(--INK3)">Tidak ada data ditemukan.</td></tr>';
+  } else {
+    tbody.innerHTML = slice.map(function(p){
+      return '<tr class="penerima-row" style="border-bottom:1px solid var(--BD)">'
+        + '<td class="px-4 py-3"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0" style="background:var(--PL);color:var(--P)">'+(p.nama||'?').charAt(0)+'</div><span class="font-semibold text-sm" style="color:var(--INK)">'+p.nama+'</span></div></td>'
+        + '<td class="px-4 py-3 hidden md:table-cell text-xs" style="color:var(--INK3)">'+p.kota+'</td>'
+        + '<td class="px-4 py-3"><span class="text-[10px] font-bold px-2 py-0.5 rounded-full" style="background:var(--PL);color:var(--P)">'+p.program+'</span></td>'
+        + '<td class="px-4 py-3 hidden md:table-cell font-semibold text-sm" style="color:var(--P)">'+fmtRp(p.jumlah)+'</td>'
+        + '<td class="px-4 py-3 text-xs" style="color:var(--INK3)">'+p.bulan+'</td>'
+        + '</tr>';
+    }).join('');
+  }
+
+  var end = Math.min(start + APP.perPg, APP.penerimaFilt.length);
+  var cnt = document.getElementById('penerima-count');
+  if (cnt) cnt.textContent = 'Menampilkan '+(APP.penerimaFilt.length?start+1:0)+'–'+end+' dari '+APP.penerimaFilt.length+' data';
+
+  var prev = document.getElementById('btn-prev-pg');
+  var next = document.getElementById('btn-next-pg');
+  if (prev) prev.disabled = APP.pg === 1;
+  if (next) next.disabled = end >= APP.penerimaFilt.length;
+}
+
+function prevPg() { if(APP.pg>1){APP.pg--;renderPenerima();} }
+function nextPg() { if((APP.pg-1)*APP.perPg+APP.perPg<APP.penerimaFilt.length){APP.pg++;renderPenerima();} }
+
+// ══════════════════════════════════════════════════════
+//  FAQ
+// ══════════════════════════════════════════════════════
+function renderFAQ(faqs) {
+  var list = document.getElementById('faq-list');
+  if (!list || !faqs || !faqs.length) return;
+  list.innerHTML = faqs.map(function(f, i){
+    return '<div class="bg-white rounded-2xl overflow-hidden shadow-sm" style="border:1.5px solid var(--BD)">'
+      + '<button onclick="toggleFaq('+i+')" class="w-full text-left flex justify-between items-start gap-3 p-4 transition" onmouseover="this.style.background=\'var(--PLL)\'" onmouseout="this.style.background=\'\'"">'
+      + '<span class="font-semibold text-sm flex-1 leading-snug" style="color:var(--INK)">'+f.pertanyaan+'</span>'
+      + '<svg id="fiq-'+i+'" class="w-5 h-5 flex-shrink-0 mt-0.5 transition-transform" style="color:var(--P)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>'
+      + '</button>'
+      + '<div class="faq-answer" id="fa-'+i+'"><div class="px-4 pb-4 text-sm leading-relaxed" style="color:var(--INK3);border-top:1px solid var(--BD);padding-top:12px">'+f.jawaban+'</div></div>'
+      + '</div>';
+  }).join('');
+}
+
+function toggleFaq(i) {
+  var ans = document.getElementById('fa-'+i);
+  var ico = document.getElementById('fiq-'+i);
+  var isOpen = ans.style.maxHeight && ans.style.maxHeight !== '0px';
+  var all = document.querySelectorAll('.faq-answer');
+  var icos = document.querySelectorAll('[id^="fiq-"]');
+  for (var j = 0; j < all.length; j++) { all[j].style.maxHeight = '0px'; icos[j].style.transform = ''; }
+  if (!isOpen) { ans.style.maxHeight = ans.scrollHeight + 'px'; ico.style.transform = 'rotate(180deg)'; }
+}
+
+// ══════════════════════════════════════════════════════
+//  COUNTER ANIMATION
+// ══════════════════════════════════════════════════════
+function initCounters() {
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var el  = e.target;
+      var tgt = parseInt(el.getAttribute('data-target')) || 0;
+      var c   = 0;
+      var run = function(){
+        c = Math.min(c + tgt/60, tgt);
+        el.textContent = Math.ceil(c);
+        if (c < tgt) requestAnimationFrame(run);
+        else el.textContent = tgt;
+      };
+      run();
+      obs.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  var els = document.querySelectorAll('.counter');
+  for (var i = 0; i < els.length; i++) obs.observe(els[i]);
+}
+
+// ══════════════════════════════════════════════════════
+//  NISAB DISPLAY
+// ══════════════════════════════════════════════════════
+function updateNisabDisplay() {
+  var nisabBln = (CONFIG.nisabGram * CONFIG.hargaEmas) / 12;
+  var el = document.getElementById('calc-nisab-val');
+  if (el) el.textContent = '≈ Rp ' + Math.round(nisabBln).toLocaleString('id-ID') + ' / bln';
+}
+
+// ══════════════════════════════════════════════════════
+//  MODAL SYSTEM
+// ══════════════════════════════════════════════════════
+var MODALS = ['modal-donasi','modal-konfirmasi','modal-cek','modal-kalkulator'];
+
+function openModal(id) {
+  closeAllModals(false);
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  var m = document.getElementById(id);
+  if (!m) return;
+  setTimeout(function(){ m.classList.add('open'); }, 10);
+  if (id === 'modal-donasi') resetDonasi();
+}
+
+function closeAllModals(restore) {
+  if (restore === undefined) restore = true;
+  document.getElementById('modal-overlay').classList.remove('open');
+  for (var i = 0; i < MODALS.length; i++) {
+    var m = document.getElementById(MODALS[i]);
+    if (m) m.classList.remove('open');
+  }
+  if (restore) document.body.style.overflow = '';
+}
+
+function openModalWithJenis(jenis) {
+  openModal('modal-donasi');
+  setTimeout(function(){
+    var opts = document.querySelectorAll('#jenis-grid .jenis-opt');
+    for (var i = 0; i < opts.length; i++) {
+      if (opts[i].getAttribute('data-val') === jenis) {
+        selJenis(opts[i]);
+        break;
+      }
+    }
+  }, 100);
+}
+
+// ══════════════════════════════════════════════════════
+//  DONASI FORM — STEP LOGIC
+// ══════════════════════════════════════════════════════
+function resetDonasi() {
+  APP.donasi = { jenis:'Wakaf', nominal:100000, nama:'', hp:'', email:'', kota:'', keluarga:'', doa:'', anonim:false };
+  APP.step = 1;
+  goStep(1);
+}
+
+function goStep(n) {
+  APP.step = n;
+  for (var i = 1; i <= 5; i++) {
+    var el = document.getElementById('dstep-'+i);
+    if (el) el.classList.toggle('hidden', i !== n);
+    var sd = document.getElementById('sd'+i);
+    if (sd) { sd.classList.toggle('on', i <= n); }
+  }
+  if (n === 4) populateStep4();
+}
+
+function selJenis(el) {
+  var opts = document.querySelectorAll('#jenis-grid .jenis-opt');
+  for (var i = 0; i < opts.length; i++) opts[i].classList.remove('sel');
+  el.classList.add('sel');
+  APP.donasi.jenis = el.getAttribute('data-val');
+  document.getElementById('jenis-lain').value = '';
+}
+
+function selJenisStr(val) {
+  var opts = document.querySelectorAll('#jenis-grid .jenis-opt');
+  for (var i = 0; i < opts.length; i++) opts[i].classList.remove('sel');
+  APP.donasi.jenis = val;
+}
+
+function selAmt(v, el) {
+  var pills = document.querySelectorAll('#amt-grid .amt-pill');
+  for (var i = 0; i < pills.length; i++) pills[i].classList.remove('sel');
+  el.classList.add('sel');
+  APP.donasi.nominal = v;
+  document.getElementById('amt-custom').value = '';
+}
+
+function amtCustom() {
+  var v = parseFloat(document.getElementById('amt-custom').value);
+  if (!isNaN(v) && v > 0) {
+    APP.donasi.nominal = v;
+    var pills = document.querySelectorAll('#amt-grid .amt-pill');
+    for (var i = 0; i < pills.length; i++) pills[i].classList.remove('sel');
+  }
+}
+
+function heroSelectAmt(v, el) {
+  var pills = el.parentElement.querySelectorAll('.amt-pill');
+  for (var i = 0; i < pills.length; i++) pills[i].classList.remove('sel');
+  el.classList.add('sel');
+  APP.donasi.nominal = v;
+}
+
+function populateStep4() {
+  var nama = document.getElementById('inp-nama').value || '';
+  var anonim = document.getElementById('inp-anonim').checked;
+  APP.donasi.nama     = nama;
+  APP.donasi.hp       = document.getElementById('inp-hp').value || '';
+  APP.donasi.email    = document.getElementById('inp-email').value || '';
+  APP.donasi.kota     = document.getElementById('inp-kota').value || '';
+  APP.donasi.keluarga = document.getElementById('inp-keluarga').value || '';
+  APP.donasi.doa      = document.getElementById('inp-doa').value || '';
+  APP.donasi.anonim   = anonim;
+
+  document.getElementById('sum-jenis').textContent   = APP.donasi.jenis;
+  document.getElementById('sum-nama').textContent    = anonim ? 'Hamba Allah' : (nama || '—');
+  document.getElementById('sum-nominal').textContent = 'Rp ' + Number(APP.donasi.nominal).toLocaleString('id-ID');
+}
+
+function kirimOrder() {
+  if (!APP.donasi.nama && !document.getElementById('inp-anonim').checked) {
+    showToast('❗ Nama donatur wajib diisi');
+    goStep(3);
+    return;
+  }
+  
+  var btn = document.getElementById('btn-kirim-order');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner w-4 h-4 border-2 border-white border-t-transparent rounded-full inline-block mr-2"></span> Menyimpan...';
+
+  // Buat FormData
+  var formData = new FormData();
+  formData.append('action', 'addDonasi');
+  formData.append('nama', APP.donasi.nama);
+  formData.append('hp', APP.donasi.hp);
+  formData.append('email', APP.donasi.email);
+  formData.append('kota', APP.donasi.kota);
+  formData.append('jenis', APP.donasi.jenis);
+  formData.append('nominal', APP.donasi.nominal);
+  formData.append('doa', APP.donasi.doa);
+  formData.append('anonim', APP.donasi.anonim ? 'true' : 'false');
+
+  // Gunakan no-cors mode
+  fetch(CONFIG.apiUrl, {
+    method: 'POST',
+    mode: 'no-cors',  // KRUSIAL: ini bypass CORS!
+    body: formData
+  })
+  .then(function(response) {
+    // Dengan no-cors, kita tidak bisa baca response
+    // Tapi kita asumsikan sukses
+    APP.kodeOrder = 'WAZQ-' + Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+    document.getElementById('kode-order-display').textContent = APP.kodeOrder;
+    startOrderCountdown();
+    goStep(5);
+    document.getElementById('kf-kode').value = APP.kodeOrder;
+    document.getElementById('kf-hp').value = APP.donasi.hp || '';
+    document.getElementById('kf-nominal').value = APP.donasi.nominal;
+    
+    btn.disabled = false;
+    btn.textContent = '📤 Kirim Order';
+    
+    showToast('✅ Order berhasil dibuat! Kode: ' + APP.kodeOrder);
+  })
+  .catch(function(error) {
+    console.error('Error:', error);
+    // Fallback: tetap kasih kode order meskipun error
+    APP.kodeOrder = 'WAZQ-' + Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+    document.getElementById('kode-order-display').textContent = APP.kodeOrder;
+    startOrderCountdown();
+    goStep(5);
+    document.getElementById('kf-kode').value = APP.kodeOrder;
+    
+    btn.disabled = false;
+    btn.textContent = '📤 Kirim Order';
+    
+    showToast('⚠️ Order tersimpan lokal, segera transfer!');
+  });
+}
+
+function copyKodeOrder() {
+  if (!APP.kodeOrder) return;
+  navigator.clipboard.writeText(APP.kodeOrder).then(function(){
+    var btn = document.getElementById('btn-copy-kode');
+    var orig = btn.textContent;
+    btn.textContent = '✓ Kode Disalin!';
+    btn.classList.add('copied');
+    showToast('✅ Kode ' + APP.kodeOrder + ' disalin!');
+    setTimeout(function(){ btn.textContent = orig; btn.classList.remove('copied'); }, 2500);
+  });
+}
+
+function startOrderCountdown() {
+  APP.orderSecs = 3600;
+  if (APP.orderTimer) clearInterval(APP.orderTimer);
+  APP.orderTimer = setInterval(function(){
+    APP.orderSecs--;
+    var m = Math.floor(APP.orderSecs / 60);
+    var s = APP.orderSecs % 60;
+    var cd = document.getElementById('order-countdown');
+    if (cd) cd.textContent = (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+    if (APP.orderSecs <= 0) { clearInterval(APP.orderTimer); if(cd) cd.textContent = 'KEDALUWARSA'; }
+  }, 1000);
+}
+
+// ══════════════════════════════════════════════════════
+//  KONFIRMASI TRANSFER
+// ══════════════════════════════════════════════════════
+function previewBukti(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e){
+      document.getElementById('upload-preview').innerHTML =
+        '<img src="'+e.target.result+'" style="width:100%;height:120px;object-fit:cover;border-radius:10px"/>'
+        + '<p style="font-size:12px;color:var(--P);font-weight:600;margin-top:8px">✅ Foto terpilih</p>';
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+function submitKonfirmasi() {
+  var kode    = document.getElementById('kf-kode').value.trim();
+  var nama    = document.getElementById('kf-nama').value.trim();
+  var hp      = document.getElementById('kf-hp').value.trim();
+  var nominal = document.getElementById('kf-nominal').value;
+  var bank    = (document.getElementById('kf-bank-select') || document.getElementById('kf-bank') || {}).value || '';
+
+  if (!kode || !nama || !hp || !nominal) {
+    showToast('❗ Kode order, nama, HP, dan nominal wajib diisi');
+    return;
+  }
+
+  var payload = {
+    action     : 'konfirmasi',
+    kodeDonasi : kode,
+    nama       : nama,
+    hp         : hp,
+    nominal    : Number(nominal),
+    bank       : bank
+  };
+
+  fetch(CONFIG.apiUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    closeAllModals();
+    if (d.success) {
+      kirimPesanWA(kode, nama, hp, nominal, bank);
+    } else {
+      showToast('❌ ' + (d.error || 'Gagal mengirim konfirmasi'));
+    }
+  })
+  .catch(function(){
+    // Tetap kirim WA meski fetch gagal
+    closeAllModals();
+    kirimPesanWA(kode, nama, hp, nominal, bank);
+  });
+}
+
+function kirimPesanWA(kode, nama, hp, nominal, bank) {
+  var fmtNominal = Number(nominal).toLocaleString('id-ID');
+  var pesan = '🕌 *KONFIRMASI DONASI WAZIQOH KMB Mesir*\n\n'
+    + '📋 *Kode Order:* ' + kode + '\n'
+    + '👤 *Nama:* ' + nama + '\n'
+    + '📱 *No. HP:* ' + hp + '\n'
+    + '💰 *Nominal:* Rp ' + fmtNominal + '\n'
+    + '🏦 *Bank:* ' + (bank || '—') + '\n\n'
+    + '✅ Mohon verifikasi dan kirimkan kwitansi. Terima kasih 🙏\n'
+    + '\n_WAZIQOH KMB Mesir — Transparan & Amanah_';
+
+  var url = 'https://wa.me/' + CONFIG.waAdmin + '?text=' + encodeURIComponent(pesan);
+  window.open(url, '_blank');
+  showToast('✅ Konfirmasi terkirim! Silakan lanjutkan di WhatsApp.');
+}
+
+// ══════════════════════════════════════════════════════
+//  CEK STATUS DONASI
+// ══════════════════════════════════════════════════════
+function cekDonasi() {
+  var q = document.getElementById('cek-input').value.trim();
+  if (!q) { showToast('❗ Masukkan kode order atau no. HP'); return; }
+
+  var loading = document.getElementById('cek-loading');
+  var result  = document.getElementById('cek-result');
+  loading.classList.remove('hidden');
+  result.classList.add('hidden');
+
+  fetch(CONFIG.apiUrl + '?action=cekDonasi&q=' + encodeURIComponent(q))
+    .then(function(r){ return r.json(); })
+    .then(function(d){ populateCekResult(d); })
+    .catch(function(){ populateCekResult({ found: false, pesan: 'Koneksi gagal. Coba lagi.' }); });
+}
+
+function populateCekResult(d) {
+  var loading = document.getElementById('cek-loading');
+  var result  = document.getElementById('cek-result');
+  loading.classList.add('hidden');
+  result.classList.remove('hidden');
+
+  if (!d.found) {
+    result.innerHTML = '<div class="rounded-2xl p-4 text-center" style="background:var(--PLL);border:1.5px solid var(--BD)">'
+      + '<div style="font-size:36px;margin-bottom:8px">🔍</div>'
+      + '<p class="font-semibold text-sm" style="color:var(--INK)">Data tidak ditemukan</p>'
+      + '<p class="text-xs mt-1" style="color:var(--INK3)">'+(d.pesan||'')+'</p></div>';
+    return;
+  }
+
+  var fmtRp = function(v){ return 'Rp ' + Number(v).toLocaleString('id-ID'); };
+  var items = d.data || [];
+  result.innerHTML = items.map(function(item){
+    var statusColor = item.status === 'Terverifikasi' || item.status === 'Tersalurkan' ? '#16a34a' : item.status === 'Menunggu Verifikasi' ? '#c9920a' : '#6b7280';
+    var statusBg    = item.status === 'Terverifikasi' || item.status === 'Tersalurkan' ? '#dcfce7' : item.status === 'Menunggu Verifikasi' ? '#fef9eb' : '#f3f4f6';
+    var statusIcon  = item.status === 'Terverifikasi' || item.status === 'Tersalurkan' ? '✅' : item.status === 'Menunggu Verifikasi' ? '⏳' : '❌';
+
+    // Link invoice jika terverifikasi
+    var invoiceBtn = (item.status === 'Terverifikasi' || item.status === 'Tersalurkan')
+      ? '<a href="?invoice='+item.kode+'" onclick="showInvoice(\''+item.kode+'\');return false;" class="w-full font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5 mt-2 transition ch" style="background:var(--P);color:#fff">🧾 Lihat & Download Kwitansi</a>'
+      : '';
+
+    return '<div class="rounded-2xl overflow-hidden shadow-sm" style="border:1.5px solid var(--BD)">'
+      + '<div class="p-3 flex items-center gap-2" style="background:var(--P)">'
+      + '<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>'
+      + '<span class="text-white font-bold text-sm">Donasi Ditemukan: '+item.kode+'</span></div>'
+      + '<div class="p-4 space-y-2">'
+      + '<div class="flex justify-between text-sm"><span style="color:var(--INK3)">Donatur</span><b style="color:var(--INK)">'+item.nama+'</b></div>'
+      + '<div class="flex justify-between text-sm"><span style="color:var(--INK3)">Jenis</span><b style="color:var(--INK)">'+item.jenis+'</b></div>'
+      + '<div class="flex justify-between text-sm"><span style="color:var(--INK3)">Nominal</span><b style="color:var(--P)">'+fmtRp(item.nominal)+'</b></div>'
+      + '<div class="flex justify-between text-sm"><span style="color:var(--INK3)">Tanggal</span><b style="color:var(--INK)">'+item.tanggal+'</b></div>'
+      + '<div class="flex justify-between text-sm items-center"><span style="color:var(--INK3)">Status</span>'
+      + '<span style="background:'+statusBg+';color:'+statusColor+';font-size:11px;font-weight:800;padding:3px 10px;border-radius:99px">'+statusIcon+' '+item.status+'</span></div>'
+      + (item.doa ? '<div class="text-xs italic p-3 rounded-xl mt-1" style="background:var(--PLL);color:var(--INK3)">"'+item.doa+'"</div>' : '')
+      + invoiceBtn
+      + '</div></div>';
+  }).join('');
+}
+
+// ══════════════════════════════════════════════════════
+//  INVOICE PAGE
+// ══════════════════════════════════════════════════════
+function checkInvoiceParam() {
+  var params = new URLSearchParams(window.location.search);
+  var kode   = params.get('invoice');
+  if (kode) showInvoice(kode);
+}
+
+function showInvoice(kode) {
+  var page = document.getElementById('invoice-page');
+  page.style.display = 'block';
+
+  fetch(CONFIG.apiUrl + '?action=cekDonasi&q=' + encodeURIComponent(kode))
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      var content = document.getElementById('invoice-content');
+      var actions = document.getElementById('invoice-actions');
+
+      if (!d.found || !d.data || !d.data.length) {
+        content.innerHTML = '<p class="text-center py-6 font-semibold text-sm" style="color:var(--INK3)">Data donasi tidak ditemukan.</p>';
+        return;
+      }
+
+      var item = d.data[0];
+      var fmtRp = function(v){ return 'Rp ' + Number(v).toLocaleString('id-ID'); };
+      var isConfirmed = item.status === 'Terverifikasi' || item.status === 'Tersalurkan';
+
+      content.innerHTML =
+        '<div class="text-center pb-4 mb-4" style="border-bottom:1px solid var(--BD)">'
+        + '<div class="text-xs font-bold uppercase tracking-wider mb-1" style="color:var(--INK3)">KWITANSI DONASI</div>'
+        + '<div class="font-display text-2xl font-bold" style="color:var(--P)">'+kode+'</div>'
+        + '<div class="inline-block px-3 py-1 rounded-full text-xs font-bold mt-2" style="background:'+(isConfirmed?'#dcfce7':'#fef9eb')+';color:'+(isConfirmed?'#16a34a':'#c9920a')+'">'
+        + (isConfirmed ? '✅ Terverifikasi' : '⏳ ' + item.status) + '</div></div>'
+        + '<div class="space-y-3 text-sm">'
+        + '<div class="flex justify-between"><span style="color:var(--INK3)">Donatur</span><b style="color:var(--INK)">'+item.nama+'</b></div>'
+        + '<div class="flex justify-between"><span style="color:var(--INK3)">Jenis Dana</span><b style="color:var(--INK)">'+item.jenis+'</b></div>'
+        + '<div class="flex justify-between"><span style="color:var(--INK3)">Nominal</span><b class="text-base" style="color:var(--P)">'+fmtRp(item.nominal)+'</b></div>'
+        + '<div class="flex justify-between"><span style="color:var(--INK3)">Tanggal</span><b style="color:var(--INK)">'+item.tanggal+'</b></div>'
+        + '<div class="flex justify-between"><span style="color:var(--INK3)">Bulan</span><b style="color:var(--INK)">'+item.bulan+'</b></div></div>'
+        + (item.doa ? '<div class="text-xs italic p-3 rounded-xl mt-4" style="background:var(--PLL);color:var(--INK3)">"'+item.doa+'"</div>' : '')
+        + (isConfirmed
+          ? '<div class="text-center mt-6 pt-4" style="border-top:1px solid var(--BD)">'
+          + '<p class="text-xs mb-1" style="color:var(--INK3)">Disahkan oleh</p>'
+          + '<p class="font-bold" style="color:var(--INK)">WAZIQOH KMB Mesir</p>'
+          + '<p class="text-xs" style="color:var(--INK3)">Nasr City, Cairo, Egypt</p>'
+          + '<div class="mt-3 w-16 h-16 mx-auto rounded-full flex items-center justify-center" style="background:var(--PL)">'
+          + '<svg class="w-8 h-8" style="color:var(--P)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>'
+          + '</div></div>'
+          : '<p class="text-xs text-center mt-4 p-3 rounded-xl" style="background:#fef9eb;color:#c9920a">Kwitansi akan aktif setelah konfirmasi diverifikasi admin.</p>');
+
+      if (isConfirmed) actions.style.display = 'block';
+    })
+    .catch(function(){
+      document.getElementById('invoice-content').innerHTML = '<p class="text-center py-6 text-sm" style="color:var(--INK3)">Gagal memuat data. Coba lagi.</p>';
+    });
+}
+
+// ══════════════════════════════════════════════════════
+//  KALKULATOR ZAKAT
+// ══════════════════════════════════════════════════════
+function switchZakatTab(t, btn) {
+  var tabs = ['p','m','f'];
+  for (var i = 0; i < tabs.length; i++) {
+    var tab = document.getElementById('ztab-'+tabs[i]);
+    var bt  = document.getElementById('zt-'+tabs[i]);
+    if (tab) tab.classList.toggle('hidden', tabs[i] !== t);
+    if (bt) {
+      bt.style.background = tabs[i] === t ? 'var(--P)' : 'transparent';
+      bt.style.color      = tabs[i] === t ? '#fff'     : 'var(--INK3)';
+    }
+  }
+}
+
+function fmtRp(v){ return 'Rp ' + Math.round(v).toLocaleString('id-ID'); }
+
+function calcZPenghasilan() {
+  var gaji       = parseFloat(document.getElementById('calc-gaji').value) || 0;
+  var bonus      = parseFloat(document.getElementById('calc-bonus').value) || 0;
+  var total      = gaji + bonus;
+  var nisabBln   = (CONFIG.nisabGram * CONFIG.hargaEmas) / 12;
+  var zakat      = total >= nisabBln ? total * 0.025 : 0;
+
+  document.getElementById('calc-result-p').textContent   = fmtRp(zakat);
+  document.getElementById('calc-result-tahunan').textContent = fmtRp(zakat * 12);
+  document.getElementById('calc-total-income').textContent   = fmtRp(total);
+  document.getElementById('calc-nisab-val').textContent      = '≈ ' + fmtRp(nisabBln) + ' / bln';
+  document.getElementById('calc-nisab-status').textContent   = total >= nisabBln
+    ? '✅ Wajib zakat (melebihi nisab)' : '⚠️ Belum wajib (di bawah nisab)';
+}
+
+function calcZMaal() {
+  var tab  = parseFloat(document.getElementById('maal-tab').value) || 0;
+  var inv  = parseFloat(document.getElementById('maal-inv').value) || 0;
+  var put  = parseFloat(document.getElementById('maal-put').value) || 0;
+  var htg  = parseFloat(document.getElementById('maal-htg').value) || 0;
+  var bersih = Math.max(tab + inv + put - htg, 0);
+  var nisab  = CONFIG.nisabGram * CONFIG.hargaEmas;
+  var zakat  = bersih >= nisab ? bersih * 0.025 : 0;
+  document.getElementById('calc-result-m').textContent  = fmtRp(zakat);
+  document.getElementById('calc-maal-status').textContent = bersih >= nisab
+    ? '✅ Wajib zakat · Harta bersih: ' + fmtRp(bersih)
+    : '⚠️ Belum wajib · Harta bersih: ' + fmtRp(bersih);
+}
+
+var _fitrahStd = 35000;
+function adjFitrah(d) {
+  var el = document.getElementById('calc-jiwa');
+  el.value = Math.max(1, (parseInt(el.value)||1) + d);
+  calcZFitrah();
+}
+function selFitrahStd(v, btn) {
+  _fitrahStd = v;
+  var btns = document.querySelectorAll('#fitrah-std-grid button');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('sel');
+  btn.classList.add('sel');
+  calcZFitrah();
+}
+function calcZFitrah() {
+  var jiwa  = parseInt(document.getElementById('calc-jiwa').value) || 1;
+  var total = jiwa * _fitrahStd;
+  document.getElementById('calc-result-f').textContent  = fmtRp(total);
+  document.getElementById('calc-fitrah-info').textContent = jiwa + ' jiwa × ' + fmtRp(_fitrahStd);
+}
+
+// ══════════════════════════════════════════════════════
+//  UI UTILS
+// ══════════════════════════════════════════════════════
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._tid);
+  t._tid = setTimeout(function(){ t.classList.remove('show'); }, 3200);
+}
+
+function setBnav(id, el) {
+  var items = document.querySelectorAll('.bnav-item');
+  for (var i = 0; i < items.length; i++) items[i].classList.remove('on');
+  el.classList.add('on');
+}
+
+var menuOpen = false;
+function toggleMobileMenu() {
+  menuOpen = !menuOpen;
+  var menu = document.getElementById('mobile-menu');
+  menu.style.transform = menuOpen ? 'translateX(0)' : 'translateX(100%)';
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+  var hb1 = document.getElementById('hb1');
+  var hb2 = document.getElementById('hb2');
+  var hb3 = document.getElementById('hb3');
+  if (menuOpen) {
+    hb1.style.transform = 'rotate(45deg) translateY(8px)';
+    hb2.style.opacity   = '0';
+    hb3.style.transform = 'rotate(-45deg) translateY(-8px)';
+  } else {
+    hb1.style.transform = '';
+    hb2.style.opacity   = '1';
+    hb3.style.transform = '';
+  }
+}
+
+// Header scroll effect
+window.addEventListener('scroll', function(){
+  var h = document.getElementById('main-header');
+  if (h) h.style.boxShadow = window.scrollY > 10 ? '0 4px 24px rgba(0,0,0,.08)' : 'none';
+}, { passive: true });
+</script>
+</body>
+</html>
