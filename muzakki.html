@@ -210,7 +210,177 @@
             box-shadow: 0 2px 8px rgba(10, 100, 60, 0.1);
         }
 
-        /* Nominal Input per Jenis */
+/* ================== ACCORDION FORM PROFESIONAL ================== */
+.form-accordion {
+    margin-bottom: 24px;
+    border-radius: 28px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 10px 30px -5px rgba(0, 80, 50, 0.08);
+    border: 1px solid #e9edf0;
+}
+
+.form-accordion-header {
+    background: linear-gradient(135deg, #f8fbfa 0%, #f0f5f2 100%);
+    padding: 18px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.form-accordion-header:hover {
+    background: linear-gradient(135deg, #f0f7f3 0%, #e5f0e9 100%);
+}
+
+.form-accordion-header.active {
+    border-bottom-color: #d0e2d9;
+    background: linear-gradient(135deg, #e8f3ee 0%, #ddebe3 100%);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.header-icon {
+    width: 44px;
+    height: 44px;
+    background: #0f7b54;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.3rem;
+    box-shadow: 0 6px 12px rgba(15, 123, 84, 0.2);
+    transition: all 0.3s ease;
+}
+
+.form-accordion-header.active .header-icon {
+    background: #0b6845;
+    transform: scale(1.05);
+}
+
+.header-text {
+    flex: 1;
+}
+
+.header-text h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1e3a2f;
+    margin-bottom: 4px;
+    letter-spacing: -0.3px;
+}
+
+.header-text p {
+    font-size: 0.8rem;
+    color: #547a66;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.header-text p i {
+    color: #fbbf24;
+    font-size: 0.7rem;
+}
+
+.header-arrow {
+    width: 38px;
+    height: 38px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0f7b54;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.03);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border: 1px solid #d0e2d9;
+}
+
+.form-accordion-header.active .header-arrow {
+    transform: rotate(180deg);
+    background: #0f7b54;
+    color: white;
+    border-color: #0f7b54;
+}
+
+.form-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, opacity 0.3s ease;
+    opacity: 0;
+    background: #ffffff;
+}
+
+.form-accordion-content.active {
+    max-height: 2000px; /* Nilai besar agar muat semua konten */
+    opacity: 1;
+    transition: max-height 0.6s ease-in, opacity 0.4s ease 0.2s;
+}
+
+.form-content-inner {
+    padding: 24px 20px;
+}
+
+/* Badge status form */
+.form-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(15, 123, 84, 0.1);
+    padding: 6px 14px;
+    border-radius: 40px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #0f7b54;
+    margin-bottom: 16px;
+    border: 1px solid rgba(15, 123, 84, 0.2);
+}
+
+.form-status i {
+    font-size: 0.7rem;
+    animation: pulse-dot 1.5s ease infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Animasi masuk */
+@keyframes slideFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-content-inner > * {
+    animation: slideFadeIn 0.4s ease forwards;
+    opacity: 0;
+}
+
+.form-content-inner > *:nth-child(1) { animation-delay: 0.05s; }
+.form-content-inner > *:nth-child(2) { animation-delay: 0.1s; }
+.form-content-inner > *:nth-child(3) { animation-delay: 0.15s; }
+.form-content-inner > *:nth-child(4) { animation-delay: 0.2s; }
+.form-content-inner > *:nth-child(5) { animation-delay: 0.25s; }
+.form-content-inner > *:nth-child(6) { animation-delay: 0.3s; }
+.form-content-inner > *:nth-child(7) { animation-delay: 0.35s; }
+.form-content-inner > *:nth-child(8) { animation-delay: 0.4s; }
+
 /* Nominal Input per Jenis - Versi Mobile Efisien */
 .nominal-group {
     margin-bottom: 16px;
@@ -674,7 +844,7 @@
             background: linear-gradient(135deg, #0f5e44 0%, #1a7a5c 100%);
             border-radius: 32px;
             padding: 24px 20px;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
             color: white;
             box-shadow: 0 12px 24px -8px rgba(10, 80, 50, 0.3);
             position: relative;
@@ -846,7 +1016,8 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding-top: 16px;
+            padding-top: 8px;
+            margin-top: 10px;
             border-top: 2px solid rgba(255, 255, 255, 0.15);
             position: relative;
             z-index: 1;
@@ -895,6 +1066,118 @@
                 justify-content: center;
             }
         }
+
+/* ================== DAILY REVENUE 2 GRID EKONOMIS ================== */
+.daily-section {
+    margin-top: 20px;
+    padding-top: 8px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.25);
+}
+
+.daily-title {
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fbbf24;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* GRID UTAMA: 2 KOLOM BERSANDINGAN */
+.daily-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;  /* IDR kiri, EGP kanan */
+    gap: 8px;                         /* jarak antar kolom kecil */
+    align-items: stretch;
+}
+
+/* CARD INDIVIDUAL */
+.daily-item {
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    padding: 10px 8px;                 /* padding ekonomis */
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    text-align: center;
+    transition: transform 0.18s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.daily-item:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* LABEL */
+.daily-label {
+    font-size: 0.7rem;                 /* lebih kecil */
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.90);
+    margin-bottom: 4px;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+}
+
+/* NOMINAL - UKURAN EKONOMIS + ELLIPSIS */
+.daily-amount {
+    font-size: 1.2rem;                  /* lebih kecil dari sebelumnya */
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;            /* tambah ... jika terlalu panjang */
+    max-width: 100%;
+    display: block;
+}
+
+/* TREND PERSENTASE */
+.daily-trend {
+    font-size: 0.65rem;                  /* sangat kecil */
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+.daily-trend i {
+    font-size: 0.7rem;
+}
+
+.daily-trend.positive {
+    background: rgba(46, 204, 113, 0.25);
+    color: #d4ffdd;
+}
+
+.daily-trend.negative {
+    background: rgba(231, 76, 60, 0.25);
+    color: #ffcccc;
+}
+
+/* DIVIDER VERTIKAL (OPSIONAL) */
+.daily-divider {
+    display: none;  /* disembunyikan karena sudah ada grid */
+}
+
+/* RESPONSIVE UNTUK LAYAR SANGAT KECIL */
+@media (max-width: 340px) {
+    .daily-content {
+        grid-template-columns: 1fr;      /* jadi 1 kolom */
+        gap: 8px;
+    }
+    
+    .daily-amount {
+        font-size: 1.1rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -919,42 +1202,63 @@
             </div>
         </div>
         
-        <!-- Total Revenue Card - Multi Currency -->
-        <div class="revenue-card">
-            <div class="revenue-header">
-                <span class="revenue-title"><i class="fas fa-chart-pie"></i> TOTAL PENDAPATAN</span>
-                <span class="revenue-badge"><i class="fas fa-sync-alt"></i> <span id="lastUpdatedRevenue"></span></span>
+<div class="revenue-card">
+    <div class="revenue-header">
+        <span class="revenue-title"><i class="fas fa-chart-pie"></i> TOTAL PENDAPATAN</span>
+        <span class="revenue-badge"><i class="fas fa-sync-alt"></i> <span id="lastUpdatedRevenue"></span></span>
+    </div>
+
+    <!-- Bagian Total Grand -->
+    <div class="revenue-content">
+        <div class="revenue-item">
+            <div class="revenue-label">
+                <i class="fas fa-coins" style="color: #fbbf24;"></i> Total Rupiah (IDR)
             </div>
-            <div class="revenue-content">
-                <div class="revenue-item">
-                    <div class="revenue-label">
-                        <i class="fas fa-coins" style="color: #fbbf24;"></i> Rupiah (IDR)
-                    </div>
-                    <div class="revenue-amount" id="totalIDR">Rp 0</div>
-                    <div class="revenue-trend" id="trendIDR">
-                        <i class="fas fa-minus"></i> dari kemarin
-                    </div>
-                </div>
-                <div class="revenue-divider"></div>
-                <div class="revenue-item">
-                    <div class="revenue-label">
-                        <i class="fas fa-money-bill-wave" style="color: #fbbf24;"></i> Pound Mesir (EGP)
-                    </div>
-                    <div class="revenue-amount" id="totalEGP">EGP 0</div>
-                    <div class="revenue-trend" id="trendEGP">
-                        <i class="fas fa-minus"></i> dari kemarin
-                    </div>
+            <div class="revenue-amount" id="totalIDR">Rp 0</div>
+        </div>
+        <div class="revenue-divider"></div>
+        <div class="revenue-item">
+            <div class="revenue-label">
+                <i class="fas fa-money-bill-wave" style="color: #fbbf24;"></i> Total Pound Mesir (EGP)
+            </div>
+            <div class="revenue-amount" id="totalEGP">EGP 0</div>
+        </div>
+    </div>
+
+    <!-- Bagian Pendapatan Hari Ini (di dalam revenue card) -->
+    <div class="daily-section">
+        <div class="daily-title">PENDAPATAN HARI INI</div>
+        <div class="daily-content">
+            <!-- KIRI: RUPIAH -->
+            <div class="daily-item">
+                <div class="daily-label">Rupiah</div>
+                <div class="daily-amount" id="dailyIDR">Rp 0</div>
+                <div class="daily-trend" id="dailyTrendIDR">
+                    <i class="fas fa-minus"></i> 0%
                 </div>
             </div>
-            <div class="revenue-footer">
-                <span class="revenue-stats" id="totalTransactions">
-                    <i class="fas fa-exchange-alt"></i> 0 transaksi
-                </span>
-                <span class="revenue-stats" id="totalMuzakki">
-                    <i class="fas fa-users"></i> 0 muzakki
-                </span>
+            
+            <!-- KANAN: POUND MESIR -->
+            <div class="daily-item">
+                <div class="daily-label">Pound Mesir</div>
+                <div class="daily-amount" id="dailyEGP">EGP 0</div>
+                <div class="daily-trend" id="dailyTrendEGP">
+                    <i class="fas fa-minus"></i> 0%
+                </div>
             </div>
         </div>
+    </div>
+
+    <!-- Footer stats -->
+    <div class="revenue-footer">
+        <span class="revenue-stats" id="totalTransactions">
+            <i class="fas fa-exchange-alt"></i> 0 transaksi
+        </span>
+        <span class="revenue-stats" id="totalMuzakki">
+            <i class="fas fa-users"></i> 0 donatur
+        </span>
+    </div>
+</div>
 
         <!-- Current Number Card -->
         <div class="current-number-card" id="currentNumberCard">
@@ -970,12 +1274,34 @@
             </div>
         </div>
 
-        <!-- Form Input Card -->
-        <div class="card">
-            <div class="form-title">
-                <i class="fas fa-pen-alt"></i> Form Transaksi Baru
+<!-- Form Transaksi Baru - Accordion Style -->
+<div class="form-accordion" id="formAccordion">
+    <div class="form-accordion-header" id="formHeader">
+        <div class="header-left">
+            <div class="header-icon">
+                <i class="fas fa-pen-alt"></i>
+            </div>
+            <div class="header-text">
+                <h3>Form Transaksi Baru</h3>
+                <p>
+                    <i class="fas fa-circle"></i> Klik untuk membuka form
+                </p>
+            </div>
+        </div>
+        <div class="header-arrow" id="formArrow">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </div>
+    
+    <div class="form-accordion-content" id="formContent">
+        <div class="form-content-inner">
+            <!-- Status Form (Hidden by default) -->
+            <div class="form-status" id="formStatus" style="display: none;">
+                <i class="fas fa-circle"></i>
+                <span id="formStatusText">Mode Tambah Data</span>
             </div>
             
+            <!-- Form Elements (pindahkan semua dari card sebelumnya) -->
             <div class="input-group">
                 <label><i class="fas fa-user"></i> NAMA LENGKAP</label>
                 <input type="text" class="input-field" id="namaInput" placeholder="Contoh: Ahmad Fauzi" value="">
@@ -1002,56 +1328,54 @@
 
             <!-- Nominal per Jenis -->
             <div class="nominal-group" id="nominalGroup">
-                <div class="nominal-group" id="nominalGroup">
-                    <div class="nominal-row" data-type="Zakat Fitrah" style="display: none;">
-                        <span class="nominal-label">Zakat Fitrah</span>
-                        <div class="nominal-input">
-                            <input type="text" id="nominalZakat" class="nominal-field" placeholder="0.00" value="">  <!-- type="text" & value="" -->
-                            <select id="currencyZakat" class="currency-select">
-                                <option value="EGP" selected>EGP</option>
-                                <option value="IDR">IDR</option>
-                            </select>
-                        </div>
+                <div class="nominal-row" data-type="Zakat Fitrah" style="display: none;">
+                    <span class="nominal-label">Zakat Fitrah</span>
+                    <div class="nominal-input">
+                        <input type="text" id="nominalZakat" class="nominal-field" placeholder="0" value="">
+                        <select id="currencyZakat" class="currency-select">
+                            <option value="EGP" selected>EGP</option>
+                            <option value="IDR">IDR</option>
+                        </select>
                     </div>
-                    <div class="nominal-row" data-type="Shodaqoh" style="display: none;">
-                        <span class="nominal-label">Shodaqoh</span>
-                        <div class="nominal-input">
-                            <input type="text" id="nominalShodaqoh" class="nominal-field" placeholder="0.00" value="">  <!-- type="text" & value="" -->
-                            <select id="currencyShodaqoh" class="currency-select">
-                                <option value="EGP" selected>EGP</option>
-                                <option value="IDR">IDR</option>
-                            </select>
-                        </div>
+                </div>
+                <div class="nominal-row" data-type="Shodaqoh" style="display: none;">
+                    <span class="nominal-label">Shodaqoh</span>
+                    <div class="nominal-input">
+                        <input type="text" id="nominalShodaqoh" class="nominal-field" placeholder="0" value="">
+                        <select id="currencyShodaqoh" class="currency-select">
+                            <option value="EGP" selected>EGP</option>
+                            <option value="IDR">IDR</option>
+                        </select>
                     </div>
-                    <div class="nominal-row" data-type="Infaq" style="display: none;">
-                        <span class="nominal-label">Infaq</span>
-                        <div class="nominal-input">
-                            <input type="text" id="nominalInfaq" class="nominal-field" placeholder="0.00" value="">  <!-- type="text" & value="" -->
-                            <select id="currencyInfaq" class="currency-select">
-                                <option value="EGP" selected>EGP</option>
-                                <option value="IDR">IDR</option>
-                            </select>
-                        </div>
+                </div>
+                <div class="nominal-row" data-type="Infaq" style="display: none;">
+                    <span class="nominal-label">Infaq</span>
+                    <div class="nominal-input">
+                        <input type="text" id="nominalInfaq" class="nominal-field" placeholder="0" value="">
+                        <select id="currencyInfaq" class="currency-select">
+                            <option value="EGP" selected>EGP</option>
+                            <option value="IDR">IDR</option>
+                        </select>
                     </div>
-                    <div class="nominal-row" data-type="Wakaf" style="display: none;">
-                        <span class="nominal-label">Wakaf</span>
-                        <div class="nominal-input">
-                            <input type="text" id="nominalWakaf" class="nominal-field" placeholder="0.00" value="">  <!-- type="text" & value="" -->
-                            <select id="currencyWakaf" class="currency-select">
-                                <option value="EGP" selected>EGP</option>
-                                <option value="IDR">IDR</option>
-                            </select>
-                        </div>
+                </div>
+                <div class="nominal-row" data-type="Wakaf" style="display: none;">
+                    <span class="nominal-label">Wakaf</span>
+                    <div class="nominal-input">
+                        <input type="text" id="nominalWakaf" class="nominal-field" placeholder="0" value="">
+                        <select id="currencyWakaf" class="currency-select">
+                            <option value="EGP" selected>EGP</option>
+                            <option value="IDR">IDR</option>
+                        </select>
                     </div>
-                    <div class="nominal-row" data-type="Lainnya" style="display: none;">
-                        <input type="text" id="customLabelLainnya" class="custom-label-input" placeholder="Jenis Lainnya" disabled>
-                        <div class="nominal-input">
-                            <input type="text" id="nominalLainnya" class="nominal-field" placeholder="0.00" value="">  <!-- type="text" & value="" -->
-                            <select id="currencyLainnya" class="currency-select">
-                                <option value="EGP" selected>EGP</option>
-                                <option value="IDR">IDR</option>
-                            </select>
-                        </div>
+                </div>
+                <div class="nominal-row" data-type="Lainnya" style="display: none;">
+                    <input type="text" id="customLabelLainnya" class="custom-label-input" placeholder="Jenis Lainnya" disabled>
+                    <div class="nominal-input">
+                        <input type="text" id="nominalLainnya" class="nominal-field" placeholder="0" value="">
+                        <select id="currencyLainnya" class="currency-select">
+                            <option value="EGP" selected>EGP</option>
+                            <option value="IDR">IDR</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -1077,6 +1401,8 @@
                 <i class="fas fa-undo-alt"></i> Reset Form
             </button>
         </div>
+    </div>
+</div>
 
         <!-- Search Bar untuk Riwayat -->
         <div class="input-group" style="margin-bottom: 16px; max-width: 100%;">
@@ -1142,34 +1468,26 @@
         };
 
 // ============================================
-// FUNGSI MENGHITUNG TOTAL PENDAPATAN (IDR & EGP)
+// FUNGSI BARU: TOTAL PENDAPATAN + RESET OTOMATIS 00:00
 // ============================================
 function calculateTotalRevenue() {
     let totalIDR = 0;
     let totalEGP = 0;
     let uniqueMuzakki = new Set();
-    
+   
     payments.forEach(payment => {
-        // Hitung muzakki unik berdasarkan nama
-        if (payment.nama) {
-            uniqueMuzakki.add(payment.nama.toLowerCase().trim());
-        }
-        
-        // Hitung total per currency
+        if (payment.nama) uniqueMuzakki.add(payment.nama.toLowerCase().trim());
+       
         if (Array.isArray(payment.jenis)) {
             payment.jenis.forEach(item => {
                 const nominal = item.nominal || 0;
                 const currency = item.currency || 'EGP';
-                
-                if (currency === 'IDR') {
-                    totalIDR += nominal;
-                } else if (currency === 'EGP') {
-                    totalEGP += nominal;
-                }
+                if (currency === 'IDR') totalIDR += nominal;
+                else if (currency === 'EGP') totalEGP += nominal;
             });
         }
     });
-    
+   
     return {
         totalIDR: totalIDR,
         totalEGP: totalEGP,
@@ -1178,156 +1496,159 @@ function calculateTotalRevenue() {
     };
 }
 
+// FUNGSI UNTUK MENGHITUNG PENDAPATAN HARI INI
+function calculateTodayRevenue() {
+    let todayIDR = 0;
+    let todayEGP = 0;
+    
+    const now = new Date();
+    const startToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
+    
+    payments.forEach(payment => {
+        const paymentDate = new Date(payment.timestamp);
+        if (paymentDate >= startToday) {
+            if (Array.isArray(payment.jenis)) {
+                payment.jenis.forEach(item => {
+                    const nominal = item.nominal || 0;
+                    const currency = item.currency || 'EGP';
+                    if (currency === 'IDR') todayIDR += nominal;
+                    else if (currency === 'EGP') todayEGP += nominal;
+                });
+            }
+        }
+    });
+    
+    return { todayIDR, todayEGP };
+}
+
+// FUNGSI UNTUK MENGHITUNG PENDAPATAN KEMARIN
 function calculateYesterdayRevenue() {
     let yesterdayIDR = 0;
     let yesterdayEGP = 0;
     
     const oneDayAgo = new Date();
     oneDayAgo.setDate(oneDayAgo.getDate() - 1);
-    oneDayAgo.setHours(0, 0, 0, 0); // Set ke awal hari kemarin
-    
-    const endOfYesterday = new Date(oneDayAgo);
-    endOfYesterday.setHours(23, 59, 59, 999); // Set ke akhir hari kemarin
+    const startYesterday = new Date(oneDayAgo.getFullYear(), oneDayAgo.getMonth(), oneDayAgo.getDate(), 0, 0, 0, 0);
+    const endYesterday = new Date(oneDayAgo.getFullYear(), oneDayAgo.getMonth(), oneDayAgo.getDate(), 23, 59, 59, 999);
     
     payments.forEach(payment => {
         const paymentDate = new Date(payment.timestamp);
-        
-        // Hitung transaksi yang terjadi KEMARIN (antara awal kemarin sampai akhir kemarin)
-        if (paymentDate >= oneDayAgo && paymentDate <= endOfYesterday) {
+        if (paymentDate >= startYesterday && paymentDate <= endYesterday) {
             if (Array.isArray(payment.jenis)) {
                 payment.jenis.forEach(item => {
                     const nominal = item.nominal || 0;
                     const currency = item.currency || 'EGP';
-                    
-                    if (currency === 'IDR') {
-                        yesterdayIDR += nominal;
-                    } else if (currency === 'EGP') {
-                        yesterdayEGP += nominal;
-                    }
+                    if (currency === 'IDR') yesterdayIDR += nominal;
+                    else if (currency === 'EGP') yesterdayEGP += nominal;
                 });
             }
         }
     });
     
-    return {
-        yesterdayIDR: yesterdayIDR,
-        yesterdayEGP: yesterdayEGP
-    };
+    return { yesterdayIDR, yesterdayEGP };
 }
 
+// FUNGSI UPDATE REVENUE CARD (UPDATE)
 function updateRevenueCard() {
-    const revenue = calculateTotalRevenue(); // TOTAL semua waktu
-    const yesterday = calculateYesterdayRevenue(); // TOTAL kemarin
+    const revenue = calculateTotalRevenue();  // fungsi total sudah ada
+    const today = calculateTodayRevenue();
+    const yesterday = calculateYesterdayRevenue();
+
+    // Total Grand (sudah ada)
+    document.getElementById('totalIDR').innerHTML = new Intl.NumberFormat('id-ID', {
+        style: 'currency', currency: 'IDR', minimumFractionDigits: 0
+    }).format(revenue.totalIDR);
+
+    document.getElementById('totalEGP').innerHTML = `EGP ${new Intl.NumberFormat('id-ID', {
+        minimumFractionDigits: 0, maximumFractionDigits: 0
+    }).format(revenue.totalEGP)}`;
+
+    document.getElementById('totalTransactions').innerHTML = `<i class="fas fa-exchange-alt"></i> ${revenue.totalTransactions} transaksi`;
+    document.getElementById('totalMuzakki').innerHTML = `<i class="fas fa-users"></i> ${revenue.uniqueMuzakkiCount} donatur`;
+    document.getElementById('lastUpdatedRevenue').innerHTML = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
+    // ========== PENDAPATAN HARI INI ==========
     
-    // Format angka IDR
-    const formattedIDR = new Intl.NumberFormat('id-ID', {
-        style: 'currency',
-        currency: 'IDR',
+    // Format IDR (tanpa desimal untuk IDR)
+    const idrFormatted = new Intl.NumberFormat('id-ID', {
+        style: 'currency', 
+        currency: 'IDR', 
         minimumFractionDigits: 0,
         maximumFractionDigits: 0
-    }).format(revenue.totalIDR);
+    }).format(today.todayIDR);
     
-    // Format angka EGP
-    const formattedEGP = new Intl.NumberFormat('id-ID', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-    }).format(revenue.totalEGP);
+    // Batasi panjang teks (misal maks 15 karakter)
+    document.getElementById('dailyIDR').innerHTML = 
+        idrFormatted.length > 15 ? 'Rp ' + today.todayIDR.toLocaleString('id-ID') : idrFormatted;
+
+    // Format EGP (dengan desimal)
+    const egpFormatted = `EGP ${new Intl.NumberFormat('id-ID', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    }).format(today.todayEGP)}`;
     
-    // Update elemen HTML
-    document.getElementById('totalIDR').innerHTML = formattedIDR;
-    document.getElementById('totalEGP').innerHTML = `EGP ${formattedEGP}`;
-    document.getElementById('totalTransactions').innerHTML = 
-        `<i class="fas fa-exchange-alt"></i> ${revenue.totalTransactions} transaksi`;
-    document.getElementById('totalMuzakki').innerHTML = 
-        `<i class="fas fa-users"></i> ${revenue.uniqueMuzakkiCount} donatur`;
-    
-    // Hapus rata-rata dari HTML jika masih ada
-    const avgElement = document.getElementById('avgTransaction');
-    if (avgElement) {
-        avgElement.style.display = 'none';
-    }
-    
-    // Update waktu terakhir
-    const now = new Date();
-    const timeStr = now.toLocaleTimeString('id-ID', { 
-        hour: '2-digit', 
-        minute: '2-digit',
-    });
-    document.getElementById('lastUpdatedRevenue').innerHTML = timeStr;
-    
-    // Hitung persentase perubahan dari KEMARIN ke HARI INI (TOTAL)
-    // Rumus: ((hari ini - kemarin) / kemarin) * 100
-    
-    // Persentase IDR
+    document.getElementById('dailyEGP').innerHTML = 
+        egpFormatted.length > 15 ? 'EGP ' + Math.round(today.todayEGP).toLocaleString('id-ID') : egpFormatted;
+
+    // ========== TREND PERSENTASE IDR ==========
+    const trendIDR = document.getElementById('dailyTrendIDR');
     if (yesterday.yesterdayIDR > 0) {
-        const percentageChangeIDR = ((revenue.totalIDR - yesterday.yesterdayIDR) / yesterday.yesterdayIDR * 100).toFixed(1);
-        const absPercentageIDR = Math.abs(percentageChangeIDR);
-        
-        const trendIDRElem = document.getElementById('trendIDR');
-        if (percentageChangeIDR > 0) {
-            trendIDRElem.innerHTML = `<i class="fas fa-arrow-up"></i> +${absPercentageIDR}% dari kemarin`;
-            trendIDRElem.className = 'revenue-trend positive';
-        } else if (percentageChangeIDR < 0) {
-            trendIDRElem.innerHTML = `<i class="fas fa-arrow-down"></i> -${absPercentageIDR}% dari kemarin`;
-            trendIDRElem.className = 'revenue-trend negative';
+        const pct = ((today.todayIDR - yesterday.yesterdayIDR) / yesterday.yesterdayIDR * 100).toFixed(1);
+        if (pct >= 0) {
+            trendIDR.innerHTML = `<i class="fas fa-arrow-up"></i> +${pct}%`;
+            trendIDR.className = 'daily-trend positive';
         } else {
-            trendIDRElem.innerHTML = `<i class="fas fa-minus"></i> 0% dari kemarin`;
-            trendIDRElem.className = 'revenue-trend';
+            trendIDR.innerHTML = `<i class="fas fa-arrow-down"></i> ${pct}%`;
+            trendIDR.className = 'daily-trend negative';
         }
+    } else if (today.todayIDR > 0) {
+        trendIDR.innerHTML = `<i class="fas fa-arrow-up"></i> Baru`;
+        trendIDR.className = 'daily-trend positive';
     } else {
-        // Jika tidak ada data kemarin, tampilkan 0%
-        document.getElementById('trendIDR').innerHTML = `<i class="fas fa-minus"></i> 0% dari kemarin`;
-        document.getElementById('trendIDR').className = 'revenue-trend';
+        trendIDR.innerHTML = `<i class="fas fa-minus"></i> 0%`;
+        trendIDR.className = 'daily-trend';
     }
-    
-    // Persentase EGP
+
+    // ========== TREND PERSENTASE EGP ==========
+    const trendEGP = document.getElementById('dailyTrendEGP');
     if (yesterday.yesterdayEGP > 0) {
-        const percentageChangeEGP = ((revenue.totalEGP - yesterday.yesterdayEGP) / yesterday.yesterdayEGP * 100).toFixed(1);
-        const absPercentageEGP = Math.abs(percentageChangeEGP);
-        
-        const trendEGPElem = document.getElementById('trendEGP');
-        if (percentageChangeEGP > 0) {
-            trendEGPElem.innerHTML = `<i class="fas fa-arrow-up"></i> +${absPercentageEGP}% dari kemarin`;
-            trendEGPElem.className = 'revenue-trend positive';
-        } else if (percentageChangeEGP < 0) {
-            trendEGPElem.innerHTML = `<i class="fas fa-arrow-down"></i> -${absPercentageEGP}% dari kemarin`;
-            trendEGPElem.className = 'revenue-trend negative';
+        const pct = ((today.todayEGP - yesterday.yesterdayEGP) / yesterday.yesterdayEGP * 100).toFixed(1);
+        if (pct >= 0) {
+            trendEGP.innerHTML = `<i class="fas fa-arrow-up"></i> +${pct}%`;
+            trendEGP.className = 'daily-trend positive';
         } else {
-            trendEGPElem.innerHTML = `<i class="fas fa-minus"></i> 0% dari kemarin`;
-            trendEGPElem.className = 'revenue-trend';
+            trendEGP.innerHTML = `<i class="fas fa-arrow-down"></i> ${pct}%`;
+            trendEGP.className = 'daily-trend negative';
         }
+    } else if (today.todayEGP > 0) {
+        trendEGP.innerHTML = `<i class="fas fa-arrow-up"></i> Baru`;
+        trendEGP.className = 'daily-trend positive';
     } else {
-        // Jika tidak ada data kemarin, tampilkan 0%
-        document.getElementById('trendEGP').innerHTML = `<i class="fas fa-minus"></i> 0% dari kemarin`;
-        document.getElementById('trendEGP').className = 'revenue-trend';
+        trendEGP.innerHTML = `<i class="fas fa-minus"></i> 0%`;
+        trendEGP.className = 'daily-trend';
     }
-    
-    // Debug (opsional, hapus jika tidak perlu)
-    console.log('Total IDR:', revenue.totalIDR, 'Kemarin IDR:', yesterday.yesterdayIDR);
-    console.log('Total EGP:', revenue.totalEGP, 'Kemarin EGP:', yesterday.yesterdayEGP);
 }
 
-        // ============================================
-        // LOAD DATA DENGAN URUTAN YANG BENAR
-        // ============================================
-        window.onload = function() {
-            loadAllData().then(() => {
-                updateRevenueCard(); // Tambahkan ini
-            });
-            updateLiveTime();
-            setInterval(updateLiveTime, 1000);
-            
-            document.getElementById('refreshNumberBtn').addEventListener('click', function() {
-                loadAllData();
-            });
 
-            setupNominalListeners();
-            
-            document.getElementById('searchInput').addEventListener('input', function() {
-                const searchTerm = this.value.trim().toLowerCase();
-                renderFilteredList(searchTerm);
-            });
-        };
+window.onload = function() {
+    loadAllData().then(() => {
+        updateRevenueCard();
+    });
+    
+    updateLiveTime();
+    setInterval(updateLiveTime, 1000); // ← ini saja yang jalan
+    
+    document.getElementById('refreshNumberBtn').addEventListener('click', function() {
+        loadAllData();
+    });
+
+    setupNominalListeners();
+    
+    document.getElementById('searchInput').addEventListener('input', function() {
+        const searchTerm = this.value.trim().toLowerCase();
+        renderFilteredList(searchTerm);
+    });
+};
 
         function showGlobalLoading(show = true) {
             const loader = document.getElementById('globalLoading');
@@ -1437,11 +1758,33 @@ function updateRevenueCard() {
             }
         }
 
-        function updateLiveTime() {
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-            document.getElementById('liveTime').innerText = timeStr;
-        }
+function updateLiveTime() {
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+    document.getElementById('liveTime').innerText = timeStr;
+    
+    // ===== RESET PERSENTASE OTOMATIS =====
+    // Gunakan key yang konsisten: 'lastPercentageReset'
+    
+    const lastReset = localStorage.getItem('lastPercentageReset');
+    const today = now.toDateString();
+    
+    // Reset jika:
+    // 1. Belum pernah reset, ATAU
+    // 2. Hari sudah berganti
+    if (lastReset !== today) {
+        console.log('🔄 Reset persentase untuk hari baru:', today);
+        
+        // Update revenue card untuk menghitung ulang persentase
+        updateRevenueCard();
+        
+        // Simpan tanggal reset
+        localStorage.setItem('lastPercentageReset', today);
+        
+        // Tampilkan notifikasi (tidak mengganggu)
+        console.log('✅ Persentase diperbarui untuk hari', today);
+    }
+}
 
         async function loadAllData() {
             showGlobalLoading(true);
@@ -2227,40 +2570,134 @@ function updateRevenueCard() {
             }
         }
 
-        function showNotification(message, type = 'success') {
-            const existingNotif = document.querySelector('.share-notification');
-            if (existingNotif) existingNotif.remove();
+        // ================== ACCORDION FORM ==================
+document.addEventListener('DOMContentLoaded', function() {
+    const formHeader = document.getElementById('formHeader');
+    const formContent = document.getElementById('formContent');
+    const formArrow = document.getElementById('formArrow');
+    const formStatus = document.getElementById('formStatus');
+    
+    // State awal: tertutup
+    let isFormOpen = false;
+    
+    // Fungsi toggle form
+    function toggleForm(open, skipAnimation = false) {
+        isFormOpen = open;
+        
+        if (open) {
+            formContent.classList.add('active');
+            formHeader.classList.add('active');
+            formArrow.innerHTML = '<i class="fas fa-chevron-up"></i>';
             
-            const notif = document.createElement('div');
-            notif.className = 'share-notification';
-            notif.innerHTML = `
-                <div style="
-                    position: fixed;
-                    bottom: 24px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    background: ${type === 'success' ? '#0f7b54' : '#dc2626'};
-                    color: white;
-                    padding: 12px 24px;
-                    border-radius: 50px;
-                    font-weight: 500;
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                    z-index: 10000;
-                    animation: slideUp 0.3s ease;
-                    max-width: 90%;
-                    text-align: center;
-                ">
-                    ${message}
-                </div>
-            `;
+            // Tampilkan status form dengan animasi
+            if (formStatus) {
+                formStatus.style.display = 'flex';
+                setTimeout(() => {
+                    formStatus.style.opacity = '1';
+                }, 300);
+            }
+        } else {
+            formContent.classList.remove('active');
+            formHeader.classList.remove('active');
+            formArrow.innerHTML = '<i class="fas fa-chevron-down"></i>';
             
-            document.body.appendChild(notif);
-            
-            setTimeout(() => {
-                notif.style.animation = 'fadeOut 0.3s ease';
-                setTimeout(() => notif.remove(), 300);
-            }, 3000);
+            // Sembunyikan status form
+            if (formStatus) {
+                formStatus.style.opacity = '0';
+                setTimeout(() => {
+                    if (!isFormOpen) formStatus.style.display = 'none';
+                }, 300);
+            }
         }
+    }
+    
+    // Klik header untuk toggle
+    formHeader.addEventListener('click', function(e) {
+        // Cegah jika klik di dalam button
+        if (e.target.closest('button')) return;
+        
+        toggleForm(!isFormOpen);
+    });
+    
+    // Buka form otomatis saat edit entry
+    const originalEditEntry = window.editEntry;
+    window.editEntry = function(invoiceNumber) {
+        // Panggil fungsi asli
+        if (originalEditEntry) {
+            originalEditEntry(invoiceNumber);
+        }
+        
+        // Buka form
+        if (!isFormOpen) {
+            toggleForm(true);
+        }
+        
+        // Update status form
+        const formStatusText = document.getElementById('formStatusText');
+        if (formStatusText) {
+            formStatusText.innerHTML = '<i class="fas fa-edit"></i> Mode Edit Data';
+        }
+        
+        // Scroll ke form dengan smooth
+        setTimeout(() => {
+            document.getElementById('formAccordion').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        }, 300);
+    };
+    
+    // Reset form dan tutup saat reset
+    const originalResetForm = resetForm;
+    window.resetForm = function() {
+        if (originalResetForm) {
+            originalResetForm();
+        }
+        
+        // Update status form
+        const formStatusText = document.getElementById('formStatusText');
+        if (formStatusText) {
+            formStatusText.innerHTML = '<i class="fas fa-plus-circle"></i> Mode Tambah Data';
+        }
+        
+        // Form tetap terbuka, hanya status yang berubah
+    };
+    
+    // Ekspos fungsi toggle ke global (opsional)
+    window.toggleForm = toggleForm;
+});
+
+function showNotification(message, type = 'success') {
+    const notif = document.createElement('div');
+    notif.className = 'share-notification';
+    notif.innerHTML = `
+        <div style="
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: ${type === 'success' ? '#0f7b54' : type === 'info' ? '#3b82f6' : '#dc2626'};
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10000;
+            animation: slideUp 0.3s ease;
+            max-width: 90%;
+            text-align: center;
+        ">
+            ${message}
+        </div>
+    `;
+    
+    document.body.appendChild(notif);
+    
+    setTimeout(() => {
+        notif.style.animation = 'fadeOut 0.3s ease';
+        setTimeout(() => notif.remove(), 300);
+    }, 3000);
+}
 
 
         // ============================================
